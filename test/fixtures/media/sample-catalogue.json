@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "kind": "clipCatalogue",
+  "pack": {
+    "id": "synthetic-media-v1",
+    "title": "Synthetic media pipeline samples"
+  },
+  "loopPolicy": {
+    "normal": {
+      "minReps": 2,
+      "maxReps": 5,
+      "minDurationSeconds": 5,
+      "maxDurationSeconds": 10
+    },
+    "judged": {
+      "minDurationSeconds": 1,
+      "maxDurationSeconds": 120
+    }
+  },
+  "clips": [
+    {
+      "id": "synthetic-squat",
+      "source": {
+        "url": "fixture://synthetic-source.mp4",
+        "cacheKey": "synthetic-source"
+      },
+      "timeRange": {
+        "startSeconds": 0,
+        "endSeconds": 6
+      },
+      "movementId": "synthetic-squat",
+      "side": "bilateral",
+      "equipment": ["bodyweight"],
+      "viewpoint": "front",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "safeFrame": {
+        "hands": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "feet": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "equipment": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "movementPath": { "x": 0, "y": 0, "width": 1, "height": 1 }
+      },
+      "loop": {
+        "kind": "reps",
+        "reps": 3,
+        "phaseMatch": true,
+        "phaseNotes": {
+          "start": "standing setup",
+          "end": "standing setup",
+          "rep": "three controlled squat repetitions"
+        }
+      },
+      "movementKind": "normal"
+    },
+    {
+      "id": "synthetic-left-hold",
+      "source": {
+        "url": "fixture://synthetic-source.mp4",
+        "cacheKey": "synthetic-source"
+      },
+      "timeRange": {
+        "startSeconds": 6,
+        "endSeconds": 12
+      },
+      "movementId": "synthetic-left-hold",
+      "side": "left",
+      "equipment": ["mat"],
+      "viewpoint": "side",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 0.5,
+        "height": 0.5
+      },
+      "safeFrame": {
+        "hands": { "x": 0, "y": 0, "width": 0.5, "height": 0.5 },
+        "feet": { "x": 0, "y": 0, "width": 0.5, "height": 0.5 },
+        "equipment": { "x": 0, "y": 0, "width": 0.5, "height": 0.5 },
+        "movementPath": { "x": 0, "y": 0, "width": 0.5, "height": 0.5 }
+      },
+      "loop": {
+        "kind": "hold",
+        "durationSeconds": 6,
+        "phaseMatch": true,
+        "phaseNotes": {
+          "start": "hold setup",
+          "end": "hold release",
+          "hold": "steady six-second judged hold"
+        }
+      },
+      "movementKind": "hold"
+    }
+  ]
+}
