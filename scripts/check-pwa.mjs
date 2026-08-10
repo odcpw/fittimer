@@ -46,10 +46,15 @@ for (const routineFile of index.routines) {
 for (const gif of gifPaths) await exists(gif);
 
 const serviceWorker = await readFile(path.join(ROOT, 'sw.js'), 'utf8');
-for (const shellFile of ['index.html', 'styles.css', 'manifest.webmanifest', 'src/app.mjs', 'src/interval-engine.mjs']) {
+for (const shellFile of ['index.html', 'styles.css', 'manifest.webmanifest', 'src/app.mjs', 'src/audio-cues.mjs', 'src/interval-engine.mjs']) {
   assert.match(serviceWorker, new RegExp(shellFile.replaceAll('.', '\\.')));
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
+
+const html = await readFile(path.join(ROOT, 'index.html'), 'utf8');
+const application = await readFile(path.join(ROOT, 'src', 'app.mjs'), 'utf8');
+assert.doesNotMatch(html, /<audio[\s>]/i, 'HTML audio elements would interfere with background music');
+assert.doesNotMatch(application, /mediaSession/i, 'Media Session must not claim background music controls');
 
 process.stdout.write(
   `PWA checks passed: ${index.routines.length} routine(s), ${gifPaths.size} referenced GIF(s), ` +

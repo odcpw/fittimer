@@ -18,8 +18,9 @@ API notes, and the build plan.
   implemented. The app loads the real MadFit routine, supports pause/back/next,
   and works after a verified offline reload in desktop Chromium.
 - The installable PWA shell caches the app, routine/block files, and only the 27
-  referenced GIFs. Android/iOS installation and audio-over-music remain the
-  next real-device milestones.
+  referenced GIFs. Synthesized WebAudio workout cues are implemented and
+  browser-tested. Android/iOS installation and Spotify mixing remain the next
+  real-device milestones.
 - Build plan is tracked in beads (`br ready` to see unblocked work; issues in
   `.beads/issues.jsonl`).
 

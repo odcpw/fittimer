@@ -9,6 +9,7 @@ const APP_SHELL = [
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
   './src/app.mjs',
+  './src/audio-cues.mjs',
   './src/interval-engine.mjs',
   './data/content-index.json',
 ];

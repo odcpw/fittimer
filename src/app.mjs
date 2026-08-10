@@ -1,4 +1,5 @@
 import { IntervalEngine } from './interval-engine.mjs';
+import { AudioCuePlayer } from './audio-cues.mjs';
 
 const elements = {
   home: document.querySelector('#home-screen'),
@@ -32,6 +33,7 @@ let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
+const audioCues = new AudioCuePlayer();
 
 function resolveUrl(relativePath) {
   return new URL(relativePath, document.baseURI).href;
@@ -142,6 +144,7 @@ function startWorkout(routine) {
   engine = new IntervalEngine(routine.intervals);
   engine.subscribe((event) => {
     if (event.type === 'tick') renderWorkout(event.snapshot);
+    else audioCues.handle(event);
   });
   renderedInterval = null;
   renderedPhase = null;
@@ -335,7 +338,12 @@ elements.routineList.addEventListener('click', (event) => {
 }, listenerOptions);
 
 elements.start.addEventListener('click', () => {
-  if (selectedRoutine) startWorkout(selectedRoutine);
+  void audioCues
+    .unlock()
+    .catch(showError)
+    .finally(() => {
+      if (selectedRoutine) startWorkout(selectedRoutine);
+    });
 }, listenerOptions);
 
 elements.pause.addEventListener('click', () => {
@@ -368,6 +376,7 @@ elements.next.addEventListener('click', () => {
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && engine && ['work', 'rest'].includes(engine.getSnapshot().state)) {
+    audioCues.resume().catch(showError);
     engine.update();
     startAnimationLoop();
   }
