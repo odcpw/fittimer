@@ -9,7 +9,7 @@
     "window-controls-overlay",
     "standalone"
   ],
-  "orientation": "portrait-primary",
+  "orientation": "landscape",
   "background_color": "#0b121b",
   "theme_color": "#0b121b",
   "icons": [

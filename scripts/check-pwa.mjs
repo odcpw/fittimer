@@ -73,7 +73,7 @@ const manifest = await readJson('manifest.webmanifest');
 assert.equal(manifest.start_url, './');
 assert.equal(manifest.scope, './');
 assert.equal(manifest.display, 'standalone');
-assert.equal(manifest.orientation, 'portrait-primary');
+assert.equal(manifest.orientation, 'landscape');
 assert.ok(manifest.icons.some((icon) => icon.sizes === '192x192' && icon.purpose.includes('maskable')));
 assert.ok(manifest.icons.some((icon) => icon.sizes === '512x512' && icon.purpose.includes('maskable')));
 
@@ -136,7 +136,7 @@ for (const importedFile of importClosure) {
   assert.ok(shellPaths.has(`./${importedFile}`), `APP_SHELL is missing static import ${importedFile}`);
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
-assert.match(serviceWorker, /fittimer-v2/);
+assert.match(serviceWorker, /fittimer-v3/);
 const assetResponse = serviceWorker.match(/async function assetResponse[\s\S]*?\n}\n/);
 assert.ok(assetResponse, 'service worker asset response handler is present');
 assert.doesNotMatch(assetResponse[0], /cache\.put/);

@@ -18,9 +18,17 @@ const elements = hasDocument
       progressTrack: document.querySelector('.progress-track'),
       progressFill: document.querySelector('#progress-fill'),
       nextUp: document.querySelector('#next-up'),
+      controls: document.querySelector('#workout-controls'),
       back: document.querySelector('#back-button'),
       pause: document.querySelector('#pause-button'),
       next: document.querySelector('#next-button'),
+      end: document.querySelector('#end-button'),
+      completionActions: document.querySelector('#completion-actions'),
+      completionHome: document.querySelector('#completion-home'),
+      completionRestart: document.querySelector('#completion-restart'),
+      endConfirmation: document.querySelector('#end-confirmation'),
+      keepGoing: document.querySelector('#keep-going-button'),
+      confirmEnd: document.querySelector('#confirm-end-button'),
       error: document.querySelector('#app-error'),
     }
   : {};
@@ -49,6 +57,26 @@ let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
 const audioCues = new AudioCuePlayer();
+
+const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
+
+/**
+ * Describe which workout actions belong on screen for a timestamped snapshot.
+ * Keeping this decision pure makes the safety-critical navigation contract
+ * testable without a browser or a running clock.
+ */
+export function workoutNavigationState(snapshot) {
+  const state = snapshot?.state;
+  const intervalIndex = Number.isInteger(snapshot?.intervalIndex) ? snapshot.intervalIndex : 0;
+  const inWorkout = WORKOUT_STATES.has(state);
+  const completed = state === 'done';
+  return Object.freeze({
+    previousDisabled: !inWorkout || intervalIndex === 0,
+    endEnabled: inWorkout,
+    activeControlsVisible: !completed,
+    completionActionsVisible: completed,
+  });
+}
 
 function mediaKind(type) {
   if (type === 'video') return 'video';
@@ -249,9 +277,17 @@ function setButtonLabel(button, label) {
 
 function setPauseControl(state) {
   const paused = state === 'paused';
-  setButtonLabel(elements.pause, paused ? 'Resume' : state === 'done' ? 'Restart' : 'Pause');
+  setButtonLabel(elements.pause, paused ? 'Resume' : 'Pause');
   const path = elements.pause.querySelector('path');
-  if (path) path.setAttribute('d', paused || state === 'done' ? 'M8 5v14l11-7L8 5Z' : 'M7 5h3v14H7zM14 5h3v14h-3z');
+  if (path) path.setAttribute('d', paused ? 'M8 5v14l11-7L8 5Z' : 'M7 5h3v14H7zM14 5h3v14h-3z');
+}
+
+function applyNavigationState(snapshot) {
+  const navigation = workoutNavigationState(snapshot);
+  elements.back.disabled = navigation.previousDisabled;
+  elements.end.disabled = !navigation.endEnabled;
+  elements.controls.hidden = !navigation.activeControlsVisible;
+  elements.completionActions.hidden = !navigation.completionActionsVisible;
 }
 
 function showError(error) {
@@ -334,6 +370,7 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
 }
 
 function startWorkout(routine) {
+  stopAnimationLoop();
   activeRoutine = routine;
   engine = new IntervalEngine(routine.intervals);
   engine.subscribe((event) => {
@@ -344,6 +381,9 @@ function startWorkout(routine) {
   renderedPhase = null;
   elements.home.hidden = true;
   elements.workout.hidden = false;
+  elements.endConfirmation.hidden = true;
+  elements.controls.hidden = false;
+  elements.completionActions.hidden = true;
   document.documentElement.dataset.phase = 'work';
   engine.start();
   startAnimationLoop();
@@ -431,9 +471,6 @@ function renderWorkout(snapshot) {
     elements.exerciseTitle.textContent = 'Workout complete';
     elements.coachNote.textContent = 'Nice work. You finished every interval.';
     elements.nextUp.textContent = '30 minutes · complete';
-    setButtonLabel(elements.back, 'Home');
-    setPauseControl('done');
-    elements.next.disabled = true;
     stopAnimationLoop();
   } else if (displayInterval) {
     elements.exerciseTitle.textContent = displayInterval.displayName;
@@ -447,10 +484,11 @@ function renderWorkout(snapshot) {
     } else {
       elements.nextUp.textContent = 'Final interval';
     }
-    setButtonLabel(elements.back, 'Back');
     setPauseControl(snapshot.state);
-    elements.next.disabled = false;
   }
+
+  elements.next.disabled = !WORKOUT_STATES.has(snapshot.state);
+  applyNavigationState(snapshot);
 
   const progress = calculateWorkoutProgress(snapshot);
   const percent = Math.round(progress * 100);
@@ -497,10 +535,48 @@ export function collectContentUrls(index, installedRoutines = routines, mediaPac
   return [...files];
 }
 
+function resumePausedWorkout() {
+  if (!engine || engine.getSnapshot().state !== 'paused') return false;
+  engine.resume();
+  startAnimationLoop();
+  return true;
+}
+
+function openEndConfirmation() {
+  if (!engine) return;
+  const snapshot = engine.getSnapshot();
+  if (!WORKOUT_STATES.has(snapshot.state)) return;
+
+  if (snapshot.state !== 'paused') {
+    if (!engine.pause()) return;
+    stopAnimationLoop();
+  }
+  elements.endConfirmation.hidden = false;
+  elements.keepGoing.focus({ preventScroll: true });
+}
+
+function closeEndConfirmation({ resume = true } = {}) {
+  elements.endConfirmation.hidden = true;
+  if (resume) resumePausedWorkout();
+  elements.end.focus({ preventScroll: true });
+}
+
+function restartCompletedWorkout() {
+  if (!engine || !activeRoutine || engine.getSnapshot().state !== 'done') return;
+  engine.restart();
+  engine.start();
+  startAnimationLoop();
+}
+
 function goHome() {
   stopAnimationLoop();
   engine = null;
   activeRoutine = null;
+  elements.endConfirmation.hidden = true;
+  elements.completionActions.hidden = true;
+  elements.controls.hidden = false;
+  elements.back.disabled = true;
+  elements.end.disabled = true;
   elements.workout.hidden = true;
   elements.home.hidden = false;
   elements.next.disabled = false;
@@ -563,14 +639,9 @@ if (hasDocument) {
   elements.pause.addEventListener('click', () => {
     if (!engine) return;
     const snapshot = engine.getSnapshot();
-    if (snapshot.state === 'done') {
-      engine.restart();
-      engine.start();
-      startAnimationLoop();
-    } else if (snapshot.state === 'paused') {
-      engine.resume();
-      startAnimationLoop();
-    } else {
+    if (snapshot.state === 'paused') {
+      resumePausedWorkout();
+    } else if (WORKOUT_STATES.has(snapshot.state)) {
       engine.pause();
       stopAnimationLoop();
     }
@@ -578,14 +649,35 @@ if (hasDocument) {
 
   elements.back.addEventListener('click', () => {
     if (!engine) return;
-    if (engine.getSnapshot().state === 'done') goHome();
-    else engine.skipBack();
+    if (workoutNavigationState(engine.getSnapshot()).previousDisabled) return;
+    engine.skipBack();
+    if (WORKOUT_STATES.has(engine.getSnapshot().state)) startAnimationLoop();
   }, listenerOptions);
 
   elements.next.addEventListener('click', () => {
     if (!engine) return;
     engine.skipForward();
     if (engine.getSnapshot().state !== 'done') startAnimationLoop();
+  }, listenerOptions);
+
+  elements.end.addEventListener('click', openEndConfirmation, listenerOptions);
+
+  elements.keepGoing.addEventListener('click', () => {
+    closeEndConfirmation();
+  }, listenerOptions);
+
+  elements.confirmEnd.addEventListener('click', () => {
+    goHome();
+  }, listenerOptions);
+
+  elements.completionHome.addEventListener('click', goHome, listenerOptions);
+  elements.completionRestart.addEventListener('click', restartCompletedWorkout, listenerOptions);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !elements.endConfirmation.hidden) {
+      event.preventDefault();
+      closeEndConfirmation();
+    }
   }, listenerOptions);
 
   document.addEventListener('visibilitychange', () => {

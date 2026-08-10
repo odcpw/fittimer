@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittimer-v2';
+const CACHE_NAME = 'fittimer-v3';
 const APP_SHELL = [
   './',
   './index.html',

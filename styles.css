@@ -24,6 +24,7 @@ body {
   min-height: 100%;
   margin: 0;
   background: var(--bg);
+  overflow-x: hidden;
 }
 
 body {
@@ -244,18 +245,21 @@ html[data-phase="paused"] .phase-label {
   place-items: center;
   width: 100%;
   min-height: 0;
-  aspect-ratio: 1.38 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid #485564;
-  border-radius: 10px;
-  background: #080d13;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(35, 57, 76, 0.35), transparent 62%),
+    #080d13;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025), 0 16px 36px rgba(0, 0, 0, 0.2);
 }
 
 .movement-stage[data-count="2"] {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.movement-stage img {
+.movement-stage__media {
   display: block;
   width: 100%;
   height: 100%;
@@ -331,8 +335,8 @@ html[data-phase="paused"] .phase-label {
 
 .workout-controls {
   display: grid;
-  grid-template-columns: 1fr 1.18fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
   margin-top: auto;
   padding-top: 2px;
 }
@@ -343,10 +347,12 @@ html[data-phase="paused"] .phase-label {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  min-height: 88px;
-  padding: 10px 8px;
+  min-height: 76px;
+  padding: 10px 6px;
   color: var(--text);
-  font-size: 0.98rem;
+  font-size: 0.84rem;
+  font-weight: 750;
+  line-height: 1.1;
   border: 1px solid #526071;
   border-radius: var(--radius);
   background: rgba(14, 22, 32, 0.9);
@@ -364,9 +370,127 @@ html[data-phase="paused"] .phase-label {
   background: var(--coral);
 }
 
+.control-button--end {
+  border-color: rgba(255, 145, 136, 0.7);
+  color: #ffd3cf;
+}
+
 .control-button:disabled {
   opacity: 0.42;
   cursor: default;
+}
+
+.control-button:not(:disabled):hover {
+  border-color: #d8e3ef;
+  background: #1b2838;
+}
+
+.control-button--primary:not(:disabled):hover {
+  border-color: var(--coral);
+  background: #ff776e;
+}
+
+.control-button--end:not(:disabled):hover {
+  border-color: #ffaaa3;
+  background: rgba(109, 33, 30, 0.55);
+}
+
+.completion-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.primary-action,
+.secondary-action,
+.danger-action {
+  min-height: 68px;
+  padding: 14px 20px;
+  font-size: 1.08rem;
+  font-weight: 800;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.secondary-action {
+  color: var(--text);
+  border: 1px solid #526071;
+  background: rgba(14, 22, 32, 0.9);
+}
+
+.secondary-action:hover {
+  border-color: #d8e3ef;
+  background: #1b2838;
+}
+
+.danger-action {
+  color: #fff;
+  border: 1px solid #ff8d85;
+  background: #8e2b27;
+}
+
+.danger-action:hover {
+  background: #a83a34;
+}
+
+.secondary-action:active,
+.danger-action:active,
+.control-button:active,
+.primary-action:active {
+  transform: translateY(1px);
+}
+
+.end-confirmation {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 7, 11, 0.76);
+  backdrop-filter: blur(7px);
+}
+
+.end-confirmation__panel {
+  width: min(100%, 420px);
+  padding: clamp(24px, 5vw, 34px);
+  border: 1px solid #526071;
+  border-radius: calc(var(--radius) + 4px);
+  background: #111a25;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.end-confirmation__eyebrow {
+  margin: 0 0 8px;
+  color: var(--coral);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.end-confirmation h2 {
+  margin: 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.end-confirmation__panel > p:not(.end-confirmation__eyebrow) {
+  margin: 14px 0 0;
+  color: #d6dce2;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.end-confirmation__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
 }
 
 .app-error {
@@ -425,5 +549,118 @@ html[data-phase="paused"] .phase-label {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Landscape is the primary workout posture: the movement stays large on the
+   left while the timer and controls remain in a thumb-reachable rail. */
+@media (orientation: landscape) and (min-width: 600px) {
+  body {
+    padding: 0;
+  }
+
+  .app-shell {
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .home-screen {
+    width: min(100%, 680px);
+    margin: 0 auto;
+  }
+
+  .workout-screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(285px, 0.85fr);
+    grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+    column-gap: clamp(16px, 3vw, 32px);
+    row-gap: clamp(6px, 1.5vh, 12px);
+    min-height: 100dvh;
+    padding:
+      max(12px, env(safe-area-inset-top))
+      max(18px, env(safe-area-inset-right))
+      max(14px, env(safe-area-inset-bottom))
+      max(18px, env(safe-area-inset-left));
+  }
+
+  .workout-header {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .phase-label {
+    margin-bottom: 2px;
+    font-size: 0.86rem;
+  }
+
+  .timer {
+    font-size: clamp(4rem, 11vw, 6.8rem);
+  }
+
+  .interval-count {
+    margin-top: 4px;
+    font-size: 1rem;
+  }
+
+  .movement-stage {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: center;
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+
+  .exercise-copy {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    min-height: 54px;
+  }
+
+  .exercise-copy h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .exercise-copy p {
+    margin-top: 5px;
+    font-size: 0.88rem;
+  }
+
+  .progress-track {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .next-up {
+    grid-column: 2;
+    grid-row: 4;
+    font-size: 0.9rem;
+  }
+
+  .workout-controls,
+  .completion-actions {
+    grid-column: 2;
+    grid-row: 5;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .control-button {
+    min-height: 68px;
+    padding: 8px 4px;
+    font-size: 0.78rem;
+  }
+
+  .control-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .completion-actions .primary-action,
+  .completion-actions .secondary-action {
+    min-height: 68px;
+    padding-inline: 8px;
   }
 }

@@ -53,10 +53,10 @@
 
         <p class="next-up" id="next-up">Next · Bum Kicks</p>
 
-        <nav class="workout-controls" aria-label="Workout controls">
-          <button class="control-button" id="back-button" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 6l-9 6 9 6V6Z"/></svg>
-            <span>Back</span>
+        <nav class="workout-controls" id="workout-controls" aria-label="Workout controls">
+          <button class="control-button" id="back-button" type="button" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7M9 12h10"/></svg>
+            <span>Previous</span>
           </button>
           <button class="control-button control-button--primary" id="pause-button" type="button">
             <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
@@ -66,7 +66,28 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 6l9 6-9 6V6Z"/></svg>
             <span>Next</span>
           </button>
+          <button class="control-button control-button--end" id="end-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10H7z"/></svg>
+            <span>End Workout</span>
+          </button>
         </nav>
+
+        <div class="completion-actions" id="completion-actions" hidden>
+          <button class="secondary-action" id="completion-home" type="button">Home</button>
+          <button class="primary-action" id="completion-restart" type="button">Restart</button>
+        </div>
+
+        <section class="end-confirmation" id="end-confirmation" role="dialog" aria-modal="true" aria-labelledby="end-confirmation-title" aria-describedby="end-confirmation-copy" hidden>
+          <div class="end-confirmation__panel">
+            <p class="end-confirmation__eyebrow">Workout paused</p>
+            <h2 id="end-confirmation-title">End this workout?</h2>
+            <p id="end-confirmation-copy">Your timer is paused. Keep going when you’re ready, or return home.</p>
+            <div class="end-confirmation__actions">
+              <button class="secondary-action" id="keep-going-button" type="button">Keep Going</button>
+              <button class="danger-action" id="confirm-end-button" type="button">End Workout</button>
+            </div>
+          </div>
+        </section>
       </section>
 
       <p class="app-error" id="app-error" role="alert" hidden></p>
