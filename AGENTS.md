@@ -14,6 +14,16 @@ Root operating manual: /home/oliver/.codex/AGENTS.md — binds in full.
   (`scripts/`), which must stay dependency-free.
 - **Tracker**: beads (`br`), issues in `.beads/issues.jsonl` committed to git.
   Work top-down from `br ready`; the dependency graph encodes the build order.
+  Verified here: `br ready`, `br show <id>`, `bv --robot-next` (never bare
+  `bv`), `br dep cycles` (must stay empty). After mutating beads:
+  `br sync --flush-only`, then commit `.beads/issues.jsonl` with the work.
+- **Checks (verified)**: `find data -name '*.json' -exec jq -e . {} \;` —
+  all data files must parse. The schema validator (arrives with
+  ft-mvp-ow6.1) supersedes this. No build, no lint config yet.
+- **Compatibility posture**: early private project — direct clean fixes,
+  no shims, no legacy wrappers.
+- **FrankenSuite**: FrankenTTS only, at content-build time (voice clips,
+  ft-mvp-ow6.6); the shipped PWA has zero runtime dependencies.
 - **Domain invariants**: audio via WebAudio only (never `<audio>`/media
   session — it pauses background music); timer must be timestamp-anchored,
   not `setInterval`-accumulated; adding a routine JSON must require zero code

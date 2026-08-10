@@ -41,7 +41,7 @@ First routine: MadFit's *"30 MIN FULL BODY HIIT with weights (NO REPEATS, NO JUM
 
 | Path | Contents |
 |---|---|
-| `data/workout_madfit_30min_hiit.json` | The 30 mapped intervals (schema in §5) |
+| `data/routines/madfit-30min-hiit.json` | The 30 mapped intervals (schema in §5) |
 | `data/exercises/catalog_full.json` | **Complete WorkoutX catalog: 1,327 exercises** — name, bodyPart, target, secondaryMuscles, equipment, step-by-step instructions, gifUrl, difficulty, mechanic, force, MET, caloriesPerMinute, isUnilateral, recommended sets/reps |
 | `data/exercises/bodyPartList.json` etc. | Valid filter values (body parts, targets, equipment, secondary muscles) |
 | `data/exercises/openapi.json` | Full WorkoutX API spec |
@@ -112,9 +112,9 @@ Existing JSON per interval: `{order, name, workSeconds, restSeconds, match, exer
 9. **History/streaks**: localStorage log `{routine, date, completedAt interval n | finished}`; month calendar with dots + current streak. No charts, no export.
 10. **GIF fetch tooling**: `scripts/fetch-gifs.mjs <ids…>` — reads `WORKOUTX_KEY` env, skips already-present files, paces under 30 req/min, appends to a committed quota ledger. Every new content block spends from the ~330-call budget.
 
-## 7. Build plan (18 issues, dependency-ordered)
+## 7. Build plan (2 epics + 16 tasks, dependency-ordered)
 
-Tracked in beads (`.beads/issues.jsonl`, prefix `ft`). `→` = blocked by.
+Tracked in beads (`.beads/issues.jsonl`, prefix `ft`); the DB also carries a since-closed data-recovery task (`ft-mvp-ow6.9`). `→` = blocked by.
 
 **Epic MVP — run the MadFit session on the owner's phone** *(P1)*
 
@@ -142,7 +142,7 @@ Tracked in beads (`.beads/issues.jsonl`, prefix `ft`). `→` = blocked by.
 | 4. **Physio**: interview owner on problem areas → research reputable sources → rehab/mobility blocks with citations. **Hard rule: not before MVP.10 is done** | MVP.10, C.1 |
 | 5. Compose 40+ min sessions from blocks (pure data) | C.2, C.3 |
 
-(The original cowork beads ids `ft-c1b.*` / `ft-mzi.*` were never exported; the issues were re-created in this repo's beads DB — see `.beads/issues.jsonl` for current ids.)
+(This repo's beads ids are `ft-mvp-ow6.*` / `ft-content-e0q.*`: created fresh, then enriched with the descriptions and acceptance criteria from the cowork tracker recovered via `fittimer.zip`. The cowork ids `ft-c1b.*` / `ft-mzi.*` are historical; its dependency edges were recorded inverted and were deliberately not imported.)
 
 ## 8. Gotchas & open items
 
