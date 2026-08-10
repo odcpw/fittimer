@@ -23,7 +23,7 @@
       "displayName": "Bum Kicks (butt kicks, side to side)",
       "workSeconds": 40,
       "restSeconds": 20,
-      "coachNote": "No butt-kick exercise in catalog; reuse Step Jacks GIF or record a custom one. Side-to-side heel-to-glute steps with optional arm swings.",
+      "coachNote": "Visual decision: use a text-only card because the catalog has no honest butt-kick match. Do side-to-side heel-to-glute steps with optional arm swings.",
       "match": "none",
       "movements": [
         {
@@ -226,7 +226,7 @@
       "displayName": "Commandos + Step Out",
       "workSeconds": 40,
       "restSeconds": 20,
-      "coachNote": "Plank up-downs (hands to elbows) alternated with plank foot step-outs. No commando GIF available on free plan (5204 exists but watermarked GIF unavailable); this GIF is a related plank-transition move.",
+      "coachNote": "Visual decision: keep the related Push-up To Side Plank GIF because commando id 5204 is unavailable on the free plan. Alternate plank up-downs (hands to elbows) with foot step-outs.",
       "match": "loose",
       "movements": [
         {
@@ -268,7 +268,7 @@
       "displayName": "Plank Pull-Throughs",
       "workSeconds": 40,
       "restSeconds": 20,
-      "coachNote": "High plank, drag the dumbbell under the body to the opposite side, no hip sway. Closest catalog match is the renegade row (same anti-rotation plank + dumbbell).",
+      "coachNote": "Visual decision: keep the renegade-row GIF as the closest anti-rotation plank-with-dumbbell match. Drag the dumbbell under the body to the opposite side with no hip sway.",
       "match": "loose",
       "movements": [
         {
@@ -394,7 +394,7 @@
       "displayName": "Standing Crunch with Dumbbell (march)",
       "workSeconds": 40,
       "restSeconds": 20,
-      "coachNote": "Marching knee-up with a crunch action, dumbbell held at chest. Catalog GIF shows the standing crunch pattern with a band instead.",
+      "coachNote": "Visual decision: keep the band standing-crunch GIF for its matching torso action. March the knees while crunching with a dumbbell held at the chest; do not use a band.",
       "match": "loose",
       "movements": [
         {
