@@ -87,6 +87,9 @@ let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
+const stageNodeCleanups = new Set();
+const videoPlaybackFailures = new WeakMap();
+const ownedBlobUrls = new WeakMap();
 const settingsStore = createSettingsStore(hasDocument ? undefined : null);
 let currentSettings = settingsStore.load();
 const audioCues = new AudioCuePlayer({ settings: currentSettings });
@@ -184,7 +187,7 @@ function shouldMirror(entry, requestedSide) {
 
 function orderedAssets(entry, reducedMotion) {
   if (!Array.isArray(entry?.assets)) return [];
-  const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && typeof asset.url === 'string');
+  const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolveAssetUrl(asset?.url));
   const candidates = reducedMotion
     ? available.filter((asset) => asset.type === 'poster')
     : available;
@@ -237,8 +240,36 @@ export function resolveMovementVisual(
   };
 }
 
+/**
+ * Compound intervals may describe one full-sequence clip more than once. Keep
+ * one visual for each resolved asset URL while leaving text-only entries and
+ * genuinely distinct assets untouched.
+ */
+export function deduplicateVisualSelections(selections) {
+  if (!Array.isArray(selections)) return [];
+  const seenUrls = new Set();
+  return selections.filter((selection) => {
+    const assetUrl = selection?.asset?.url;
+    if (typeof assetUrl !== 'string') return true;
+    const resolvedUrl = resolveAssetUrl(assetUrl);
+    if (!resolvedUrl) return true;
+    if (seenUrls.has(resolvedUrl)) return false;
+    seenUrls.add(resolvedUrl);
+    return true;
+  });
+}
+
 function resolveUrl(relativePath) {
   return new URL(relativePath, hasDocument ? document.baseURI : 'http://localhost/').href;
+}
+
+function resolveAssetUrl(assetUrl) {
+  if (typeof assetUrl !== 'string' || assetUrl.trim() === '') return null;
+  try {
+    return resolveUrl(assetUrl);
+  } catch {
+    return null;
+  }
 }
 
 async function fetchJson(relativePath) {
@@ -527,6 +558,47 @@ function textVisualNode(label) {
   return text;
 }
 
+function trackOwnedBlobUrl(node, asset) {
+  if (asset?.ownedBlobUrl !== true || typeof asset.url !== 'string' || !asset.url.startsWith('blob:')) return;
+  const urls = ownedBlobUrls.get(node) ?? new Set();
+  urls.add(asset.url);
+  ownedBlobUrls.set(node, urls);
+}
+
+function revokeOwnedBlobUrls(node) {
+  const urls = ownedBlobUrls.get(node);
+  if (!urls) return;
+  for (const url of urls) {
+    if (typeof URL.revokeObjectURL === 'function') URL.revokeObjectURL(url);
+  }
+  ownedBlobUrls.delete(node);
+}
+
+function cleanupMediaNode(node) {
+  if (node?.nodeName?.toLowerCase() === 'video') {
+    node.pause();
+    node.removeAttribute('src');
+    node.removeAttribute('poster');
+    node.load();
+  }
+  revokeOwnedBlobUrls(node);
+}
+
+function disposeStageVisuals() {
+  for (const cleanup of [...stageNodeCleanups]) cleanup();
+  stageNodeCleanups.clear();
+  if (elements.stage) elements.stage.replaceChildren();
+}
+
+function playVideo(node, onFailure) {
+  try {
+    const playback = node.play();
+    if (playback && typeof playback.catch === 'function') playback.catch(onFailure);
+  } catch {
+    onFailure();
+  }
+}
+
 function createVisualNode(movement, interval, selection, candidateIndex = 0) {
   const asset = selection.candidates[candidateIndex];
   if (!asset) return textVisualNode(selection.label);
@@ -537,22 +609,43 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
     framing: resolveFraming(selectedMediaPack, asset),
   };
   if (visual.kind === 'text') return textVisualNode(selection.label);
+  if (reducedMotionPreferred() && asset.type !== 'poster') {
+    const posterIndex = selection.candidates.findIndex((candidate) => candidate.type === 'poster');
+    return posterIndex >= 0
+      ? createVisualNode(movement, interval, selection, posterIndex)
+      : textVisualNode(selection.label);
+  }
 
   const node = visual.kind === 'video'
     ? document.createElement('video')
     : document.createElement('img');
   node.className = 'movement-stage__media';
   node.dataset.mediaType = asset.type;
-  node.src = resolveUrl(asset.url);
   node.alt = selection.label;
   node.decoding = 'async';
   applyFraming(node, visual);
 
-  const fallback = () => {
-    if (!node.isConnected) return;
-    node.replaceWith(createVisualNode(movement, interval, selection, candidateIndex + 1));
+  let disposed = false;
+  let onError;
+  let onCanPlay;
+  const dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    if (onError) node.removeEventListener('error', onError);
+    if (onCanPlay) node.removeEventListener('canplay', onCanPlay);
+    videoPlaybackFailures.delete(node);
+    stageNodeCleanups.delete(dispose);
+    cleanupMediaNode(node);
   };
-  node.addEventListener('error', fallback, { once: true });
+
+  const fallback = () => {
+    if (disposed || !node.isConnected) return;
+    const replacement = createVisualNode(movement, interval, selection, candidateIndex + 1);
+    dispose();
+    node.replaceWith(replacement);
+  };
+  onError = fallback;
+  node.addEventListener('error', onError, { once: true });
 
   if (visual.kind === 'video') {
     node.muted = true;
@@ -563,12 +656,28 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
     node.controls = false;
     node.preload = 'metadata';
     const poster = selection.candidates.find((candidate) => candidate.type === 'poster');
-    if (poster) node.poster = resolveUrl(poster.url);
-    node.addEventListener('canplay', () => {
-      if (node.autoplay) node.play().catch(fallback);
-    }, { once: true });
+    if (poster) {
+      node.poster = resolveUrl(poster.url);
+      trackOwnedBlobUrl(node, poster);
+    }
+    videoPlaybackFailures.set(node, fallback);
+    onCanPlay = () => {
+      if (node.autoplay && !reducedMotionPreferred()) playVideo(node, fallback);
+    };
+    node.addEventListener('canplay', onCanPlay, { once: true });
   }
+  trackOwnedBlobUrl(node, asset);
+  stageNodeCleanups.add(dispose);
+  node.src = resolveUrl(asset.url);
   return node;
+}
+
+function replayCurrentVideos() {
+  if (reducedMotionPreferred() || !elements.stage) return;
+  for (const node of elements.stage.querySelectorAll('video')) {
+    if (!node.autoplay) continue;
+    playVideo(node, videoPlaybackFailures.get(node) ?? (() => {}));
+  }
 }
 
 function startWorkout(routine) {
@@ -633,6 +742,7 @@ function movementForSnapshot(snapshot) {
 }
 
 function renderMovement(interval) {
+  disposeStageVisuals();
   if (!interval) {
     const done = textVisualNode('Workout complete');
     elements.stage.dataset.count = '1';
@@ -640,11 +750,18 @@ function renderMovement(interval) {
     return;
   }
 
-  const visuals = interval.movements.map((movement) => {
-    const selection = resolveMovementVisual(movement, selectedMediaPack, {
+  const movementSelections = interval.movements.map((movement) => ({
+    movement,
+    selection: resolveMovementVisual(movement, selectedMediaPack, {
       reducedMotion: reducedMotionPreferred(),
       requestedSide: interval.side,
-    });
+    }),
+  }));
+  const uniqueSelections = deduplicateVisualSelections(
+    movementSelections.map(({ selection }) => selection),
+  );
+  const visuals = uniqueSelections.map((selection) => {
+    const { movement } = movementSelections.find((item) => item.selection === selection);
     return createVisualNode(movement, interval, selection);
   });
   elements.stage.dataset.count = String(visuals.length);
@@ -772,6 +889,7 @@ function restartCompletedWorkout() {
 
 function goHome() {
   stopAnimationLoop();
+  disposeStageVisuals();
   engine = null;
   activeRoutine = null;
   elements.endConfirmation.hidden = true;
@@ -887,6 +1005,7 @@ if (hasDocument) {
     if (document.visibilityState === 'visible' && engine && ['work', 'rest'].includes(engine.getSnapshot().state)) {
       audioCues.resume().catch(showError);
       engine.update();
+      replayCurrentVideos();
       startAnimationLoop();
     }
   }, listenerOptions);

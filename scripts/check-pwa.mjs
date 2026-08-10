@@ -136,7 +136,7 @@ for (const importedFile of importClosure) {
   assert.ok(shellPaths.has(`./${importedFile}`), `APP_SHELL is missing static import ${importedFile}`);
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
-assert.match(serviceWorker, /fittimer-v4/);
+assert.match(serviceWorker, /fittimer-v5/);
 const assetResponse = serviceWorker.match(/async function assetResponse[\s\S]*?\n}\n/);
 assert.ok(assetResponse, 'service worker asset response handler is present');
 assert.doesNotMatch(assetResponse[0], /cache\.put/);
