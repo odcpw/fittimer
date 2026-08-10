@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-phase="home">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b121b">
+    <meta name="description" content="A phone-first offline interval timer for guided workouts.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FitTimer">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <title>FitTimer</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="home-screen" id="home-screen" aria-labelledby="brand-title">
+        <header class="home-header">
+          <h1 class="brand" id="brand-title">FitTimer</h1>
+          <p class="home-lede">Ready when you are.</p>
+        </header>
+
+        <div class="routine-list" id="routine-list" aria-label="Workout routines"></div>
+
+        <div class="home-actions">
+          <button class="primary-action" id="start-button" type="button" disabled>Start workout</button>
+          <p class="offline-status" id="offline-status" role="status">
+            <span class="offline-dot" aria-hidden="true"></span>
+            <span>Preparing offline…</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="workout-screen" id="workout-screen" aria-labelledby="exercise-title" hidden>
+        <header class="workout-header">
+          <p class="phase-label" id="phase-label">WORK</p>
+          <p class="timer" id="timer" aria-live="off">00:40</p>
+          <p class="interval-count" id="interval-count">1 / 30</p>
+        </header>
+
+        <div class="movement-stage" id="movement-stage" aria-live="polite"></div>
+
+        <div class="exercise-copy">
+          <h2 id="exercise-title">Step Jacks</h2>
+          <p id="coach-note">Step out, no jumping.</p>
+        </div>
+
+        <div class="progress-track" role="progressbar" aria-label="Workout progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progress-fill"></span>
+        </div>
+
+        <p class="next-up" id="next-up">Next · Bum Kicks</p>
+
+        <nav class="workout-controls" aria-label="Workout controls">
+          <button class="control-button" id="back-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 6l-9 6 9 6V6Z"/></svg>
+            <span>Back</span>
+          </button>
+          <button class="control-button control-button--primary" id="pause-button" type="button">
+            <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+            <span>Pause</span>
+          </button>
+          <button class="control-button" id="next-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 6l9 6-9 6V6Z"/></svg>
+            <span>Next</span>
+          </button>
+        </nav>
+      </section>
+
+      <p class="app-error" id="app-error" role="alert" hidden></p>
+    </main>
+
+    <script type="module" src="src/app.mjs"></script>
+  </body>
+</html>

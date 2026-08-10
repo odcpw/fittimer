@@ -14,9 +14,12 @@ API notes, and the build plan.
 
 - Data schema v1, reusable block composition, and dependency-free validation
   are implemented; the MadFit routine expands to 30 validated intervals.
-- The timestamp-anchored interval engine is implemented and covered by an
-  injected-fake-clock `node --test` suite. The PWA shell and workout screen are
-  the next runnable-app milestones.
+- The timestamp-anchored interval engine and the phone-first workout UI are
+  implemented. The app loads the real MadFit routine, supports pause/back/next,
+  and works after a verified offline reload in desktop Chromium.
+- The installable PWA shell caches the app, routine/block files, and only the 27
+  referenced GIFs. Android/iOS installation and audio-over-music remain the
+  next real-device milestones.
 - Build plan is tracked in beads (`br ready` to see unblocked work; issues in
   `.beads/issues.jsonl`).
 
@@ -25,7 +28,16 @@ Run the current checks with:
 ```sh
 node --test
 node scripts/validate.mjs data/routines/*.json
+node scripts/check-pwa.mjs
 ```
+
+Run it locally from the repository root (service workers require HTTP):
+
+```sh
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000/`.
 
 ## Data provenance
 
@@ -49,3 +61,6 @@ scripts/         content-build tooling (GIF fetcher, TTS pre-render)
 src/             dependency-free application modules
 test/            Node tests and committed schema fixtures
 ```
+
+The current mobile visual reference is
+[`docs/design/fittimer-mobile-concept.png`](docs/design/fittimer-mobile-concept.png).

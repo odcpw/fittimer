@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "routines": [
+    "data/routines/madfit-30min-hiit.json"
+  ],
+  "blocks": {
+    "madfit-30min-hiit": "data/blocks/madfit-30min-hiit.json"
+  }
+}

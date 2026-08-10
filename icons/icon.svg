@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">FitTimer</title>
+  <rect width="512" height="512" rx="112" fill="#0b121b"/>
+  <circle cx="256" cy="256" r="154" fill="none" stroke="#c9ff3d" stroke-width="30"/>
+  <path d="M256 70v52M256 390v52M70 256h52M390 256h52" stroke="#c9ff3d" stroke-width="24" stroke-linecap="round"/>
+  <rect x="194" y="174" width="42" height="164" rx="18" fill="#f5f7fa"/>
+  <rect x="276" y="174" width="42" height="164" rx="18" fill="#f5f7fa"/>
+</svg>

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "routine",
   "id": "madfit-30min-hiit",
-  "title": "30 MIN FULL BODY HIIT with weights (NO REPEATS, NO JUMPING)",
+  "title": "30 MIN FULL BODY HIIT",
   "description": "A 30-minute, low-impact full-body interval workout reconstructed from MadFit's coached video.",
   "equipment": [
     "1–2 light dumbbells (video uses 10 lb)"
