@@ -401,6 +401,9 @@ async function validateInterval(interval, location, errors, movementModes, refer
     'workSeconds',
     'restSeconds',
     'side',
+    'tempo',
+    'rpe',
+    'regressions',
     'coachNote',
     'match',
     'movements',
@@ -410,6 +413,9 @@ async function validateInterval(interval, location, errors, movementModes, refer
   checkString(interval.displayName, `${location}.displayName`, errors);
   checkPositiveInteger(interval.workSeconds, `${location}.workSeconds`, errors);
   checkPositiveInteger(interval.restSeconds, `${location}.restSeconds`, errors);
+  checkString(interval.tempo, `${location}.tempo`, errors, { optional: true });
+  checkString(interval.rpe, `${location}.rpe`, errors, { optional: true });
+  checkStringArray(interval.regressions, `${location}.regressions`, errors, { optional: true });
   checkString(interval.coachNote, `${location}.coachNote`, errors, { optional: true });
 
   if (interval.side !== undefined && !SIDE_VALUES.has(interval.side)) {
@@ -501,6 +507,7 @@ async function validateRoutine(routine, file, blocks, errors, movementModes, ref
     'estimatedDurationSeconds',
     'source',
     'notes',
+    'safetyCues',
     'sequence',
   ]);
   if (!checkObject(routine, allowed, location, errors, `schemaVersion ${CONTENT_SCHEMA_VERSION}`)) return null;
@@ -518,6 +525,7 @@ async function validateRoutine(routine, file, blocks, errors, movementModes, ref
   checkPositiveInteger(routine.estimatedDurationSeconds, `${location}.estimatedDurationSeconds`, errors);
   if (routine.source !== undefined) validateSource(routine.source, `${location}.source`, errors);
   checkStringArray(routine.notes, `${location}.notes`, errors, { optional: true });
+  checkStringArray(routine.safetyCues, `${location}.safetyCues`, errors, { optional: true });
 
   let durationSeconds = 0;
   let intervalCount = 0;

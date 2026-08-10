@@ -5,9 +5,17 @@
     "gif-v1": "data/media/gif-v1.json"
   },
   "routines": [
-    "data/routines/madfit-30min-hiit.json"
+    "data/routines/madfit-30min-hiit.json",
+    "data/routines/iron-roots.json",
+    "data/routines/silk-coils.json",
+    "data/routines/dragon-longform.json",
+    "data/routines/crane-longform.json"
   ],
   "blocks": {
-    "madfit-30min-hiit": "data/blocks/madfit-30min-hiit.json"
+    "madfit-30min-hiit": "data/blocks/madfit-30min-hiit.json",
+    "iron-roots": "data/blocks/iron-roots.json",
+    "silk-coils": "data/blocks/silk-coils.json",
+    "dragon-longform": "data/blocks/dragon-longform.json",
+    "crane-longform": "data/blocks/crane-longform.json"
   }
 }

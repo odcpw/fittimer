@@ -84,6 +84,7 @@ same `id`, which is the cross-routine reuse mechanism.
     "url": "https://example.com/optional-source"
   },
   "notes": ["Optional curator note."],
+  "safetyCues": ["Routine-wide safety or regression rule."],
   "sequence": [
     { "blockId": "warm-up" },
     { "blockId": "strength" },
@@ -104,6 +105,23 @@ same `id`, which is the cross-routine reuse mechanism.
 `estimatedDurationSeconds` must equal the sum of every expanded interval's
 `workSeconds + restSeconds`. This catches stale picker metadata.
 
+`safetyCues`, when present, carries routine-wide form, load, pain, and
+regression rules that apply in addition to an interval's own `coachNote`.
+
+| Field | Required | Type | Meaning |
+| --- | --- | --- | --- |
+| `schemaVersion` | yes | integer | Contract version; exactly `2`. |
+| `kind` | yes | string | Exactly `"routine"`. |
+| `id` | yes | string | Unique lowercase kebab-case routine ID. |
+| `title` | yes | string | Human-readable routine name. |
+| `description` | no | string | Picker-facing summary. |
+| `equipment` | yes | string[] | Equipment needed for the routine. |
+| `estimatedDurationSeconds` | yes | integer | Exact expanded work-plus-rest duration. |
+| `source` | no | object | Provenance fields; at least one field when present. |
+| `notes` | no | string[] | Curator-facing notes. |
+| `safetyCues` | no | string[] | Routine-wide form, load, pain, or regression cues. |
+| `sequence` | yes | sequence[] | Ordered block references and/or inline intervals. |
+
 The sequence item rules are unchanged from the composition model: each item
 contains exactly one `blockId` or one inline `interval`.
 
@@ -115,6 +133,9 @@ contains exactly one `blockId` or one inline `interval`.
   "workSeconds": 40,
   "restSeconds": 20,
   "side": "alternating",
+  "tempo": "controlled hinge; no bounce",
+  "rpe": "6–7",
+  "regressions": ["Use a lighter load or shorten the range if form changes."],
   "coachNote": "Alternate one rep of each movement.",
   "match": "combo",
   "movements": [
@@ -138,6 +159,9 @@ contains exactly one `blockId` or one inline `interval`.
 | `workSeconds` | yes | integer | Positive work duration in seconds. |
 | `restSeconds` | yes | integer | Positive following-rest duration in seconds. |
 | `side` | no | enum | `left`, `right`, `alternating`, `bilateral`, `first`, or `second`. |
+| `tempo` | no | string | Prescribed rep cadence, pause, hold, or controlled-speed cue. |
+| `rpe` | no | string | Target effort notation, retained as written by the routine author (for example `8`, `6–7`, or `2→4`). |
+| `regressions` | no | string[] | One or more explicit lower-load, supported, range, or toe-safe options. |
 | `coachNote` | no | string | Form guidance or an explicit visual-substitution decision. |
 | `match` | no | enum | `exact`, `close`, `combo`, `loose`, or `none`. |
 | `movements` | yes | movement[] | Non-empty list of visual movements. |

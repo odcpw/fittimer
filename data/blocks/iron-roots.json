@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 2,
+  "kind": "block",
+  "id": "iron-roots",
+  "title": "Iron Roots",
+  "description": "Thirty hinge-and-push intervals from the canonical Fable W1 routine.",
+  "intervals": [
+    {
+      "displayName": "March + Arm Circles",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "rpe": "2→4",
+      "coachNote": "Ramp from easy marching to a steady pattern with relaxed arm circles; no bounce.",
+      "match": "none",
+      "movements": [{ "movementId": "march-arm-circles", "displayName": "March + Arm Circles", "textOnly": true }]
+    },
+    {
+      "displayName": "Bodyweight Squat, Deepening",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "tempo": "Controlled depth; heels down",
+      "coachNote": "Begin shallow and deepen only while the heels stay down.",
+      "regressions": ["Use a smaller range or hold support if balance or hip range limits depth."],
+      "match": "none",
+      "movements": [{ "movementId": "bodyweight-squat-deepening", "displayName": "Bodyweight Squat, Deepening", "textOnly": true }]
+    },
+    {
+      "displayName": "Hip Hinge + Reach",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Hinge from the hips with a long spine; reach without forcing range.",
+      "match": "none",
+      "movements": [{ "movementId": "hip-hinge-reach", "displayName": "Hip Hinge + Reach", "textOnly": true }]
+    },
+    {
+      "displayName": "Ankle Pumps + Heel-to-toe Rocks",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Prepare the ankles with pumps and heel-to-toe rocks; this is not a calf-raise station.",
+      "match": "none",
+      "movements": [{ "movementId": "ankle-pumps-heel-to-toe-rocks", "displayName": "Ankle Pumps + Heel-to-toe Rocks", "textOnly": true }]
+    },
+    {
+      "displayName": "Standing Wall Scapular Reach",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Stand at the wall and reach without shrugging or forcing the shoulder range.",
+      "match": "none",
+      "movements": [{ "movementId": "standing-wall-scapular-reach", "displayName": "Standing Wall Scapular Reach", "textOnly": true }]
+    },
+    {
+      "displayName": "Lateral Step + Relaxed Arm Sweep",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Step side to side with relaxed arms; keep the landings quiet and planted.",
+      "match": "none",
+      "movements": [{ "movementId": "lateral-step-arm-sweep", "displayName": "Lateral Step + Relaxed Arm Sweep", "textOnly": true }]
+    },
+    {
+      "displayName": "Split Squat (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "3 s down / pause / controlled rise",
+      "rpe": "8",
+      "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
+      "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
+      "match": "none",
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+    },
+    {
+      "displayName": "Split Squat (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "3 s down / pause / controlled rise",
+      "rpe": "8",
+      "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
+      "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
+      "match": "none",
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+    },
+    {
+      "displayName": "Push-up",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "tempo": "3 s down / pause / controlled rise",
+      "rpe": "8",
+      "coachNote": "Use a standard, knees-down, or hands-elevated push-up; never use fists as a toe-safe regression.",
+      "regressions": ["Use knees-down or hands-elevated; fists do not unload the first MTP."],
+      "match": "exact",
+      "movements": [{ "movementId": "push-ups", "exerciseId": "0662", "displayName": "Push-up" }]
+    },
+    {
+      "displayName": "Single-leg RDL (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "3 s down / controlled rise",
+      "rpe": "8",
+      "coachNote": "Use dumbbells with a flat back, square pelvis, and eyes on a fixed spot.",
+      "regressions": ["Use wall support or a toe kickstand; keep the whole foot loaded."],
+      "match": "exact",
+      "movements": [{ "movementId": "single-leg-rdl", "exerciseId": "1757", "displayName": "Single-leg RDL" }]
+    },
+    {
+      "displayName": "Single-leg RDL (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "3 s down / controlled rise",
+      "rpe": "8",
+      "coachNote": "Use dumbbells with a flat back, square pelvis, and eyes on a fixed spot.",
+      "regressions": ["Use wall support or a toe kickstand; keep the whole foot loaded."],
+      "match": "exact",
+      "movements": [{ "movementId": "single-leg-rdl", "exerciseId": "1757", "displayName": "Single-leg RDL" }]
+    },
+    {
+      "displayName": "One-arm Row (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "3 s eccentric / 1 s squeeze",
+      "rpe": "8",
+      "coachNote": "Use 7 kg if form stays clean; support the free hand and keep the shoulder away from the ear.",
+      "regressions": ["Use a lighter dumbbell or forearm support if the back or shoulder position changes."],
+      "match": "none",
+      "movements": [{ "movementId": "one-arm-row", "displayName": "One-arm Row", "textOnly": true }]
+    },
+    {
+      "displayName": "One-arm Row (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "3 s eccentric / 1 s squeeze",
+      "rpe": "8",
+      "coachNote": "Use 7 kg if form stays clean; support the free hand and keep the shoulder away from the ear.",
+      "regressions": ["Use a lighter dumbbell or forearm support if the back or shoulder position changes."],
+      "match": "none",
+      "movements": [{ "movementId": "one-arm-row", "displayName": "One-arm Row", "textOnly": true }]
+    },
+    {
+      "displayName": "Glute Bridge March",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "rpe": "6–7",
+      "coachNote": "Keep the pelvis level while alternating the march; avoid anterior-hip pinching.",
+      "regressions": ["Use a bilateral bridge if marching loses pelvic control."],
+      "match": "none",
+      "movements": [{ "movementId": "glute-bridge-march", "displayName": "Glute Bridge March", "textOnly": true }]
+    },
+    {
+      "displayName": "Horse-stance Goblet Hold",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "rpe": "8",
+      "coachNote": "Use a moderate stance width, hold the dumbbell at the chest, and keep breathing.",
+      "regressions": ["Use a lighter load or a higher stance without turning the hold into an aggressive hip stretch."],
+      "match": "none",
+      "movements": [{ "movementId": "horse-stance-goblet-hold", "displayName": "Horse-stance Goblet Hold", "textOnly": true }]
+    },
+    {
+      "displayName": "Slow Step-up (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "Slow ascent and descent; whole foot planted",
+      "rpe": "5–7",
+      "coachNote": "Use a low step and control the pelvis; place the whole foot on the step.",
+      "regressions": ["Lower the step or use a stable support; do not push off the trailing foot."],
+      "match": "none",
+      "movements": [{ "movementId": "slow-step-up", "displayName": "Slow Step-up", "textOnly": true }]
+    },
+    {
+      "displayName": "Slow Step-up (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "Slow ascent and descent; whole foot planted",
+      "rpe": "5–7",
+      "coachNote": "Use a low step and control the pelvis; place the whole foot on the step.",
+      "regressions": ["Lower the step or use a stable support; do not push off the trailing foot."],
+      "match": "none",
+      "movements": [{ "movementId": "slow-step-up", "displayName": "Slow Step-up", "textOnly": true }]
+    },
+    {
+      "displayName": "Prone W Raise",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "tempo": "2 s squeeze / slow lower",
+      "rpe": "5–7",
+      "coachNote": "Lift into a comfortable W, squeeze for two seconds, and keep the neck relaxed.",
+      "regressions": ["Use a smaller lift or no lift if the shoulder feels apprehensive."],
+      "match": "none",
+      "movements": [{ "movementId": "prone-w-raise", "displayName": "Prone W Raise", "textOnly": true }]
+    },
+    {
+      "displayName": "Suitcase March",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "alternating",
+      "rpe": "6–7",
+      "coachNote": "Carry 7 kg tall, switch hands at 20 seconds, and march briskly without bouncing.",
+      "regressions": ["Use a lighter dumbbell or reduce the knee lift while keeping the trunk tall."],
+      "match": "none",
+      "movements": [{ "movementId": "suitcase-march", "displayName": "Suitcase March", "textOnly": true }]
+    },
+    {
+      "displayName": "Quadruped Thread-the-needle",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "alternating",
+      "coachNote": "Thread one arm under the body, switch sides at 20 seconds, and rotate only through a comfortable range.",
+      "regressions": ["Keep the knees grounded and shorten the rotation if the shoulder or back feels strained."],
+      "match": "none",
+      "movements": [{ "movementId": "quadruped-thread-the-needle", "displayName": "Quadruped Thread-the-needle", "textOnly": true }]
+    },
+    {
+      "displayName": "Dead Bug",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "tempo": "Slow exhale with each extension",
+      "coachNote": "Move slowly and exhale; keep the back quiet against the floor.",
+      "regressions": ["Keep the feet supported or reduce the limb range if the back arches."],
+      "match": "none",
+      "movements": [{ "movementId": "dead-bug", "displayName": "Dead Bug", "textOnly": true }]
+    },
+    {
+      "displayName": "Slow Front Kick (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "4 s out / hold / 4 s back",
+      "rpe": "5–7",
+      "coachNote": "Kick slowly with a controlled hold and return; keep the standing foot stable.",
+      "regressions": ["Use a wall for balance and lower the kick height."],
+      "match": "none",
+      "movements": [{ "movementId": "slow-front-kick", "displayName": "Slow Front Kick", "textOnly": true }]
+    },
+    {
+      "displayName": "Slow Front Kick (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "4 s out / hold / 4 s back",
+      "rpe": "5–7",
+      "coachNote": "Kick slowly with a controlled hold and return; keep the standing foot stable.",
+      "regressions": ["Use a wall for balance and lower the kick height."],
+      "match": "none",
+      "movements": [{ "movementId": "slow-front-kick", "displayName": "Slow Front Kick", "textOnly": true }]
+    },
+    {
+      "displayName": "Single-leg Calf Raise (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "3 s up / 1 s pause / 3 s down",
+      "rpe": "~8",
+      "coachNote": "Use a dumbbell if stable; load the calf deliberately, never bounce, and keep pressure distributed across the forefoot.",
+      "regressions": ["Use support or a bilateral calf raise; keep pain 0–3/10 and below the 5/10 ceiling."],
+      "match": "none",
+      "movements": [{ "movementId": "single-leg-calf-raise", "displayName": "Single-leg Calf Raise", "textOnly": true }]
+    },
+    {
+      "displayName": "Single-leg Calf Raise (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "3 s up / 1 s pause / 3 s down",
+      "rpe": "~8",
+      "coachNote": "Use a dumbbell if stable; load the calf deliberately, never bounce, and keep pressure distributed across the forefoot.",
+      "regressions": ["Use support or a bilateral calf raise; keep pain 0–3/10 and below the 5/10 ceiling."],
+      "match": "none",
+      "movements": [{ "movementId": "single-leg-calf-raise", "displayName": "Single-leg Calf Raise", "textOnly": true }]
+    },
+    {
+      "displayName": "Wall-press Hip-abduction Isometric (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "tempo": "2 × 15 s within the interval",
+      "rpe": "5–7",
+      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
+      "match": "none",
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
+    },
+    {
+      "displayName": "Wall-press Hip-abduction Isometric (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "tempo": "2 × 15 s within the interval",
+      "rpe": "5–7",
+      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
+      "match": "none",
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
+    },
+    {
+      "displayName": "Two-hand DB Swing",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "rpe": "6–7",
+      "coachNote": "Hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop.",
+      "regressions": ["Use a lighter load or reduce the range; never jump the weight."],
+      "match": "close",
+      "movements": [{ "movementId": "dumbbell-swing", "exerciseId": "0549", "displayName": "Two-hand DB Swing" }]
+    },
+    {
+      "displayName": "Backward Walking",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "rpe": "5–7",
+      "coachNote": "Walk briskly backward with whole-foot landings and a clear path.",
+      "regressions": ["Use a wall or rail for support and slow the pace."],
+      "match": "none",
+      "movements": [{ "movementId": "backward-walking", "displayName": "Backward Walking", "textOnly": true }]
+    },
+    {
+      "displayName": "Breathing + Easy Reach",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Use the work interval to downshift with easy reaches and calm breathing; keep the final 20-second rest.",
+      "match": "none",
+      "movements": [{ "movementId": "breathing-easy-reach", "displayName": "Breathing + Easy Reach", "textOnly": true }]
+    }
+  ]
+}

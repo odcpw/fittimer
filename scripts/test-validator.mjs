@@ -18,8 +18,19 @@ const EXPECTED_CODES = new Map([
 ]);
 const MEDIA_FIXTURE = 'invalid-media-pack.json';
 
-const realResult = await validateFiles(['data/routines/madfit-30min-hiit.json']);
+const productionRoutines = [
+  'data/routines/madfit-30min-hiit.json',
+  'data/routines/iron-roots.json',
+  'data/routines/silk-coils.json',
+  'data/routines/dragon-longform.json',
+  'data/routines/crane-longform.json',
+];
+const realResult = await validateFiles(productionRoutines);
 assert.equal(realResult.valid, true, JSON.stringify(realResult.errors, null, 2));
+assert.deepEqual(
+  realResult.routines.map((routine) => routine.id).sort(),
+  ['crane-longform', 'dragon-longform', 'iron-roots', 'madfit-30min-hiit', 'silk-coils'],
+);
 
 const fixtureFiles = (await readdir(FIXTURES_DIR)).filter((name) => name.endsWith('.json')).sort();
 const fixtures = fixtureFiles.filter((name) => !['valid-shared-block.json', MEDIA_FIXTURE].includes(name));
@@ -46,6 +57,6 @@ assert.ok(
 );
 
 process.stdout.write(
-  `Validator tests passed: 1 production routine, 1 shared-block routine, ` +
+  `Validator tests passed: ${productionRoutines.length} production routines, 1 shared-block routine, ` +
     `${fixtures.length + 1} invalid fixtures.\n`,
 );
