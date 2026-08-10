@@ -56,10 +56,14 @@ class FakeAudioContext {
   }
 }
 
-function setup() {
+function setup(settings) {
   const context = new FakeAudioContext();
-  const player = new AudioCuePlayer({ contextFactory: () => context });
+  const player = new AudioCuePlayer({ contextFactory: () => context, settings });
   return { context, player };
+}
+
+function peakVolumes(context) {
+  return context.gains.map((gain) => gain.gain.values[1].value);
 }
 
 test('unlock creates and resumes one WebAudio context', async () => {
@@ -91,6 +95,51 @@ test('countdown final beep and halfway tick have their own tone profiles', async
     context.oscillators.map((oscillator) => [oscillator.frequency.values[0].value, oscillator.type]),
     [[780, 'sine'], [1040, 'sine'], [440, 'triangle']],
   );
+});
+
+test('cue settings filter countdown and halfway without changing boundary cues', async () => {
+  const { context, player } = setup({
+    cues: { countdown: false, halfway: false },
+  });
+  await player.unlock();
+
+  assert.equal(player.handle({ type: 'intervalStart', at: 0, observedAt: 0 }), true);
+  assert.equal(player.handle({ type: 'intervalEnd', at: 1, observedAt: 1 }), true);
+  assert.equal(player.handle({ type: 'countdown321', count: 3, at: 2, observedAt: 2 }), false);
+  assert.equal(player.handle({ type: 'halfway', at: 3, observedAt: 3 }), false);
+  assert.equal(context.oscillators.length, 4);
+});
+
+test('disabled cues stay silent and can be enabled through the live settings API', async () => {
+  const { context, player } = setup({ cues: { enabled: false } });
+  await player.unlock();
+  assert.equal(player.handle({ type: 'intervalStart', at: 0, observedAt: 0 }), false);
+  assert.equal(player.handle({ type: 'intervalEnd', at: 1, observedAt: 1 }), false);
+  assert.equal(player.handle({ type: 'countdown321', count: 1, at: 2, observedAt: 2 }), false);
+  assert.equal(player.handle({ type: 'halfway', at: 3, observedAt: 3 }), false);
+  assert.equal(context.oscillators.length, 0);
+
+  assert.deepEqual(player.setSettings({ cues: { enabled: true } }), {
+    packId: 'synth-v1',
+    enabled: true,
+    volume: 1,
+    countdown: true,
+    halfway: true,
+  });
+  assert.equal(player.handle({ type: 'halfway', at: 4, observedAt: 4 }), true);
+  assert.equal(context.oscillators.length, 1);
+});
+
+test('cue volume scales every synthesized tone and zero is silent', async () => {
+  const { context, player } = setup({ cues: { volume: 0.25 } });
+  await player.unlock();
+  player.handle({ type: 'intervalStart', at: 0, observedAt: 0 });
+  player.handle({ type: 'halfway', at: 1, observedAt: 1 });
+  assert.deepEqual(peakVolumes(context), [0.03, 0.0325, 0.0175]);
+
+  player.setSettings({ cues: { volume: 0 } });
+  player.handle({ type: 'intervalEnd', at: 2, observedAt: 2 });
+  assert.equal(context.oscillators.length, 3);
 });
 
 test('stale catch-up events and unrelated engine events stay silent', async () => {
