@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "kind": "block",
+  "id": "madfit-30min-hiit",
+  "title": "MadFit 30-minute full-body HIIT",
+  "description": "Thirty no-repeat, low-impact intervals reconstructed from the source video transcript.",
+  "intervals": [
+    {
+      "displayName": "Step Jacks",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Video does the low-impact step-out version of a jumping jack — step out, no jump.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3224",
+          "displayName": "Jack Jump (male)",
+          "gif": "data/gifs/3224.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Bum Kicks (butt kicks, side to side)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "No butt-kick exercise in catalog; reuse Step Jacks GIF or record a custom one. Side-to-side heel-to-glute steps with optional arm swings.",
+      "match": "none",
+      "movements": [
+        {
+          "displayName": "Bum Kicks (butt kicks, side to side)",
+          "textOnly": true
+        }
+      ]
+    },
+    {
+      "displayName": "Power Half Lunge + Knee Drive (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "coachNote": "Static half-lunge stance, then explosive knee drive up on the right leg. Catalog's Walking High Knees Lunge shows the lunge + knee-up pattern.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3655",
+          "displayName": "Walking High Knees Lunge",
+          "gif": "data/gifs/3655.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Power Half Lunge + Knee Drive (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "coachNote": "Same as previous, left leg.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3655",
+          "displayName": "Walking High Knees Lunge",
+          "gif": "data/gifs/3655.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Standing Star Crunch",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Big star stance, reach for opposite toe/knee side to side.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3213",
+          "displayName": "Side-to-side Toe Touch (male)",
+          "gif": "data/gifs/3213.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Bodyweight Squat",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Plain bodyweight squat; catalog GIF adds an overhead reach — just skip the reach.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "1685",
+          "displayName": "Squat To Overhead Reach",
+          "gif": "data/gifs/1685.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Calf Raise + Cross Toe Touch",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Rise on tiptoes with arms overhead, then hinge down reaching for the opposite toe, arm back. Combines calf raise (this GIF) with a cross toe touch.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "1373",
+          "displayName": "Bodyweight Standing Calf Raise",
+          "gif": "data/gifs/1373.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "High Plank Toe Taps",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "In high plank, tap one toe in toward hands at a time, slow and controlled — like a slow mountain climber.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "0630",
+          "displayName": "Mountain Climber",
+          "gif": "data/gifs/0630.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Cocoons",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "0260",
+          "displayName": "Cocoons",
+          "gif": "data/gifs/0260.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Glute Bridges",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Focus on form: press low back down, squeeze at top.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "3013",
+          "displayName": "Low Glute Bridge On Floor",
+          "gif": "data/gifs/3013.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Squat to Overhead Press (2 dumbbells)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Thruster pattern; catalog GIF uses kettlebells — do it with two dumbbells, palms facing, explosive at the top.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "0550",
+          "displayName": "Kettlebell Thruster",
+          "gif": "data/gifs/0550.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Deadlift + Upright Row (2 dumbbells)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Alternate one dumbbell deadlift (id 0300) with one upright row (id 0437). Flat back, lead with elbows on the row.",
+      "match": "combo",
+      "movements": [
+        {
+          "exerciseId": "0300",
+          "displayName": "Dumbbell Deadlift",
+          "gif": "data/gifs/0300.gif"
+        },
+        {
+          "exerciseId": "0437",
+          "displayName": "Dumbbell Upright Row",
+          "gif": "data/gifs/0437.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Side Lunge to Curtsy Squat (right)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "right",
+      "coachNote": "Side lunge right, back through center into curtsy squat; one dumbbell held at chest, optional.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3769",
+          "displayName": "Curtsey Squat",
+          "gif": "data/gifs/3769.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Side Lunge to Curtsy Squat (left)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "left",
+      "coachNote": "Same as previous, left side.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3769",
+          "displayName": "Curtsey Squat",
+          "gif": "data/gifs/3769.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Dumbbell Swing",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Kettlebell-swing pattern holding one dumbbell with both hands. Hip hinge, glutes and core drive it.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "0549",
+          "displayName": "Kettlebell Swing",
+          "gif": "data/gifs/0549.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Commandos + Step Out",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Plank up-downs (hands to elbows) alternated with plank foot step-outs. No commando GIF available on free plan (5204 exists but watermarked GIF unavailable); this GIF is a related plank-transition move.",
+      "match": "loose",
+      "movements": [
+        {
+          "exerciseId": "0664",
+          "displayName": "Push-up To Side Plank",
+          "gif": "data/gifs/0664.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Weighted Russian Twist",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Skip the weight until the bodyweight twist is mastered.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "0846",
+          "displayName": "Weighted Russian Twist",
+          "gif": "data/gifs/0846.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Weighted Sit-up",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Full sit-up holding a dumbbell at chest or arms extended overhead.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "3204",
+          "displayName": "Arms Overhead Full Sit-up (male)",
+          "gif": "data/gifs/3204.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Plank Pull-Throughs",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "High plank, drag the dumbbell under the body to the opposite side, no hip sway. Closest catalog match is the renegade row (same anti-rotation plank + dumbbell).",
+      "match": "loose",
+      "movements": [
+        {
+          "exerciseId": "0521",
+          "displayName": "Kettlebell Alternating Renegade Row",
+          "gif": "data/gifs/0521.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Side Plank Crunch (side 1)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "first",
+      "coachNote": "Forearm + knee side plank, lift into side crunch. Stack shoulder over elbow.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "0705",
+          "displayName": "Side Bridge V. 2",
+          "gif": "data/gifs/0705.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Side Plank Crunch (side 2)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "second",
+      "coachNote": "Same as previous, other side.",
+      "match": "close",
+      "movements": [
+        {
+          "exerciseId": "0705",
+          "displayName": "Side Bridge V. 2",
+          "gif": "data/gifs/0705.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Plank Walkout + Overhead Press",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Inchworm walkout (id 1471), walk back, pick up dumbbell, overhead press (id 0426).",
+      "match": "combo",
+      "movements": [
+        {
+          "exerciseId": "1471",
+          "displayName": "Inchworm",
+          "gif": "data/gifs/1471.gif"
+        },
+        {
+          "exerciseId": "0426",
+          "displayName": "Dumbbell Standing Overhead Press",
+          "gif": "data/gifs/0426.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Squat + Hammer Curl (2 dumbbells)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Dumbbell squat (id 0413) into hammer curl at the top (id 0313).",
+      "match": "combo",
+      "movements": [
+        {
+          "exerciseId": "0413",
+          "displayName": "Dumbbell Squat",
+          "gif": "data/gifs/0413.gif"
+        },
+        {
+          "exerciseId": "0313",
+          "displayName": "Dumbbell Hammer Curl",
+          "gif": "data/gifs/0313.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Single-Leg RDL (side 1)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "first",
+      "coachNote": "Leg lifted or toe as kickstand; flat back, eyes on a fixed spot.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "1757",
+          "displayName": "Dumbbell Single Leg Deadlift",
+          "gif": "data/gifs/1757.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Single-Leg RDL (side 2)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "second",
+      "coachNote": "Same as previous, other side.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "1757",
+          "displayName": "Dumbbell Single Leg Deadlift",
+          "gif": "data/gifs/1757.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Alternating Reverse Lunges (2 dumbbells)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Alternate legs each rep.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "0381",
+          "displayName": "Dumbbell Rear Lunge",
+          "gif": "data/gifs/0381.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Standing Crunch with Dumbbell (march)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "Marching knee-up with a crunch action, dumbbell held at chest. Catalog GIF shows the standing crunch pattern with a band instead.",
+      "match": "loose",
+      "movements": [
+        {
+          "exerciseId": "1005",
+          "displayName": "Band Standing Crunch",
+          "gif": "data/gifs/1005.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Dumbbell Snatch (side 1)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "first",
+      "coachNote": "Explosive; dumbbell finishes overhead, arm nearly extended.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "3888",
+          "displayName": "Dumbbell One Arm Snatch",
+          "gif": "data/gifs/3888.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Dumbbell Snatch (side 2)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "side": "second",
+      "coachNote": "Same as previous, other arm.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "3888",
+          "displayName": "Dumbbell One Arm Snatch",
+          "gif": "data/gifs/3888.gif"
+        }
+      ]
+    },
+    {
+      "displayName": "Push-ups (final minute)",
+      "workSeconds": 40,
+      "restSeconds": 20,
+      "coachNote": "On toes, half push-ups, or hold a plank — last 40s, empty the tank.",
+      "match": "exact",
+      "movements": [
+        {
+          "exerciseId": "0662",
+          "displayName": "Push-up",
+          "gif": "data/gifs/0662.gif"
+        }
+      ]
+    }
+  ]
+}

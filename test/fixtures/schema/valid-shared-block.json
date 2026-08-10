@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "routine",
+  "id": "fixture-shared-block",
+  "title": "Shared block fixture",
+  "equipment": [
+    "1–2 light dumbbells"
+  ],
+  "estimatedDurationSeconds": 1800,
+  "sequence": [
+    {
+      "blockId": "madfit-30min-hiit"
+    }
+  ]
+}

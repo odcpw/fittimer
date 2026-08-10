@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "routine",
+  "id": "fixture-unknown-block",
+  "title": "Unknown block fixture",
+  "equipment": ["none"],
+  "estimatedDurationSeconds": 60,
+  "sequence": [
+    {
+      "blockId": "block-that-does-not-exist"
+    }
+  ]
+}

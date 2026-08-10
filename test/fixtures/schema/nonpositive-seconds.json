@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "kind": "routine",
+  "id": "fixture-nonpositive-seconds",
+  "title": "Zero and negative seconds fixture",
+  "equipment": ["none"],
+  "estimatedDurationSeconds": 1,
+  "sequence": [
+    {
+      "interval": {
+        "displayName": "Zero work and negative rest",
+        "workSeconds": 0,
+        "restSeconds": -1,
+        "movements": [
+          {
+            "displayName": "Text card",
+            "textOnly": true
+          }
+        ]
+      }
+    }
+  ]
+}

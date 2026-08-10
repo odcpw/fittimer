@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "routine",
+  "id": "fixture-missing-gif",
+  "title": "Missing GIF fixture",
+  "equipment": ["none"],
+  "estimatedDurationSeconds": 60,
+  "sequence": [
+    {
+      "interval": {
+        "displayName": "Missing visual",
+        "workSeconds": 40,
+        "restSeconds": 20,
+        "movements": [
+          {
+            "exerciseId": "9999",
+            "displayName": "Missing visual",
+            "gif": "data/gifs/does-not-exist.gif"
+          }
+        ]
+      }
+    }
+  ]
+}

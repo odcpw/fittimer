@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "kind": "routine",
+  "id": "fixture-invalid-side",
+  "title": "Invalid side fixture",
+  "equipment": ["none"],
+  "estimatedDurationSeconds": 60,
+  "sequence": [
+    {
+      "interval": {
+        "displayName": "Side exercise",
+        "workSeconds": 40,
+        "restSeconds": 20,
+        "side": "diagonal",
+        "movements": [
+          {
+            "exerciseId": "3224",
+            "displayName": "Jack Jump",
+            "gif": "data/gifs/3224.gif"
+          }
+        ]
+      }
+    }
+  ]
+}
