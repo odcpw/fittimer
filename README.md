@@ -40,6 +40,10 @@ python -m http.server 8000
 
 Then open `http://localhost:8000/`.
 
+To install the deployed app, open `https://odcpw.github.io/fittimer/` on the
+phone. In Android Chrome use **Install app**; in iOS Safari use **Share → Add
+to Home Screen**. Visit once online before testing a workout in airplane mode.
+
 ## Data provenance
 
 The cowork session's assets were never pushed to GitHub (contrary to the
