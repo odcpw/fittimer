@@ -132,6 +132,57 @@ const mirroredAsset = resolveMovementVisual(
 assert.equal(mirroredAsset.asset.side, 'left');
 assert.equal(mirroredAsset.mirror, true);
 
+const crossMediaPack = {
+  entries: {
+    exactBeatsGeneric: {
+      mirroring: 'when-needed',
+      assets: [
+        { type: 'video', url: 'data/video/generic.mp4' },
+        { type: 'gif', url: 'data/gifs/exact.gif', side: 'right' },
+        { type: 'video', url: 'data/video/opposite.mp4', side: 'left' },
+      ],
+    },
+    genericBeatsOpposite: {
+      mirroring: 'when-needed',
+      assets: [
+        { type: 'gif', url: 'data/gifs/generic.gif' },
+        { type: 'video', url: 'data/video/opposite.mp4', side: 'left' },
+      ],
+    },
+    exactTierPriority: {
+      assets: [
+        { type: 'poster', url: 'data/posters/exact.jpg', side: 'right' },
+        { type: 'gif', url: 'data/gifs/exact.gif', side: 'right' },
+      ],
+    },
+  },
+};
+
+assert.equal(
+  resolveMovementVisual(
+    { movementId: 'exactBeatsGeneric', displayName: 'Exact side' },
+    crossMediaPack,
+    { requestedSide: 'right' },
+  ).asset.url,
+  'data/gifs/exact.gif',
+);
+assert.equal(
+  resolveMovementVisual(
+    { movementId: 'genericBeatsOpposite', displayName: 'Generic side' },
+    crossMediaPack,
+    { requestedSide: 'right' },
+  ).asset.url,
+  'data/gifs/generic.gif',
+);
+assert.equal(
+  resolveMovementVisual(
+    { movementId: 'exactTierPriority', displayName: 'Exact tier' },
+    crossMediaPack,
+    { requestedSide: 'right' },
+  ).asset.url,
+  'data/gifs/exact.gif',
+);
+
 const index = {
   defaultMediaPack: 'gif-v1',
   mediaPacks: {

@@ -218,15 +218,17 @@ function orderedAssets(entry, reducedMotion, requestedSide) {
     ? sideAware.filter((asset) => asset.type === 'poster')
     : sideAware;
   return [...candidates].sort((left, right) => {
-    const mediaDifference = MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type);
-    if (mediaDifference !== 0 || normalizedSide === null) return mediaDifference;
     const rank = (asset) => {
       const candidateSide = assetSide(asset);
       if (candidateSide === normalizedSide) return 0;
       if (candidateSide === null) return 1;
       return 2;
     };
-    return rank(left) - rank(right);
+    if (normalizedSide !== null) {
+      const sideDifference = rank(left) - rank(right);
+      if (sideDifference !== 0) return sideDifference;
+    }
+    return MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type);
   });
 }
 
