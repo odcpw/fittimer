@@ -12,28 +12,29 @@ API notes, and the build plan.
 
 ## Status (2026-08-10)
 
-- Repo scaffolded; no app code yet.
+- Repo scaffolded, all data assets in place; no app code yet.
 - Build plan tracked in beads (`br ready` to see unblocked work; issues in
   `.beads/issues.jsonl`).
 - First routine data: [data/routines/madfit-30min-hiit.json](data/routines/madfit-30min-hiit.json)
-  (reconstructed from the spec's mapping table — interim shape).
+  (interim shape — final block/routine schema is the first build task).
 
-## Data recovery (blocking asset work)
+## Data provenance
 
-The original cowork session fetched the WorkoutX exercise catalog
-(1,327 exercises), 27 routine GIFs, and the YouTube transcript, but —
-contrary to the handoff spec's claim — **never pushed them to GitHub**
-(`odcpw/autoreport`'s workout branch is identical to its `main`). Recover
-the files from that cowork session's workspace if still possible, or
-re-fetch GIFs via the WorkoutX API (~330 calls left this month; catalog
-would cost ~133 calls at 10 items/call).
+The cowork session's assets were never pushed to GitHub (contrary to the
+handoff spec's claim) but were recovered 2026-08-10 from the session's
+workspace download (`fittimer.zip`): WorkoutX catalog (1,327 exercises) +
+filter lists + OpenAPI spec, all 27 routine GIFs, the original routine
+JSON, and the YouTube transcript/metadata. No re-fetching needed; the
+WorkoutX quota (~330 calls left this month) is only for future blocks.
 
 ## Layout
 
 ```
 data/routines/   one JSON per installable routine
-data/gifs/       exercise GIFs referenced by routines (not yet recovered)
-data/exercises/  WorkoutX catalog + filter lists (not yet recovered)
+data/gifs/       exercise GIFs referenced by routines (27, 360×360)
+data/exercises/  WorkoutX catalog + filter lists + OpenAPI spec
+data/youtube/    MadFit video transcript + metadata
 docs/SPEC.md     canonical handoff spec
+docs/evaluation.md  historical pre-spec feasibility notes
 scripts/         content-build tooling (GIF fetcher, TTS pre-render)
 ```

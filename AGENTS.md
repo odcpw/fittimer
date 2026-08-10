@@ -18,6 +18,6 @@ Root operating manual: /home/oliver/.codex/AGENTS.md — binds in full.
   session — it pauses background music); timer must be timestamp-anchored,
   not `setInterval`-accumulated; adding a routine JSON must require zero code
   changes; physio content is blocked until the MVP phone test passes.
-- **Data caveat**: `data/exercises/` and `data/gifs/` are empty pending
-  recovery (see README). Do not re-fetch the full catalog without checking
-  the WorkoutX quota ledger first.
+- **Data caveat**: all assets recovered and committed (see README "Data
+  provenance"). Do not re-fetch anything already in `data/`; new-block GIF
+  fetches must go through the quota ledger (WorkoutX ~330 calls/month left).

@@ -6,8 +6,9 @@ Complete specification and project plan for **FitTimer**, a personal interval-wo
 > (`fittimer-spec.md`, claude.ai artifact `24319be5-2581-458d-8dda-c71876eaf1b6`).
 > **Correction to §3/§8:** the data assets were NEVER actually pushed to
 > `odcpw/autoreport` — that branch is identical to `main` and contains no
-> `workout-app/` folder. The assets exist only in the original cowork session's
-> workspace. See README "Data recovery" for status.
+> `workout-app/` folder. They were recovered 2026-08-10 from the cowork
+> session's workspace download (`fittimer.zip`) and now live in `data/`
+> in this repo. §3's table describes them; §8's recovery item is done.
 
 ---
 
@@ -36,9 +37,7 @@ First routine: MadFit's *"30 MIN FULL BODY HIIT with weights (NO REPEATS, NO JUM
 | Repo | `odcpw/fittimer`, **public** (⚠ not yet created on GitHub as of 2026-08-10) |
 | Issue tracker | **beads** (`br` on the owner's 3090 machine; issues as `.beads/issues.jsonl` in git) |
 
-## 3. Data assets (from the cowork session — NOT recovered yet, see provenance note)
-
-The cowork session had fetched these, intended layout `data/…`:
+## 3. Data assets (recovered from the cowork session, now in `data/`)
 
 | Path | Contents |
 |---|---|
@@ -147,7 +146,7 @@ Tracked in beads (`.beads/issues.jsonl`, prefix `ft`). `→` = blocked by.
 
 ## 8. Gotchas & open items
 
-- **Data recovery**: catalog, GIFs, transcript, and the original MadFit JSON live only in the cowork session workspace (never pushed to GitHub, despite what the original spec claimed). Recover them from that session, or re-fetch via the WorkoutX API (spends quota).
+- ~~**Data recovery**~~ done 2026-08-10: catalog, GIFs, transcript, and the original MadFit JSON recovered from the cowork session's `fittimer.zip` (they were never on GitHub, despite what the original spec claimed).
 - **API key**: never in the repo; env var only. The repo is intended to be public.
 - **Public-repo caveat**: the bundled WorkoutX GIFs are watermarked free-tier assets being redistributed in a public repo — acceptable to the owner so far, but flag if licensing matters.
 - **iOS quirks**: SpeechSynthesis needs a user-gesture unlock; Wake Lock needs iOS ≥ 16.4; test WebAudio-over-Spotify mixing on a real device early.
