@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittimer-v5';
+const CACHE_NAME = 'fittimer-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const APP_SHELL = [
   './src/audio-cues.mjs',
   './src/interval-engine.mjs',
   './src/settings.mjs',
+  './src/wake-lock.mjs',
   './data/content-index.json',
 ];
 

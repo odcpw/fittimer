@@ -1,5 +1,6 @@
 import { IntervalEngine } from './interval-engine.mjs';
 import { AudioCuePlayer } from './audio-cues.mjs';
+import { createWakeLockController } from './wake-lock.mjs';
 import {
   CUE_PACK_IDS,
   CUE_PACK_SYNTH_V1,
@@ -93,6 +94,7 @@ const ownedBlobUrls = new WeakMap();
 const settingsStore = createSettingsStore(hasDocument ? undefined : null);
 let currentSettings = settingsStore.load();
 const audioCues = new AudioCuePlayer({ settings: currentSettings });
+const wakeLockController = createWakeLockController();
 
 const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
 
@@ -104,6 +106,14 @@ const SETTINGS_PACK_LABELS = new Map([
   [VISUAL_PACK_REFERENCE_V1, 'Reference pack'],
   [VISUAL_PACK_W1W4_V1, 'W1–W4 pack'],
 ]);
+
+function requestWakeLock() {
+  void wakeLockController.request();
+}
+
+function releaseWakeLock() {
+  void wakeLockController.release();
+}
 
 function settingsPackLabel(packId) {
   return SETTINGS_PACK_LABELS.get(packId) ?? packId;
@@ -697,6 +707,7 @@ function startWorkout(routine) {
   elements.completionActions.hidden = true;
   document.documentElement.dataset.phase = 'work';
   engine.start();
+  requestWakeLock();
   startAnimationLoop();
 }
 
@@ -790,6 +801,7 @@ function renderWorkout(snapshot) {
     elements.exerciseTitle.textContent = 'Workout complete';
     elements.coachNote.textContent = 'Nice work. You finished every interval.';
     elements.nextUp.textContent = '30 minutes · complete';
+    releaseWakeLock();
     stopAnimationLoop();
   } else if (displayInterval) {
     elements.exerciseTitle.textContent = displayInterval.displayName;
@@ -856,7 +868,8 @@ export function collectContentUrls(index, installedRoutines = routines, mediaPac
 
 function resumePausedWorkout() {
   if (!engine || engine.getSnapshot().state !== 'paused') return false;
-  engine.resume();
+  if (!engine.resume()) return false;
+  requestWakeLock();
   startAnimationLoop();
   return true;
 }
@@ -870,6 +883,7 @@ function openEndConfirmation() {
     if (!engine.pause()) return;
     stopAnimationLoop();
   }
+  releaseWakeLock();
   elements.endConfirmation.hidden = false;
   elements.keepGoing.focus({ preventScroll: true });
 }
@@ -884,10 +898,12 @@ function restartCompletedWorkout() {
   if (!engine || !activeRoutine || engine.getSnapshot().state !== 'done') return;
   engine.restart();
   engine.start();
+  requestWakeLock();
   startAnimationLoop();
 }
 
 function goHome() {
+  releaseWakeLock();
   stopAnimationLoop();
   disposeStageVisuals();
   engine = null;
@@ -938,7 +954,10 @@ async function prepareOffline(index) {
 if (hasDocument) {
   const pageLifetime = new AbortController();
   const listenerOptions = { signal: pageLifetime.signal };
-  window.addEventListener('pagehide', () => pageLifetime.abort(), { once: true });
+  window.addEventListener('pagehide', () => {
+    void wakeLockController.dispose();
+    pageLifetime.abort();
+  }, { once: true });
   bindSettingsControls(listenerOptions);
 
   elements.routineList.addEventListener('click', (event) => {
@@ -949,6 +968,7 @@ if (hasDocument) {
   }, listenerOptions);
 
   elements.start.addEventListener('click', () => {
+    if (selectedRoutine) requestWakeLock();
     void audioCues
       .unlock()
       .catch(showError)
@@ -965,6 +985,7 @@ if (hasDocument) {
     } else if (WORKOUT_STATES.has(snapshot.state)) {
       engine.pause();
       stopAnimationLoop();
+      releaseWakeLock();
     }
   }, listenerOptions);
 
@@ -1004,9 +1025,12 @@ if (hasDocument) {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && engine && ['work', 'rest'].includes(engine.getSnapshot().state)) {
       audioCues.resume().catch(showError);
-      engine.update();
-      replayCurrentVideos();
-      startAnimationLoop();
+      const snapshot = engine.update();
+      if (['work', 'rest'].includes(snapshot.state)) {
+        requestWakeLock();
+        replayCurrentVideos();
+        startAnimationLoop();
+      }
     }
   }, listenerOptions);
 
