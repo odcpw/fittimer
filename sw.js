@@ -13,6 +13,7 @@ const APP_SHELL = [
   './src/interval-engine.mjs',
   './src/settings.mjs',
   './src/wake-lock.mjs',
+  './src/workout-history.mjs',
   './data/content-index.json',
 ];
 

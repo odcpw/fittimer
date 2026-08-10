@@ -24,6 +24,37 @@
 
         <div class="routine-list" id="routine-list" aria-label="Workout routines"></div>
 
+        <section class="history-panel" id="history-panel" aria-labelledby="history-title">
+          <div class="history-panel__header">
+            <div>
+              <p class="history-panel__eyebrow">Consistency</p>
+              <h2 id="history-title">Training history</h2>
+            </div>
+            <div class="history-streak" aria-label="Current consecutive-day streak">
+              <strong id="history-streak">0</strong>
+              <span>day streak</span>
+            </div>
+          </div>
+
+          <div class="history-month-nav" aria-label="History month navigation">
+            <button class="history-month-nav__button" id="history-previous-month" type="button" aria-label="Previous month">‹</button>
+            <h3 id="history-month-label">This month</h3>
+            <button class="history-month-nav__button" id="history-next-month" type="button" aria-label="Next month">›</button>
+          </div>
+
+          <div class="history-weekdays" aria-hidden="true">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+          <div class="history-calendar" id="history-calendar" role="grid" aria-label="Workout history calendar"></div>
+          <p class="history-summary" id="history-summary" role="status">No completed workouts yet.</p>
+        </section>
+
         <details class="settings-panel" id="settings-panel">
           <summary>
             <span class="settings-summary__label">

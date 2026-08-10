@@ -2,6 +2,14 @@ import { IntervalEngine } from './interval-engine.mjs';
 import { AudioCuePlayer } from './audio-cues.mjs';
 import { createWakeLockController } from './wake-lock.mjs';
 import {
+  appendWorkoutHistory,
+  buildMonthCalendar,
+  currentStreak,
+  formatDateKey,
+  historySummary,
+  loadWorkoutHistory,
+} from './workout-history.mjs';
+import {
   CUE_PACK_IDS,
   CUE_PACK_SYNTH_V1,
   VISUAL_PACK_IDS,
@@ -21,6 +29,12 @@ const elements = hasDocument
       home: document.querySelector('#home-screen'),
       workout: document.querySelector('#workout-screen'),
       routineList: document.querySelector('#routine-list'),
+      historyStreak: document.querySelector('#history-streak'),
+      historyMonthLabel: document.querySelector('#history-month-label'),
+      historyPreviousMonth: document.querySelector('#history-previous-month'),
+      historyNextMonth: document.querySelector('#history-next-month'),
+      historyCalendar: document.querySelector('#history-calendar'),
+      historySummary: document.querySelector('#history-summary'),
       settingsSummaryStatus: document.querySelector('#settings-summary-status'),
       cuePack: document.querySelector('#settings-cue-pack'),
       cuesEnabled: document.querySelector('#settings-cues-enabled'),
@@ -88,6 +102,7 @@ let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
+let historyMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 const stageNodeCleanups = new Set();
 const videoPlaybackFailures = new WeakMap();
 const ownedBlobUrls = new WeakMap();
@@ -422,6 +437,73 @@ function renderRoutineList() {
   elements.routineList.replaceChildren(...rows);
 }
 
+function renderHistory() {
+  if (!hasDocument) return;
+  const entries = loadWorkoutHistory();
+  const calendar = buildMonthCalendar(historyMonth, entries);
+  const today = formatDateKey(new Date());
+  const streak = currentStreak(entries);
+  const summary = historySummary(entries);
+
+  elements.historyStreak.textContent = String(streak);
+  elements.historyStreak.parentElement?.setAttribute(
+    'aria-label',
+    `Current consecutive-day streak: ${streak} ${streak === 1 ? 'day' : 'days'}`,
+  );
+  elements.historyMonthLabel.textContent = calendar.label;
+
+  const cells = calendar.cells.map((cell) => {
+    const element = document.createElement('span');
+    element.className = 'history-calendar__cell';
+    if (!cell.inMonth) element.classList.add('history-calendar__cell--outside');
+    if (cell.date === today) element.classList.add('history-calendar__cell--today');
+    if (cell.completed) element.classList.add('history-calendar__cell--completed');
+    if (cell.aborted) element.classList.add('history-calendar__cell--aborted');
+    element.dataset.date = cell.date;
+    element.dataset.inMonth = String(cell.inMonth);
+    element.setAttribute('role', 'gridcell');
+    const status = cell.completed ? 'workout completed' : cell.aborted ? 'workout ended early' : 'no workout';
+    element.setAttribute('aria-label', `${cell.date}: ${status}`);
+    element.textContent = String(cell.day);
+    return element;
+  });
+  elements.historyCalendar.replaceChildren(...cells);
+
+  const completedLabel = `${summary.completed} completed ${summary.completed === 1 ? 'workout' : 'workouts'}`;
+  const abortedLabel = summary.aborted > 0
+    ? ` · ${summary.aborted} ended early`
+    : '';
+  elements.historySummary.textContent = summary.completed > 0 || summary.aborted > 0
+    ? `${completedLabel}${abortedLabel}`
+    : 'No completed workouts yet.';
+}
+
+function shiftHistoryMonth(delta) {
+  historyMonth = new Date(historyMonth.getFullYear(), historyMonth.getMonth() + delta, 1);
+  renderHistory();
+}
+
+function activeRoutineHistoryId() {
+  if (typeof activeRoutine?.id === 'string' && activeRoutine.id.trim() !== '') return activeRoutine.id;
+  if (typeof activeRoutine?.title === 'string' && activeRoutine.title.trim() !== '') return activeRoutine.title;
+  return 'workout';
+}
+
+function recordFinishedWorkout() {
+  if (!activeRoutine) return;
+  appendWorkoutHistory({ routine: activeRoutineHistoryId(), finished: true });
+  renderHistory();
+}
+
+function recordAbortedWorkout(snapshot) {
+  if (!activeRoutine || !snapshot) return;
+  appendWorkoutHistory({
+    routine: activeRoutineHistoryId(),
+    abortedAtInterval: Math.max(1, snapshot.intervalNumber),
+  });
+  renderHistory();
+}
+
 function createPackOptions(select, ids, unavailableIds = new Set()) {
   const options = ids.map((packId) => {
     const option = document.createElement('option');
@@ -724,6 +806,7 @@ function startWorkout(routine) {
   activeRoutine = routine;
   engine = new IntervalEngine(routine.intervals);
   engine.subscribe((event) => {
+    if (event.type === 'done') recordFinishedWorkout();
     if (event.type === 'tick') renderWorkout(event.snapshot);
     else audioCues.handle(event);
   });
@@ -988,12 +1071,21 @@ if (hasDocument) {
     pageLifetime.abort();
   }, { once: true });
   bindSettingsControls(listenerOptions);
+  renderHistory();
 
   elements.routineList.addEventListener('click', (event) => {
     const row = event.target instanceof Element ? event.target.closest('[data-routine-index]') : null;
     if (!row) return;
     selectedRoutine = routines[Number(row.dataset.routineIndex)] ?? selectedRoutine;
     renderRoutineList();
+  }, listenerOptions);
+
+  elements.historyPreviousMonth.addEventListener('click', () => {
+    shiftHistoryMonth(-1);
+  }, listenerOptions);
+
+  elements.historyNextMonth.addEventListener('click', () => {
+    shiftHistoryMonth(1);
   }, listenerOptions);
 
   elements.start.addEventListener('click', () => {
@@ -1038,6 +1130,7 @@ if (hasDocument) {
   }, listenerOptions);
 
   elements.confirmEnd.addEventListener('click', () => {
+    if (engine) recordAbortedWorkout(engine.getSnapshot());
     goHome();
   }, listenerOptions);
 
