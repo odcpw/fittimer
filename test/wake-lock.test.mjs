@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { resolveMovementVisual } from '../src/app.mjs';
 import { WakeLockController } from '../src/wake-lock.mjs';
 
 class FakeSentinel extends EventTarget {
@@ -122,43 +121,4 @@ test('dispose releases an active sentinel and prevents re-acquisition', async ()
   assert.equal(fake.state.requestCalls, 1);
 });
 
-test('side-specific media wins without selecting the opposite side, including first/second', () => {
-  const pack = {
-    entries: {
-      unilateral: {
-        assets: [
-          { type: 'gif', url: 'data/gifs/side-1.gif', side: 'first' },
-          { type: 'gif', url: 'data/gifs/generic.gif' },
-          { type: 'gif', url: 'data/gifs/side-2.gif', side: 'second' },
-        ],
-      },
-      generic: {
-        assets: [{ type: 'gif', url: 'data/gifs/generic-only.gif' }],
-      },
-    },
-  };
-
-  const sideTwo = resolveMovementVisual(
-    { movementId: 'unilateral', displayName: 'Side two' },
-    pack,
-    { requestedSide: 'second' },
-  );
-  assert.equal(sideTwo.asset.side, 'second');
-  assert.notEqual(sideTwo.asset.side, 'first');
-
-  const sideOne = resolveMovementVisual(
-    { movementId: 'unilateral', displayName: 'Side one' },
-    pack,
-    { requestedSide: 'first' },
-  );
-  assert.equal(sideOne.asset.side, 'first');
-
-  const generic = resolveMovementVisual(
-    { movementId: 'Generic GIF', displayName: 'Generic' },
-    { entries: { 'Generic GIF': pack.entries.generic } },
-    { requestedSide: 'second' },
-  );
-  assert.equal(generic.asset.url, 'data/gifs/generic-only.gif');
-});
-
-process.stdout.write('Wake lock and side selection tests passed: lifecycle, rejection, release event, teardown, and media preference.\n');
+process.stdout.write('Wake lock tests passed: support, lifecycle, rejection, release event, and teardown.\n');

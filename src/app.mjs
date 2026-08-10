@@ -183,31 +183,36 @@ function resolveFraming(mediaPack, asset) {
   return mediaPack.framingProfiles?.[asset.framing] ?? null;
 }
 
-function shouldMirror(entry, requestedSide) {
+function assetSide(asset) {
+  if (asset?.side === undefined || asset?.side === null || asset.side === '') return null;
+  return String(asset.side);
+}
+
+function shouldMirror(entry, requestedSide, selectedAsset = null) {
+  const sourceSide = assetSide(selectedAsset) ?? assetSide({ side: entry?.anatomicalSide });
   if (entry?.mirroring === 'always') return true;
   if (
     entry?.mirroring !== 'when-needed' ||
     !['left', 'right'].includes(requestedSide) ||
-    !['left', 'right'].includes(entry.anatomicalSide)
+    !['left', 'right'].includes(sourceSide)
   ) {
     return false;
   }
-  return requestedSide !== entry.anatomicalSide;
+  return requestedSide !== sourceSide;
 }
 
 function orderedAssets(entry, reducedMotion, requestedSide) {
   if (!Array.isArray(entry?.assets)) return [];
   const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolveAssetUrl(asset?.url));
-  const normalizedSide = requestedSide === undefined || requestedSide === null || requestedSide === ''
-    ? null
-    : String(requestedSide);
+  const normalizedSide = assetSide({ side: requestedSide });
+  const mirroredSide = normalizedSide === 'left' ? 'right' : normalizedSide === 'right' ? 'left' : null;
   const sideAware = normalizedSide === null
     ? available
     : available.filter((asset) => {
-        const assetSide = asset?.side === undefined || asset?.side === null || asset?.side === ''
-          ? null
-          : String(asset.side);
-        return assetSide === null || assetSide === normalizedSide;
+        const candidateSide = assetSide(asset);
+        return candidateSide === null
+          || candidateSide === normalizedSide
+          || entry.mirroring === 'when-needed' && candidateSide === mirroredSide;
       });
   const candidates = reducedMotion
     ? sideAware.filter((asset) => asset.type === 'poster')
@@ -215,9 +220,13 @@ function orderedAssets(entry, reducedMotion, requestedSide) {
   return [...candidates].sort((left, right) => {
     const mediaDifference = MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type);
     if (mediaDifference !== 0 || normalizedSide === null) return mediaDifference;
-    const leftSide = left.side === undefined || left.side === null || left.side === '' ? null : String(left.side);
-    const rightSide = right.side === undefined || right.side === null || right.side === '' ? null : String(right.side);
-    return Number(rightSide === normalizedSide) - Number(leftSide === normalizedSide);
+    const rank = (asset) => {
+      const candidateSide = assetSide(asset);
+      if (candidateSide === normalizedSide) return 0;
+      if (candidateSide === null) return 1;
+      return 2;
+    };
+    return rank(left) - rank(right);
   });
 }
 
@@ -262,7 +271,7 @@ export function resolveMovementVisual(
     entry,
     framing: resolveFraming(mediaPack, asset),
     anatomicalSide: entry.anatomicalSide,
-    mirror: shouldMirror(entry, requestedSide),
+    mirror: shouldMirror(entry, requestedSide, asset),
     fallback: 'text',
   };
 }
@@ -634,6 +643,7 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
     asset,
     kind: mediaKind(asset.type) ?? 'text',
     framing: resolveFraming(selectedMediaPack, asset),
+    mirror: shouldMirror(selection.entry, interval?.side, asset),
   };
   if (visual.kind === 'text') return textVisualNode(selection.label);
   if (reducedMotionPreferred() && asset.type !== 'poster') {

@@ -67,6 +67,71 @@ assert.equal(
   true,
 );
 
+const sidePack = {
+  entries: {
+    unilateral: {
+      assets: [
+        { type: 'gif', url: 'data/gifs/side-1.gif', side: 'first' },
+        { type: 'gif', url: 'data/gifs/generic.gif' },
+        { type: 'gif', url: 'data/gifs/side-2.gif', side: 'second' },
+      ],
+    },
+    firstOnly: {
+      assets: [{ type: 'gif', url: 'data/gifs/first-only.gif', side: 'first' }],
+    },
+    secondOnly: {
+      assets: [{ type: 'gif', url: 'data/gifs/second-only.gif', side: 'second' }],
+    },
+    genericOnly: {
+      assets: [{ type: 'gif', url: 'data/gifs/generic-only.gif' }],
+    },
+    leftAssetOnly: {
+      anatomicalSide: 'bilateral',
+      mirroring: 'when-needed',
+      assets: [{ type: 'gif', url: 'data/gifs/left-only.gif', side: 'left' }],
+    },
+  },
+};
+
+const firstSide = resolveMovementVisual(
+  { movementId: 'unilateral', displayName: 'First side' },
+  sidePack,
+  { requestedSide: 'first' },
+);
+assert.equal(firstSide.asset.side, 'first');
+
+const secondSide = resolveMovementVisual(
+  { movementId: 'unilateral', displayName: 'Second side' },
+  sidePack,
+  { requestedSide: 'second' },
+);
+assert.equal(secondSide.asset.side, 'second');
+
+const genericSide = resolveMovementVisual(
+  { movementId: 'genericOnly', displayName: 'Generic side' },
+  sidePack,
+  { requestedSide: 'second' },
+);
+assert.equal(genericSide.asset.url, 'data/gifs/generic-only.gif');
+
+for (const [movementId, requestedSide] of [['firstOnly', 'second'], ['secondOnly', 'first']]) {
+  const oppositeSide = resolveMovementVisual(
+    { movementId, displayName: 'Opposite side' },
+    sidePack,
+    { requestedSide },
+  );
+  assert.equal(oppositeSide.kind, 'text');
+  assert.equal(oppositeSide.reason, 'empty-pack-entry');
+}
+
+const mirroredAsset = resolveMovementVisual(
+  { movementId: 'leftAssetOnly', displayName: 'Mirrored right' },
+  sidePack,
+  { requestedSide: 'right' },
+);
+assert.equal(mirroredAsset.asset.side, 'left');
+assert.equal(mirroredAsset.mirror, true);
+
 const index = {
   defaultMediaPack: 'gif-v1',
   mediaPacks: {
