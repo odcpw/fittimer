@@ -12,11 +12,20 @@ API notes, and the build plan.
 
 ## Status (2026-08-10)
 
-- Repo scaffolded, all data assets in place; no app code yet.
-- Build plan tracked in beads (`br ready` to see unblocked work; issues in
+- Data schema v1, reusable block composition, and dependency-free validation
+  are implemented; the MadFit routine expands to 30 validated intervals.
+- The timestamp-anchored interval engine is implemented and covered by an
+  injected-fake-clock `node --test` suite. The PWA shell and workout screen are
+  the next runnable-app milestones.
+- Build plan is tracked in beads (`br ready` to see unblocked work; issues in
   `.beads/issues.jsonl`).
-- First routine data: [data/routines/madfit-30min-hiit.json](data/routines/madfit-30min-hiit.json)
-  (interim shape — final block/routine schema is the first build task).
+
+Run the current checks with:
+
+```sh
+node --test
+node scripts/validate.mjs data/routines/*.json
+```
 
 ## Data provenance
 
@@ -37,4 +46,6 @@ data/youtube/    MadFit video transcript + metadata
 docs/SPEC.md     canonical handoff spec
 docs/evaluation.md  historical pre-spec feasibility notes
 scripts/         content-build tooling (GIF fetcher, TTS pre-render)
+src/             dependency-free application modules
+test/            Node tests and committed schema fixtures
 ```
