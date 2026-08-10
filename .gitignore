@@ -1,2 +1,5 @@
 .beads/beads.db*
 .beads/*.lock
+.env
+.env.*
+!.env.example
