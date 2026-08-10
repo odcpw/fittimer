@@ -28,28 +28,58 @@ for (const icon of manifest.icons) await exists(icon.src);
 await exists('icons/apple-touch-icon.png');
 
 const index = await readJson('data/content-index.json');
-assert.equal(index.schemaVersion, 1);
+assert.equal(index.schemaVersion, 2);
 assert.ok(index.routines.length > 0);
+assert.equal(index.defaultMediaPack, 'gif-v1');
+assert.ok(index.mediaPacks && typeof index.mediaPacks === 'object');
 
-const gifPaths = new Set();
+const selectedPack = await readJson(index.mediaPacks[index.defaultMediaPack]);
+assert.equal(selectedPack.schemaVersion, 1);
+assert.equal(selectedPack.kind, 'mediaPack');
+assert.equal(selectedPack.id, index.defaultMediaPack);
+assert.deepEqual(selectedPack.outputFrame, {
+  orientation: 'landscape',
+  width: 16,
+  height: 9,
+  qaViewport: { width: 844, height: 390 },
+  scalePolicy: 'avoid-upsample',
+});
+
+const movementIds = new Set();
 for (const routineFile of index.routines) {
   const routine = await readJson(routineFile);
+  assert.equal(routine.schemaVersion, 2);
   for (const item of routine.sequence) {
     const intervals = item.interval ? [item.interval] : (await readJson(index.blocks[item.blockId])).intervals;
     for (const interval of intervals) {
       for (const movement of interval.movements) {
-        if (movement.gif) gifPaths.add(movement.gif);
+        assert.ok(movement.movementId);
+        assert.equal('gif' in movement, false);
+        movementIds.add(movement.movementId);
       }
     }
   }
 }
-for (const gif of gifPaths) await exists(gif);
+
+const mediaPaths = new Set([index.mediaPacks[index.defaultMediaPack]]);
+for (const movementId of movementIds) {
+  const entry = selectedPack.entries[movementId];
+  assert.ok(entry, `selected media pack does not cover ${movementId}`);
+  for (const asset of entry.assets) {
+    mediaPaths.add(asset.url);
+    await exists(asset.url);
+  }
+}
 
 const serviceWorker = await readFile(path.join(ROOT, 'sw.js'), 'utf8');
 for (const shellFile of ['index.html', 'styles.css', 'manifest.webmanifest', 'src/app.mjs', 'src/audio-cues.mjs', 'src/interval-engine.mjs']) {
   assert.match(serviceWorker, new RegExp(shellFile.replaceAll('.', '\\.')));
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
+assert.match(serviceWorker, /fittimer-v2/);
+const assetResponse = serviceWorker.match(/async function assetResponse[\s\S]*?\n}\n/);
+assert.ok(assetResponse, 'service worker asset response handler is present');
+assert.doesNotMatch(assetResponse[0], /cache\.put/);
 
 const html = await readFile(path.join(ROOT, 'index.html'), 'utf8');
 const application = await readFile(path.join(ROOT, 'src', 'app.mjs'), 'utf8');
@@ -57,6 +87,6 @@ assert.doesNotMatch(html, /<audio[\s>]/i, 'HTML audio elements would interfere w
 assert.doesNotMatch(application, /mediaSession/i, 'Media Session must not claim background music controls');
 
 process.stdout.write(
-  `PWA checks passed: ${index.routines.length} routine(s), ${gifPaths.size} referenced GIF(s), ` +
+  `PWA checks passed: ${index.routines.length} routine(s), ${mediaPaths.size - 1} selected media asset(s), ` +
     `${manifest.icons.length} install icon(s).\n`,
 );

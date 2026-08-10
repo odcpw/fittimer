@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "routine",
   "id": "fixture-nonpositive-seconds",
   "title": "Zero and negative seconds fixture",
@@ -13,6 +13,7 @@
         "restSeconds": -1,
         "movements": [
           {
+            "movementId": "bum-kicks",
             "displayName": "Text card",
             "textOnly": true
           }

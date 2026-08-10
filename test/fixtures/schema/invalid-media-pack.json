@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "kind": "mediaPack",
+  "id": "invalid-media-pack",
+  "title": "Invalid media pack fixture",
+  "outputFrame": {
+    "orientation": "landscape",
+    "width": 16,
+    "height": 9,
+    "qaViewport": {
+      "width": 844,
+      "height": 390
+    },
+    "scalePolicy": "avoid-upsample"
+  },
+  "framingProfiles": {
+    "bad-frame": {
+      "fit": "contain",
+      "crop": {
+        "x": 0.8,
+        "y": 0,
+        "width": 0.5,
+        "height": 1
+      },
+      "zoom": 1,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "safeRegions": {
+        "hands": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "feet": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "equipment": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "movementPath": { "x": 0, "y": 0, "width": 1, "height": 1 }
+      }
+    }
+  },
+  "entries": {
+    "step-jacks": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3224.gif", "framing": "bad-frame" }
+      ]
+    }
+  }
+}

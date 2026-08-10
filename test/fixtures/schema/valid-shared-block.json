@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "routine",
   "id": "fixture-shared-block",
   "title": "Shared block fixture",

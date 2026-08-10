@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "kind": "mediaPack",
+  "id": "gif-v1",
+  "title": "FitTimer built-in GIF pack",
+  "outputFrame": {
+    "orientation": "landscape",
+    "width": 16,
+    "height": 9,
+    "qaViewport": {
+      "width": 844,
+      "height": 390
+    },
+    "scalePolicy": "avoid-upsample"
+  },
+  "framingProfiles": {
+    "full-source-landscape": {
+      "fit": "contain",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "zoom": 1,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "safeRegions": {
+        "hands": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "feet": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "equipment": { "x": 0, "y": 0, "width": 1, "height": 1 },
+        "movementPath": { "x": 0, "y": 0, "width": 1, "height": 1 }
+      }
+    }
+  },
+  "entries": {
+    "step-jacks": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3224.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "bum-kicks": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [],
+      "fallback": "text"
+    },
+    "power-half-lunge-knee-drive": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3655.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "standing-star-crunch": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3213.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "bodyweight-squat": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/1685.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "calf-raise-cross-toe-touch": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/1373.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "high-plank-toe-taps": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0630.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "cocoons": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0260.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "glute-bridges": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3013.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "squat-overhead-press": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0550.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-deadlift": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0300.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-upright-row": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0437.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "side-lunge-curtsy-squat": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3769.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-swing": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0549.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "commandos-step-out": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0664.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "weighted-russian-twist": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0846.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "weighted-sit-up": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3204.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "plank-pull-throughs": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0521.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "side-plank-crunch": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0705.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "inchworm": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/1471.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-standing-overhead-press": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0426.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-squat": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0413.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-hammer-curl": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0313.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "single-leg-rdl": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/1757.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "alternating-reverse-lunges": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0381.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "standing-crunch-with-dumbbell": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/1005.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "dumbbell-snatch": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/3888.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "push-ups": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0662.gif", "framing": "full-source-landscape" }
+      ]
+    }
+  }
+}

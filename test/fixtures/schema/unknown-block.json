@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "routine",
   "id": "fixture-unknown-block",
   "title": "Unknown block fixture",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittimer-v1';
+const CACHE_NAME = 'fittimer-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -62,12 +62,7 @@ async function navigationResponse(request) {
 async function assetResponse(request) {
   const cached = await caches.match(request);
   if (cached) return cached;
-  const response = await fetchWithTimeout(request);
-  if (response.ok) {
-    const cache = await caches.open(CACHE_NAME);
-    await cache.put(request, response.clone());
-  }
-  return response;
+  return fetchWithTimeout(request);
 }
 
 self.addEventListener('fetch', (event) => {
@@ -78,12 +73,28 @@ self.addEventListener('fetch', (event) => {
 
 self.addEventListener('message', (event) => {
   if (event.data?.type !== 'CACHE_CONTENT' || !Array.isArray(event.data.urls)) return;
-  const scope = new URL(self.registration.scope);
-  const urls = event.data.urls.map((relativePath) => new URL(relativePath, scope));
-  const safe = urls.every((url) => url.origin === scope.origin && url.pathname.startsWith(scope.pathname));
 
   event.waitUntil((async () => {
     try {
+      const scope = new URL(self.registration.scope);
+      const urls = [...new Set(event.data.urls)].map((relativePath) => new URL(relativePath, scope));
+      const safe = urls.every((url) => {
+        if (url.origin !== scope.origin || !url.pathname.startsWith(scope.pathname)) return false;
+        const relativePath = url.pathname.slice(scope.pathname.length);
+        return (
+          relativePath === '' ||
+          relativePath === 'index.html' ||
+          relativePath === 'styles.css' ||
+          relativePath === 'manifest.webmanifest' ||
+          relativePath.startsWith('icons/') ||
+          relativePath.startsWith('src/') ||
+          relativePath === 'data/content-index.json' ||
+          relativePath.startsWith('data/blocks/') ||
+          relativePath.startsWith('data/routines/') ||
+          relativePath.startsWith('data/media/') ||
+          relativePath.startsWith('data/gifs/')
+        );
+      });
       if (!safe) throw new Error('Refused to cache content outside the service-worker scope');
       const cache = await caches.open(CACHE_NAME);
       const missing = [];

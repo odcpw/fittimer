@@ -1,21 +1,19 @@
 {
   "schemaVersion": 2,
   "kind": "routine",
-  "id": "fixture-missing-gif",
-  "title": "Missing GIF fixture",
+  "id": "fixture-missing-movement-id",
+  "title": "Missing movement ID fixture",
   "equipment": ["none"],
   "estimatedDurationSeconds": 60,
   "sequence": [
     {
       "interval": {
-        "displayName": "Missing visual",
+        "displayName": "Unidentified visual",
         "workSeconds": 40,
         "restSeconds": 20,
         "movements": [
           {
-            "movementId": "uncovered-gif",
-            "exerciseId": "9999",
-            "displayName": "Missing visual"
+            "displayName": "Unidentified visual"
           }
         ]
       }

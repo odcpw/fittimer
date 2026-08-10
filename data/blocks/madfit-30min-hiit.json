@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "block",
   "id": "madfit-30min-hiit",
   "title": "MadFit 30-minute full-body HIIT",
@@ -13,9 +13,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "step-jacks",
           "exerciseId": "3224",
-          "displayName": "Jack Jump (male)",
-          "gif": "data/gifs/3224.gif"
+          "displayName": "Jack Jump (male)"
         }
       ]
     },
@@ -27,6 +27,7 @@
       "match": "none",
       "movements": [
         {
+          "movementId": "bum-kicks",
           "displayName": "Bum Kicks (butt kicks, side to side)",
           "textOnly": true
         }
@@ -41,9 +42,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "power-half-lunge-knee-drive",
           "exerciseId": "3655",
-          "displayName": "Walking High Knees Lunge",
-          "gif": "data/gifs/3655.gif"
+          "displayName": "Walking High Knees Lunge"
         }
       ]
     },
@@ -56,9 +57,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "power-half-lunge-knee-drive",
           "exerciseId": "3655",
-          "displayName": "Walking High Knees Lunge",
-          "gif": "data/gifs/3655.gif"
+          "displayName": "Walking High Knees Lunge"
         }
       ]
     },
@@ -70,9 +71,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "standing-star-crunch",
           "exerciseId": "3213",
-          "displayName": "Side-to-side Toe Touch (male)",
-          "gif": "data/gifs/3213.gif"
+          "displayName": "Side-to-side Toe Touch (male)"
         }
       ]
     },
@@ -84,9 +85,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "bodyweight-squat",
           "exerciseId": "1685",
-          "displayName": "Squat To Overhead Reach",
-          "gif": "data/gifs/1685.gif"
+          "displayName": "Squat To Overhead Reach"
         }
       ]
     },
@@ -98,9 +99,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "calf-raise-cross-toe-touch",
           "exerciseId": "1373",
-          "displayName": "Bodyweight Standing Calf Raise",
-          "gif": "data/gifs/1373.gif"
+          "displayName": "Bodyweight Standing Calf Raise"
         }
       ]
     },
@@ -112,9 +113,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "high-plank-toe-taps",
           "exerciseId": "0630",
-          "displayName": "Mountain Climber",
-          "gif": "data/gifs/0630.gif"
+          "displayName": "Mountain Climber"
         }
       ]
     },
@@ -125,9 +126,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "cocoons",
           "exerciseId": "0260",
-          "displayName": "Cocoons",
-          "gif": "data/gifs/0260.gif"
+          "displayName": "Cocoons"
         }
       ]
     },
@@ -139,9 +140,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "glute-bridges",
           "exerciseId": "3013",
-          "displayName": "Low Glute Bridge On Floor",
-          "gif": "data/gifs/3013.gif"
+          "displayName": "Low Glute Bridge On Floor"
         }
       ]
     },
@@ -153,9 +154,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "squat-overhead-press",
           "exerciseId": "0550",
-          "displayName": "Kettlebell Thruster",
-          "gif": "data/gifs/0550.gif"
+          "displayName": "Kettlebell Thruster"
         }
       ]
     },
@@ -167,14 +168,14 @@
       "match": "combo",
       "movements": [
         {
+          "movementId": "dumbbell-deadlift",
           "exerciseId": "0300",
-          "displayName": "Dumbbell Deadlift",
-          "gif": "data/gifs/0300.gif"
+          "displayName": "Dumbbell Deadlift"
         },
         {
+          "movementId": "dumbbell-upright-row",
           "exerciseId": "0437",
-          "displayName": "Dumbbell Upright Row",
-          "gif": "data/gifs/0437.gif"
+          "displayName": "Dumbbell Upright Row"
         }
       ]
     },
@@ -187,9 +188,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "side-lunge-curtsy-squat",
           "exerciseId": "3769",
-          "displayName": "Curtsey Squat",
-          "gif": "data/gifs/3769.gif"
+          "displayName": "Curtsey Squat"
         }
       ]
     },
@@ -202,9 +203,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "side-lunge-curtsy-squat",
           "exerciseId": "3769",
-          "displayName": "Curtsey Squat",
-          "gif": "data/gifs/3769.gif"
+          "displayName": "Curtsey Squat"
         }
       ]
     },
@@ -216,9 +217,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "dumbbell-swing",
           "exerciseId": "0549",
-          "displayName": "Kettlebell Swing",
-          "gif": "data/gifs/0549.gif"
+          "displayName": "Kettlebell Swing"
         }
       ]
     },
@@ -230,9 +231,9 @@
       "match": "loose",
       "movements": [
         {
+          "movementId": "commandos-step-out",
           "exerciseId": "0664",
-          "displayName": "Push-up To Side Plank",
-          "gif": "data/gifs/0664.gif"
+          "displayName": "Push-up To Side Plank"
         }
       ]
     },
@@ -244,9 +245,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "weighted-russian-twist",
           "exerciseId": "0846",
-          "displayName": "Weighted Russian Twist",
-          "gif": "data/gifs/0846.gif"
+          "displayName": "Weighted Russian Twist"
         }
       ]
     },
@@ -258,9 +259,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "weighted-sit-up",
           "exerciseId": "3204",
-          "displayName": "Arms Overhead Full Sit-up (male)",
-          "gif": "data/gifs/3204.gif"
+          "displayName": "Arms Overhead Full Sit-up (male)"
         }
       ]
     },
@@ -272,9 +273,9 @@
       "match": "loose",
       "movements": [
         {
+          "movementId": "plank-pull-throughs",
           "exerciseId": "0521",
-          "displayName": "Kettlebell Alternating Renegade Row",
-          "gif": "data/gifs/0521.gif"
+          "displayName": "Kettlebell Alternating Renegade Row"
         }
       ]
     },
@@ -287,9 +288,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "side-plank-crunch",
           "exerciseId": "0705",
-          "displayName": "Side Bridge V. 2",
-          "gif": "data/gifs/0705.gif"
+          "displayName": "Side Bridge V. 2"
         }
       ]
     },
@@ -302,9 +303,9 @@
       "match": "close",
       "movements": [
         {
+          "movementId": "side-plank-crunch",
           "exerciseId": "0705",
-          "displayName": "Side Bridge V. 2",
-          "gif": "data/gifs/0705.gif"
+          "displayName": "Side Bridge V. 2"
         }
       ]
     },
@@ -316,14 +317,14 @@
       "match": "combo",
       "movements": [
         {
+          "movementId": "inchworm",
           "exerciseId": "1471",
-          "displayName": "Inchworm",
-          "gif": "data/gifs/1471.gif"
+          "displayName": "Inchworm"
         },
         {
+          "movementId": "dumbbell-standing-overhead-press",
           "exerciseId": "0426",
-          "displayName": "Dumbbell Standing Overhead Press",
-          "gif": "data/gifs/0426.gif"
+          "displayName": "Dumbbell Standing Overhead Press"
         }
       ]
     },
@@ -335,14 +336,14 @@
       "match": "combo",
       "movements": [
         {
+          "movementId": "dumbbell-squat",
           "exerciseId": "0413",
-          "displayName": "Dumbbell Squat",
-          "gif": "data/gifs/0413.gif"
+          "displayName": "Dumbbell Squat"
         },
         {
+          "movementId": "dumbbell-hammer-curl",
           "exerciseId": "0313",
-          "displayName": "Dumbbell Hammer Curl",
-          "gif": "data/gifs/0313.gif"
+          "displayName": "Dumbbell Hammer Curl"
         }
       ]
     },
@@ -355,9 +356,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "single-leg-rdl",
           "exerciseId": "1757",
-          "displayName": "Dumbbell Single Leg Deadlift",
-          "gif": "data/gifs/1757.gif"
+          "displayName": "Dumbbell Single Leg Deadlift"
         }
       ]
     },
@@ -370,9 +371,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "single-leg-rdl",
           "exerciseId": "1757",
-          "displayName": "Dumbbell Single Leg Deadlift",
-          "gif": "data/gifs/1757.gif"
+          "displayName": "Dumbbell Single Leg Deadlift"
         }
       ]
     },
@@ -384,9 +385,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "alternating-reverse-lunges",
           "exerciseId": "0381",
-          "displayName": "Dumbbell Rear Lunge",
-          "gif": "data/gifs/0381.gif"
+          "displayName": "Dumbbell Rear Lunge"
         }
       ]
     },
@@ -398,9 +399,9 @@
       "match": "loose",
       "movements": [
         {
+          "movementId": "standing-crunch-with-dumbbell",
           "exerciseId": "1005",
-          "displayName": "Band Standing Crunch",
-          "gif": "data/gifs/1005.gif"
+          "displayName": "Band Standing Crunch"
         }
       ]
     },
@@ -413,9 +414,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "dumbbell-snatch",
           "exerciseId": "3888",
-          "displayName": "Dumbbell One Arm Snatch",
-          "gif": "data/gifs/3888.gif"
+          "displayName": "Dumbbell One Arm Snatch"
         }
       ]
     },
@@ -428,9 +429,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "dumbbell-snatch",
           "exerciseId": "3888",
-          "displayName": "Dumbbell One Arm Snatch",
-          "gif": "data/gifs/3888.gif"
+          "displayName": "Dumbbell One Arm Snatch"
         }
       ]
     },
@@ -442,9 +443,9 @@
       "match": "exact",
       "movements": [
         {
+          "movementId": "push-ups",
           "exerciseId": "0662",
-          "displayName": "Push-up",
-          "gif": "data/gifs/0662.gif"
+          "displayName": "Push-up"
         }
       ]
     }

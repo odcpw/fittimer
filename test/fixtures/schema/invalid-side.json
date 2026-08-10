@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "routine",
   "id": "fixture-invalid-side",
   "title": "Invalid side fixture",
@@ -14,9 +14,9 @@
         "side": "diagonal",
         "movements": [
           {
+            "movementId": "step-jacks",
             "exerciseId": "3224",
-            "displayName": "Jack Jump",
-            "gif": "data/gifs/3224.gif"
+            "displayName": "Jack Jump"
           }
         ]
       }

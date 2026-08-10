@@ -1,5 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "defaultMediaPack": "gif-v1",
+  "mediaPacks": {
+    "gif-v1": "data/media/gif-v1.json"
+  },
   "routines": [
     "data/routines/madfit-30min-hiit.json"
   ],
