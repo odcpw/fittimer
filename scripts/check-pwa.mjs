@@ -16,6 +16,59 @@ async function readJson(file) {
 }
 const exists = async (file) => access(path.join(ROOT, file));
 
+function repoRelative(absoluteFile) {
+  const relative = path.relative(ROOT, absoluteFile);
+  if (relative.startsWith('..') || path.isAbsolute(relative)) return null;
+  return relative.split(path.sep).join('/');
+}
+
+function staticImportSpecifiers(source) {
+  const specifiers = new Set();
+  const patterns = [
+    /^\s*import\s+(?:(?:[\s\S]*?)\sfrom\s+)?['"]([^'"]+)['"]\s*;?/gm,
+    /^\s*export\s+(?:[\s\S]*?\sfrom\s+)['"]([^'"]+)['"]\s*;?/gm,
+  ];
+  for (const pattern of patterns) {
+    for (const match of source.matchAll(pattern)) specifiers.add(match[1]);
+  }
+  return [...specifiers];
+}
+
+async function resolveLocalModule(fromFile, specifier) {
+  const base = path.resolve(ROOT, path.dirname(fromFile), specifier);
+  const candidates = path.extname(base)
+    ? [base]
+    : [base, `${base}.mjs`, `${base}.js`, path.join(base, 'index.mjs'), path.join(base, 'index.js')];
+  for (const candidate of candidates) {
+    const repoPath = repoRelative(candidate);
+    if (!repoPath || !/\.m?js$/.test(repoPath)) continue;
+    try {
+      await access(candidate);
+      return repoPath;
+    } catch {
+      // Try the next standard extension/index form.
+    }
+  }
+  throw new Error(`${fromFile} imports missing local module ${specifier}`);
+}
+
+async function collectStaticImportClosure(entryFile) {
+  const closure = new Set();
+  const pending = [entryFile];
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (closure.has(current)) continue;
+    closure.add(current);
+    const source = await readFile(path.join(ROOT, current), 'utf8');
+    for (const specifier of staticImportSpecifiers(source)) {
+      if (!specifier.startsWith('.')) continue;
+      const localModule = await resolveLocalModule(current, specifier);
+      if (!closure.has(localModule)) pending.push(localModule);
+    }
+  }
+  return [...closure].sort();
+}
+
 const manifest = await readJson('manifest.webmanifest');
 assert.equal(manifest.start_url, './');
 assert.equal(manifest.scope, './');
@@ -72,8 +125,15 @@ for (const movementId of movementIds) {
 }
 
 const serviceWorker = await readFile(path.join(ROOT, 'sw.js'), 'utf8');
-for (const shellFile of ['index.html', 'styles.css', 'manifest.webmanifest', 'src/app.mjs', 'src/audio-cues.mjs', 'src/interval-engine.mjs']) {
-  assert.match(serviceWorker, new RegExp(shellFile.replaceAll('.', '\\.')));
+const shellDeclaration = serviceWorker.match(/const APP_SHELL = \[([\s\S]*?)\n\];/);
+assert.ok(shellDeclaration, 'service worker APP_SHELL declaration is present');
+const shellPaths = new Set([...shellDeclaration[1].matchAll(/['"]([^'"]+)['"]/g)].map((match) => match[1]));
+for (const shellFile of ['index.html', 'styles.css', 'manifest.webmanifest']) {
+  assert.ok(shellPaths.has(`./${shellFile}`), `APP_SHELL is missing ${shellFile}`);
+}
+const importClosure = await collectStaticImportClosure('src/app.mjs');
+for (const importedFile of importClosure) {
+  assert.ok(shellPaths.has(`./${importedFile}`), `APP_SHELL is missing static import ${importedFile}`);
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
 assert.match(serviceWorker, /fittimer-v2/);
@@ -88,5 +148,5 @@ assert.doesNotMatch(application, /mediaSession/i, 'Media Session must not claim 
 
 process.stdout.write(
   `PWA checks passed: ${index.routines.length} routine(s), ${mediaPaths.size - 1} selected media asset(s), ` +
-    `${manifest.icons.length} install icon(s).\n`,
+    `${manifest.icons.length} install icon(s), ${importClosure.length} shell JS module(s).\n`,
 );

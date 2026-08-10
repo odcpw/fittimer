@@ -11,6 +11,7 @@ const APP_SHELL = [
   './src/app.mjs',
   './src/audio-cues.mjs',
   './src/interval-engine.mjs',
+  './src/settings.mjs',
   './data/content-index.json',
 ];
 
