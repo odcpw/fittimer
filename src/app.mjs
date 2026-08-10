@@ -195,13 +195,30 @@ function shouldMirror(entry, requestedSide) {
   return requestedSide !== entry.anatomicalSide;
 }
 
-function orderedAssets(entry, reducedMotion) {
+function orderedAssets(entry, reducedMotion, requestedSide) {
   if (!Array.isArray(entry?.assets)) return [];
   const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolveAssetUrl(asset?.url));
+  const normalizedSide = requestedSide === undefined || requestedSide === null || requestedSide === ''
+    ? null
+    : String(requestedSide);
+  const sideAware = normalizedSide === null
+    ? available
+    : available.filter((asset) => {
+        const assetSide = asset?.side === undefined || asset?.side === null || asset?.side === ''
+          ? null
+          : String(asset.side);
+        return assetSide === null || assetSide === normalizedSide;
+      });
   const candidates = reducedMotion
-    ? available.filter((asset) => asset.type === 'poster')
-    : available;
-  return [...candidates].sort((left, right) => MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type));
+    ? sideAware.filter((asset) => asset.type === 'poster')
+    : sideAware;
+  return [...candidates].sort((left, right) => {
+    const mediaDifference = MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type);
+    if (mediaDifference !== 0 || normalizedSide === null) return mediaDifference;
+    const leftSide = left.side === undefined || left.side === null || left.side === '' ? null : String(left.side);
+    const rightSide = right.side === undefined || right.side === null || right.side === '' ? null : String(right.side);
+    return Number(rightSide === normalizedSide) - Number(leftSide === normalizedSide);
+  });
 }
 
 /**
@@ -233,7 +250,7 @@ export function resolveMovementVisual(
   const entry = movementId && isObject(mediaPack?.entries) ? mediaPack.entries[movementId] : null;
   if (!entry) return textResult('missing-pack-entry');
 
-  const candidates = orderedAssets(entry, reducedMotion);
+  const candidates = orderedAssets(entry, reducedMotion, requestedSide);
   if (candidates.length === 0) return textResult(reducedMotion ? 'no-poster' : 'empty-pack-entry');
   const asset = candidates[0];
   return {
