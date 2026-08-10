@@ -1,5 +1,18 @@
 import { IntervalEngine } from './interval-engine.mjs';
 import { AudioCuePlayer } from './audio-cues.mjs';
+import {
+  CUE_PACK_IDS,
+  CUE_PACK_SYNTH_V1,
+  VISUAL_PACK_IDS,
+  VISUAL_PACK_GIF_V1,
+  VISUAL_PACK_REFERENCE_V1,
+  VISUAL_PACK_W1W4_V1,
+  VOICE_PACK_IDS,
+  VOICE_PACK_BROWSER_V1,
+  VOICE_PACK_FRANKENTTS_V1,
+  createSettingsStore,
+  normalizeSettings,
+} from './settings.mjs';
 
 const hasDocument = typeof document !== 'undefined';
 const elements = hasDocument
@@ -7,6 +20,23 @@ const elements = hasDocument
       home: document.querySelector('#home-screen'),
       workout: document.querySelector('#workout-screen'),
       routineList: document.querySelector('#routine-list'),
+      settingsSummaryStatus: document.querySelector('#settings-summary-status'),
+      cuePack: document.querySelector('#settings-cue-pack'),
+      cuesEnabled: document.querySelector('#settings-cues-enabled'),
+      cuesVolume: document.querySelector('#settings-cues-volume'),
+      cuesVolumeOutput: document.querySelector('#settings-cues-volume-output'),
+      cuesCountdown: document.querySelector('#settings-cues-countdown'),
+      cuesHalfway: document.querySelector('#settings-cues-halfway'),
+      voicePack: document.querySelector('#settings-voice-pack'),
+      voiceEnabled: document.querySelector('#settings-voice-enabled'),
+      voiceVolume: document.querySelector('#settings-voice-volume'),
+      voiceVolumeOutput: document.querySelector('#settings-voice-volume-output'),
+      voiceExercise: document.querySelector('#settings-voice-exercise'),
+      voiceSide: document.querySelector('#settings-voice-side'),
+      voiceNext: document.querySelector('#settings-voice-next'),
+      visualPack: document.querySelector('#settings-visual-pack'),
+      reducedMotion: document.querySelector('#settings-reduced-motion'),
+      mediaStatus: document.querySelector('#settings-media-status'),
       start: document.querySelector('#start-button'),
       offline: document.querySelector('#offline-status'),
       phase: document.querySelector('#phase-label'),
@@ -51,14 +81,63 @@ let routines = [];
 let selectedRoutine = null;
 let activeRoutine = null;
 let mediaPacks = new Map();
+let contentIndex = null;
 let selectedMediaPack = null;
 let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
-const audioCues = new AudioCuePlayer();
+const settingsStore = createSettingsStore(hasDocument ? undefined : null);
+let currentSettings = settingsStore.load();
+const audioCues = new AudioCuePlayer({ settings: currentSettings });
 
 const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
+
+const SETTINGS_PACK_LABELS = new Map([
+  [CUE_PACK_SYNTH_V1, 'Synth tones'],
+  [VOICE_PACK_BROWSER_V1, 'Browser voice'],
+  [VOICE_PACK_FRANKENTTS_V1, 'FrankenTTS voice'],
+  [VISUAL_PACK_GIF_V1, 'GIFs'],
+  [VISUAL_PACK_REFERENCE_V1, 'Reference pack'],
+  [VISUAL_PACK_W1W4_V1, 'W1–W4 pack'],
+]);
+
+function settingsPackLabel(packId) {
+  return SETTINGS_PACK_LABELS.get(packId) ?? packId;
+}
+
+/**
+ * Keep the home summary short while deriving every value from the versioned
+ * settings contract instead of duplicating defaults in the UI.
+ */
+export function summarizeSettings(settings) {
+  const normalized = normalizeSettings(settings);
+  return Object.freeze({
+    label: `${normalized.cues.enabled ? 'Sound on' : 'Sound off'} · ${settingsPackLabel(normalized.visuals.selectedPackId)}`,
+    cueLabel: normalized.cues.enabled ? 'Sound on' : 'Sound off',
+    visualLabel: settingsPackLabel(normalized.visuals.selectedPackId),
+  });
+}
+
+/**
+ * A valid preference may name a pack that is not installed in the current
+ * content index. Keep that stable preference, but use the built-in pack for
+ * rendering and offline caching until the requested pack is available.
+ */
+export function resolveMediaPackPreference(index, settings) {
+  const normalized = normalizeSettings(settings);
+  const available = isObject(index?.mediaPacks) ? index.mediaPacks : {};
+  const requestedId = normalized.visuals.selectedPackId;
+  const fallbackId = typeof index?.defaultMediaPack === 'string'
+    ? index.defaultMediaPack
+    : VISUAL_PACK_GIF_V1;
+  const effectiveId = Object.hasOwn(available, requestedId)
+    ? requestedId
+    : Object.hasOwn(available, fallbackId)
+      ? fallbackId
+      : VISUAL_PACK_GIF_V1;
+  return Object.freeze({ requestedId, effectiveId, isFallback: requestedId !== effectiveId });
+}
 
 /**
  * Describe which workout actions belong on screen for a timestamped snapshot.
@@ -202,11 +281,15 @@ async function loadContent() {
     Object.entries(index.mediaPacks).map(async ([id, file]) => [id, await fetchJson(file)]),
   );
   mediaPacks = new Map(mediaPackEntries);
-  selectedMediaPack = mediaPacks.get(index.defaultMediaPack);
+  contentIndex = index;
+  populateSettingsOptions();
+  const mediaPreference = resolveMediaPackPreference(index, currentSettings);
+  selectedMediaPack = mediaPacks.get(mediaPreference.effectiveId);
   if (!selectedMediaPack) {
     throw new Error(`Default media pack is unavailable: ${index.defaultMediaPack}`);
   }
   applyOutputFrame(selectedMediaPack);
+  renderSettings(currentSettings);
 
   const blockEntries = await Promise.all(
     Object.entries(index.blocks).map(async ([id, file]) => [id, await fetchJson(file)]),
@@ -270,6 +353,124 @@ function renderRoutineList() {
   elements.routineList.replaceChildren(...rows);
 }
 
+function createPackOptions(select, ids, unavailableIds = new Set()) {
+  const options = ids.map((packId) => {
+    const option = document.createElement('option');
+    option.value = packId;
+    option.textContent = unavailableIds.has(packId)
+      ? `${settingsPackLabel(packId)} · not installed`
+      : settingsPackLabel(packId);
+    return option;
+  });
+  select.replaceChildren(...options);
+}
+
+function populateSettingsOptions() {
+  if (!hasDocument) return;
+  const unavailableVisuals = new Set(
+    VISUAL_PACK_IDS.filter((packId) => contentIndex && !mediaPacks.has(packId)),
+  );
+  createPackOptions(elements.cuePack, CUE_PACK_IDS);
+  createPackOptions(elements.voicePack, VOICE_PACK_IDS);
+  createPackOptions(elements.visualPack, VISUAL_PACK_IDS, unavailableVisuals);
+}
+
+function volumeLabel(value) {
+  return `${Math.round(value * 100)}%`;
+}
+
+function renderSettings(settings) {
+  if (!hasDocument) return;
+  const normalized = normalizeSettings(settings);
+  const summary = summarizeSettings(normalized);
+  elements.settingsSummaryStatus.textContent = summary.label;
+  elements.cuePack.value = normalized.cues.packId;
+  elements.cuesEnabled.checked = normalized.cues.enabled;
+  elements.cuesVolume.value = String(normalized.cues.volume);
+  elements.cuesVolumeOutput.textContent = volumeLabel(normalized.cues.volume);
+  elements.cuesCountdown.checked = normalized.cues.countdown;
+  elements.cuesHalfway.checked = normalized.cues.halfway;
+  elements.voicePack.value = normalized.voice.packId;
+  elements.voiceEnabled.checked = normalized.voice.enabled;
+  elements.voiceVolume.value = String(normalized.voice.volume);
+  elements.voiceVolumeOutput.textContent = volumeLabel(normalized.voice.volume);
+  elements.voiceExercise.checked = normalized.voice.exercise;
+  elements.voiceSide.checked = normalized.voice.side;
+  elements.voiceNext.checked = normalized.voice.next;
+  elements.visualPack.value = normalized.visuals.selectedPackId;
+  elements.reducedMotion.checked = normalized.visuals.reducedMotion;
+
+  const mediaPreference = resolveMediaPackPreference(contentIndex, normalized);
+  elements.mediaStatus.textContent = mediaPreference.isFallback
+    ? `${settingsPackLabel(mediaPreference.requestedId)} is saved; built-in GIFs stay active until that pack is installed.`
+    : `${settingsPackLabel(mediaPreference.effectiveId)} active.`;
+}
+
+function persistSettings(patch) {
+  currentSettings = settingsStore.update(patch);
+  audioCues.setSettings(currentSettings);
+  if (patch?.visuals) {
+    applySelectedMediaPack();
+  }
+  renderSettings(currentSettings);
+}
+
+function applySelectedMediaPack() {
+  if (!contentIndex) return;
+  const mediaPreference = resolveMediaPackPreference(contentIndex, currentSettings);
+  const nextPack = mediaPacks.get(mediaPreference.effectiveId);
+  if (!nextPack) return;
+  selectedMediaPack = nextPack;
+  applyOutputFrame(selectedMediaPack);
+}
+
+function bindSettingsControls(listenerOptions) {
+  populateSettingsOptions();
+  renderSettings(currentSettings);
+
+  elements.cuePack.addEventListener('change', (event) => {
+    persistSettings({ cues: { packId: event.currentTarget.value } });
+  }, listenerOptions);
+  elements.cuesEnabled.addEventListener('change', (event) => {
+    persistSettings({ cues: { enabled: event.currentTarget.checked } });
+  }, listenerOptions);
+  elements.cuesVolume.addEventListener('input', (event) => {
+    persistSettings({ cues: { volume: event.currentTarget.valueAsNumber } });
+  }, listenerOptions);
+  elements.cuesCountdown.addEventListener('change', (event) => {
+    persistSettings({ cues: { countdown: event.currentTarget.checked } });
+  }, listenerOptions);
+  elements.cuesHalfway.addEventListener('change', (event) => {
+    persistSettings({ cues: { halfway: event.currentTarget.checked } });
+  }, listenerOptions);
+
+  elements.voicePack.addEventListener('change', (event) => {
+    persistSettings({ voice: { packId: event.currentTarget.value } });
+  }, listenerOptions);
+  elements.voiceEnabled.addEventListener('change', (event) => {
+    persistSettings({ voice: { enabled: event.currentTarget.checked } });
+  }, listenerOptions);
+  elements.voiceVolume.addEventListener('input', (event) => {
+    persistSettings({ voice: { volume: event.currentTarget.valueAsNumber } });
+  }, listenerOptions);
+  elements.voiceExercise.addEventListener('change', (event) => {
+    persistSettings({ voice: { exercise: event.currentTarget.checked } });
+  }, listenerOptions);
+  elements.voiceSide.addEventListener('change', (event) => {
+    persistSettings({ voice: { side: event.currentTarget.checked } });
+  }, listenerOptions);
+  elements.voiceNext.addEventListener('change', (event) => {
+    persistSettings({ voice: { next: event.currentTarget.checked } });
+  }, listenerOptions);
+
+  elements.visualPack.addEventListener('change', (event) => {
+    persistSettings({ visuals: { selectedPackId: event.currentTarget.value } });
+  }, listenerOptions);
+  elements.reducedMotion.addEventListener('change', (event) => {
+    persistSettings({ visuals: { reducedMotion: event.currentTarget.checked } });
+  }, listenerOptions);
+}
+
 function setButtonLabel(button, label) {
   const span = button.querySelector('span');
   if (span) span.textContent = label;
@@ -296,7 +497,8 @@ function showError(error) {
 }
 
 function reducedMotionPreferred() {
-  return typeof globalThis.matchMedia === 'function' && globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return currentSettings.visuals.reducedMotion
+    || typeof globalThis.matchMedia === 'function' && globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 function applyFraming(element, visual) {
@@ -619,6 +821,7 @@ if (hasDocument) {
   const pageLifetime = new AbortController();
   const listenerOptions = { signal: pageLifetime.signal };
   window.addEventListener('pagehide', () => pageLifetime.abort(), { once: true });
+  bindSettingsControls(listenerOptions);
 
   elements.routineList.addEventListener('click', (event) => {
     const row = event.target instanceof Element ? event.target.closest('[data-routine-index]') : null;

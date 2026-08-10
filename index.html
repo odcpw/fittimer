@@ -24,6 +24,88 @@
 
         <div class="routine-list" id="routine-list" aria-label="Workout routines"></div>
 
+        <details class="settings-panel" id="settings-panel">
+          <summary>
+            <span class="settings-summary__label">
+              <span class="settings-summary__title">Personal settings</span>
+              <span class="settings-summary__hint">Sound, voice, and display</span>
+            </span>
+            <span class="settings-summary__status" id="settings-summary-status">Sound on · GIFs</span>
+          </summary>
+
+          <div class="settings-content" id="settings-content">
+            <p class="settings-content__intro">These choices stay on this device and never interrupt your workout.</p>
+
+            <div class="settings-grid">
+              <fieldset class="settings-group">
+                <legend>Sound cues</legend>
+                <label class="settings-select" for="settings-cue-pack">
+                  <span>Tone pack</span>
+                  <select id="settings-cue-pack"></select>
+                </label>
+                <label class="settings-switch">
+                  <input id="settings-cues-enabled" type="checkbox">
+                  <span class="settings-switch__control" aria-hidden="true"></span>
+                  <span class="settings-switch__copy">
+                    <strong>Audio cues</strong>
+                    <small>Start, rest, and countdown tones</small>
+                  </span>
+                </label>
+                <label class="settings-range" for="settings-cues-volume">
+                  <span class="settings-range__heading"><span>Volume</span><output id="settings-cues-volume-output" for="settings-cues-volume">100%</output></span>
+                  <input id="settings-cues-volume" type="range" min="0" max="1" step="0.05" value="1">
+                </label>
+                <div class="settings-checks" aria-label="Sound cue details">
+                  <label class="settings-check"><input id="settings-cues-countdown" type="checkbox"><span>Countdown</span></label>
+                  <label class="settings-check"><input id="settings-cues-halfway" type="checkbox"><span>Halfway</span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="settings-group">
+                <legend>Voice</legend>
+                <label class="settings-select" for="settings-voice-pack">
+                  <span>Voice pack</span>
+                  <select id="settings-voice-pack"></select>
+                </label>
+                <label class="settings-switch">
+                  <input id="settings-voice-enabled" type="checkbox">
+                  <span class="settings-switch__control" aria-hidden="true"></span>
+                  <span class="settings-switch__copy">
+                    <strong>Voice announcements</strong>
+                    <small>Ready for the active voice pack</small>
+                  </span>
+                </label>
+                <label class="settings-range" for="settings-voice-volume">
+                  <span class="settings-range__heading"><span>Volume</span><output id="settings-voice-volume-output" for="settings-voice-volume">100%</output></span>
+                  <input id="settings-voice-volume" type="range" min="0" max="1" step="0.05" value="1">
+                </label>
+                <div class="settings-checks" aria-label="Voice announcement details">
+                  <label class="settings-check"><input id="settings-voice-exercise" type="checkbox"><span>Exercise</span></label>
+                  <label class="settings-check"><input id="settings-voice-side" type="checkbox"><span>Side</span></label>
+                  <label class="settings-check"><input id="settings-voice-next" type="checkbox"><span>Next</span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="settings-group">
+                <legend>Display</legend>
+                <label class="settings-select" for="settings-visual-pack">
+                  <span>Media pack</span>
+                  <select id="settings-visual-pack"></select>
+                </label>
+                <label class="settings-switch">
+                  <input id="settings-reduced-motion" type="checkbox">
+                  <span class="settings-switch__control" aria-hidden="true"></span>
+                  <span class="settings-switch__copy">
+                    <strong>Reduced motion</strong>
+                    <small>Prefer still exercise images</small>
+                  </span>
+                </label>
+                <p class="settings-media-status" id="settings-media-status" role="status">Built-in GIFs active.</p>
+              </fieldset>
+            </div>
+          </div>
+        </details>
+
         <div class="home-actions">
           <button class="primary-action" id="start-button" type="button" disabled>Start workout</button>
           <p class="offline-status" id="offline-status" role="status">
