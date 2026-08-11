@@ -34,7 +34,7 @@
     "intervalCount": 180,
     "phraseCount": 203,
     "assetCount": 203,
-    "digest": "993f2841bd4d7d7cf3a1397d80f9726a3b88ae18c37129aa60132bb143dc4240"
+    "digest": "0f5a88607d3f10763f6ea2df0e3c9857069b3652a98f46bf26960d6a9d39116f"
   },
   "generatedAt": "2026-08-10T23:26:28.350Z",
   "phrases": [
@@ -186,7 +186,7 @@
           "dragon-longform"
         ],
         "movementIds": [
-          "push-ups"
+          "one-and-a-half-rep-push-up"
         ],
         "roles": [
           "interval-display-name",
@@ -3159,7 +3159,7 @@
           "crane-longform"
         ],
         "movementIds": [
-          "push-ups"
+          "push-up-plus"
         ],
         "roles": [
           "interval-display-name",
@@ -4173,7 +4173,7 @@
           "silk-coils"
         ],
         "movementIds": [
-          "push-ups"
+          "slow-push-up"
         ],
         "roles": [
           "interval-display-name",

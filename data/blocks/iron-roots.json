@@ -280,7 +280,7 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
@@ -292,7 +292,7 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]

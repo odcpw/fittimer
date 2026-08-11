@@ -204,7 +204,7 @@
       "coachNote": "Use a push-up plus with controlled scapular reach and no shoulder apprehension.",
       "regressions": ["Use knees-down or hands-elevated; fists do not unload the first MTP."],
       "match": "close",
-      "movements": [{ "movementId": "push-ups", "exerciseId": "0662", "displayName": "Push-up Plus" }]
+      "movements": [{ "movementId": "push-up-plus", "exerciseId": "0662", "displayName": "Push-up Plus" }]
     },
     {
       "displayName": "Lateral Lunge (left)",

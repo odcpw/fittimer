@@ -215,10 +215,36 @@ test('Fable W1-W4 preserve canonical order, sides, exact duration, and media cov
   }
 
   assert.ok(allMovementIds.has('push-ups'));
+  assert.ok(allMovementIds.has('slow-push-up'));
+  assert.ok(allMovementIds.has('one-and-a-half-rep-push-up'));
+  assert.ok(allMovementIds.has('push-up-plus'));
   assert.ok(allMovementIds.has('single-leg-rdl'));
   assert.ok(allMovementIds.has('dumbbell-swing'));
   assert.ok(allMovementIds.has('inchworm'));
   assert.ok(allMovementIds.has('dumbbell-snatch'));
+
+  const pushUpIdsByName = new Map();
+  const wallPressIntervals = [];
+  for (const blockId of ['iron-roots', 'silk-coils', 'dragon-longform', 'crane-longform']) {
+    for (const interval of blocks.get(blockId).intervals) {
+      if (interval.displayName.includes('Push-up')) {
+        pushUpIdsByName.set(interval.displayName, interval.movements[0].movementId);
+      }
+      if (interval.movements.some(({ movementId }) => movementId === 'wall-press-hip-abduction-isometric')) {
+        wallPressIntervals.push(interval);
+      }
+    }
+  }
+  assert.deepEqual(Object.fromEntries(pushUpIdsByName), {
+    'Push-up': 'push-ups',
+    'Slow Push-up': 'slow-push-up',
+    '1.5-rep Push-up': 'one-and-a-half-rep-push-up',
+    'Push-up Plus': 'push-up-plus',
+  });
+  assert.equal(wallPressIntervals.length, 6);
+  assert.ok(wallPressIntervals.every(({ coachNote }) =>
+    coachNote === 'Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.'
+  ));
 
   const result = await validateFiles(routineFiles);
   assert.equal(result.valid, true, JSON.stringify(result.errors, null, 2));

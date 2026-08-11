@@ -237,6 +237,27 @@
         { "type": "gif", "url": "data/gifs/0662.gif", "framing": "full-source-landscape" }
       ]
     },
+    "slow-push-up": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0662.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "one-and-a-half-rep-push-up": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0662.gif", "framing": "full-source-landscape" }
+      ]
+    },
+    "push-up-plus": {
+      "anatomicalSide": "bilateral",
+      "mirroring": "never",
+      "assets": [
+        { "type": "gif", "url": "data/gifs/0662.gif", "framing": "full-source-landscape" }
+      ]
+    },
     "alternating-side-bend-reach": { "anatomicalSide": "unspecified", "mirroring": "never", "assets": [], "fallback": "text" },
     "ankle-pumps-heel-to-toe-rocks": { "anatomicalSide": "bilateral", "mirroring": "never", "assets": [], "fallback": "text" },
     "b-stance-rdl": { "anatomicalSide": "unspecified", "mirroring": "never", "assets": [], "fallback": "text" },

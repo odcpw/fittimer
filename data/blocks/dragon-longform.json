@@ -137,7 +137,7 @@
       "coachNote": "Use a 1.5-rep push-up with a neutral shoulder and a controlled trunk.",
       "regressions": ["Use knees-down or hands-elevated; fists do not unload the first MTP."],
       "match": "close",
-      "movements": [{ "movementId": "push-ups", "exerciseId": "0662", "displayName": "1.5-rep Push-up" }]
+      "movements": [{ "movementId": "one-and-a-half-rep-push-up", "exerciseId": "0662", "displayName": "1.5-rep Push-up" }]
     },
     {
       "displayName": "Single-leg RDL (left)",
@@ -377,7 +377,7 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric", "textOnly": true }]
@@ -389,7 +389,7 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric", "textOnly": true }]

@@ -148,7 +148,7 @@
       "coachNote": "Use a slow push-up with a neutral shoulder and controlled trunk.",
       "regressions": ["Use knees-down or hands-elevated; fists do not unload the first MTP."],
       "match": "exact",
-      "movements": [{ "movementId": "push-ups", "exerciseId": "0662", "displayName": "Slow Push-up" }]
+      "movements": [{ "movementId": "slow-push-up", "exerciseId": "0662", "displayName": "Slow Push-up" }]
     },
     {
       "displayName": "Half-kneeling Press (left)",
@@ -213,7 +213,7 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
@@ -225,7 +225,7 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Press the stance-leg knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
       "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
