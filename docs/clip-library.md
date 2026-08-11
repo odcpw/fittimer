@@ -11,6 +11,26 @@ video ID/title/URL, source start/end, and equipment. The pack-level `creators`
 registry decides which professional creators appear in the app. Older research
 clips stay indexed but are not exposed as creator choices.
 
+The canonical private catalogue is compiled with
+`scripts/media/creator-library.mjs`. Its inputs are independently reviewed
+`approvedCreatorMovementCandidates` files; its outputs are the complete
+creator-movement library, a movement-by-creator matrix, the ready encode queue,
+and the explicit review/rejection queue. Multiple ranges for the same movement
+and creator are preserved as variants rather than silently collapsed.
+
+```sh
+node scripts/media/creator-library.mjs \
+  --input /home/oliver/Projects/fittimer-media-research/approved-creator-library-v1 \
+  --output /home/oliver/Projects/fittimer-private-packs/creator-library-v1/catalogue \
+  --verify-files
+```
+
+`--verify-files` proves every ready range still points to a retained private
+source. The generated files contain private paths and therefore remain outside
+Git. A range is `ready` only when its movement semantics and framing were
+reviewed; `candidate`, `approximate`, and `rejected` records remain searchable
+and must carry an honest reason.
+
 ## Delivery path
 
 1. Retain source videos, subtitles, metadata, and research contact sheets in
