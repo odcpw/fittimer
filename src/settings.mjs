@@ -107,6 +107,11 @@ function validPackId(value, allowedIds, fallback) {
   return typeof value === 'string' && allowedIds.includes(value) ? value : fallback;
 }
 
+function visualPackIds(options = undefined) {
+  const additional = Array.isArray(options?.visualPackIds) ? options.visualPackIds : [];
+  return [...new Set([...VISUAL_PACK_IDS, ...additional.filter((id) => typeof id === 'string')])];
+}
+
 function validBoolean(value, fallback) {
   return typeof value === 'boolean' ? value : fallback;
 }
@@ -135,7 +140,7 @@ function sameValue(left, right) {
  * Convert a partial settings record to the canonical v1 shape. Unknown keys
  * are dropped and invalid individual values use their documented defaults.
  */
-export function normalizeSettings(value) {
+export function normalizeSettings(value, options = undefined) {
   const source = isRecord(value) ? value : {};
   const cues = section(source, 'cues');
   const voice = section(source, 'voice');
@@ -169,7 +174,7 @@ export function normalizeSettings(value) {
     visuals: {
       selectedPackId: validPackId(
         firstDefined(visuals, 'selectedPackId', 'selectedPack', 'packId', 'pack'),
-        VISUAL_PACK_IDS,
+        visualPackIds(options),
         DEFAULT_VISUAL_SETTINGS.selectedPackId,
       ),
       reducedMotion: validBoolean(visuals.reducedMotion, DEFAULT_VISUAL_SETTINGS.reducedMotion),
@@ -191,9 +196,9 @@ export function normalizeCueSettings(value) {
  * normalizer after this check so malformed individual fields can still fall
  * back independently.
  */
-export function isValidSettings(value) {
+export function isValidSettings(value, options = undefined) {
   if (!isRecord(value) || value.schemaVersion !== SETTINGS_VERSION) return false;
-  const normalized = normalizeSettings(value);
+  const normalized = normalizeSettings(value, options);
   return sameValue(normalized, value);
 }
 
@@ -241,7 +246,7 @@ function resolveStorage(storage) {
  * access errors, malformed JSON, unsupported versions, and invalid fields all
  * return a usable record without logging or throwing.
  */
-export function loadSettings(storage = undefined) {
+export function loadSettings(storage = undefined, options = undefined) {
   const storageArea = resolveStorage(storage);
   if (!storageArea) return cloneSettings(DEFAULT_SETTINGS);
 
@@ -255,7 +260,7 @@ export function loadSettings(storage = undefined) {
 
   try {
     const migrated = migrateSettings(JSON.parse(serialized));
-    return migrated ? normalizeSettings(migrated) : cloneSettings(DEFAULT_SETTINGS);
+    return migrated ? normalizeSettings(migrated, options) : cloneSettings(DEFAULT_SETTINGS);
   } catch {
     return cloneSettings(DEFAULT_SETTINGS);
   }
@@ -266,8 +271,8 @@ export function loadSettings(storage = undefined) {
  * failure leaves the caller with the normalized record and does not block the
  * workout; the next load will use the last successfully stored value.
  */
-export function saveSettings(value, storage = undefined) {
-  const normalized = normalizeSettings(value);
+export function saveSettings(value, storage = undefined, options = undefined) {
+  const normalized = normalizeSettings(value, options);
   const storageArea = resolveStorage(storage);
   if (!storageArea) return normalized;
 
@@ -294,32 +299,38 @@ function mergeSettings(current, patch) {
  * Apply a partial nested patch, normalize it, and persist it. A function patch
  * receives a mutable snapshot, which is convenient for checkbox/slider UIs.
  */
-export function updateSettings(patch, storage = undefined) {
-  const current = loadSettings(storage);
+export function updateSettings(patch, storage = undefined, options = undefined) {
+  const current = loadSettings(storage, options);
   const requested = typeof patch === 'function' ? patch({
     schemaVersion: current.schemaVersion,
     cues: { ...current.cues },
     voice: { ...current.voice },
     visuals: { ...current.visuals },
   }) : patch;
-  return saveSettings(mergeSettings(current, requested), storage);
+  return saveSettings(mergeSettings(current, requested), storage, options);
 }
 
 export class SettingsStore {
   constructor(storage = undefined) {
     this.storage = storage;
+    this.visualPackIds = null;
   }
 
   load() {
-    return loadSettings(this.storage);
+    return loadSettings(this.storage, { visualPackIds: this.visualPackIds ?? [] });
   }
 
   save(value) {
-    return saveSettings(value, this.storage);
+    return saveSettings(value, this.storage, { visualPackIds: this.visualPackIds ?? [] });
   }
 
   update(patch) {
-    return updateSettings(patch, this.storage);
+    return updateSettings(patch, this.storage, { visualPackIds: this.visualPackIds ?? [] });
+  }
+
+  setVisualPackIds(ids) {
+    this.visualPackIds = [...new Set(Array.isArray(ids) ? ids.filter((id) => typeof id === 'string') : [])];
+    return this.load();
   }
 }
 

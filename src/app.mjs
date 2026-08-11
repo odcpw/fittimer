@@ -118,6 +118,7 @@ const wakeLockController = createWakeLockController();
 
 const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
 export const WORKOUT_HUD_DURATION_MS = 10_000;
+export const PRIVATE_MEDIA_PACK_INDEX_PATH = 'private-packs/index.json';
 
 const SETTINGS_PACK_LABELS = new Map([
   [CUE_PACK_SYNTH_V1, 'Synth tones'],
@@ -152,12 +153,73 @@ function settingsPackLabel(packId) {
   return SETTINGS_PACK_LABELS.get(packId) ?? packId;
 }
 
+function appSettings(settings) {
+  return normalizeSettings(settings, { visualPackIds: [...mediaPacks.keys()] });
+}
+
+function safePrivatePackPath(value) {
+  if (typeof value !== 'string' || value.trim() === '' || value.startsWith('/') || value.includes('\\')) return false;
+  if (value.includes('?') || value.includes('#') || value.includes('\0')) return false;
+  try {
+    const url = new URL(value, 'http://fittimer-private.local/private-packs/index.json');
+    if (url.origin !== 'http://fittimer-private.local' || !url.pathname.startsWith('/private-packs/')) return false;
+    const parts = url.pathname.slice('/private-packs/'.length).split('/').filter(Boolean);
+    return parts.length > 0 && parts.every((part) => part !== '.' && part !== '..');
+  } catch {
+    return false;
+  }
+}
+
+function privatePackId(value) {
+  return typeof value === 'string' && /^[a-z0-9][a-z0-9._-]{0,63}$/i.test(value) ? value : null;
+}
+
+function safePrivateAssetPath(value) {
+  if (typeof value !== 'string' || value.trim() === '' || value.startsWith('/') || value.includes('\\') || value.includes('%')) return false;
+  if (value.includes('?') || value.includes('#') || value.includes(':')) return false;
+  const parts = value.split('/');
+  return parts.every((part) => part && part !== '.' && part !== '..');
+}
+
+function privatePackAssetsAreRelative(pack) {
+  return Object.values(pack?.entries ?? {}).every((entry) => Array.isArray(entry?.assets)
+    && entry.assets.every((asset) => safePrivateAssetPath(asset?.url)));
+}
+
+/**
+ * Validate the optional same-origin private index without ever accepting an
+ * absolute filesystem path or URL into the browser content graph.
+ */
+export function normalizePrivateMediaPackIndex(value) {
+  if (!isObject(value) || value.schemaVersion !== 1 || value.kind !== 'privateMediaPackIndex') return null;
+  if (!isObject(value.mediaPacks)) return null;
+  const mediaPacks = {};
+  for (const [id, relativePath] of Object.entries(value.mediaPacks)) {
+    const safeId = privatePackId(id);
+    if (!safeId || !safePrivatePackPath(relativePath)) continue;
+    mediaPacks[safeId] = relativePath.startsWith('private-packs/')
+      ? relativePath
+      : `private-packs/${relativePath}`;
+  }
+  return Object.keys(mediaPacks).length > 0 ? Object.freeze({ schemaVersion: 1, kind: value.kind, mediaPacks }) : null;
+}
+
+export function mergePrivateMediaPackIndex(index, privateIndex) {
+  const normalized = normalizePrivateMediaPackIndex(privateIndex);
+  if (!normalized) return index;
+  const mediaPacks = { ...(index?.mediaPacks ?? {}) };
+  for (const [id, file] of Object.entries(normalized.mediaPacks)) {
+    if (!Object.hasOwn(mediaPacks, id)) mediaPacks[id] = file;
+  }
+  return { ...index, mediaPacks, privateMediaPackIndexPath: PRIVATE_MEDIA_PACK_INDEX_PATH };
+}
+
 /**
  * Keep the home summary short while deriving every value from the versioned
  * settings contract instead of duplicating defaults in the UI.
  */
 export function summarizeSettings(settings) {
-  const normalized = normalizeSettings(settings);
+  const normalized = appSettings(settings);
   return Object.freeze({
     label: `${normalized.cues.enabled ? 'Sound on' : 'Sound off'} · ${settingsPackLabel(normalized.visuals.selectedPackId)}`,
     cueLabel: normalized.cues.enabled ? 'Sound on' : 'Sound off',
@@ -171,8 +233,8 @@ export function summarizeSettings(settings) {
  * rendering and offline caching until the requested pack is available.
  */
 export function resolveMediaPackPreference(index, settings) {
-  const normalized = normalizeSettings(settings);
   const available = isObject(index?.mediaPacks) ? index.mediaPacks : {};
+  const normalized = normalizeSettings(settings, { visualPackIds: Object.keys(available) });
   const requestedId = normalized.visuals.selectedPackId;
   const fallbackId = typeof index?.defaultMediaPack === 'string'
     ? index.defaultMediaPack
@@ -183,6 +245,46 @@ export function resolveMediaPackPreference(index, settings) {
       ? fallbackId
       : VISUAL_PACK_GIF_V1;
   return Object.freeze({ requestedId, effectiveId, isFallback: requestedId !== effectiveId });
+}
+
+function fallbackPackIds(packId) {
+  if (packId === VISUAL_PACK_W1W4_V1) return [VISUAL_PACK_W1W4_V1, VISUAL_PACK_REFERENCE_V1, VISUAL_PACK_GIF_V1];
+  if (packId === VISUAL_PACK_REFERENCE_V1) return [VISUAL_PACK_REFERENCE_V1, VISUAL_PACK_GIF_V1];
+  return [packId];
+}
+
+/**
+ * Keep the selected pack's identity while filling missing movement entries
+ * from the stable reference and GIF packs. Asset source paths travel with
+ * each asset so private pack manifests can use paths relative to themselves.
+ */
+export function selectMediaPack(packId, packs = mediaPacks) {
+  const chain = fallbackPackIds(packId)
+    .map((id) => packs.get(id))
+    .filter((pack) => isObject(pack));
+  const primary = chain[0];
+  if (!primary) return null;
+  const entries = {};
+  for (const pack of chain) {
+    for (const [movementId, entry] of Object.entries(pack.entries ?? {})) {
+      if (Object.hasOwn(entries, movementId)) continue;
+      entries[movementId] = {
+        ...entry,
+        assets: (entry.assets ?? []).map((asset) => ({
+          ...asset,
+          __sourcePath: asset.__sourcePath ?? pack.__sourcePath ?? null,
+          __framingProfile: typeof asset.framing === 'string'
+            ? pack.framingProfiles?.[asset.framing] ?? null
+            : null,
+        })),
+      };
+    }
+  }
+  return {
+    ...primary,
+    entries,
+    __sourcePackIds: chain.map((pack) => pack.id),
+  };
 }
 
 /**
@@ -229,6 +331,7 @@ function mediaKind(type) {
 function resolveFraming(mediaPack, asset) {
   if (!asset || !mediaPack) return null;
   if (typeof asset.framing === 'object' && asset.framing !== null) return asset.framing;
+  if (asset.__framingProfile && typeof asset.__framingProfile === 'object') return asset.__framingProfile;
   if (typeof asset.framing !== 'string') return null;
   return mediaPack.framingProfiles?.[asset.framing] ?? null;
 }
@@ -251,9 +354,9 @@ function shouldMirror(entry, requestedSide, selectedAsset = null) {
   return requestedSide !== sourceSide;
 }
 
-function orderedAssets(entry, reducedMotion, requestedSide) {
+function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null) {
   if (!Array.isArray(entry?.assets)) return [];
-  const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolveAssetUrl(asset?.url));
+  const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolvePackAssetUrl(mediaPack, asset?.url, asset));
   const normalizedSide = assetSide({ side: requestedSide });
   const mirroredSide = normalizedSide === 'left' ? 'right' : normalizedSide === 'right' ? 'left' : null;
   const sideAware = normalizedSide === null
@@ -305,13 +408,14 @@ export function resolveMovementVisual(
     fallback: 'text',
     mirror: false,
     framing: null,
+    mediaPackBasePath: mediaPack?.__sourcePath ?? null,
   });
 
   if (movement?.textOnly === true) return textResult('text-only');
   const entry = movementId && isObject(mediaPack?.entries) ? mediaPack.entries[movementId] : null;
   if (!entry) return textResult('missing-pack-entry');
 
-  const candidates = orderedAssets(entry, reducedMotion, requestedSide);
+  const candidates = orderedAssets(entry, reducedMotion, requestedSide, mediaPack);
   if (candidates.length === 0) return textResult(reducedMotion ? 'no-poster' : 'empty-pack-entry');
   const asset = candidates[0];
   return {
@@ -323,6 +427,7 @@ export function resolveMovementVisual(
     entry,
     framing: resolveFraming(mediaPack, asset),
     anatomicalSide: entry.anatomicalSide,
+    mediaPackBasePath: mediaPack?.__sourcePath ?? null,
     mirror: shouldMirror(entry, requestedSide, asset),
     fallback: 'text',
   };
@@ -339,7 +444,7 @@ export function deduplicateVisualSelections(selections) {
   return selections.filter((selection) => {
     const assetUrl = selection?.asset?.url;
     if (typeof assetUrl !== 'string') return true;
-    const resolvedUrl = resolveAssetUrl(assetUrl);
+    const resolvedUrl = resolveAssetUrl(assetUrl, selection?.asset?.__sourcePath ?? selection?.mediaPackBasePath);
     if (!resolvedUrl) return true;
     if (seenUrls.has(resolvedUrl)) return false;
     seenUrls.add(resolvedUrl);
@@ -351,9 +456,22 @@ function resolveUrl(relativePath) {
   return new URL(relativePath, hasDocument ? document.baseURI : 'http://localhost/').href;
 }
 
-function resolveAssetUrl(assetUrl) {
+function resolveAssetUrl(assetUrl, basePath = undefined) {
   if (typeof assetUrl !== 'string' || assetUrl.trim() === '') return null;
   try {
+    return basePath ? new URL(assetUrl, resolveUrl(basePath)).href : resolveUrl(assetUrl);
+  } catch {
+    return null;
+  }
+}
+
+function resolvePackAssetUrl(mediaPack, assetUrl, asset = null) {
+  if (typeof assetUrl !== 'string' || assetUrl.trim() === '') return null;
+  try {
+    const sourcePath = asset?.__sourcePath ?? mediaPack?.__sourcePath;
+    if (typeof sourcePath === 'string') {
+      return new URL(assetUrl, resolveUrl(sourcePath)).href;
+    }
     return resolveUrl(assetUrl);
   } catch {
     return null;
@@ -372,6 +490,28 @@ async function fetchJson(relativePath) {
   }
 }
 
+async function fetchOptionalPrivateIndex() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5_000);
+  try {
+    const response = await fetch(resolveUrl(PRIVATE_MEDIA_PACK_INDEX_PATH), {
+      signal: controller.signal,
+      cache: 'no-store',
+    });
+    if (!response.ok) return null;
+    try {
+      return normalizePrivateMediaPackIndex(await response.json());
+    } catch {
+      // GitHub Pages may return its HTML fallback for an unknown path.
+      return null;
+    }
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 function applyOutputFrame(mediaPack) {
   const frame = mediaPack?.outputFrame;
   if (!frame || !elements.stage) return;
@@ -385,7 +525,8 @@ function applyOutputFrame(mediaPack) {
 }
 
 async function loadContent() {
-  const index = await fetchJson('data/content-index.json');
+  const publicIndex = await fetchJson('data/content-index.json');
+  const index = mergePrivateMediaPackIndex(publicIndex, await fetchOptionalPrivateIndex());
   if (
     index.schemaVersion !== 2 ||
     !Array.isArray(index.routines) ||
@@ -397,13 +538,23 @@ async function loadContent() {
   }
 
   const mediaPackEntries = await Promise.all(
-    Object.entries(index.mediaPacks).map(async ([id, file]) => [id, await fetchJson(file)]),
+    Object.entries(index.mediaPacks).map(async ([id, file]) => {
+      const pack = await fetchJson(file);
+      if (!isObject(pack) || pack.id !== id || pack.kind !== 'mediaPack') {
+        throw new Error(`Media pack ${id} does not match ${file}`);
+      }
+      if (file.startsWith('private-packs/') && !privatePackAssetsAreRelative(pack)) {
+        throw new Error(`Private media pack ${id} contains an unsafe asset path`);
+      }
+      return [id, file.startsWith('private-packs/') ? { ...pack, __sourcePath: file } : pack];
+    }),
   );
   mediaPacks = new Map(mediaPackEntries);
   contentIndex = index;
+  currentSettings = settingsStore.setVisualPackIds(Object.keys(index.mediaPacks));
   populateSettingsOptions();
   const mediaPreference = resolveMediaPackPreference(index, currentSettings);
-  selectedMediaPack = mediaPacks.get(mediaPreference.effectiveId);
+  selectedMediaPack = selectMediaPack(mediaPreference.effectiveId);
   if (!selectedMediaPack) {
     throw new Error(`Default media pack is unavailable: ${index.defaultMediaPack}`);
   }
@@ -555,12 +706,13 @@ function createPackOptions(select, ids, unavailableIds = new Set()) {
 
 function populateSettingsOptions() {
   if (!hasDocument) return;
+  const visualPackIds = [...new Set([...VISUAL_PACK_IDS, ...mediaPacks.keys()])];
   const unavailableVisuals = new Set(
-    VISUAL_PACK_IDS.filter((packId) => contentIndex && !mediaPacks.has(packId)),
+    visualPackIds.filter((packId) => contentIndex && !mediaPacks.has(packId)),
   );
   createPackOptions(elements.cuePack, CUE_PACK_IDS);
   createPackOptions(elements.voicePack, VOICE_PACK_IDS);
-  createPackOptions(elements.visualPack, VISUAL_PACK_IDS, unavailableVisuals);
+  createPackOptions(elements.visualPack, visualPackIds, unavailableVisuals);
 }
 
 function volumeLabel(value) {
@@ -569,7 +721,7 @@ function volumeLabel(value) {
 
 function renderSettings(settings) {
   if (!hasDocument) return;
-  const normalized = normalizeSettings(settings);
+  const normalized = appSettings(settings);
   const summary = summarizeSettings(normalized);
   elements.settingsSummaryStatus.textContent = summary.label;
   elements.cuePack.value = normalized.cues.packId;
@@ -601,6 +753,7 @@ function persistSettings(patch) {
   startVoicePackLoad();
   if (patch?.visuals) {
     applySelectedMediaPack();
+    if (contentIndex) void prepareOffline(contentIndex).catch(showError);
   }
   renderSettings(currentSettings);
 }
@@ -608,7 +761,7 @@ function persistSettings(patch) {
 function applySelectedMediaPack() {
   if (!contentIndex) return;
   const mediaPreference = resolveMediaPackPreference(contentIndex, currentSettings);
-  const nextPack = mediaPacks.get(mediaPreference.effectiveId);
+  const nextPack = selectMediaPack(mediaPreference.effectiveId);
   if (!nextPack) return;
   selectedMediaPack = nextPack;
   applyOutputFrame(selectedMediaPack);
@@ -834,7 +987,7 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
     node.preload = 'metadata';
     const poster = selection.candidates.find((candidate) => candidate.type === 'poster');
     if (poster) {
-      node.poster = resolveUrl(poster.url);
+      node.poster = resolvePackAssetUrl(selectedMediaPack, poster.url, poster);
       trackOwnedBlobUrl(node, poster);
     }
     videoPlaybackFailures.set(node, fallback);
@@ -845,7 +998,7 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
   }
   trackOwnedBlobUrl(node, asset);
   stageNodeCleanups.add(dispose);
-  node.src = resolveUrl(asset.url);
+  node.src = resolvePackAssetUrl(selectedMediaPack, asset.url, asset);
   return node;
 }
 
@@ -1050,11 +1203,30 @@ export function collectContentUrls(
 
   const packId = mediaPack?.id ?? index.defaultMediaPack;
   const packFile = packId && index.mediaPacks?.[packId];
-  if (packFile) files.add(packFile);
+  const packFiles = new Set();
+  if (packFile) packFiles.add(packFile);
+  for (const fallbackId of mediaPack?.__sourcePackIds ?? []) {
+    if (index.mediaPacks?.[fallbackId]) packFiles.add(index.mediaPacks[fallbackId]);
+  }
+  for (const file of packFiles) files.add(file);
+  if ([...packFiles].some((file) => file.startsWith('private-packs/')) && index.privateMediaPackIndexPath) {
+    files.add(index.privateMediaPackIndexPath);
+  }
   for (const movementId of movementIds) {
     const entry = mediaPack?.entries?.[movementId];
     for (const asset of entry?.assets ?? []) {
-      if (typeof asset.url === 'string') files.add(asset.url);
+      if (typeof asset.url !== 'string') continue;
+      const sourcePath = asset.__sourcePath;
+      if (typeof sourcePath === 'string' && sourcePath.startsWith('private-packs/')) {
+        try {
+          const resolved = new URL(asset.url, new URL(sourcePath, 'http://fittimer-content.local/'));
+          if (resolved.origin === 'http://fittimer-content.local') files.add(resolved.pathname.replace(/^\//, ''));
+        } catch {
+          // Ignore malformed optional private assets; the renderer falls back.
+        }
+      } else {
+        files.add(asset.url);
+      }
     }
   }
   if (installedVoicePack?.id === VOICE_PACK_FRANKENTTS_V1) {

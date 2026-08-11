@@ -1,5 +1,5 @@
-// fittimer-v6 is intentionally superseded; activateApp removes every older cache.
-const CACHE_NAME = 'fittimer-v7';
+// fittimer-v6 and earlier caches are intentionally superseded; activateApp removes every older cache.
+const CACHE_NAME = 'fittimer-v8';
 const APP_SHELL = [
   './',
   './index.html',
@@ -303,6 +303,7 @@ self.addEventListener('message', (event) => {
           relativePath.startsWith('data/media/') ||
           relativePath.startsWith('data/gifs/')
           || relativePath.startsWith('data/voice/')
+          || relativePath.startsWith('private-packs/')
         );
       });
       if (!safe) throw new Error('Refused to cache content outside the service-worker scope');
