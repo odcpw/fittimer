@@ -124,6 +124,19 @@ for (const movementId of movementIds) {
   }
 }
 
+const voicePack = await readJson('data/voice/voice-pack-v1.json');
+assert.equal(voicePack.schemaVersion, 1);
+assert.equal(voicePack.kind, 'voicePack');
+assert.equal(voicePack.id, 'frankentts-v1');
+assert.ok(Array.isArray(voicePack.phrases) && voicePack.phrases.length > 0);
+const voicePaths = new Set(['data/voice/voice-pack-v1.json']);
+for (const phrase of voicePack.phrases) {
+  assert.ok(phrase.asset && phrase.asset.type === 'audio/mpeg', `voice phrase ${phrase.id} has no MP3 asset`);
+  assert.equal(typeof phrase.asset.url, 'string');
+  voicePaths.add(phrase.asset.url);
+  await exists(phrase.asset.url);
+}
+
 const serviceWorker = await readFile(path.join(ROOT, 'sw.js'), 'utf8');
 const shellDeclaration = serviceWorker.match(/const APP_SHELL = \[([\s\S]*?)\n\];/);
 assert.ok(shellDeclaration, 'service worker APP_SHELL declaration is present');
@@ -135,8 +148,13 @@ const importClosure = await collectStaticImportClosure('src/app.mjs');
 for (const importedFile of importClosure) {
   assert.ok(shellPaths.has(`./${importedFile}`), `APP_SHELL is missing static import ${importedFile}`);
 }
+for (const voicePath of voicePaths) {
+  assert.ok(shellPaths.has(`./${voicePath}`), `APP_SHELL is missing voice asset ${voicePath}`);
+}
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
-assert.match(serviceWorker, /fittimer-v6/);
+const cacheVersion = serviceWorker.match(/const CACHE_NAME = ['"]fittimer-v(\d+)['"]/);
+assert.ok(cacheVersion, 'service worker cache version is declared');
+assert.ok(Number(cacheVersion[1]) >= 7, 'service worker cache must be v7 or newer');
 const assetResponse = serviceWorker.match(/async function assetResponse[\s\S]*?\n}\n/);
 assert.ok(assetResponse, 'service worker asset response handler is present');
 assert.doesNotMatch(assetResponse[0], /cache\.put/);
@@ -148,5 +166,6 @@ assert.doesNotMatch(application, /mediaSession/i, 'Media Session must not claim 
 
 process.stdout.write(
   `PWA checks passed: ${index.routines.length} routine(s), ${mediaPaths.size - 1} selected media asset(s), ` +
-    `${manifest.icons.length} install icon(s), ${importClosure.length} shell JS module(s).\n`,
+    `${voicePaths.size - 1} voice asset(s), ${manifest.icons.length} install icon(s), ` +
+    `${importClosure.length} shell JS module(s).\n`,
 );

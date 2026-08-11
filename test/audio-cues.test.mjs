@@ -73,6 +73,19 @@ test('unlock creates and resumes one WebAudio context', async () => {
   assert.equal(context.resumeCount, 1);
 });
 
+test('a hanging WebAudio resume is bounded so Start can continue', async () => {
+  const context = new FakeAudioContext();
+  context.resume = () => new Promise(() => {});
+  const player = new AudioCuePlayer({
+    contextFactory: () => context,
+    resumeTimeoutMs: 10,
+  });
+  const startedAt = Date.now();
+  assert.equal(await player.unlock(), false);
+  assert.ok(Date.now() - startedAt < 100, 'unlock must not block workout startup');
+  assert.equal(await player.resume(), false);
+});
+
 test('work start and rest boundary use distinct ascending and descending pairs', async () => {
   const { context, player } = setup();
   await player.unlock();

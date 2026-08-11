@@ -42,8 +42,9 @@ export const SETTINGS_PACK_IDS = Object.freeze({
  * Documented v1 defaults:
  * - synthesized cues are enabled at their original full level;
  * - countdown and halfway cues are enabled;
- * - browser voice is enabled for the future voice consumer, with all three
- *   announcement kinds enabled;
+ * - the verified FrankenTTS voice pack is enabled, with all three
+ *   announcement kinds enabled; an explicitly saved browser voice choice is
+ *   preserved by normalization;
  * - the built-in GIF visual pack is selected and reduced motion is off.
  *
  * This object is deeply frozen. Load/save/update return fresh mutable records
@@ -59,7 +60,7 @@ export const DEFAULT_SETTINGS = deepFreeze({
     halfway: true,
   },
   voice: {
-    packId: VOICE_PACK_BROWSER_V1,
+    packId: VOICE_PACK_FRANKENTTS_V1,
     enabled: true,
     volume: 1,
     exercise: true,

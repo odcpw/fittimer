@@ -8,6 +8,7 @@ import {
   SETTINGS_STORAGE_KEY,
   VISUAL_PACK_GIF_V1,
   VOICE_PACK_BROWSER_V1,
+  VOICE_PACK_FRANKENTTS_V1,
   createSettingsStore,
   isValidSettings,
   loadSettings,
@@ -56,7 +57,7 @@ test('v1 key, pack IDs, and documented defaults are stable and isolated', () => 
       halfway: true,
     },
     voice: {
-      packId: VOICE_PACK_BROWSER_V1,
+      packId: VOICE_PACK_FRANKENTTS_V1,
       enabled: true,
       volume: 1,
       exercise: true,
@@ -237,7 +238,7 @@ test('unknown IDs and malformed fields fall back independently while valid field
       halfway: false,
     },
     voice: {
-      packId: VOICE_PACK_BROWSER_V1,
+      packId: VOICE_PACK_FRANKENTTS_V1,
       enabled: true,
       volume: 1,
       exercise: false,
@@ -249,6 +250,13 @@ test('unknown IDs and malformed fields fall back independently while valid field
       reducedMotion: true,
     },
   });
+});
+
+test('an explicitly saved browser voice choice remains stable', () => {
+  const storage = new FakeStorage();
+  const saved = saveSettings({ voice: { packId: VOICE_PACK_BROWSER_V1 } }, storage);
+  assert.equal(saved.voice.packId, VOICE_PACK_BROWSER_V1);
+  assert.equal(loadSettings(storage).voice.packId, VOICE_PACK_BROWSER_V1);
 });
 
 test('the supported v1 version envelope migrates without another key', () => {

@@ -1,0 +1,5959 @@
+{
+  "schemaVersion": 1,
+  "kind": "voicePack",
+  "id": "frankentts-v1",
+  "title": "FitTimer FrankenTTS voice pack",
+  "language": "en-US",
+  "fallback": "speechSynthesis",
+  "generator": {
+    "tool": "franken-tts",
+    "version": "0.1.5",
+    "sourceCommit": "aee1ef4b7813d6d7bdfd2540e3a9a33ea39bf83c",
+    "voice": "matt",
+    "model": "qwen3-tts-12hz-0.6b-base",
+    "modelManifestSha256": "2445f0abcb6a611593bd9adef7cff0989e13dd6be78637ef9d8f8831dd9705f0",
+    "command": "ftts say --model <external-model-dir> --voice matt --output <external-wav> <phrase-text>",
+    "conversion": "ffmpeg -i <external-wav> -codec:a libmp3lame -b:a 64k -ar 24000 -ac 1 <repo-asset>.mp3"
+  },
+  "inventory": {
+    "source": "data/content-index.json",
+    "routineIds": [
+      "madfit-30min-hiit",
+      "iron-roots",
+      "silk-coils",
+      "dragon-longform",
+      "crane-longform"
+    ],
+    "blockIds": [
+      "madfit-30min-hiit",
+      "iron-roots",
+      "silk-coils",
+      "dragon-longform",
+      "crane-longform"
+    ],
+    "intervalCount": 180,
+    "phraseCount": 203,
+    "assetCount": 203,
+    "digest": "993f2841bd4d7d7cf3a1397d80f9726a3b88ae18c37129aa60132bb143dc4240"
+  },
+  "generatedAt": "2026-08-10T23:26:28.350Z",
+  "phrases": [
+    {
+      "id": "digit-1",
+      "kind": "digit",
+      "text": "1",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "countdown-digit"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/digit-1.mp3",
+        "bytes": 10220,
+        "sha256": "afdd93ae09e482443ff267070aff161ffcbb2113155e0e1af87ee4e5eafd02f9",
+        "sourceWavSha256": "a66f526ce9f8a542bb0cda8e878cf570c8e3125979ce38d3f8bc78a883a3dcd0",
+        "sourceTextSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "digit-2",
+      "kind": "digit",
+      "text": "2",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "countdown-digit"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/digit-2.mp3",
+        "bytes": 9644,
+        "sha256": "a02d6376e1e3d99c45c011dd1aa8575c891991b26b53af955c9ed8f7b2875b9a",
+        "sourceWavSha256": "2358281f72e4606be0e3b7720e95331be62f3839e8b8e4c2c054d34f822c399e",
+        "sourceTextSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "digit-3",
+      "kind": "digit",
+      "text": "3",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "countdown-digit"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/digit-3.mp3",
+        "bytes": 8300,
+        "sha256": "c6f3ad3b7ce08c63bd437d17511ca8a54c95c3cc57431fe105b91016cece26b0",
+        "sourceWavSha256": "d27ce4d31911aa42ea1174cb4e6b34afb9b3aef867bc639b988cc3e01718b61e",
+        "sourceTextSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "go",
+      "kind": "boundary",
+      "text": "Go",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "content-wide"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/go.mp3",
+        "bytes": 5804,
+        "sha256": "f574a6a94a3ca80ab50c69b98a0f3687141046bd815d711ed2f2b5a48da7bd85",
+        "sourceWavSha256": "444116d3939a848f5723b9073d68d7ab9b3c238bfcf783165e73428cfd41c466",
+        "sourceTextSha256": "6cc8519b91584e8bd435d63341e0838a99721948718b1c9c1e9c358c64ba992a",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-1-5-rep-push-up",
+      "kind": "movement",
+      "text": "1.5-rep Push-up",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "push-ups"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-1-5-rep-push-up.mp3",
+        "bytes": 23084,
+        "sha256": "dd67324062d1c7da0b704271ac5007bffe0c3314aeca60ef84435fbfe1b7a223",
+        "sourceWavSha256": "390408bf211e2b19fafa4d894f0138a2aab3047d5f1ac9475c11526e5c42e1d4",
+        "sourceTextSha256": "2698bc143cf826da4e756605e3e953efa792e394faea070cbf09ffb766225fed",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-90-90-hip-switches",
+      "kind": "movement",
+      "text": "90/90 Hip Switches",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "ninety-ninety-hip-switches"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-90-90-hip-switches.mp3",
+        "bytes": 17324,
+        "sha256": "e494b566d19f6b8a5abfe286458f74ad57136bc2dd2cfaa3d48c65d9d1d536f8",
+        "sourceWavSha256": "54385643ad3ba73d7a223eecdd8df1c829974f37f99cf1dbf152362f6738b628",
+        "sourceTextSha256": "e51690bff2e083034f8ca8e70590ff3652f710aec864b863f7778678b0baac85",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-alternating-reverse-lunges-2-dumbbells",
+      "kind": "movement",
+      "text": "Alternating Reverse Lunges (2 dumbbells)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "alternating-reverse-lunges"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-alternating-reverse-lunges-2-dumbbells.mp3",
+        "bytes": 28268,
+        "sha256": "1cc1bee7e065a319a258af8360b1988f8cb485745ee4ec6a0322786079175779",
+        "sourceWavSha256": "15e1c85ef6202f028f9383f62f042deb197fa39598e6642ee199ba774393c1f7",
+        "sourceTextSha256": "9a8e343133bd636268460b03d561d019c8c9459eadfa2b9e5bfa7815e367bbba",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-alternating-side-bend-reach",
+      "kind": "movement",
+      "text": "Alternating Side-bend Reach",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "alternating-side-bend-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-alternating-side-bend-reach.mp3",
+        "bytes": 19820,
+        "sha256": "2ea11f5548d348e374987f9510a4758e3cdc78b17362cee510560cb0d267a868",
+        "sourceWavSha256": "f031f70e7d350824694143b93f4ad783239e805dc8a98aab1ddfe57b6bb1002c",
+        "sourceTextSha256": "ff5ca75d2d12c8f0beaaa77b9dc6902775ac887d5c525f4c77be5548f22dfc5c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-ankle-pumps-plus-heel-to-toe-rocks",
+      "kind": "movement",
+      "text": "Ankle Pumps + Heel-to-toe Rocks",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "ankle-pumps-heel-to-toe-rocks"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-ankle-pumps-plus-heel-to-toe-rocks.mp3",
+        "bytes": 20588,
+        "sha256": "59d55e4963c134b705205bb36eee81ef144e3a89cfaa28b8d518e268fdfff349",
+        "sourceWavSha256": "84c06ec59980a4b6611029455840b5a4469898651343c9d6cb185566ebb9bf47",
+        "sourceTextSha256": "3e97b0782ae53c9c0b06076afc3c0a0f965aa2a7f75fd73ad881b3e2a86cd03d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-arms-overhead-full-sit-up-male",
+      "kind": "movement",
+      "text": "Arms Overhead Full Sit-up (male)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "weighted-sit-up"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-arms-overhead-full-sit-up-male.mp3",
+        "bytes": 28268,
+        "sha256": "b9b04e3110d9d0bf869e2c7ce2b29ce9e618e93ce64349a1e1916e61bf5bdd8a",
+        "sourceWavSha256": "7881ba3b063a9420d74e95076d6dbd37fa2de7a150c474c291825f33baa9d36c",
+        "sourceTextSha256": "d9d8708d6db8d807df18de9ee299d0d755579d457ad9fc96a8dabf4bd2064ef6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-b-stance-rdl",
+      "kind": "movement",
+      "text": "B-stance RDL",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "b-stance-rdl"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-b-stance-rdl.mp3",
+        "bytes": 12140,
+        "sha256": "02f0b50531d1ae8d3db8998bc2a1b4ae55544eacb0c9e68e892c67a91717ac83",
+        "sourceWavSha256": "818a97f37dd26c1205e6ef05021ad29ebb9ff1bc70e21a97a91ad2348ce1033c",
+        "sourceTextSha256": "79670d482f593503535019927cbb6cd84b6fc658f36e1fb3e26f76ad78eb6acf",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-b-stance-rdl-left",
+      "kind": "movement",
+      "text": "B-stance RDL (left)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "b-stance-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-b-stance-rdl-left.mp3",
+        "bytes": 19244,
+        "sha256": "81d5a3c7117864e5b0397e5fb6a03360f54cf7e7efe085a372d00aee74228ea2",
+        "sourceWavSha256": "830356801a8e8d981f2bd4b7bd08261bf21822e3fc4c2864c7b5b5191ee46ec5",
+        "sourceTextSha256": "c4eaa39dba2de768c5bcfb3c0d77a9f9d590fb3ca1a8efb7e46c300e9927e277",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-b-stance-rdl-right",
+      "kind": "movement",
+      "text": "B-stance RDL (right)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "b-stance-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-b-stance-rdl-right.mp3",
+        "bytes": 12908,
+        "sha256": "7950325a625319f92bb0fa09bd25fa8689169eeb92f47cb05cd70cb32df11609",
+        "sourceWavSha256": "880497008d062813b61e76eff9f460b2a492574009861a6e1139a410424fb77a",
+        "sourceTextSha256": "30084038a5bfd6c1334e9191c9a37eb893ac4cbdf112d2578846e33d4cf0ca35",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-backward-walking",
+      "kind": "movement",
+      "text": "Backward Walking",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "backward-walking"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-backward-walking.mp3",
+        "bytes": 10220,
+        "sha256": "ae57cb01a20b5d98126aecc7057a5fc97e9875a1d86f1d4c6e5074668fbdd2a3",
+        "sourceWavSha256": "25f0d0bb5b58366a36c6d5d7133df35ab49d76f5809a7d59c185dd2f36486d88",
+        "sourceTextSha256": "e210d02692b71f35fde9fd9ca83d7d8ee2c691f5176490034b2185c48bb9c99f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-band-standing-crunch",
+      "kind": "movement",
+      "text": "Band Standing Crunch",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "standing-crunch-with-dumbbell"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-band-standing-crunch.mp3",
+        "bytes": 11564,
+        "sha256": "2d27fad752ffa3f79916f47141b065060f715a0351a4c281e288fe7f2ea64c4d",
+        "sourceWavSha256": "bae690d41d9cdd5a132bf5661beba439fa895178494c55019926b55af00f5276",
+        "sourceTextSha256": "c353579ef16ec8687e35682e64fe911eed5291b33324c1482de793689fddbe6d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-bodyweight-squat",
+      "kind": "movement",
+      "text": "Bodyweight Squat",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "bodyweight-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-bodyweight-squat.mp3",
+        "bytes": 13484,
+        "sha256": "c0b4e33c64eed32940c4aac52d9485f77488231cdee3161a877bfd29b9431486",
+        "sourceWavSha256": "6beaf444e0f63f046d091c92b1b41413abb593ef605edb4a861ca213f88aefb5",
+        "sourceTextSha256": "91740cf979ed4a1fe28351b8eacef917967995299972cf193ac34fd2d5d9a47c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-bodyweight-squat-deepening",
+      "kind": "movement",
+      "text": "Bodyweight Squat, Deepening",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "bodyweight-squat-deepening"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-bodyweight-squat-deepening.mp3",
+        "bytes": 18668,
+        "sha256": "88eb2a47aab08038b04a5901f8c6036683861028b065347d4a46f0d98452dc2a",
+        "sourceWavSha256": "9613edda530919f5711060b6a053ea530cb9b55743d4588cff2601a8897ba5f0",
+        "sourceTextSha256": "d8f22711e013fd8c95596b8484b082fb5337eaa635910bf9c160cdf8045d291f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-bodyweight-standing-calf-raise",
+      "kind": "movement",
+      "text": "Bodyweight Standing Calf Raise",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "calf-raise-cross-toe-touch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-bodyweight-standing-calf-raise.mp3",
+        "bytes": 23084,
+        "sha256": "ab437facb7133a225f956db368c55a3560d8b02ec75e72908684219ecf078eef",
+        "sourceWavSha256": "2178f5aa30105c7de3e252fc30379747d01da24f66f16ea34d13fec82ba7d87c",
+        "sourceTextSha256": "8f87e6728d2b39d13c5b8a45b2370380d0412c43b9fea5136d58fa7377836667",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-breathing",
+      "kind": "movement",
+      "text": "Breathing",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "breathing-easy-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-breathing.mp3",
+        "bytes": 7148,
+        "sha256": "b705d4e146002c8f54c36c97ec1a2c22363e804d90e2f883cdaf729738743411",
+        "sourceWavSha256": "e1860558db5573ee2dcd4e0a2b363f15b317109179c1e220860f4d3cc04c18ba",
+        "sourceTextSha256": "762c550a6e429519987e8104770cb201b6a96c3b65632aa9a94d94086e668fe7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-breathing-plus-easy-reach",
+      "kind": "movement",
+      "text": "Breathing + Easy Reach",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "breathing-easy-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-breathing-plus-easy-reach.mp3",
+        "bytes": 17324,
+        "sha256": "39411cdb89a1e530341008ac72b89b60b59b40069b45d32e4faae247f4085dd5",
+        "sourceWavSha256": "b5082990297ca95ce255c695fe5e537b3262f8f8d9a508921c679cea5239bcff",
+        "sourceTextSha256": "e11b18a7041eb6004e0a7abfb5450a167d02e5c9c7c4a4a91aab7d995fe43e00",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-breathing-plus-reach",
+      "kind": "movement",
+      "text": "Breathing + Reach",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "breathing-easy-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-breathing-plus-reach.mp3",
+        "bytes": 12908,
+        "sha256": "f6b3ee8655248df8cd341a3a32763f0a026ba875f4c738f82465fdef11a2462b",
+        "sourceWavSha256": "84607ed4e9d4207702d786c965800b93445baa29e2eae732a822671cc0297d3d",
+        "sourceTextSha256": "e9b9ac2ffaaeabb14a5f8be77a13dd46367330aebb34d683a91c2d722b1af5b8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-brisk-backward-walking",
+      "kind": "movement",
+      "text": "Brisk Backward Walking",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "backward-walking"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-brisk-backward-walking.mp3",
+        "bytes": 13484,
+        "sha256": "5ab33c26cc37f813e7c5f18440e30082a8a79fe65c46b44d367f76d165f7f439",
+        "sourceWavSha256": "baf9001bf0d0a74be806552d7a07ddddc79cd87284a18ee10f45c74fba83108c",
+        "sourceTextSha256": "b7178a2c7eaea82bc88d78de98ee4fa8e931df3e8da223504209e8c9b403907a",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-bum-kicks-butt-kicks-side-to-side",
+      "kind": "movement",
+      "text": "Bum Kicks (butt kicks, side to side)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "bum-kicks"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-bum-kicks-butt-kicks-side-to-side.mp3",
+        "bytes": 22508,
+        "sha256": "e612b38d04721c80d8ac422e1d54840c694d8b128ca9a13ab50f9d45368ebf52",
+        "sourceWavSha256": "4af5ce30fd1b546619e970120b55e3098df36957be13a5626c5e45f7b3bbb68c",
+        "sourceTextSha256": "09edb9610ee60eac25c9f42c4fc1d17b7400e5cfd7e81435fb6d8925a3faef53",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-calf-raise-plus-cross-toe-touch",
+      "kind": "movement",
+      "text": "Calf Raise + Cross Toe Touch",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "calf-raise-cross-toe-touch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-calf-raise-plus-cross-toe-touch.mp3",
+        "bytes": 25580,
+        "sha256": "c06424228406e4523af018e07c661f108be5c75a1b8b49431472b1feee79bf2f",
+        "sourceWavSha256": "44d751b65611d369fbd16e76bd3e6a37fed97e99c9c5462efa74bf60ce173677",
+        "sourceTextSha256": "00401202f6f6105875f612b74c0312398c98152f8d0f3f6e05c7e3bd628666d8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-cat-cow",
+      "kind": "movement",
+      "text": "Cat-cow",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "cat-cow-child-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-cat-cow.mp3",
+        "bytes": 9068,
+        "sha256": "7e4263db7ad1478c353a58502f6fca069ce6854bd02bc829ea739013a59d7eac",
+        "sourceWavSha256": "83e7d9341ec69c94996b26ff2d89e4eba2ccef29ca4c0081bd55a02384dfb3e7",
+        "sourceTextSha256": "cedeeb9a7b7e35886892dde769c489f819502c76e688a33de54da9cb3d3f2373",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-cat-cow-to-child-reach",
+      "kind": "movement",
+      "text": "Cat-cow → Child Reach",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "cat-cow-child-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-cat-cow-to-child-reach.mp3",
+        "bytes": 21740,
+        "sha256": "12cbd3c7272f7e42993a5bfe9a80a65af5290b142dd408ed8420f697af242c22",
+        "sourceWavSha256": "1f75fe2b855c4e8d3ebf4177460d2f55dcea111473c860e935542b890f5f040f",
+        "sourceTextSha256": "abdc5da16c8699e31c4b934aed084a68f7a7381f513b4aa3dfba848ebdd55826",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-cocoons",
+      "kind": "movement",
+      "text": "Cocoons",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "cocoons"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-cocoons.mp3",
+        "bytes": 10988,
+        "sha256": "859380230cf3b1701f3f57b2079c522748845421653754b4e4809fe7970a168c",
+        "sourceWavSha256": "992c8cc840e9d6f459e05989c1c4afc31e3929e5b5043ea3c5cf1189324fba4e",
+        "sourceTextSha256": "e259cd31b890b40097b44ace9abf00e9cfdf9c8bb26579725ee5295316cd8491",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-commandos-plus-step-out",
+      "kind": "movement",
+      "text": "Commandos + Step Out",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "commandos-step-out"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-commandos-plus-step-out.mp3",
+        "bytes": 15404,
+        "sha256": "ab40dc5b528d262b8f05f0fd76122cea171c9fd330f2bc1dcb9e8ea147b9a3a3",
+        "sourceWavSha256": "6441665002f11962140dc221f0ac06c70815578485fe18a97ad985e90ae9d0d9",
+        "sourceTextSha256": "0a48b4835197bea7d8b72f4ef721dec8f76450f5adb9d034da9fea6f82eaa320",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-controlled-leg-pendulum",
+      "kind": "movement",
+      "text": "Controlled Leg Pendulum",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "controlled-leg-pendulum"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-controlled-leg-pendulum.mp3",
+        "bytes": 19244,
+        "sha256": "51f003d9d0d9d8e5f94acd5ece77ceba7e5edb8e88d86125e27b8c4e7e401d91",
+        "sourceWavSha256": "0c7cce8338c11b80d4c735995346fce17608815d8a8c4f79b0d9eda5ac5f5f71",
+        "sourceTextSha256": "28ea91578c1ddbb77ff2e5a3fca3c577b778e8a134fc13ffd22d3814cf9bd3c4",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-controlled-leg-pendulum-left",
+      "kind": "movement",
+      "text": "Controlled Leg Pendulum (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "controlled-leg-pendulum"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-controlled-leg-pendulum-left.mp3",
+        "bytes": 23084,
+        "sha256": "bde775630ec9b189027b7769494d024d678d7657d5af7f2951199ec739694f0a",
+        "sourceWavSha256": "67d52068a012fce27e80495b73cfbc7266ae3935130aeab915ae13e6f7ef6aef",
+        "sourceTextSha256": "0beb02b862568c1deb9b10f8efe3417c515bbd61069035687f2ad56ef9115015",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-controlled-leg-pendulum-right",
+      "kind": "movement",
+      "text": "Controlled Leg Pendulum (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "controlled-leg-pendulum"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-controlled-leg-pendulum-right.mp3",
+        "bytes": 24428,
+        "sha256": "523e242844895d87cc9e8b1991c1e62b38ed81ed6df4b70ef7bbc1e08acc2640",
+        "sourceWavSha256": "eefddc0bce6834da01df3b3d37ccd8af39c883922b47a77f984b55762994c18f",
+        "sourceTextSha256": "7c5fde09661d28192e74f29ae43ed78cf62ff49660b3851bf4bb6019de328716",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-crane-stance-hold",
+      "kind": "movement",
+      "text": "Crane-stance Hold",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "crane-stance-hold"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-crane-stance-hold.mp3",
+        "bytes": 21164,
+        "sha256": "3ca0e7f7b20d5da7ecae8627aad9ad3ab6f2b1fab75f13ce056cce804bb33b95",
+        "sourceWavSha256": "b78b59b57c574771899bd82fb896c3d8066a6adb1033319e942495d177241c07",
+        "sourceTextSha256": "dff00e1fbbdc8293ff63058860850223090c56b6f9ba32b9206819352dabded3",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-crane-stance-hold-left",
+      "kind": "movement",
+      "text": "Crane-stance Hold (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "crane-stance-hold"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-crane-stance-hold-left.mp3",
+        "bytes": 19820,
+        "sha256": "a6daad4fe6acbc66733489cd5f45b5ebb9f585416a3c0be5877ef46ea59705a5",
+        "sourceWavSha256": "57429eea1b50742105cad7403bcd31328039ba754fa1da6c05947ccb49ec220f",
+        "sourceTextSha256": "d87623712223925446ad690ccbb6d987ff5eb236726493705611b2768b1e5cac",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-crane-stance-hold-right",
+      "kind": "movement",
+      "text": "Crane-stance Hold (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "crane-stance-hold"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-crane-stance-hold-right.mp3",
+        "bytes": 19244,
+        "sha256": "144d2842d8c1d995d3319aadf9fa9c0cb1b7cbba2d803963297b814b323eec6e",
+        "sourceWavSha256": "e096234c1d09896bb1d325e0a79ef6ad66ded7c9f8eeb282ce00a00c35aa68a7",
+        "sourceTextSha256": "064cf2255a38f8724367fab8058f7acc3fc7da99e87c3029d6c32bf5d340598d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-curtsey-squat",
+      "kind": "movement",
+      "text": "Curtsey Squat",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-lunge-curtsy-squat"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-curtsey-squat.mp3",
+        "bytes": 10220,
+        "sha256": "58175aa725063ffec5d6d85f09bc377bd114cbc4d6544766e7469803ce94dce4",
+        "sourceWavSha256": "0f91c6045976dd6e144545a0f8d6f7457f93a507418134b78fe398d04c39067a",
+        "sourceTextSha256": "e8202bda623a30fd28669c907fb73f0ca234fbf725eba1b98fb7085edac562e1",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-db-knee-drive-march",
+      "kind": "movement",
+      "text": "DB Knee-drive March",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "dumbbell-knee-drive-march"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-db-knee-drive-march.mp3",
+        "bytes": 21164,
+        "sha256": "c88bff9b6afe2d74f6344df2426f10827654220f20984584abfe566117ef521f",
+        "sourceWavSha256": "601e6e965c1b22404a654f3795f9d7886c815a92263fbd87ed858c03ced03b44",
+        "sourceTextSha256": "29a27c0e44397fbf6990c3703237090570240424d8744010808ede3ced068c68",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-db-swing",
+      "kind": "movement",
+      "text": "DB Swing",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "dumbbell-swing"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-db-swing.mp3",
+        "bytes": 12908,
+        "sha256": "3d1907b7e19a6f0e17a874d2eabdb42dc6423e1b7ff3b03fd9c23c90bfa31fb3",
+        "sourceWavSha256": "4347e7c565fbaf433edd562b573746cfa13d364acce6a0c3772a265c65036eb5",
+        "sourceTextSha256": "d3bca1654c2e78fba73729a363f2eeaaba60b31a22cf8e467eca0b87dc740f79",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dead-bug",
+      "kind": "movement",
+      "text": "Dead Bug",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "dead-bug"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dead-bug.mp3",
+        "bytes": 9068,
+        "sha256": "541236f35a251e31c72f983a6902f93c02365182a7cf1500a80a34be441ec5b0",
+        "sourceWavSha256": "e94a02bc5f2c1d6111fd1a2723a0c73c1eba974d88b6440c0833d34bd2994f55",
+        "sourceTextSha256": "ed1deeed9629b8093ca91bc2848998a80b667884202d9b8358ed21299c384612",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-deadlift-plus-upright-row-2-dumbbells",
+      "kind": "movement",
+      "text": "Deadlift + Upright Row (2 dumbbells)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-deadlift",
+          "dumbbell-upright-row"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-deadlift-plus-upright-row-2-dumbbells.mp3",
+        "bytes": 28268,
+        "sha256": "8bee8289fd8d071fe715509f8d508214a35e35c847f3d7a833aebeaaba11c5b4",
+        "sourceWavSha256": "6041df4cbbadc1596593aff7ead86f40439c72943b7ceb6f42defb1eb3bb11e9",
+        "sourceTextSha256": "1e2ec1eea203d7e4556667b066515a9ada7d97db46b2e994ae77fc66b754d785",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-diagonal-chop",
+      "kind": "movement",
+      "text": "Diagonal Chop",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "diagonal-chop"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-diagonal-chop.mp3",
+        "bytes": 12140,
+        "sha256": "2161bc4be75363a47de306a5f5723f6c0af84ecd6300fa9cc32dfc6699e11721",
+        "sourceWavSha256": "e81a6a9f206c7b1255efe36f71b7e993cf935d0c465f71bc966a960cb64373ee",
+        "sourceTextSha256": "7f97d69a5b012b93bdabcf0fe572f12a6743e59a9c89fcce701a6bb110cc0a1b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-diagonal-chop-left",
+      "kind": "movement",
+      "text": "Diagonal Chop (left)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "diagonal-chop"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-diagonal-chop-left.mp3",
+        "bytes": 14060,
+        "sha256": "1ad521182e63533e6ee0a483cca92007f5a896bb932e78058d8ee21896aeb81a",
+        "sourceWavSha256": "32b1690c746eae785a698af7b10d56ead5c4b528e5b0b32e605feacc906807e3",
+        "sourceTextSha256": "2cd2dc4208ef4ed3726ea0531cfae888a91eb75a7e35f3ce5343deaccf10eb37",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-diagonal-chop-right",
+      "kind": "movement",
+      "text": "Diagonal Chop (right)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "diagonal-chop"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-diagonal-chop-right.mp3",
+        "bytes": 17900,
+        "sha256": "b79c3b1b08e8751815c51669bf159511b0b29ed4ace1cf4a97e24fb3732406d8",
+        "sourceWavSha256": "0f1749b06499cc14e20720770bca459a64f8f49369ca72073a29e502a691a31d",
+        "sourceTextSha256": "5bc6eee7c431a4657cf11902a802d6b6093087a8de2771060ec595afebc2f634",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-deadlift",
+      "kind": "movement",
+      "text": "Dumbbell Deadlift",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-deadlift"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-deadlift.mp3",
+        "bytes": 12140,
+        "sha256": "f8cc870f6169271bc200f191aaf16df37fe5da703bd9804aa7fe67e1196cb7af",
+        "sourceWavSha256": "98efcc4862c71d16f69d358a05a9b71e688be8b7bdb7200bfab9b85baa57b79a",
+        "sourceTextSha256": "408433275e8d452c0d6ba6a81fad08bfa302975a956b8b859a95cd2e51fa5aa0",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-hammer-curl",
+      "kind": "movement",
+      "text": "Dumbbell Hammer Curl",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-hammer-curl"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-hammer-curl.mp3",
+        "bytes": 14828,
+        "sha256": "ead00094bbae58724409592748db390069c1da3149d171dce1b0b2aa8a9fe48f",
+        "sourceWavSha256": "192f30aae2a60867bef0c976bb62d8465dd9f074d06efb50ab555e1c5ffea019",
+        "sourceTextSha256": "7c8f1c3cecc6316abb04c09c3d3f486a41379553ffd2540c3eb25502e4ac1652",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-rear-lunge",
+      "kind": "movement",
+      "text": "Dumbbell Rear Lunge",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "alternating-reverse-lunges"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-rear-lunge.mp3",
+        "bytes": 14828,
+        "sha256": "0ef6f7c9145b4b351c5794f2ff3efc37a0676c5caf30398250d2f65836c67a7b",
+        "sourceWavSha256": "03805c38fa9699029f8fe9e4a9a73a554ff599e6916565ffa878498a98689ac3",
+        "sourceTextSha256": "4cf4213e254e907f5602cb791c44eabb7be4b80a629db80b31c14518f639510d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-single-leg-deadlift",
+      "kind": "movement",
+      "text": "Dumbbell Single Leg Deadlift",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-single-leg-deadlift.mp3",
+        "bytes": 21164,
+        "sha256": "0304351353de5a9ed4e03699d1995e89f24479dd10d221f9ed0c21f702a6edf4",
+        "sourceWavSha256": "a516dc13f7baf5132ce8196d85e87ddfc301590eaf4b4979472b6af744ce06f2",
+        "sourceTextSha256": "67aa5d06cb321eb47fdd5d9c0b9c31139d32e37984d2e14465b25064045669c2",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-squat",
+      "kind": "movement",
+      "text": "Dumbbell Squat",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-squat"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-squat.mp3",
+        "bytes": 10220,
+        "sha256": "a083a9004f03f6de4147a464159d3435441b7354afee294760294e0a9566f6ba",
+        "sourceWavSha256": "2c5b4026929953b02de0e865860ee5ad27796b0b328a22cf00e554065f8c1c22",
+        "sourceTextSha256": "7e887ce60491cac4aaa8ea1deba51d0c317db0b3b499052ddc0e71ba1848d2a9",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-standing-overhead-press",
+      "kind": "movement",
+      "text": "Dumbbell Standing Overhead Press",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-standing-overhead-press"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-standing-overhead-press.mp3",
+        "bytes": 18668,
+        "sha256": "a589c48dafe376d449be730b7645d720b3aa2062cf2ec47d3265f045bd393635",
+        "sourceWavSha256": "0262a4ebe5da8aef2598e222f08c4c3d3e1a0915cdb10bb552f93857177f5642",
+        "sourceTextSha256": "005017e25cc142e07dbd846e1bc481447602f795c5a792b1c375e92914cd7e6e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-swing",
+      "kind": "movement",
+      "text": "Dumbbell Swing",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-swing"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-swing.mp3",
+        "bytes": 13484,
+        "sha256": "7711e015fed51548c3d18d49a5ebb01c1db3de8e364eabe7b2e5467882a65a79",
+        "sourceWavSha256": "6af362123d8ae196cc21e825d8a5ca3774425bd36d9dd8f9f1ae7ec25b0692fa",
+        "sourceTextSha256": "63612123b0499b45d7db01a3778d7d503919732214ba978d7272b59a8c28c4a7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-dumbbell-upright-row",
+      "kind": "movement",
+      "text": "Dumbbell Upright Row",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-upright-row"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-dumbbell-upright-row.mp3",
+        "bytes": 12140,
+        "sha256": "d1ef27a0fb88b9521c3f5255dfa9772436cfabd825924bfe14b9dde70ca6b9e2",
+        "sourceWavSha256": "4a41107cfc967d93e79c0ec7faffb2d280b2c967b2ce53690dd1b573ed55639b",
+        "sourceTextSha256": "c0c72ce657c51d8d9733116e99cd973b7a7838dbe25e8553b009c6f383f932ad",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-foot-planted-shadowboxing",
+      "kind": "movement",
+      "text": "Foot-planted Shadowboxing",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "foot-planted-shadowboxing"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-foot-planted-shadowboxing.mp3",
+        "bytes": 18668,
+        "sha256": "4fbd1d5e8386339af4e2dcfe7edfa380873b190b5ca407cd0e808b203ece81d6",
+        "sourceWavSha256": "20ede507e3a87c821a1be16836cd6da30be103c72e71d635809e9f1856f64016",
+        "sourceTextSha256": "7d6ab419d1d191c29fb60704b3459ff739502ab12813bb20a16022c385f2bb08",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-front-rack-press-out",
+      "kind": "movement",
+      "text": "Front-rack Press-out",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "front-rack-press-out"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-front-rack-press-out.mp3",
+        "bytes": 21164,
+        "sha256": "64ab4fa0288f8f96c94ae9ee89a3dfc4e113522107bb1ba99760536c8d1c6071",
+        "sourceWavSha256": "e3ad26f52f6c9f39b089276b908489157c31174fc6cbd2813920dd221dcf7a6c",
+        "sourceTextSha256": "5183d834fd1822f311c169637a43cd4580ac569f7bab444fa4877dbde2c032ea",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-glute-bridge-march",
+      "kind": "movement",
+      "text": "Glute Bridge March",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "glute-bridge-march"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-glute-bridge-march.mp3",
+        "bytes": 15404,
+        "sha256": "286f8fe5af2b08bb7e30e62d7dcec88222caedaea4c02181984fffd1d53b4bfb",
+        "sourceWavSha256": "7bc72071d3967fea6e41e2bb3679c989c23811bea81746e85c1f491d6b011c2d",
+        "sourceTextSha256": "66716079a2bf834d5b9a1ce0fbfb8f024f5704c7fa4e9cedd92972f31c1c4281",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-glute-bridges",
+      "kind": "movement",
+      "text": "Glute Bridges",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "glute-bridges"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-glute-bridges.mp3",
+        "bytes": 15404,
+        "sha256": "e7ca35f936a80ff1d5a99e57b7e5c92264b57a8fa49ac5506403389acb40bbc9",
+        "sourceWavSha256": "ef1a2d9c505531abbcaf05d7cc33488489d24a9b88140d9d7f38d1dfaae35cca",
+        "sourceTextSha256": "fbef7dac46cffdecc03ec52341426109207d36f36f82ffb8aa4d8dbe5ae2585f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-goblet-squat",
+      "kind": "movement",
+      "text": "Goblet Squat",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "goblet-squat"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-goblet-squat.mp3",
+        "bytes": 10220,
+        "sha256": "726304400913e4d56ad3fc1ee619d73ce9da532f8d661e884f091db3e77fc348",
+        "sourceWavSha256": "6f01dc2be9ce8cd0db3177b478464fb2350561e29ccddf14c1ed5d79b04bb1bc",
+        "sourceTextSha256": "bb1e7286b1413d0da88093d0a0285ae7a42f0d2657a4dd0ea813ec8ba3604c86",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-half-kneeling-press",
+      "kind": "movement",
+      "text": "Half-kneeling Press",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "half-kneeling-press"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-half-kneeling-press.mp3",
+        "bytes": 15404,
+        "sha256": "7286cd538e0cd8b1b1635a6d581116032c7545b4666d1072e0012af2e3d3e0a9",
+        "sourceWavSha256": "b037aa298dcaa676c000c1bfd78a824261f149d60d32d5afba5cc8124e440bfb",
+        "sourceTextSha256": "2e82fd155115bd5e04d0e56ae578d2db2d638cd91abd33d42b5d8cf12ceabc38",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-half-kneeling-press-left",
+      "kind": "movement",
+      "text": "Half-kneeling Press (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "half-kneeling-press"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-half-kneeling-press-left.mp3",
+        "bytes": 19820,
+        "sha256": "070da9c7d15e84f25db8569d01310ebbb17be599c0f3e4590e73d4df46f9dc68",
+        "sourceWavSha256": "b69f5227f3aa07573c506188a0042139166b08528eaa1e30e435ad8fc4f25a41",
+        "sourceTextSha256": "28d3c63e77aadbf2251bcc7aca30e881fa980236df3468b3b77c5c4cecdbd88f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-half-kneeling-press-right",
+      "kind": "movement",
+      "text": "Half-kneeling Press (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "half-kneeling-press"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-half-kneeling-press-right.mp3",
+        "bytes": 20588,
+        "sha256": "32e134f5f27ed1fc2d16972eae2949b0b453e4cef72ff6670ff8f24d92034ad3",
+        "sourceWavSha256": "64069797a213e5e5a429f9de57cfc992036e08a099193bc7e5e3c7012c346bcb",
+        "sourceTextSha256": "16d8304627294f3fe061a1361315f1c407039f57f7f76afb2ffc57fa09c1c9b9",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-high-plank-toe-taps",
+      "kind": "movement",
+      "text": "High Plank Toe Taps",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "high-plank-toe-taps"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-high-plank-toe-taps.mp3",
+        "bytes": 15980,
+        "sha256": "07a7098897fc0240048071a22e4c08ea04cd22d500dcdd7afec077bca050071a",
+        "sourceWavSha256": "bcd43c1f96cf055f6ae8f34abef3063c418c96048d7f8679ec0b35ff98c933cf",
+        "sourceTextSha256": "7abb695bd0294c5b1d2e15b69dcd975fbdb20f5438712d9851a1a01f5070a85f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-flexor-stretch",
+      "kind": "movement",
+      "text": "Hip-flexor Stretch",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "hip-flexor-stretch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-flexor-stretch.mp3",
+        "bytes": 14060,
+        "sha256": "e3a95866c130bcc50b7b2241f7fef82b16bbb5a211abf16aceffbf4941d7588c",
+        "sourceWavSha256": "e17529d18e24106071b76158225ab5c02c8e1d24a3bdf09eff8f646f73a1a532",
+        "sourceTextSha256": "05364e5e4a505c5e5e6b459c1fcca98933741b8061b305432793691e68d39133",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-flexor-stretch-left",
+      "kind": "movement",
+      "text": "Hip-flexor Stretch (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "hip-flexor-stretch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-flexor-stretch-left.mp3",
+        "bytes": 19244,
+        "sha256": "d94ecce382538787c71f1749665928b504911824b46f22cb3576cae3a2d64d31",
+        "sourceWavSha256": "819078d0a021e81fb759f60fc77e6b7d7f0f3ef3129458e44080580844e46bc2",
+        "sourceTextSha256": "96e15324d07ab79906ad2a8c3f8673af2f7ffdb4d0705e3313fb1a092980cbb0",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-flexor-stretch-right",
+      "kind": "movement",
+      "text": "Hip-flexor Stretch (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "hip-flexor-stretch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-flexor-stretch-right.mp3",
+        "bytes": 16748,
+        "sha256": "d545f5ee831af513d1021514dd1668b50591b9261a40924c251850170d1307cb",
+        "sourceWavSha256": "d71320b32e1e20398a8b4b55728c98781574311b8de452bd624a2f6cadfb7feb",
+        "sourceTextSha256": "c7fe8f50642ce5ec95c2a3044f124e94289e0237ea65840ab548b5aa8e098e4b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-hinge-plus-reach",
+      "kind": "movement",
+      "text": "Hip Hinge + Reach",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "hip-hinge-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-hinge-plus-reach.mp3",
+        "bytes": 17324,
+        "sha256": "4f31e3c9fb36f0c43ec340e55fbd0275cf347376e43de35bd49dff1e08de92f4",
+        "sourceWavSha256": "3c37a83b7b3144ca84fab5fca111a052f55b86e7e518b3cd351be2d1b043957b",
+        "sourceTextSha256": "a730da89f6a6809585750503702d56d7eb0d31192db9c8412fd3886994f83949",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-hitch",
+      "kind": "movement",
+      "text": "Hip Hitch",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "hip-hitch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-hitch.mp3",
+        "bytes": 12908,
+        "sha256": "5d7eac6b36207901bb097f7b78c8972e2937374eade4665cbba991e669063eb7",
+        "sourceWavSha256": "a4bd0faa519606efc6ea8e419655c997d97bdcdf853fdcd437a233de89395418",
+        "sourceTextSha256": "1f0bf0671ed37051fa275ff23d60581680c78d9ae88d8292092ba4d464cfaa8f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-hitch-left",
+      "kind": "movement",
+      "text": "Hip Hitch (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "hip-hitch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-hitch-left.mp3",
+        "bytes": 15980,
+        "sha256": "ce769210840133c8b3a676f330dcfa707597b1cc32469a8be53636f759a186a7",
+        "sourceWavSha256": "d779e2c61144576e00508b7535ae66e1839eb9735653d557940bbcd86803966a",
+        "sourceTextSha256": "4c2b02973ad315b7122261c19f148475bf2447d3f88824df313e62c322dd60a9",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-hip-hitch-right",
+      "kind": "movement",
+      "text": "Hip Hitch (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "hip-hitch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-hip-hitch-right.mp3",
+        "bytes": 14060,
+        "sha256": "2c333b53db5e3afd6422b895a653efcf600271e26fa38e38cac86768bd688442",
+        "sourceWavSha256": "019d8a2e7a5ad21e07c8e3414058bd4c77df1aa143bdd4965e95c482650b83c0",
+        "sourceTextSha256": "870efaf647ddca24be6437ebea2923b1d85e820f7b9e6f28ffd4a0446ed6b024",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-horse-stance-goblet-hold",
+      "kind": "movement",
+      "text": "Horse-stance Goblet Hold",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "horse-stance-goblet-hold"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-horse-stance-goblet-hold.mp3",
+        "bytes": 19244,
+        "sha256": "22cccf4d187306f8cfb91b293cbdde8de00d2c7580d27755934b37cb896460ea",
+        "sourceWavSha256": "1470e623b87d27790f3e3c40e1400906f48b60ee8b81da26157c59cd9ebeea6a",
+        "sourceTextSha256": "9eb28f026612bba8f91763818a6c9044db3b6505213f5188300dcd73fc628668",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-inchworm",
+      "kind": "movement",
+      "text": "Inchworm",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "inchworm"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-inchworm.mp3",
+        "bytes": 9644,
+        "sha256": "c55041c69ad1ea54a96b65c4ca8ba7425099f54ede9f1eba684289fd68a14c7b",
+        "sourceWavSha256": "5e3352fcdd4ec2214a5bcae051152913361542543106826baa0eedeaa798d8a3",
+        "sourceTextSha256": "0237b92598da8b7dbd004988df7b515998635ff1d62b0b5fc0d8be174014103c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-jack-jump-male",
+      "kind": "movement",
+      "text": "Jack Jump (male)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "step-jacks"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-jack-jump-male.mp3",
+        "bytes": 19244,
+        "sha256": "8ad301749c334e3b26626276abc195ddde69a8b05339ea434fca8f6d8c8e69f0",
+        "sourceWavSha256": "d730d9cc5618d3059735e8358b68ad3905c1cbc9756334f60b4e5c81eb13cfd6",
+        "sourceTextSha256": "8652ab9a954e5821ec20435d0a86039c7875c685ba9bec454e135f4a858abbb2",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-kettlebell-alternating-renegade-row",
+      "kind": "movement",
+      "text": "Kettlebell Alternating Renegade Row",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "plank-pull-throughs"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-kettlebell-alternating-renegade-row.mp3",
+        "bytes": 34604,
+        "sha256": "7cd3894e2d8af941ee2fa28f47d4d6dd0bee23a2bfc51402fdde9d19e7315a94",
+        "sourceWavSha256": "7f6db5280031d17f0789145f9a654027892eba8de7e699718b92e218a25e4a76",
+        "sourceTextSha256": "41a445167af29e56082d66396fde8ee4db7da3443a38c106783d309d85677305",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-kettlebell-swing",
+      "kind": "movement",
+      "text": "Kettlebell Swing",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-swing"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-kettlebell-swing.mp3",
+        "bytes": 12908,
+        "sha256": "ab20fe60e21448478e2025e774f58ae0c42332f34a380cbbd9655523a2490c32",
+        "sourceWavSha256": "c01e6d48ff8fd4e67273d8cd1bf1d6f88202e2155de613566817dc9902495bda",
+        "sourceTextSha256": "b2621c05a41c3c25bb4370aa38b246a5254bd3626c98b7a8e47042a5e958d571",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-kettlebell-thruster",
+      "kind": "movement",
+      "text": "Kettlebell Thruster",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "squat-overhead-press"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-kettlebell-thruster.mp3",
+        "bytes": 10220,
+        "sha256": "f94b8f13e61a748fbd10f039563b178f6c3b5d2184e5a56a39fe5a6671aaeca6",
+        "sourceWavSha256": "dacc91129b0241b742d46c20ed0957fab93143a9052d27340311be5df5f0219a",
+        "sourceTextSha256": "6f7a0f2adc220a98d22b8e041d4d3b579cff82132f4a5499780adaa0c2dac492",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-knee-lift-cardio",
+      "kind": "movement",
+      "text": "Knee-lift Cardio",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "knee-lift-cardio"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-knee-lift-cardio.mp3",
+        "bytes": 13484,
+        "sha256": "6c517a58314eaf1a6134d4da441329f1c4dd226647ff348aef0d387a31378f14",
+        "sourceWavSha256": "af101c1a9e0f4296c7163c50932ffac62e83a86d33ef6363a032884b61834f60",
+        "sourceTextSha256": "f406c4a7aaf7f121a88a1afbf0756ace0ac6e98b9d693a85852b257832fecc3e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-knees-down-inchworm-walkout",
+      "kind": "movement",
+      "text": "Knees-down Inchworm Walkout",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "inchworm"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-knees-down-inchworm-walkout.mp3",
+        "bytes": 26924,
+        "sha256": "d01836669d2f80c175336cb9b230648704042141056d5067cc7c7793eb9ffe8c",
+        "sourceWavSha256": "dd38cf291478ee19c4c69fe38f1bf18059ee1415a2c201839f044c91588fe9f0",
+        "sourceTextSha256": "400058d6907b71b5c8a8f7a1e0d477435fc08299a4df30e0de3bb07adf9d93fe",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-lunge",
+      "kind": "movement",
+      "text": "Lateral Lunge",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "lateral-lunge"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-lunge.mp3",
+        "bytes": 15404,
+        "sha256": "fdb02e9efc479fb7144f85f7f4eb92feca6053db98236d92551181395b762d3e",
+        "sourceWavSha256": "009a036ae40041efe2c3e8b685daa20a60df01f27a8537c7149bd119bcdfc937",
+        "sourceTextSha256": "d736601922259cd3df6e91d6d507a5791c29438a573998d2f9f7abbf25e254ac",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-lunge-left",
+      "kind": "movement",
+      "text": "Lateral Lunge (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "lateral-lunge"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-lunge-left.mp3",
+        "bytes": 19820,
+        "sha256": "af30437c0d898af0ffd343644c86e588ca959491245dcb5f2093d72828c0f926",
+        "sourceWavSha256": "d49bf353714dce1eee973a1ae9a5a4f352caf02a4e772981b24ecc75144ffbb9",
+        "sourceTextSha256": "67fe93b6dd51896250bb4e3c91a3315be53ac9954c2e7948115d905ed828a9f2",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-lunge-right",
+      "kind": "movement",
+      "text": "Lateral Lunge (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "lateral-lunge"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-lunge-right.mp3",
+        "bytes": 23660,
+        "sha256": "72f7ec660702c1e790fc27ae79985fecc841f01d82c8f3c7d0d471e629b2c233",
+        "sourceWavSha256": "3d8c398c541a163cbe1185b4fa2fee8c77bb04969addf920ce6bfd1c0fd4c0f8",
+        "sourceTextSha256": "5a1b593a754897ce4a24c211da76f27e895e8601106249e7824cb6646828cbd1",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-squat-rock",
+      "kind": "movement",
+      "text": "Lateral Squat Rock",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "lateral-squat-rock"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-squat-rock.mp3",
+        "bytes": 19244,
+        "sha256": "cda028aec7ee1b52d616e15208ded87710815da381bc40b5f21efecfd7443850",
+        "sourceWavSha256": "37993863e27c131ce6293b8e3d07792a356f102a2929b02993990d45888d6a6d",
+        "sourceTextSha256": "4fb4d3ad30c2a1c98f3f2e97be84e5b36b152851938fe8809eb179c9f0bd6041",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-and-reach",
+      "kind": "movement",
+      "text": "Lateral Step-and-reach",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "lateral-step-and-reach"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-and-reach.mp3",
+        "bytes": 21164,
+        "sha256": "c13fb1d80f8622bf8616a86fd36efd4047a4ef1ad982bdd352bfd4f0c1fa686e",
+        "sourceWavSha256": "6be8e60d97fcbd80fc541e7322bc7e9315cbd1fc484422e631b6bc2b4016e8dd",
+        "sourceTextSha256": "5ff15a229434a801d0594de7f0003b6726be5a51a17206c25f6c325dc1846483",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-and-reach-left",
+      "kind": "movement",
+      "text": "Lateral Step-and-reach (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "lateral-step-and-reach"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-and-reach-left.mp3",
+        "bytes": 20588,
+        "sha256": "54e247ab7585c508a70c9583b0ea923be3ab4fd02a3774e4a2ceb677a16f5714",
+        "sourceWavSha256": "4f2538c6195d7826dfc878ec74537b3d1a9605d4177401d8fdd272d6829e731f",
+        "sourceTextSha256": "6c38c08063f00b81114758f7e5c94401865e5f8031013fa3d81543e71bc6f7f7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-and-reach-right",
+      "kind": "movement",
+      "text": "Lateral Step-and-reach (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "lateral-step-and-reach"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-and-reach-right.mp3",
+        "bytes": 19244,
+        "sha256": "6b885d02364a65c33fc5620ea32cecf06e0beefa91a4ac625fcd699eaf9ca919",
+        "sourceWavSha256": "af0c828888ea3fad8548b14618ddfcbb9f361849f46f50f503e71919ddc1cfd3",
+        "sourceTextSha256": "aaeb7388fde25d6166c1351db255664e23a864f14cc21ac0627ab09b3f55b407",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-plus-relaxed-arm-sweep",
+      "kind": "movement",
+      "text": "Lateral Step + Relaxed Arm Sweep",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "lateral-step-arm-sweep"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-plus-relaxed-arm-sweep.mp3",
+        "bytes": 23084,
+        "sha256": "f5b401ddc6b97f8439fd24deba93479d22284b13f7b38906b83f754a3a6528e4",
+        "sourceWavSha256": "a0cebf48b87ccf5d603ad89dbd098d36ef88448fd0bf52c33ceecc3e07851a76",
+        "sourceTextSha256": "12365ad918f41872f7dbb515669fc909a10241af3c93a9471c0254bf866025bb",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-to-balance",
+      "kind": "movement",
+      "text": "Lateral Step-to-balance",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "lateral-step-to-balance-short-foot"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-to-balance.mp3",
+        "bytes": 17324,
+        "sha256": "1d55bae76bf36ebca6c2b6ebaa8fa4d0a19138eb46d17a9a4fdd0076b094a614",
+        "sourceWavSha256": "38e6d4c4bc31388f05cb2ad8c814eaaa65246b7883c96f012001b978a8b526f3",
+        "sourceTextSha256": "72c31b102d2ed9638fd3c236dca84e44c651b063ab7617d13e24f5492722aea8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-to-balance-left",
+      "kind": "movement",
+      "text": "Lateral Step-to-balance (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "lateral-step-to-balance-short-foot"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-to-balance-left.mp3",
+        "bytes": 21164,
+        "sha256": "2872a6cf34efe6785d21f25759d99832138965fa1851b083db98fca62788ee79",
+        "sourceWavSha256": "d728999f8f1da63f3ab6acd053d705af2f33fa8650055528c3a82181fc131314",
+        "sourceTextSha256": "62cbbe5a53f31326771af3de071f9df55b55e23ac1b4cf242dd27e16c8c923db",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-to-balance-plus-short-foot",
+      "kind": "movement",
+      "text": "Lateral Step-to-balance + Short-foot",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "lateral-step-to-balance-short-foot"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-to-balance-plus-short-foot.mp3",
+        "bytes": 44204,
+        "sha256": "f0b8192e9fd9a3dbf900df3f3c2478ee6d96c94be53143254435b1378be2a987",
+        "sourceWavSha256": "bdc2740737d9039f56f4e7e49cc3e7e38a05803062ef36acadd584122d8b0b84",
+        "sourceTextSha256": "6a4055babeda6cd57c5137ac40e2633b8f9e2eab48853e0ae75ae04ade1b6614",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-lateral-step-to-balance-right",
+      "kind": "movement",
+      "text": "Lateral Step-to-balance (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "lateral-step-to-balance-short-foot"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-lateral-step-to-balance-right.mp3",
+        "bytes": 25580,
+        "sha256": "a693c1cc843661794336b6fd33b2b87a1487914a280d55f8476904e55c58abaf",
+        "sourceWavSha256": "a9fce927d4750c83622565cc4e16eab3e52a2022431a2e48cec3c9db7ef06845",
+        "sourceTextSha256": "fe3997455b849d9a5f510f656e3d8017745eec227ca7658736df1349bcd362f1",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-low-glute-bridge-on-floor",
+      "kind": "movement",
+      "text": "Low Glute Bridge On Floor",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "glute-bridges"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-low-glute-bridge-on-floor.mp3",
+        "bytes": 17324,
+        "sha256": "b3a0fba5b948570cc22d60eca682a50dcf1a96dcff30e2ee51e8e93f2960f294",
+        "sourceWavSha256": "3891cc1ccb88e7080cdb3c53d2f3b4c2e023b65410932dd821509ec337185dbc",
+        "sourceTextSha256": "fb2d1d46a4273b966221ff73ca35da2aa1b5131dbc0439165f49654a7dd075b5",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-march-plus-arm-circles",
+      "kind": "movement",
+      "text": "March + Arm Circles",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "march-arm-circles"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-march-plus-arm-circles.mp3",
+        "bytes": 20588,
+        "sha256": "3388bc3f8828ccf9b00acf854d39f5797f8c608f6ca14abf8c12ec7a5b8de70e",
+        "sourceWavSha256": "1387dd64d5db4613cd20c5bf5571f0988e0b4ce8fa340b517f5812f0ae5e89ce",
+        "sourceTextSha256": "3a0c6e3084e053f5fd5b07bdc5406df496ca2b0de7e7e80ace9e5beac74ec202",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-march-plus-shoulder-rolls",
+      "kind": "movement",
+      "text": "March + Shoulder Rolls",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "march-shoulder-rolls"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-march-plus-shoulder-rolls.mp3",
+        "bytes": 19244,
+        "sha256": "0d8bb96493c46149effa33f2b09d756b700feba5fc72494950489981110dc80e",
+        "sourceWavSha256": "95f52cea7af4814f2f4789f6d1b663adb858254ff86e37153abe85d7cd9b0d01",
+        "sourceTextSha256": "a1d2730c070e6999c46fec6f32e8bd04f105bd60587de45ea2dba73f46efda3c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-march-ramp",
+      "kind": "movement",
+      "text": "March Ramp",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "march-ramp"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-march-ramp.mp3",
+        "bytes": 14060,
+        "sha256": "b53074e1ec908fb31c4ec2033ecaa61479b8451206a7d9f12b1d79da57d664bc",
+        "sourceWavSha256": "9f98d30d437a6f650640c59307325f73eca46e284c84a4ce2ec57a33992d87e1",
+        "sourceTextSha256": "40b929e400cc79ef3903f12a5b1497f477a71095867a9de18a3a2925d19a24d8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-mountain-climber",
+      "kind": "movement",
+      "text": "Mountain Climber",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "high-plank-toe-taps"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-mountain-climber.mp3",
+        "bytes": 10220,
+        "sha256": "a5d107720bdfc60776af58fd6265f67703463cf9b4d5601042dffdd661e4c2de",
+        "sourceWavSha256": "55d7c402152b44224f4a39f81bb0e107d31998256fecf6fd2c6d5611802f22d1",
+        "sourceTextSha256": "289ddbf20c286ee4906ebba926b8f62425f6b4b258eb1b66c9bd918577311e6e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-db-snatch",
+      "kind": "movement",
+      "text": "One-arm DB Snatch",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "dumbbell-snatch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-db-snatch.mp3",
+        "bytes": 15980,
+        "sha256": "32e15b00c648ddfd85d260cf351cd93f297ba8b05ed3a95666c74d60fba52c45",
+        "sourceWavSha256": "1326e281edeeaa7976e17bf19dd43d2b33e3b82e67642bb9c8e245c569af9c09",
+        "sourceTextSha256": "ddc23a9ce6bea1d2b68add286fca47c623f361d97c24e4d76d3c13fad9b4510c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-db-snatch-left",
+      "kind": "movement",
+      "text": "One-arm DB Snatch (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "dumbbell-snatch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-db-snatch-left.mp3",
+        "bytes": 19244,
+        "sha256": "9d4736b9194cf906dcf3a779146ff84e4e928e675e3261fba08e384bc32a5ba6",
+        "sourceWavSha256": "c13e5d96dd1761b1b8572a00354e9c62b1cdf06b18d989371c8e9b954191c001",
+        "sourceTextSha256": "baf04377ad8a98c94f060da65ba21944a055e104f1283656c4e9b2e834d871a2",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-db-snatch-right",
+      "kind": "movement",
+      "text": "One-arm DB Snatch (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "dumbbell-snatch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-db-snatch-right.mp3",
+        "bytes": 21164,
+        "sha256": "21daffc60e1882e4fbf11cb915a74fbcd0205c567db77e37e2b58e36875f2a60",
+        "sourceWavSha256": "152bf8437fd0570bb0732508e52a9268e14a1d9eb85b19c4eb3a4be7f5f03769",
+        "sourceTextSha256": "518e6622ec17e203ce0637886e1e6ed005b5d9c2f1cf59d97fe9c9dc5c31d4b6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive",
+      "kind": "movement",
+      "text": "One-Arm Dumbbell Reverse Lunge + Overhead Drive",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "one-arm-dumbbell-reverse-lunge-overhead-drive"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive.mp3",
+        "bytes": 26924,
+        "sha256": "9188c40b4d33ea8c46a82af932e088e59d99a85f0129de6b749f4e1caf2fae19",
+        "sourceWavSha256": "2649c0a857911084a563a0b7b27efee7d2e47b61fee307623046812e872fd407",
+        "sourceTextSha256": "aa03523bdbab97aa475bdc90842ac8198f40c873fc180a2444ef7ba2205149f7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive-side-1",
+      "kind": "movement",
+      "text": "One-Arm Dumbbell Reverse Lunge + Overhead Drive (side 1)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "one-arm-dumbbell-reverse-lunge-overhead-drive"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive-side-1.mp3",
+        "bytes": 32684,
+        "sha256": "2d5acac18d2f97a589fb356ec313687b8d7e0168daa2e6d5bbbefff449a3b5a7",
+        "sourceWavSha256": "408332e9244951aa6541fb895a69ad42816533c0aac47a2d2f97e66ea751f2df",
+        "sourceTextSha256": "67d36b249175d7e56c882b5607f775b27195032edbc6035545fb5f79e2fbb7ec",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive-side-2",
+      "kind": "movement",
+      "text": "One-Arm Dumbbell Reverse Lunge + Overhead Drive (side 2)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "one-arm-dumbbell-reverse-lunge-overhead-drive"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-dumbbell-reverse-lunge-plus-overhead-drive-side-2.mp3",
+        "bytes": 30188,
+        "sha256": "4cfdb981265b787363cc0db6a4e4bf805d5b3bb008f316a992d15a3147044e98",
+        "sourceWavSha256": "ece2d2c30db2556b73ae7a4d4d16b5b1e40b5a47accd611f62840c0fe24a213d",
+        "sourceTextSha256": "dee3900988f2057e3d890b95a23fefd4da21032c88d4b7f0090a6c5e41960a1c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-row",
+      "kind": "movement",
+      "text": "One-arm Row",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "one-arm-row"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-row.mp3",
+        "bytes": 12140,
+        "sha256": "181d70b45175e460910aef79a892780be68563d2b6e2fb0f4a07dea6fe76acff",
+        "sourceWavSha256": "803d313892dfa37fd4a87a62058179922137c5b797765e4b2d7541ae3679e05d",
+        "sourceTextSha256": "e06bc65e0ac73c0a1bc9d21944bca3a1505faba50e027cbfa91139f91865bbf9",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-row-left",
+      "kind": "movement",
+      "text": "One-arm Row (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "one-arm-row"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-row-left.mp3",
+        "bytes": 15404,
+        "sha256": "99f1e6d9343b01ad5bbbbff02a94bda5fb1eaf16be3bb13f841ce5b45a75a425",
+        "sourceWavSha256": "e2f6749098be8f5de36b0afd1582cbf85011c000ff23880f3685037d0f5dcc4a",
+        "sourceTextSha256": "9472d3cea2a70cc1c07c281143538aeac5b7486341f05833301a34ed7c30f0a8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-one-arm-row-right",
+      "kind": "movement",
+      "text": "One-arm Row (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "one-arm-row"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-one-arm-row-right.mp3",
+        "bytes": 20588,
+        "sha256": "0cb07482af6574c3c9a077d7571aa70827834fe2897f46a26d99c1b71d190848",
+        "sourceWavSha256": "fe6bbbfbd5863763be3e731ee643ec06f585e194fba2aa44bebb67b9beb7fcdd",
+        "sourceTextSha256": "b1e44f42b2c28031e553562a9d43a077fb2be46945be2fa7a90b10aaee5cfb90",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-plank-pull-throughs",
+      "kind": "movement",
+      "text": "Plank Pull-Throughs",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "plank-pull-throughs"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-plank-pull-throughs.mp3",
+        "bytes": 15980,
+        "sha256": "0c08789f3c0f4b55cf4500c43433d87be1d562238f203c8406d6fb66a3a0da0f",
+        "sourceWavSha256": "c282c5c8092fe181da20c5de5e0cbec2858338343b8245e04293d17ea611e6af",
+        "sourceTextSha256": "e076bc9e87961ff1ed761a003ae78f24458b7acb70ffc0ed293bbbec43327512",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-plank-walkout-plus-overhead-press",
+      "kind": "movement",
+      "text": "Plank Walkout + Overhead Press",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-standing-overhead-press",
+          "inchworm"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-plank-walkout-plus-overhead-press.mp3",
+        "bytes": 19820,
+        "sha256": "83eeae1cde329e202e9238fedb4600854f5812f54484d4530b6e119c07fd180a",
+        "sourceWavSha256": "7ecdd5de62afb98b277fef3c0841e2b5f814a4bc792414a75f55467046df51a0",
+        "sourceTextSha256": "8894b2fee4fcd90a211b49b791dd560f8320bcaf25beca8bf363c7e9b5b39f85",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-power-half-lunge-plus-knee-drive-left",
+      "kind": "movement",
+      "text": "Power Half Lunge + Knee Drive (left)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "power-half-lunge-knee-drive"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-power-half-lunge-plus-knee-drive-left.mp3",
+        "bytes": 30764,
+        "sha256": "ea3676a87e5f78e1cb16e32b5460b9e95714031eba5c646cabedceca738ceb7a",
+        "sourceWavSha256": "823c17cc092c68c050edee02d94c14006ef8bc36163d7e85e375cefb717b097c",
+        "sourceTextSha256": "13cc27589d75a9c9ce120e15ed1e4dd4907d64cd30b130fac286c852e52fc8bb",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-power-half-lunge-plus-knee-drive-right",
+      "kind": "movement",
+      "text": "Power Half Lunge + Knee Drive (right)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "power-half-lunge-knee-drive"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-power-half-lunge-plus-knee-drive-right.mp3",
+        "bytes": 23084,
+        "sha256": "d458cfab4af181ef814b39fdab8e43dd882558c1306c849a2679e96ec847bb45",
+        "sourceWavSha256": "4d2ce313b34b594c4a456573d3ddd0b9be4fc643fdff782e4cf0a07eea7f2ca4",
+        "sourceTextSha256": "4c03d4ba303a9beb8767afd54fab1c2eeee52ba25a139c429f7d6a9184ef2a42",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-prone-w-raise",
+      "kind": "movement",
+      "text": "Prone W Raise",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "prone-w-raise"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-prone-w-raise.mp3",
+        "bytes": 12140,
+        "sha256": "1d4731416b21d385d54fcf299e858889056fb7ca7121043153e579a1e1d75ba4",
+        "sourceWavSha256": "2be159872f08183919bb7ac4ec3cb76acb71c76cf1a12fe797a87c0d855705f5",
+        "sourceTextSha256": "d3ada873fbaa3753b8d986c4eff56069b8c80974105d76524e67463d8952ff80",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-prone-y-w",
+      "kind": "movement",
+      "text": "Prone Y/W",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "prone-y-w"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-prone-y-w.mp3",
+        "bytes": 19244,
+        "sha256": "9e20714941acacf536d58fe0f1fe306354ff4225f4c8609fb00e49fb38e054ea",
+        "sourceWavSha256": "78e3252eb6fe1fd9523f9a6e674434d2594d92acf849882c7adc43cfe83a5e1c",
+        "sourceTextSha256": "a895809fd491e890e6c060156667f5fb5a7ef6aa089a7499961674ae19c0fe01",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-push-up",
+      "kind": "movement",
+      "text": "Push-up",
+      "source": {
+        "routineIds": [
+          "iron-roots",
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "iron-roots",
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "push-ups"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-push-up.mp3",
+        "bytes": 7724,
+        "sha256": "67a4565ca6c74a67b640bf98067a6d98c8dd3ea47a5cc34c5c36696ee1a15385",
+        "sourceWavSha256": "9969e8b243227e6b6bdac6932d67fb7106e9a478a649a696f0c9fab9afd127af",
+        "sourceTextSha256": "e0a78c5efc6ad0e4c455693ea27f028d855baa1141bc02e10736476cd870a4be",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-push-up-plus",
+      "kind": "movement",
+      "text": "Push-up Plus",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "push-ups"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-push-up-plus.mp3",
+        "bytes": 12908,
+        "sha256": "9e0b810f4dfda66f3ad92703bf9dd35f6336a49e1a884ac34823a52673fd5895",
+        "sourceWavSha256": "e8b01af39ee38a3ca2713f3ce7307387767b93c79654c167f59eafd8268dc615",
+        "sourceTextSha256": "86b4195fc4b62d0aad265189ea183ca1594636281405b2d068658e37323e64c7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-push-up-to-side-plank",
+      "kind": "movement",
+      "text": "Push-up To Side Plank",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "commandos-step-out"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-push-up-to-side-plank.mp3",
+        "bytes": 15404,
+        "sha256": "189c2aacb07da8ee2c10efadaa4a035a7c0777bd6cefafa6763d646323c8c236",
+        "sourceWavSha256": "a164126c94121f84b4110acf22666b85b188ec36f97c09aebe2903852dcf429a",
+        "sourceTextSha256": "011f07df04c1e537f6b98eb108849627eb0de4a8bab3816d0dd24bb4d277585f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-push-ups-final-minute",
+      "kind": "movement",
+      "text": "Push-ups (final minute)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "push-ups"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-push-ups-final-minute.mp3",
+        "bytes": 18668,
+        "sha256": "bb87aab55db9a8c72e11fbf36d0ae84ded229c41843ca57bafd505244b0300ab",
+        "sourceWavSha256": "70177cde4f77acae8a72560ed21df7a0d8d14beb08786f7d3414ee9cbf5ea56c",
+        "sourceTextSha256": "7426c74b57358d836a0092f3792f4f12e38dbe7bf7854d157d523dac794f10ca",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-quadruped-thread-the-needle",
+      "kind": "movement",
+      "text": "Quadruped Thread-the-needle",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "quadruped-thread-the-needle"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-quadruped-thread-the-needle.mp3",
+        "bytes": 15404,
+        "sha256": "652e6d8a8731580514e94034bb3ec8d7f705e4dc0a5ab3ce78d042b4bb6c0a6d",
+        "sourceWavSha256": "3fd50dfdd2536de3509d93035a6005b719e8902717c79880f722174fe0ef29f4",
+        "sourceTextSha256": "f775d501c54318729c94fd6b336e9d42ab3cb6f23441072e36d5d2dc4cb15e7e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-psoas-raise",
+      "kind": "movement",
+      "text": "Seated Psoas Raise",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "seated-psoas-raise"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-psoas-raise.mp3",
+        "bytes": 17900,
+        "sha256": "cffc70c4907c33365e1c90130aeb166d88dad665566b40a6dd7eb0314df4c394",
+        "sourceWavSha256": "13cca030f1edb1bc1dee0cbeaeaee06aa8a2df19ee8bb76a0f6b5af1d879f9f1",
+        "sourceTextSha256": "d83947d5b17ebd167a1409037b6a10fd6e89cb6d8d457685b799d0751cd2ca3c",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-psoas-raise-left",
+      "kind": "movement",
+      "text": "Seated Psoas Raise (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "seated-psoas-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-psoas-raise-left.mp3",
+        "bytes": 25004,
+        "sha256": "03f1866ef7e245c0e8126463df0f09b737d2cf07a9571400c0daa24c02532968",
+        "sourceWavSha256": "55d91294cf2902ceeb5e62ce9a394c831cb0f94ad7a2ddc1f444430dac26486c",
+        "sourceTextSha256": "51cc9d8ef8df0b3001815e8424e0549f65e4a8efec3b38bdbedc4c178e731bcf",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-psoas-raise-right",
+      "kind": "movement",
+      "text": "Seated Psoas Raise (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "seated-psoas-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-psoas-raise-right.mp3",
+        "bytes": 24428,
+        "sha256": "1fba5f00a3b389f5ce538f77afb788ba222f0bb1a29a87403bb7a849b573173d",
+        "sourceWavSha256": "4fa0597c3b0e793796a5239a1bf2454287418894939a607ce438257d83a24d3a",
+        "sourceTextSha256": "61205090bfe0adb5d43c2e66067d64ca3a74abcd0b6213f6db195637a486b32e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-soleus-raise",
+      "kind": "movement",
+      "text": "Seated Soleus Raise",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "seated-soleus-raise"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-soleus-raise.mp3",
+        "bytes": 17900,
+        "sha256": "72ec2b8d21693d6aabbb352d7a8b84d89c4371a7f760bb56d1ff1594c92df08a",
+        "sourceWavSha256": "007ab27b67d3c131bcadc3e36396b742d8f21f196ff383e90e101bf137f0afdb",
+        "sourceTextSha256": "c52345c9aa6154628805efe29c1737957b613640a39052e091e30511249c7a59",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-soleus-raise-left",
+      "kind": "movement",
+      "text": "Seated Soleus Raise (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "seated-soleus-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-soleus-raise-left.mp3",
+        "bytes": 19820,
+        "sha256": "c48830b101485d2db5c6490b3eb6860b46d68aeb92e01f6a32b66d6a1b6505fa",
+        "sourceWavSha256": "8e5e7671a4132192faa96c2a7befabfbc331c2288b087a841ad42c1a717cec89",
+        "sourceTextSha256": "04d164f1085ae0029fe7b3c334161b386347cda04143577759dd3457ec44aa63",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-soleus-raise-right",
+      "kind": "movement",
+      "text": "Seated Soleus Raise (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "seated-soleus-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-soleus-raise-right.mp3",
+        "bytes": 17324,
+        "sha256": "25e93bf18ce54dfdb16041ae687fb006d0bbe01c4786d3828430db1ff6f1413e",
+        "sourceWavSha256": "69ff86c58b65579ee62ef6508d6827e7a99f8481d970ee2bb10caa724cbee890",
+        "sourceTextSha256": "5692e3a830d8682dc8455b9a6358e8a57670fac743fa4c17b090e2a574a1d778",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-seated-straddle-active-hinge",
+      "kind": "movement",
+      "text": "Seated Straddle Active Hinge",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "seated-straddle-active-hinge"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-seated-straddle-active-hinge.mp3",
+        "bytes": 21164,
+        "sha256": "31d931e7a326c541448bbb4be6a49cab4c7f2b4c93f3587c428f8c66210d7858",
+        "sourceWavSha256": "abb792770be30f79f155a6a0010389d92768bbbe4d34f0638d9a08f59090257d",
+        "sourceTextSha256": "0c779eb2aa8c0c2b5c503a4b6c52eee25547cb2c4e2ef45eea5142a2ddf92bcc",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-bend-holds",
+      "kind": "movement",
+      "text": "Side-bend Holds",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "side-bend-holds"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-bend-holds.mp3",
+        "bytes": 12908,
+        "sha256": "e55d191ad4d4f7ce24c7892924e16998960cef335c29f4d7b78a6a2fde42f2b2",
+        "sourceWavSha256": "111d1896070e83e7a5d0330983a5f12f2f9b7b30bf313be352bc2ed7dba71423",
+        "sourceTextSha256": "9e04e7b2ae456a66c8fab7c3cfb72156bc1fbae1337c9907ecdc584ccdd21ff7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-bridge-v-2",
+      "kind": "movement",
+      "text": "Side Bridge V. 2",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-plank-crunch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-bridge-v-2.mp3",
+        "bytes": 21740,
+        "sha256": "a4e80657be3ef9f5a5745477c31210656c72ca620d11b621ae99e31b49af0ead",
+        "sourceWavSha256": "d7e0c268d5042b48579c6e3f26a1f97a847d94abd4081236dc7bf316fb231857",
+        "sourceTextSha256": "72cceb8081fbf319ca69a88f076b3b626cea0f16e7e44cc8f07f852a19e26006",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-lunge-to-curtsy-squat-left",
+      "kind": "movement",
+      "text": "Side Lunge to Curtsy Squat (left)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-lunge-curtsy-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-lunge-to-curtsy-squat-left.mp3",
+        "bytes": 28268,
+        "sha256": "5dd9b9501ca8e046988cdfb3a53ada77f99d4f11487b86a8c30c7ea3d73cefbe",
+        "sourceWavSha256": "11a57bd1375de7262894ca1dbdfb7f3354ca0c5a619aef487898c51871a3fa83",
+        "sourceTextSha256": "8e365fb0d0c91e7857b2254ed1a8212dc8535a182aea06acfa925503a8deec68",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-lunge-to-curtsy-squat-right",
+      "kind": "movement",
+      "text": "Side Lunge to Curtsy Squat (right)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-lunge-curtsy-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-lunge-to-curtsy-squat-right.mp3",
+        "bytes": 26348,
+        "sha256": "ad2abecea77057b0c6a42e547e505a739aecbaf718c17fbf4a39d4fd2ec66f0d",
+        "sourceWavSha256": "14d2d9f190a1a21cf905b805f69abc59da1b082555b7580f2499d210ff08a798",
+        "sourceTextSha256": "2a2a058cd399426fb90a996605821b7f1ff3cdfc4a94b6d482b39b04e6f3ed0f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-plank-crunch-side-1",
+      "kind": "movement",
+      "text": "Side Plank Crunch (side 1)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-plank-crunch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-plank-crunch-side-1.mp3",
+        "bytes": 21164,
+        "sha256": "ceba70ae8d16383101716ed2d9a2d07f3ce76a24b5bd46a28f9e72476166f601",
+        "sourceWavSha256": "d98eb22b3170b52c9a7e09a753f9bb3e44066814db0dafeea577d04d6d662b51",
+        "sourceTextSha256": "821cc9ab665e776fcfa1e762d696b15d5b772adc9840bc97d0fadcc50f8f5be5",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-plank-crunch-side-2",
+      "kind": "movement",
+      "text": "Side Plank Crunch (side 2)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "side-plank-crunch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-plank-crunch-side-2.mp3",
+        "bytes": 17324,
+        "sha256": "d11517cc6b0437130f501195290440a0f90a1aad5898ce8647c12041648a27f8",
+        "sourceWavSha256": "3f6ecacf186bd3ae18c7ce170bf757f073edee6d106a91816813afe67588fc5f",
+        "sourceTextSha256": "3ec28c397b843d542c7bad5ff66c465dbafd4bfbb63a0fff1fca6b0b5304451d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-side-to-side-toe-touch-male",
+      "kind": "movement",
+      "text": "Side-to-side Toe Touch (male)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "standing-star-crunch"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-side-to-side-toe-touch-male.mp3",
+        "bytes": 19820,
+        "sha256": "1389636de9f8a30dc8055250a2eda1061956b89eae43c24811cbf928ff066319",
+        "sourceWavSha256": "adb6c92975e796114b4c8c823b637e0ad98d6b0c3502745ba0b6ee601703b2b6",
+        "sourceTextSha256": "f922dc85d5f1dbb45ee09ee004b1ce51b423ef3ffe287fd789c5f58321bc4393",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-balance-plus-short-foot",
+      "kind": "movement",
+      "text": "Single-leg Balance + Short-foot",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-balance-short-foot"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-balance-plus-short-foot.mp3",
+        "bytes": 25580,
+        "sha256": "e7494ff609063c030378c011a1260a01947d3021f46793b490cd6b69dca83c79",
+        "sourceWavSha256": "b2ac0b8086d469e97fa29bfade1e6f2cc06a04209c485e4bea3c79f6df0d23e5",
+        "sourceTextSha256": "4b9219beb98cb226f205d30fa2fca56d1c6f5a46ae5827e308eea11b1a6d21c6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-balance-plus-short-foot-left",
+      "kind": "movement",
+      "text": "Single-leg Balance + Short-foot (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-balance-short-foot"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-balance-plus-short-foot-left.mp3",
+        "bytes": 28844,
+        "sha256": "e9ed4366cad54900816ec1d26a97620521d156e97cc9dcdbb83f6a618fcb6d83",
+        "sourceWavSha256": "bf093ef0db32fe35d822da75eb5a0d0c17a1529c7fde1c1111c6b3861f42d77a",
+        "sourceTextSha256": "dc04f0b6b45129c0b55a88969668bd8ca6ee112134b7cbffcf4d9d20859ded3b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-balance-plus-short-foot-right",
+      "kind": "movement",
+      "text": "Single-leg Balance + Short-foot (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-balance-short-foot"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-balance-plus-short-foot-right.mp3",
+        "bytes": 27500,
+        "sha256": "72908d58584d1d840fff2f4fa843e993f6887a46d0edee2eda75ea847e5c7720",
+        "sourceWavSha256": "9405ff21903df1521b4644ae98bc166bf88c527beec372bc9bd1447d16845052",
+        "sourceTextSha256": "a2e72c7ff707391e7ae1ca1bd39bd1aee2a14b7b08891f64c5abba25a0f643ac",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-calf-raise",
+      "kind": "movement",
+      "text": "Single-leg Calf Raise",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-calf-raise"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-calf-raise.mp3",
+        "bytes": 18668,
+        "sha256": "879d6522351ddcae18b139a52aad1ea2cb7b82de6fff11aa24a535286c7e7f28",
+        "sourceWavSha256": "f5d59609b17363130ca8c12d62b92f7ffc1e8b3707a5e18f79585f84cad476d8",
+        "sourceTextSha256": "edbc8a4a381c3a58b64ba13ad344ad1c1ebb356c39d9b992d15d8927840db06e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-calf-raise-left",
+      "kind": "movement",
+      "text": "Single-leg Calf Raise (left)",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-calf-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-calf-raise-left.mp3",
+        "bytes": 23084,
+        "sha256": "576f82381414070d575cc1ecb70767fe3b16edbe75427f291453a76df921966c",
+        "sourceWavSha256": "b59d830c211ef7b6f159041d89b4335b2e9f8062e594714a143d1040ebf5bafd",
+        "sourceTextSha256": "3e45c513e0eb7651dbd91634485221df9aef06ae81c866edc34812fa0d803ca4",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-calf-raise-right",
+      "kind": "movement",
+      "text": "Single-leg Calf Raise (right)",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-calf-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-calf-raise-right.mp3",
+        "bytes": 17900,
+        "sha256": "00df23f180d73444b745503643080a668b664da533d13a53ea1b1d72c3da35cf",
+        "sourceWavSha256": "6ebec96efb5f27db37b6f21210741a4bf93de5d660429fc2c7752e1d994fd950",
+        "sourceTextSha256": "06f965f2097a219a623752abf7011db066c9274aeab70a1b049d191c15f8ae76",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-glute-bridge",
+      "kind": "movement",
+      "text": "Single-leg Glute Bridge",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-glute-bridge"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-glute-bridge.mp3",
+        "bytes": 16748,
+        "sha256": "4e7754f5cfa6bfaa0a0104250bdd49ba6c71db17d1fbba83a05ae964f0dfc378",
+        "sourceWavSha256": "265dad3a187ab54a7d8b49cdd22f965153ae1ef81b1ef18a9951ca5bb66e3a5b",
+        "sourceTextSha256": "7a380571fd330c4c9af64aad2c9024a006ae0e0bf7a485212910f1410996bf1e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-glute-bridge-left",
+      "kind": "movement",
+      "text": "Single-leg Glute Bridge (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-glute-bridge"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-glute-bridge-left.mp3",
+        "bytes": 21740,
+        "sha256": "4e1b6075c2b8509bce409b007661a8a2476f071e1e2170ddac983a409eda0975",
+        "sourceWavSha256": "3a37d9371de5dbcb7ad1bc5f3656e38b4cec1846057ca292475f3ba6d3b29e9b",
+        "sourceTextSha256": "d9e626b40b9510731439148a873201a73c15cebcdf22ae41300945fdc999d9ae",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-glute-bridge-right",
+      "kind": "movement",
+      "text": "Single-leg Glute Bridge (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "single-leg-glute-bridge"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-glute-bridge-right.mp3",
+        "bytes": 30188,
+        "sha256": "4df6cf440633409ab664c0f0bae8bef28fe425597fb7d2f1662fb1891b5ca142",
+        "sourceWavSha256": "a8413c7ba2585b1c57beaabf6e398ebf09184f4b5979b67b808408735e8d5c5e",
+        "sourceTextSha256": "95ba15256363b62c320081a9937bf8f9f0589e6f211407a58aa7922cf78dc3b5",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-rdl",
+      "kind": "movement",
+      "text": "Single-leg RDL",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-rdl.mp3",
+        "bytes": 15404,
+        "sha256": "c8b4accfa550b642f08631b54c391936290b06606c778022780fd8b605763fb8",
+        "sourceWavSha256": "d7f1ad63ae9edfc529cefe54e8767aea225a2fc33c32aa64ce55f9251c5dedba",
+        "sourceTextSha256": "400f67daae77deb67dde9160bd73451d13172884b39594c89995ee6f326d9678",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-rdl-left",
+      "kind": "movement",
+      "text": "Single-leg RDL (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-rdl-left.mp3",
+        "bytes": 19244,
+        "sha256": "2e6acddbc1ef6cf51207111e41a9567b94649e812c166aca37ad9fa151aaa311",
+        "sourceWavSha256": "9445181b8ebfe39803c40030fcb259025d6f704e7f2868d93489bc9c90d4aa85",
+        "sourceTextSha256": "a27395a78cda404737e67951f0daca33a9a91c0823705b03ae13dcf78c51e72f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-rdl-right",
+      "kind": "movement",
+      "text": "Single-leg RDL (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-rdl-right.mp3",
+        "bytes": 28268,
+        "sha256": "282e75a50d65989659b04555dbfa6786b73762d73af913c4781a92d40ef60464",
+        "sourceWavSha256": "f9157ca3e0795fcd4851d458e4f029100a5b48e51e72b242b5ba03e237ce26ef",
+        "sourceTextSha256": "11bcdb4b50ebc8796ce7041edf65d7407db29c498b215cada6d539f65ff2e5c7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-rdl-side-1",
+      "kind": "movement",
+      "text": "Single-Leg RDL (side 1)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-rdl-side-1.mp3",
+        "bytes": 30764,
+        "sha256": "2075f8fb9973f91655d1767bdf1754f3f5f5531fc4700d6a1f81f53f893ee19d",
+        "sourceWavSha256": "cd6ea48a61ea2c6c4cf1720fc8250d160a09ed8b669ff4e9941034d191a8e3ca",
+        "sourceTextSha256": "a053e92b1208d57174d53b6aeb9c0ae92c722541c5d2e0d12f60331ff7d70204",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-single-leg-rdl-side-2",
+      "kind": "movement",
+      "text": "Single-Leg RDL (side 2)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "single-leg-rdl"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-single-leg-rdl-side-2.mp3",
+        "bytes": 27500,
+        "sha256": "66e6f1d779267ffca7b22e33db2b0693301ab05191c572cf4465043d4e42d55e",
+        "sourceWavSha256": "26ad24cf2031269c513ddd5991a4332a61810cf35d5f9a687cab154beec7b17b",
+        "sourceTextSha256": "3aeee4defbd5f62691c81290baf9b8f5cba476115288012849511f40a2da954f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-front-kick",
+      "kind": "movement",
+      "text": "Slow Front Kick",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-front-kick"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-front-kick.mp3",
+        "bytes": 12140,
+        "sha256": "15fb735a27eabdf49aa2d58d3e04a72e1eb402968890db85c6d632b6f41e29c4",
+        "sourceWavSha256": "51a0c2033e3931d23eafb6fba280caad90c2860ac9aa47f85fe6099b17f3c64f",
+        "sourceTextSha256": "d2ea51d3e1d51e3d7403829aad1b952e7856d1b4c0ce6990fc4eb854a1f86b25",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-front-kick-left",
+      "kind": "movement",
+      "text": "Slow Front Kick (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-front-kick"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-front-kick-left.mp3",
+        "bytes": 20588,
+        "sha256": "09fa1d235b74f4672d868dd787965d32a748052ccd0a47bfc389a50267087e4a",
+        "sourceWavSha256": "6f8780b0e462a1ef7f5dca28df8144aeb9cfa6cc0077c9a2f14339f0edb5ffaa",
+        "sourceTextSha256": "892925c61231c4e7dfc97fcc7281c28334b090991d206eb816893e70e366f889",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-front-kick-right",
+      "kind": "movement",
+      "text": "Slow Front Kick (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-front-kick"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-front-kick-right.mp3",
+        "bytes": 19820,
+        "sha256": "8bbc55154f079052c1cbe790f12f20de5f8942b026770971af42e5dbb7fe4d00",
+        "sourceWavSha256": "20ccee71a34a1bc86bb0c603678206265a93e64f4f434ce02121278a779306b4",
+        "sourceTextSha256": "20db33b588b01e8ee2ff1aeb205d762359d43dd5cd7e9809e5c8b7e2577e185d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-push-up",
+      "kind": "movement",
+      "text": "Slow Push-up",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "push-ups"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-push-up.mp3",
+        "bytes": 10988,
+        "sha256": "8b0d0d243c98f8641bec9b98cdad3b2d2144e4e90f7eebcf16efdc2b42618542",
+        "sourceWavSha256": "4be2d7e9a520f1745487a33aa64301a12f595f614b43298d7444e3556600c8dc",
+        "sourceTextSha256": "c3e5bac1e5ab020a39fff338b1356b4796094fdd058226433844bb54040d07eb",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-roundhouse-chamber",
+      "kind": "movement",
+      "text": "Slow Roundhouse Chamber",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "slow-roundhouse-chamber"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-roundhouse-chamber.mp3",
+        "bytes": 15404,
+        "sha256": "03cac9f28899e5bc22126c4eb52490a698abbb8fdadf550683d3e83c9fa6cfd4",
+        "sourceWavSha256": "9a6d37aa8eb05b385854085b269d8f84a305a1800d36eb3b13fc22937748cd90",
+        "sourceTextSha256": "dbaa8fed2a35d20d4cfc8dbf7772ca6ff3ce6afb436ceb0cc0b610ce533d42fc",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-roundhouse-chamber-left",
+      "kind": "movement",
+      "text": "Slow Roundhouse Chamber (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "slow-roundhouse-chamber"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-roundhouse-chamber-left.mp3",
+        "bytes": 23084,
+        "sha256": "df6ba082811242c01b7fa59391af85ef0d1bc9d35192b4793734f04b3be2e907",
+        "sourceWavSha256": "e0e78e61a26ff35809c3214ad80bd0b6c97a536dbce91912feef5d1365db6dc8",
+        "sourceTextSha256": "40383735091df4149030fc97a4763c5ddfb52199a044f1e43ed1571c59c0c37b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-roundhouse-chamber-right",
+      "kind": "movement",
+      "text": "Slow Roundhouse Chamber (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "slow-roundhouse-chamber"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-roundhouse-chamber-right.mp3",
+        "bytes": 17900,
+        "sha256": "497ce0fbfe31d8eabadc0e290424f8bb817c177318ad12e25b8123b71a4e38f7",
+        "sourceWavSha256": "454cf13f65ac29948bd8c44b67bd1658a335047b868cf960ca419b26567a455e",
+        "sourceTextSha256": "f056ef7c3253b2e5c9125ef34474267ad92ba8524bbbcdd1036e21f4931a132e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-side-kick",
+      "kind": "movement",
+      "text": "Slow Side Kick",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-side-kick"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-side-kick.mp3",
+        "bytes": 14828,
+        "sha256": "f5a5105b0cdb872847b11b39da68e11206c04981055b6679a6e19599b0818598",
+        "sourceWavSha256": "229d22f41fc2d871ea1d17b9192276eddb03a99a6ae32cc8ed1529c9dee9b65f",
+        "sourceTextSha256": "fe8f333bc6cf66e2859293ee528116df28c458e1562661ca55c02b5669401df6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-side-kick-left",
+      "kind": "movement",
+      "text": "Slow Side Kick (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-side-kick"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-side-kick-left.mp3",
+        "bytes": 17900,
+        "sha256": "d20beda1ce4be215dd8f5b53ff5ee6a786708c8cb8176624d631edc9a0a93275",
+        "sourceWavSha256": "3df176e1e3213fd1b490b5df6258572b332885e2c77853ec2deb78dbc92c78cd",
+        "sourceTextSha256": "34c07434edf1c6d13539c600d83f676660e03c77c91dcbf7bfaad2577a4de0c2",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-side-kick-right",
+      "kind": "movement",
+      "text": "Slow Side Kick (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-side-kick"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-side-kick-right.mp3",
+        "bytes": 21164,
+        "sha256": "82f205b0c5cd5915f844e6e1f3e42574a35e16c0b6cde0559d68d8dbcd82715c",
+        "sourceWavSha256": "f5a18fdb3747966198a3dd6e6d3255e9140d09f28a4c25a32e5ac309462de514",
+        "sourceTextSha256": "33fd9cbde23ce8e842f267dda960cd0168f2f612723d842d9cf92d9aa8e21dc6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-down",
+      "kind": "movement",
+      "text": "Slow Step-down",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-step-down"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-down.mp3",
+        "bytes": 14060,
+        "sha256": "a44803421a2af759bd4cf929f79da405c8e19180e7cc28f49cbc20594a96a5df",
+        "sourceWavSha256": "b9150cc8c5262ef3af9483700dd29d30cfeb4f2429dd656c6fdd1f94117621e4",
+        "sourceTextSha256": "8fec0d3f50793e62cd4413388a10e687d3b6df9bfe9e96c7c75a4550a6b5b7a4",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-down-left",
+      "kind": "movement",
+      "text": "Slow Step-down (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-step-down"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-down-left.mp3",
+        "bytes": 19820,
+        "sha256": "7636fdef1f743b4b763df2f9407560ce58552b0736014b41a848175a83ee0620",
+        "sourceWavSha256": "2bbb8adf1451b9be4124624cf59efa926c4dbbd82d8db90d357e70c57588cfd3",
+        "sourceTextSha256": "16a4dc830e07eef6bec29275061b8ed227ae034e59c4e008b918cea44071e5d8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-down-right",
+      "kind": "movement",
+      "text": "Slow Step-down (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "slow-step-down"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-down-right.mp3",
+        "bytes": 17324,
+        "sha256": "c65ebda91b66b1bf6cb27291b1d3219b70544626418627ce09008136d3ca46bb",
+        "sourceWavSha256": "aa86eb5f089308ab86d54bea1d14e7bed409875651a4efe7de9d271ded1710a7",
+        "sourceTextSha256": "d551ea6a5d65ced6e82c39e9ccef0cc6a467eefbbad0e059abf74c5a1477af7f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-up",
+      "kind": "movement",
+      "text": "Slow Step-up",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-step-up"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-up.mp3",
+        "bytes": 12140,
+        "sha256": "82a7324a8af2fe6a775ad0aeaa96748f766806729bf679b0634117233bbfb0d1",
+        "sourceWavSha256": "3145c0e0970550b5b9052283f0747d89cd26aa29bcd2c13aafbaba858c8abe3b",
+        "sourceTextSha256": "98fa1777eba6d425ea929aa081a96e716423191c2f034213c74346e8b8833310",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-up-left",
+      "kind": "movement",
+      "text": "Slow Step-up (left)",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-step-up"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-up-left.mp3",
+        "bytes": 15404,
+        "sha256": "b4f05d59c4f99496f276e36eda9f5f113026cb13f84b8482d441670ff8432c53",
+        "sourceWavSha256": "6158dc9acb76d2f34f08f0615750d9419dbfb699f2ead0c8ce2762d0e27b01f9",
+        "sourceTextSha256": "a8fe63f045d68764b398d4f37bfaa26e60447009f7678aca3bc2dde125719153",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-slow-step-up-right",
+      "kind": "movement",
+      "text": "Slow Step-up (right)",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "slow-step-up"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-slow-step-up-right.mp3",
+        "bytes": 17324,
+        "sha256": "4274ea7fb924da0a7b802c8cd6986f006eb3ab8dc09bdc7bb17e9c0344c53ea7",
+        "sourceWavSha256": "8cbe3e04635cef08e501425c136c160eb5948744b8ad2ca4295eb8d5a58ec984",
+        "sourceTextSha256": "fd043019d549280c7f491e53a78b359aebbbaa32b9f2ff9aef0098256cb2beda",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-split-squat",
+      "kind": "movement",
+      "text": "Split Squat",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "split-squat"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-split-squat.mp3",
+        "bytes": 13484,
+        "sha256": "843e473214c2c1e341c1354aa5606df228af377d45f094824174f8ec6d063e0a",
+        "sourceWavSha256": "b96657fc94cdfeb36b590ba6b96a414e3f74a2e2ed41c2d9c16adb549be8e36b",
+        "sourceTextSha256": "eeef0c9d8a8cd42d6c52cebbfafd3eda9056e73a833ce2e41076598f484b8a24",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-split-squat-left",
+      "kind": "movement",
+      "text": "Split Squat (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "split-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-split-squat-left.mp3",
+        "bytes": 19820,
+        "sha256": "8a8a53736c2319b16a4bad35b6491406acbdbc5b9f2ef432e5156f0310b69282",
+        "sourceWavSha256": "9a1fa5c57f8162ca8d4dbb0084b88eec446e8ae57a4e8bc166eeb9afecabdc4d",
+        "sourceTextSha256": "30b28027cfd9151d4db2809b2d5d2fb27c3576c205544ec6ec6aa789e22f77c7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-split-squat-right",
+      "kind": "movement",
+      "text": "Split Squat (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "split-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-split-squat-right.mp3",
+        "bytes": 15980,
+        "sha256": "995e8b32ac5273d69230facfe5c8abaa6250db305b74be1f50581022a3394b39",
+        "sourceWavSha256": "cc6071c019d22cfc66d7c0d810d9db4e7ca24a179f368b0aafd2572528fd43c1",
+        "sourceTextSha256": "e0bd65c824bbcd85286fe35a5599e9cb37172199662b6d292ddad0e9d4a74001",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-squat-plus-hammer-curl-2-dumbbells",
+      "kind": "movement",
+      "text": "Squat + Hammer Curl (2 dumbbells)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "dumbbell-hammer-curl",
+          "dumbbell-squat"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-squat-plus-hammer-curl-2-dumbbells.mp3",
+        "bytes": 24428,
+        "sha256": "00746db683e4121eb89b703c772fb7e8db409677f4ffaa1d36d65830aa4e140e",
+        "sourceWavSha256": "94d19e2665298cb683944c8ec5e8ac83351a1315400659866a51dd2d60e817a4",
+        "sourceTextSha256": "b783ef84b2be40ad3f85ba9ac961cdfb3514e61006e8af6c60df2286d686121a",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-squat-to-overhead-press-2-dumbbells",
+      "kind": "movement",
+      "text": "Squat to Overhead Press (2 dumbbells)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "squat-overhead-press"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-squat-to-overhead-press-2-dumbbells.mp3",
+        "bytes": 20588,
+        "sha256": "bfa4c6f5334ce76c5a7db54fd69a544d6948f956dc1d464ce20e2bea8e0eff96",
+        "sourceWavSha256": "22fbd82c6c5a3285ca1b982eeb3d7fecda57cf80bef04893659b0abd365367e1",
+        "sourceTextSha256": "623c73c5648ced1a3047ff1a442f8a6adb9f628c20bcf9e8819bd22feef58938",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-squat-to-overhead-reach",
+      "kind": "movement",
+      "text": "Squat To Overhead Reach",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "bodyweight-squat"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-squat-to-overhead-reach.mp3",
+        "bytes": 18668,
+        "sha256": "bdbccee9d177157f299612322ef71aea61ccd1c0489100d2efa9beefb8d06002",
+        "sourceWavSha256": "af79c7f0401bf19d741473f9154f63332916cb01fd647984485ca15301ebc171",
+        "sourceTextSha256": "f16c0a435bec2c3ed391fa05a2bd9a20b2483903bf6d6d509aa870d8c031bcda",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-standing-crunch-with-dumbbell-march",
+      "kind": "movement",
+      "text": "Standing Crunch with Dumbbell (march)",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "standing-crunch-with-dumbbell"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-standing-crunch-with-dumbbell-march.mp3",
+        "bytes": 20588,
+        "sha256": "15d2767359e166ce8f9af597b108bcb0cc3ed3bb71924d0be21a98dad8447c92",
+        "sourceWavSha256": "c56257bc6f0d3edae50e76aa7bd3705181fe0dc2530752827335996ead977912",
+        "sourceTextSha256": "a8ec2dd7f0087d7d8fd8897a5105539ebbc3c3e8228e28bdf558a00246368cc7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-standing-star-crunch",
+      "kind": "movement",
+      "text": "Standing Star Crunch",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "standing-star-crunch"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-standing-star-crunch.mp3",
+        "bytes": 12908,
+        "sha256": "62eb049d3a18af08db255c3252eb39222fecded5dafd3c86ef08443e1faef02a",
+        "sourceWavSha256": "b74ea090b4ee1640327a239955e2814158a7a244ff5cc08378883ed946f16dd8",
+        "sourceTextSha256": "15bf511ad9787665cbc86d86b664c643c80064ae9943d353170bc96afa3016ac",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-standing-wall-scapular-reach",
+      "kind": "movement",
+      "text": "Standing Wall Scapular Reach",
+      "source": {
+        "routineIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "dragon-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "standing-wall-scapular-reach"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-standing-wall-scapular-reach.mp3",
+        "bytes": 21740,
+        "sha256": "a13c6b15ddd163099f167cab8fe7fa040288d821a9c24907edcbb5b83a3eb83f",
+        "sourceWavSha256": "33f12ee5cb7497c409dafe957720c71e1141fbba8acbd19bfd069904a51fea3f",
+        "sourceTextSha256": "41c80380756e8a9e533750949be2f932b276a4bebcc28f818383ee12eb20126f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-step-jacks",
+      "kind": "movement",
+      "text": "Step Jacks",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "step-jacks"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-step-jacks.mp3",
+        "bytes": 12140,
+        "sha256": "95dd3ba29138b9ace8c0c5cd1f56ee25bfd0a4d887f0fb9fea849e034b2e376f",
+        "sourceWavSha256": "ac52646da438894996b6bc71d6463de58e0f60545bdbb86170078745ba508f72",
+        "sourceTextSha256": "2c9f9dabee43957f720aadd3ab024977dfa8e5b1dcb7c081db2898959a859064",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-suitcase-march",
+      "kind": "movement",
+      "text": "Suitcase March",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "iron-roots"
+        ],
+        "movementIds": [
+          "suitcase-march"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-suitcase-march.mp3",
+        "bytes": 15404,
+        "sha256": "a3ad51ee9414c461535e1773269579b9c67b819ab3fbe9428fc270334e34ee30",
+        "sourceWavSha256": "644cebc4e6b67d40d73fef44709a532adc8bfd0341ad8f5d4ff1e0a96a1497a1",
+        "sourceTextSha256": "006c41e82cec095d83af08f13819e69a6f9d89e61be2bce2f0a4de8de8720f37",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supine-active-hamstring-extension",
+      "kind": "movement",
+      "text": "Supine Active Hamstring Extension",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "supine-active-hamstring-extension"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supine-active-hamstring-extension.mp3",
+        "bytes": 23084,
+        "sha256": "e3738137403d0aa2b226785f96905d797cdeb8bec79263e77493160d4ba795c0",
+        "sourceWavSha256": "57aa273cb70bf9cd4611b6bd38d271f7347290bae67b8e351974ec41bc631db6",
+        "sourceTextSha256": "abde54afd74b470c68c39be36d8cf25cf49f7f7c5127d35e8140c5f553154d06",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-one-arm-row",
+      "kind": "movement",
+      "text": "Supported One-arm Row",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "supported-one-arm-row"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-one-arm-row.mp3",
+        "bytes": 15404,
+        "sha256": "e26fe95c0b9bd626319219b82a8a90cfb4eea3f38b6d23684761ba599eb96cc6",
+        "sourceWavSha256": "a3b8d2d9d0f21c0b1a679282a9f89ca6c58e442178379cfbecd07e9fe2480146",
+        "sourceTextSha256": "920cd4c2915d99005d2ee5b7b5d07aa03bf59697ba3d560fa8a670abde7b69c1",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-one-arm-row-left",
+      "kind": "movement",
+      "text": "Supported One-arm Row (left)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "supported-one-arm-row"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-one-arm-row-left.mp3",
+        "bytes": 18668,
+        "sha256": "6f1a2ea82cf6d940fb37b321d1d801def3c5e6b10eb31598552ad861071dca92",
+        "sourceWavSha256": "556692a900ff109054cbd28262b7b638b10c9331498cc033231acc7f45b99608",
+        "sourceTextSha256": "7290095ae8e60333cf276e869b3bb8c694f2eeb23eb54882a7a3e594b26e3e4d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-one-arm-row-right",
+      "kind": "movement",
+      "text": "Supported One-arm Row (right)",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "supported-one-arm-row"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-one-arm-row-right.mp3",
+        "bytes": 25580,
+        "sha256": "f0f86e7ec26b56757acca43b263fc94a72cefcd85b917b626928c4bb1611961e",
+        "sourceWavSha256": "5caa65aff25456dd48019265f0cef6e15f3e1e1550dac4c7c37f285999d4797e",
+        "sourceTextSha256": "e67c2fadcc48ef0e356493d9a887f69a4867e6abaa53de73d815aa14a03569c6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-side-reach-plus-breathing",
+      "kind": "movement",
+      "text": "Supported Side Reach + Breathing",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "supported-side-reach-breathing"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-side-reach-plus-breathing.mp3",
+        "bytes": 21164,
+        "sha256": "ed44dc5162cc9ebcaf63602749cd78f4dc725b8616476bd7f34fc0a5138d5f6c",
+        "sourceWavSha256": "007df1c5657f39eecee6efaf71488b77a42736a647992778e0232655c53c5fcb",
+        "sourceTextSha256": "e364cae92b76cc1e8232fa48b91ae96d9126fb350a744d73cf5705c0ba59723f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-standing-side-leg-raise",
+      "kind": "movement",
+      "text": "Supported Standing Side-leg Raise",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "supported-standing-side-leg-raise"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-standing-side-leg-raise.mp3",
+        "bytes": 24428,
+        "sha256": "de8c2708f21d339e787a2ef5fef36b67277503a7503fa1123c42696617f59f8c",
+        "sourceWavSha256": "051cb82adbcef8261872de0d132fd01d3ac59ec7e136ed0e78df92f4c40e0e22",
+        "sourceTextSha256": "c3ade93ca21b89f57134a3ed4b2a04dcfbc46ee554868bfef741653375e57dfb",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-standing-side-leg-raise-left",
+      "kind": "movement",
+      "text": "Supported Standing Side-leg Raise (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "supported-standing-side-leg-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-standing-side-leg-raise-left.mp3",
+        "bytes": 25580,
+        "sha256": "c94f6979ecf71f7cc918f6f9c63c63fd2336e12e6ee88e86dcb768d204d06ca9",
+        "sourceWavSha256": "a49af8717292948f50362dbb7171096d5546777cf8a978f4da4b8f39a1669750",
+        "sourceTextSha256": "94cc35f093aa568147751294b100a3c1e6dd7783da95b8b32ca5cae327deec4b",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-supported-standing-side-leg-raise-right",
+      "kind": "movement",
+      "text": "Supported Standing Side-leg Raise (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "supported-standing-side-leg-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-supported-standing-side-leg-raise-right.mp3",
+        "bytes": 32684,
+        "sha256": "ebcec005cd0ea6b15f0727e4628cb3b6211d70f297bec34f70f38c62d3c13a91",
+        "sourceWavSha256": "9346dba51ebe06c7cf5cf0200fd856037633d0f94facd2b8c81b73bcc114d835",
+        "sourceTextSha256": "9442d870d814632fdc532e51b44ed02d246e9bcca058d79feb69a3f855c41190",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-tibialis-raises",
+      "kind": "movement",
+      "text": "Tibialis Raises",
+      "source": {
+        "routineIds": [
+          "silk-coils"
+        ],
+        "blockIds": [
+          "silk-coils"
+        ],
+        "movementIds": [
+          "tibialis-raises"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-tibialis-raises.mp3",
+        "bytes": 13484,
+        "sha256": "52f1fc2a8ac73257096e8a653af9cce261a5a6452f5e5c7cf7e2cd07c6ae8d6a",
+        "sourceWavSha256": "f0c12425a44b42f4b1207de26d573d10ed32aa46cff32c8d8d081f8151c25034",
+        "sourceTextSha256": "6fb760c95150057c0961484dbb8e6d1d9f4826547d5c42dd24402713746ee6dd",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-toe-spread-plus-short-foot",
+      "kind": "movement",
+      "text": "Toe-spread + Short-foot",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "toe-spread-short-foot"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-toe-spread-plus-short-foot.mp3",
+        "bytes": 15404,
+        "sha256": "29d9a9cdfbe107958cd9c94acb60a166471c233852b8da39ef93cd25e719bc20",
+        "sourceWavSha256": "715ea8dbe3ad0c87375fd32d9b22d4f97703574b0257e5128ced6e3e3258fc06",
+        "sourceTextSha256": "f4c4d631b268d52f5c9ee10e51b43acb4d824c9fb80829af78aa44b602b558b8",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-two-arm-bent-over-row",
+      "kind": "movement",
+      "text": "Two-arm Bent-over Row",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "two-arm-bent-over-row"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-two-arm-bent-over-row.mp3",
+        "bytes": 14060,
+        "sha256": "df85969f7cc507ef2b8e90e31ae5bf0df6c20b2213328652e7b88c2924de0efe",
+        "sourceWavSha256": "95cdec2defabf14f410303dcc0903f3ab40266f896e7fd354e9e07b632029e1c",
+        "sourceTextSha256": "2f30d7c3dc8908f6f3a8d27bfa535b6663cc2fe3d4aca6aa437e937995fa06a7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-two-db-farmer-carry",
+      "kind": "movement",
+      "text": "Two-DB Farmer Carry",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "farmer-carry"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-two-db-farmer-carry.mp3",
+        "bytes": 14060,
+        "sha256": "1559ccb7ccc3bace3e988bba81fb347933ca2aecbbe77403815061252c8360d1",
+        "sourceWavSha256": "c44657b9038d2ab47a9329a6e9434cd56838d0b9e250a4e35fe9b0fa69a32e72",
+        "sourceTextSha256": "5de190331bf7a3293fa0031fd644b5770a1623fc91ba5f112913b6c9664a4ef6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-two-db-romanian-deadlift",
+      "kind": "movement",
+      "text": "Two-DB Romanian Deadlift",
+      "source": {
+        "routineIds": [
+          "crane-longform"
+        ],
+        "blockIds": [
+          "crane-longform"
+        ],
+        "movementIds": [
+          "two-dumbbell-romanian-deadlift"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-two-db-romanian-deadlift.mp3",
+        "bytes": 21164,
+        "sha256": "39bdfba88e2820336330f9d580e515752727728f1d7f02ccbb08d6ca36f2ff7d",
+        "sourceWavSha256": "e1e2b58bc89ae78119630526842d8514123a7085474d09bd9cc4871a61e6318f",
+        "sourceTextSha256": "7f9289bb36befbe0910e493df3803bb7d7c12c6d7c36fb351b8d85dcd3f80815",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-two-hand-db-swing",
+      "kind": "movement",
+      "text": "Two-hand DB Swing",
+      "source": {
+        "routineIds": [
+          "iron-roots"
+        ],
+        "blockIds": [
+          "iron-roots"
+        ],
+        "movementIds": [
+          "dumbbell-swing"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-two-hand-db-swing.mp3",
+        "bytes": 13484,
+        "sha256": "b083785cc02d4061fb42f276a70ea3db1bc680d53cadf44d7c08259cd9ae43d0",
+        "sourceWavSha256": "4a9a5591d9ada62a283b80ba6cf4eeb1471720a02ab601bddbcd77bdf9b72aa4",
+        "sourceTextSha256": "82d27e64c4f0491a3886a878fbcbad53ba2e4f9d4625f00e1e12108e648e534d",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-walking-high-knees-lunge",
+      "kind": "movement",
+      "text": "Walking High Knees Lunge",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "power-half-lunge-knee-drive"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-walking-high-knees-lunge.mp3",
+        "bytes": 18668,
+        "sha256": "41213e590177edc8e6b12c3b98705be9c3cf0e037fff80df6bcb1dfeeda6d363",
+        "sourceWavSha256": "81a77fd9e5d49a6ff8099c5ead1a96ded0e512a7d377ee61119b74c3ef09a65f",
+        "sourceTextSha256": "9281ee4658650e8a68b708118671136640b86881e853d45bd97c2c42fbfff88f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-external-rotation-isometric",
+      "kind": "movement",
+      "text": "Wall External-rotation Isometric",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-external-rotation-isometric"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-external-rotation-isometric.mp3",
+        "bytes": 23660,
+        "sha256": "3009f1ee04ac315710eed040de5e33c51d78bf318c34ab250d2d54dc661e5d48",
+        "sourceWavSha256": "a5e2187e8f8539b75007783bf9503caa103f5c6b5691252310c646f1a49a0808",
+        "sourceTextSha256": "5be9d46780da71dece97162385f7aa871a2d41076db36ac17769cb965d257237",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-external-rotation-isometric-left",
+      "kind": "movement",
+      "text": "Wall External-rotation Isometric (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-external-rotation-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-external-rotation-isometric-left.mp3",
+        "bytes": 23084,
+        "sha256": "a96e3d9bd2c14e6f0c5f432b5534bc2c257e8cf2fe8713e6706aafde8ed9683f",
+        "sourceWavSha256": "045e4389e626072a5056353c6a14e66929695721674f2359ac4071be8bbe4442",
+        "sourceTextSha256": "8f18094d6687d91ed9bd81cf90f1d825d062a521aae3aa939bb6422643a7a159",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-external-rotation-isometric-right",
+      "kind": "movement",
+      "text": "Wall External-rotation Isometric (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-external-rotation-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-external-rotation-isometric-right.mp3",
+        "bytes": 28268,
+        "sha256": "7c7d46ed11d96c70868d8d1d65fef7698bdd0682927cede1aca7b806cde2d35d",
+        "sourceWavSha256": "7b2693fb779e74b13f7005af9693faf416a9898ce47f44a2a7eb2b2ffac0d3b8",
+        "sourceTextSha256": "de4700f142d0ca321a73807d1fcbe46916f7299b9496ea190537d8dad8d27b17",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-abduction-isometric",
+      "kind": "movement",
+      "text": "Wall-press Hip-abduction Isometric",
+      "source": {
+        "routineIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-abduction-isometric.mp3",
+        "bytes": 22508,
+        "sha256": "5b896069bf1db917ce6e67681c7285671af1e7e869d0424a9d73c9ffc1a7469b",
+        "sourceWavSha256": "a5cab6b28fc76ab4a913d0e50371104872154084c0589e76500b1d863eb53c90",
+        "sourceTextSha256": "5131c27e006c9ce0ab00d87d81fcf00bb5dff79faae2cc0ca2b002bd13f25480",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-abduction-isometric-left",
+      "kind": "movement",
+      "text": "Wall-press Hip-abduction Isometric (left)",
+      "source": {
+        "routineIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-abduction-isometric-left.mp3",
+        "bytes": 22508,
+        "sha256": "da04145cc2f4ef2e74e87ef21164135ed47b7a768fdfe865354a48205a1d351e",
+        "sourceWavSha256": "ec05e515f05d73678285ee129589f1ca082b920edf2123da8b5e59c87605905b",
+        "sourceTextSha256": "2cef1dca34354c46fdb564a5d9aca789a27b951cf72c8756ecbd2c0804dd37aa",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-abduction-isometric-right",
+      "kind": "movement",
+      "text": "Wall-press Hip-abduction Isometric (right)",
+      "source": {
+        "routineIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "iron-roots",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-abduction-isometric-right.mp3",
+        "bytes": 25004,
+        "sha256": "a7b4fc756ec023d807eed0e69821b453e5481a2359c71959eff0cb4ad58b8616",
+        "sourceWavSha256": "b089c631517d6952f213d5022010a88e00b3c08a0763d8ade7e82cbed61b8608",
+        "sourceTextSha256": "72138363eea0f17b470a730761a6389a867c67148eadfd6c3b5aeaacfd464956",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-isometric",
+      "kind": "movement",
+      "text": "Wall-press Hip Isometric",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-isometric.mp3",
+        "bytes": 21164,
+        "sha256": "5a864d7ffd38b8a4ffa0f513de1e5c75bf405916a504a4d493b850dff0bba946",
+        "sourceWavSha256": "9820d784ce8676dd3c6bc89537e6f4961adbe3aa9aa4298a733dad85572ff93f",
+        "sourceTextSha256": "6b87ec40a3d04fb743831f173e04fd17a84fc994494bedf400c12e1f59afd6ed",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-isometric-left",
+      "kind": "movement",
+      "text": "Wall-press Hip Isometric (left)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-isometric-left.mp3",
+        "bytes": 23660,
+        "sha256": "9315025fa55da4e154b11d07413ca2fd30460482fe819155806f0e237f3b6c57",
+        "sourceWavSha256": "cf8e5d95c3605bdac50274b5fe8d6c5ab014fb20a7809609f387b8172f420846",
+        "sourceTextSha256": "0bb336535e3280cbcb675139c86b701444b35bac16fa69e4900f19c1d52c3900",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-press-hip-isometric-right",
+      "kind": "movement",
+      "text": "Wall-press Hip Isometric (right)",
+      "source": {
+        "routineIds": [
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "wall-press-hip-abduction-isometric"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-press-hip-isometric-right.mp3",
+        "bytes": 28844,
+        "sha256": "aabbce038d43a5cb1f7b0e4bfe0da5f09cbe13b254f2a5953f6a3193196a64a0",
+        "sourceWavSha256": "e655f343a14164d2aa781767819449df571e5c3e6e395acdd0f8ea582488fc30",
+        "sourceTextSha256": "cca6cf1e4983dec39eed331af3b2b052ced4bc86a7ad2073c3aa5d343169cb92",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-wall-slides",
+      "kind": "movement",
+      "text": "Wall Slides",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "silk-coils"
+        ],
+        "movementIds": [
+          "wall-slides"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-wall-slides.mp3",
+        "bytes": 10988,
+        "sha256": "0f0664977c0a0f9e1e43689ffad3495aa097bf47a0f49271a238b21fe4d96063",
+        "sourceWavSha256": "8c5de9a6bc8196ee761dc7d8abeb96b99f8061f0a16b96a63321f87d45e5966c",
+        "sourceTextSha256": "b80abdef04b52d0d19eac451f9c1c90a4f25a77458b7f9505ad40b2b0be4787e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-weighted-russian-twist",
+      "kind": "movement",
+      "text": "Weighted Russian Twist",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "weighted-russian-twist"
+        ],
+        "roles": [
+          "interval-display-name",
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-weighted-russian-twist.mp3",
+        "bytes": 16748,
+        "sha256": "0e2c17d2d45ba0e4efa7b1525568594e1ee1cb2d7bae79df427ce5f635f737a5",
+        "sourceWavSha256": "c5d93096a4047fdf840306f71a38c5f05c3d9f6a3d0ca420b35df50ec012338b",
+        "sourceTextSha256": "d46e7e1df5f55d24f4a95ae3b98e175501c7a71f214d50b980974342fa82e0dc",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-weighted-sit-up",
+      "kind": "movement",
+      "text": "Weighted Sit-up",
+      "source": {
+        "routineIds": [
+          "madfit-30min-hiit"
+        ],
+        "blockIds": [
+          "madfit-30min-hiit"
+        ],
+        "movementIds": [
+          "weighted-sit-up"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-weighted-sit-up.mp3",
+        "bytes": 7148,
+        "sha256": "6d12826837264e9fbab4eee9e9c8a806d6b9f48dff1c4f6b8cf058bbe5ed6e4a",
+        "sourceWavSha256": "dfa67c32f51fcb78ced588995dbbdfbd5aaef91afe2a87b1c3b593d00c51e0b6",
+        "sourceTextSha256": "ddd2cd7cdc6db2266155d8cd7013fddd165b19a999808b3cc7523dbee92b4447",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-weighted-straight-knee-calf-raise",
+      "kind": "movement",
+      "text": "Weighted Straight-knee Calf Raise",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "weighted-straight-knee-calf-raise"
+        ],
+        "roles": [
+          "movement-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-weighted-straight-knee-calf-raise.mp3",
+        "bytes": 20588,
+        "sha256": "1aaa1d90bad5d3cc7447a4c97805325254625da9b032a03fc482f2556fe859d3",
+        "sourceWavSha256": "2e24e83eef3492d26c5f1089f0ec5ddcc2c9a6d7470dbdae9000524f56d6e5d3",
+        "sourceTextSha256": "009d02d55da7355e3da07470c1b704490fb82fb392f3a3ff1f58ade62e444a5f",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-weighted-straight-knee-calf-raise-left",
+      "kind": "movement",
+      "text": "Weighted Straight-knee Calf Raise (left)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "weighted-straight-knee-calf-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-weighted-straight-knee-calf-raise-left.mp3",
+        "bytes": 19820,
+        "sha256": "86b1872f0377a5cc78d95a337543b99e61f1716ca8578c31ff74630c5f945112",
+        "sourceWavSha256": "f583b5039cdff03a53e88a9c9c10b23d355eb27bae7b8c75157732be64bc9208",
+        "sourceTextSha256": "1dc86fd1d13f4127474c0fb176f009b58978ebbfa3484f58e44f557f9a2889f7",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "movement-weighted-straight-knee-calf-raise-right",
+      "kind": "movement",
+      "text": "Weighted Straight-knee Calf Raise (right)",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform"
+        ],
+        "movementIds": [
+          "weighted-straight-knee-calf-raise"
+        ],
+        "roles": [
+          "interval-display-name"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/movement-weighted-straight-knee-calf-raise-right.mp3",
+        "bytes": 18668,
+        "sha256": "288a31034a38c841615890411fafb58ed5b4de9886d274b547c2e6a0178b938b",
+        "sourceWavSha256": "68a7e2588b152b0f43ef0f0ea7f0f174ccbd30f769ce0db5e160b13464cf10d4",
+        "sourceTextSha256": "f53c655fdffb6178f6b29fe41743c1bbd137ea3cb824186724dba957ea7fbf02",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "next",
+      "kind": "next",
+      "text": "Next",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "content-wide"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/next.mp3",
+        "bytes": 9644,
+        "sha256": "467831d477e0f8c2d77e72f6a9cdbc2242f5a847a56c8261440b5f7ac487c0bc",
+        "sourceWavSha256": "6f7597f59c1f86b9c4935041479c36460a6934a3d8fcc84105a6cd887e3f269b",
+        "sourceTextSha256": "1ff57a29d7c9d11bdf61c1b80f2b289b44c1ea844824d4b94a0d52b6ba5fc858",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "rest",
+      "kind": "boundary",
+      "text": "Rest",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "content-wide"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/rest.mp3",
+        "bytes": 8300,
+        "sha256": "953252fa9b6b8df8dcb7e1e6d272f62255903080c2c1957d1dd729916ecee284",
+        "sourceWavSha256": "eeae8d09a9886761952e52fb87b4a8ca0febb3711d52fff06b011995e20ff207",
+        "sourceTextSha256": "05863ec2c378927634badbb44e31103dc47f0a0f4df78ae2fcbcc4d915899f5e",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "side-alternating",
+      "kind": "side",
+      "text": "Alternating sides",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "interval-side"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/side-alternating.mp3",
+        "bytes": 13484,
+        "sha256": "d2e8ebed772375d8648103b6c2079820c4a544b773e6baf6f85c4f4d8111e17d",
+        "sourceWavSha256": "5dec0a1160f0315a5d7b569a00b7b9b3f7af2355a3e69cb3ad553397c0e6fe7a",
+        "sourceTextSha256": "40b170f7ea29f2a988bb2586476e1fc912e6a7717c27b6309a978c18995be551",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "side-first",
+      "kind": "side",
+      "text": "First side",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "interval-side"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/side-first.mp3",
+        "bytes": 7724,
+        "sha256": "94f3f9acaf531c6f93c752eae309ec84d24e5044800cb72997cc117c22788c34",
+        "sourceWavSha256": "936c56d8069237c6d89530749bcfc5aaf2085fdf094b23ea1f79199651a76834",
+        "sourceTextSha256": "aa15613559f3455f62012e813ef5d82445e0b2166867caf012302612ef269dd1",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "side-left",
+      "kind": "side",
+      "text": "Left",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "interval-side"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/side-left.mp3",
+        "bytes": 9644,
+        "sha256": "870cc51bbfffaf090605f37e44b0a55a66460722cbf414424cc8a0285d3d4983",
+        "sourceWavSha256": "53913db0349e86ff9d3d4b2b1eb2a9a93cfd48e0ce2decba79c3a9994505ca2b",
+        "sourceTextSha256": "58eb9032e3bb83f0e39d644ebc87ca254117b95bf458483bec7379bea0b419d0",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "side-right",
+      "kind": "side",
+      "text": "Right",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "interval-side"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/side-right.mp3",
+        "bytes": 5228,
+        "sha256": "cb8dbdf39c2966002bc35f73481218cb228541ae014e13fe34304a706c13417b",
+        "sourceWavSha256": "9a763f746f7eff53278bf8c72921a75047cc7e76bd5495a75bae3b368e120285",
+        "sourceTextSha256": "883361d5d682a1574410961ce51450b6e036a779c9f098dec71e28aec832bfa6",
+        "sourceVoice": "matt"
+      }
+    },
+    {
+      "id": "side-second",
+      "kind": "side",
+      "text": "Second side",
+      "source": {
+        "routineIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "blockIds": [
+          "crane-longform",
+          "dragon-longform",
+          "iron-roots",
+          "madfit-30min-hiit",
+          "silk-coils"
+        ],
+        "movementIds": [],
+        "roles": [
+          "interval-side"
+        ]
+      },
+      "asset": {
+        "type": "audio/mpeg",
+        "url": "data/voice/assets/side-second.mp3",
+        "bytes": 10220,
+        "sha256": "6f65f14c7e7803208b541a228913fea8f0dd73b1992138d5310559d10f2ad8bc",
+        "sourceWavSha256": "bea9ead731889f1b89e598411be517955ffacf3cb2be7c3a33e9cf0c96187c00",
+        "sourceTextSha256": "dd54ac47d51406337bb1ab35fc49903b0c237decff03a3fac7615596d49ced70",
+        "sourceVoice": "matt"
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { normalizeCueSettings } from './settings.mjs';
 
 const DEFAULT_MAX_EVENT_LAG_MS = 500;
+const DEFAULT_CONTEXT_RESUME_TIMEOUT_MS = 500;
 
 function browserContextFactory() {
   const AudioContextClass = globalThis.AudioContext ?? globalThis.webkitAudioContext;
@@ -12,6 +13,7 @@ export class AudioCuePlayer {
   constructor({
     contextFactory = browserContextFactory,
     maxEventLagMs = DEFAULT_MAX_EVENT_LAG_MS,
+    resumeTimeoutMs = DEFAULT_CONTEXT_RESUME_TIMEOUT_MS,
     settings,
     cueSettings,
   } = {}) {
@@ -19,20 +21,40 @@ export class AudioCuePlayer {
     if (!Number.isFinite(maxEventLagMs) || maxEventLagMs < 0) {
       throw new TypeError('maxEventLagMs must be a non-negative number');
     }
+    if (!Number.isFinite(resumeTimeoutMs) || resumeTimeoutMs <= 0) {
+      throw new TypeError('resumeTimeoutMs must be a positive number');
+    }
     this.contextFactory = contextFactory;
     this.maxEventLagMs = maxEventLagMs;
+    this.resumeTimeoutMs = resumeTimeoutMs;
     this.context = null;
     this.cueSettings = normalizeCueSettings(cueSettings ?? settings);
   }
 
   async unlock() {
     if (!this.context) this.context = this.contextFactory();
-    if (this.context.state === 'suspended') await this.context.resume();
-    return this.context.state === 'running';
+    return this._resumeContext();
   }
 
   async resume() {
-    if (this.context?.state === 'suspended') await this.context.resume();
+    return this._resumeContext();
+  }
+
+  async _resumeContext() {
+    if (!this.context) return false;
+    if (this.context.state !== 'suspended') return this.context.state === 'running';
+    let timeoutId;
+    try {
+      const resumed = await Promise.race([
+        Promise.resolve().then(() => this.context.resume()).then(() => true, () => false),
+        new Promise((resolve) => {
+          timeoutId = setTimeout(() => resolve(false), this.resumeTimeoutMs);
+        }),
+      ]);
+      return resumed === true && this.context.state === 'running';
+    } finally {
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    }
   }
 
   setSettings(settings) {

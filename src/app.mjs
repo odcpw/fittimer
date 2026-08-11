@@ -1,5 +1,6 @@
 import { IntervalEngine } from './interval-engine.mjs';
 import { AudioCuePlayer } from './audio-cues.mjs';
+import { VoiceCueQueue } from './voice-cues.mjs';
 import { createWakeLockController } from './wake-lock.mjs';
 import {
   appendWorkoutHistory,
@@ -98,6 +99,8 @@ let activeRoutine = null;
 let mediaPacks = new Map();
 let contentIndex = null;
 let selectedMediaPack = null;
+let voicePack = null;
+let voicePackLoad = null;
 let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
@@ -109,6 +112,7 @@ const ownedBlobUrls = new WeakMap();
 const settingsStore = createSettingsStore(hasDocument ? undefined : null);
 let currentSettings = settingsStore.load();
 const audioCues = new AudioCuePlayer({ settings: currentSettings });
+const voiceCues = new VoiceCueQueue({ settings: currentSettings });
 const wakeLockController = createWakeLockController();
 
 const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
@@ -128,6 +132,18 @@ function requestWakeLock() {
 
 function releaseWakeLock() {
   void wakeLockController.release();
+}
+
+function startVoicePackLoad() {
+  if (currentSettings.voice.packId !== VOICE_PACK_FRANKENTTS_V1) return null;
+  const pending = voiceCues.loadPack();
+  voicePackLoad = pending;
+  void pending.then((pack) => {
+    if (pack) voicePack = pack;
+  }).catch(() => {
+    // VoiceCueQueue bounds and absorbs pack failures; SpeechSynthesis remains the fallback.
+  });
+  return pending;
 }
 
 function settingsPackLabel(packId) {
@@ -396,6 +412,8 @@ async function loadContent() {
   });
 
   selectedRoutine = routines[0] ?? null;
+  voiceCues.setIntervals(selectedRoutine?.intervals ?? []);
+  startVoicePackLoad();
   renderRoutineList();
   elements.start.disabled = selectedRoutine === null;
   return index;
@@ -560,6 +578,8 @@ function renderSettings(settings) {
 function persistSettings(patch) {
   currentSettings = settingsStore.update(patch);
   audioCues.setSettings(currentSettings);
+  voiceCues.setSettings(currentSettings);
+  startVoicePackLoad();
   if (patch?.visuals) {
     applySelectedMediaPack();
   }
@@ -804,11 +824,18 @@ function replayCurrentVideos() {
 function startWorkout(routine) {
   stopAnimationLoop();
   activeRoutine = routine;
+  voiceCues.setIntervals(routine.intervals);
   engine = new IntervalEngine(routine.intervals);
   engine.subscribe((event) => {
+    const voiceAllowsCountdown = voiceCues.handle(event);
     if (event.type === 'done') recordFinishedWorkout();
+    if (event.type === 'done') voiceCues.clear();
     if (event.type === 'tick') renderWorkout(event.snapshot);
-    else audioCues.handle(event);
+    else if (event.type === 'countdown321') {
+      if (voiceAllowsCountdown) audioCues.handle(event);
+    } else {
+      audioCues.handle(event);
+    }
   });
   renderedInterval = null;
   renderedPhase = null;
@@ -949,7 +976,12 @@ function routineIntervals(routine) {
  * reached through movement IDs in those installed routines and the selected
  * pack only. Unreferenced pack entries and the exercise catalog are excluded.
  */
-export function collectContentUrls(index, installedRoutines = routines, mediaPack = selectedMediaPack) {
+export function collectContentUrls(
+  index,
+  installedRoutines = routines,
+  mediaPack = selectedMediaPack,
+  installedVoicePack = voicePack,
+) {
   const files = new Set(['data/content-index.json']);
   const installed = Array.isArray(installedRoutines) ? installedRoutines : [];
 
@@ -975,6 +1007,12 @@ export function collectContentUrls(index, installedRoutines = routines, mediaPac
       if (typeof asset.url === 'string') files.add(asset.url);
     }
   }
+  if (installedVoicePack?.id === VOICE_PACK_FRANKENTTS_V1) {
+    files.add('data/voice/voice-pack-v1.json');
+    for (const phrase of installedVoicePack.phrases ?? []) {
+      if (typeof phrase.asset?.url === 'string') files.add(phrase.asset.url);
+    }
+  }
   return [...files];
 }
 
@@ -992,6 +1030,7 @@ function openEndConfirmation() {
   if (!WORKOUT_STATES.has(snapshot.state)) return;
 
   if (snapshot.state !== 'paused') {
+    voiceCues.clear({ resetAnnouncements: false });
     if (!engine.pause()) return;
     stopAnimationLoop();
   }
@@ -1008,6 +1047,8 @@ function closeEndConfirmation({ resume = true } = {}) {
 
 function restartCompletedWorkout() {
   if (!engine || !activeRoutine || engine.getSnapshot().state !== 'done') return;
+  voiceCues.clear();
+  voiceCues.setIntervals(activeRoutine.intervals);
   engine.restart();
   engine.start();
   requestWakeLock();
@@ -1017,6 +1058,7 @@ function restartCompletedWorkout() {
 function goHome() {
   releaseWakeLock();
   stopAnimationLoop();
+  voiceCues.clear();
   disposeStageVisuals();
   engine = null;
   activeRoutine = null;
@@ -1044,6 +1086,7 @@ async function prepareOffline(index) {
   if (!worker) throw new Error('Service worker did not become active');
 
   const channel = new MessageChannel();
+  const installedVoicePack = voicePack ?? await voicePackLoad ?? null;
   const acknowledgement = new Promise((resolve, reject) => {
     channel.port1.onmessage = ({ data }) => {
       if (data?.ok) resolve();
@@ -1052,7 +1095,7 @@ async function prepareOffline(index) {
   });
   worker.postMessage({
     type: 'CACHE_CONTENT',
-    urls: collectContentUrls(index, routines, selectedMediaPack),
+    urls: collectContentUrls(index, routines, selectedMediaPack, installedVoicePack),
   }, [channel.port2]);
   try {
     await acknowledgement;
@@ -1067,6 +1110,7 @@ if (hasDocument) {
   const pageLifetime = new AbortController();
   const listenerOptions = { signal: pageLifetime.signal };
   window.addEventListener('pagehide', () => {
+    void voiceCues.dispose().catch(() => {});
     void wakeLockController.dispose();
     pageLifetime.abort();
   }, { once: true });
@@ -1077,6 +1121,7 @@ if (hasDocument) {
     const row = event.target instanceof Element ? event.target.closest('[data-routine-index]') : null;
     if (!row) return;
     selectedRoutine = routines[Number(row.dataset.routineIndex)] ?? selectedRoutine;
+    voiceCues.setIntervals(selectedRoutine?.intervals ?? []);
     renderRoutineList();
   }, listenerOptions);
 
@@ -1090,8 +1135,7 @@ if (hasDocument) {
 
   elements.start.addEventListener('click', () => {
     if (selectedRoutine) requestWakeLock();
-    void audioCues
-      .unlock()
+    void Promise.all([audioCues.unlock(), voiceCues.unlock()])
       .catch(showError)
       .finally(() => {
         if (selectedRoutine) startWorkout(selectedRoutine);
@@ -1102,8 +1146,10 @@ if (hasDocument) {
     if (!engine) return;
     const snapshot = engine.getSnapshot();
     if (snapshot.state === 'paused') {
+      void voiceCues.resume().catch(showError);
       resumePausedWorkout();
     } else if (WORKOUT_STATES.has(snapshot.state)) {
+      voiceCues.clear({ resetAnnouncements: false });
       engine.pause();
       stopAnimationLoop();
       releaseWakeLock();
@@ -1113,12 +1159,14 @@ if (hasDocument) {
   elements.back.addEventListener('click', () => {
     if (!engine) return;
     if (workoutNavigationState(engine.getSnapshot()).previousDisabled) return;
+    voiceCues.clear();
     engine.skipBack();
     if (WORKOUT_STATES.has(engine.getSnapshot().state)) startAnimationLoop();
   }, listenerOptions);
 
   elements.next.addEventListener('click', () => {
     if (!engine) return;
+    voiceCues.clear();
     engine.skipForward();
     if (engine.getSnapshot().state !== 'done') startAnimationLoop();
   }, listenerOptions);
@@ -1147,6 +1195,7 @@ if (hasDocument) {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && engine && ['work', 'rest'].includes(engine.getSnapshot().state)) {
       audioCues.resume().catch(showError);
+      voiceCues.resume().catch(showError);
       const snapshot = engine.update();
       if (['work', 'rest'].includes(snapshot.state)) {
         requestWakeLock();
