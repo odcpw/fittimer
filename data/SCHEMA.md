@@ -199,9 +199,15 @@ Deliberate text card when no honest animation exists:
 | `displayName` | yes | string | Movement name shown with the visual. |
 | `textOnly` | no | `true` | Deliberately request the text fallback; never accompanies a visual field. |
 
-`textOnly` is product data, not a validator escape hatch. A manifest entry is
-still required for a text-only movement so the pack's coverage is explicit;
-it has an empty `assets` list and `fallback: "text"`.
+`textOnly` is product data, not a validator escape hatch. It deliberately
+forces the movement to render as text in every pack. A manifest entry is still
+required so the pack's coverage is explicit; it has an empty `assets` list and
+`fallback: "text"`.
+
+A visual movement may also resolve to an empty `assets` list with
+`fallback: "text"` in one particular pack. That is a pack-level fallback, not
+a permanent content decision: another installed pack may provide a clip for
+the same stable `movementId`.
 
 ## Content index
 

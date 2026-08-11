@@ -224,6 +224,12 @@
         { "type": "gif", "url": "data/gifs/3888.gif", "framing": "full-source-landscape" }
       ]
     },
+    "one-arm-dumbbell-reverse-lunge-overhead-drive": {
+      "anatomicalSide": "unspecified",
+      "mirroring": "never",
+      "assets": [],
+      "fallback": "text"
+    },
     "push-ups": {
       "anatomicalSide": "bilateral",
       "mirroring": "never",

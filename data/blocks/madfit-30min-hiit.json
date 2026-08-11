@@ -406,32 +406,30 @@
       ]
     },
     {
-      "displayName": "Dumbbell Snatch (side 1)",
+      "displayName": "One-Arm Dumbbell Reverse Lunge + Overhead Drive (side 1)",
       "workSeconds": 40,
       "restSeconds": 20,
       "side": "first",
-      "coachNote": "Explosive; dumbbell finishes overhead, arm nearly extended.",
-      "match": "exact",
+      "coachNote": "Step back as the dumbbell lowers, then stand and drive the same arm overhead. Keep the lunge controlled; this is not a floor-to-overhead snatch.",
+      "match": "none",
       "movements": [
         {
-          "movementId": "dumbbell-snatch",
-          "exerciseId": "3888",
-          "displayName": "Dumbbell One Arm Snatch"
+          "movementId": "one-arm-dumbbell-reverse-lunge-overhead-drive",
+          "displayName": "One-Arm Dumbbell Reverse Lunge + Overhead Drive"
         }
       ]
     },
     {
-      "displayName": "Dumbbell Snatch (side 2)",
+      "displayName": "One-Arm Dumbbell Reverse Lunge + Overhead Drive (side 2)",
       "workSeconds": 40,
       "restSeconds": 20,
       "side": "second",
-      "coachNote": "Same as previous, other arm.",
-      "match": "exact",
+      "coachNote": "Repeat the same reverse-lunge-to-overhead-drive sequence on the second side.",
+      "match": "none",
       "movements": [
         {
-          "movementId": "dumbbell-snatch",
-          "exerciseId": "3888",
-          "displayName": "Dumbbell One Arm Snatch"
+          "movementId": "one-arm-dumbbell-reverse-lunge-overhead-drive",
+          "displayName": "One-Arm Dumbbell Reverse Lunge + Overhead Drive"
         }
       ]
     },

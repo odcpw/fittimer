@@ -89,8 +89,8 @@ Format: 30 intervals × (40s work + 20s rest). `match`: exact / close / combo (t
 | 25 | Single-leg RDL (side 2) | 1757 | exact |
 | 26 | Alternating reverse lunges (2 DB) | 0381 Dumbbell Rear Lunge | exact |
 | 27 | Standing DB crunch (march) | 1005 Band Standing Crunch | **loose** |
-| 28 | Dumbbell snatch (side 1) | 3888 Dumbbell One Arm Snatch | exact |
-| 29 | Dumbbell snatch (side 2) | 3888 | exact |
+| 28 | One-arm DB reverse lunge + overhead drive (side 1) | — | **none** (the catalog snatch is a different movement) |
+| 29 | One-arm DB reverse lunge + overhead drive (side 2) | — | **none** (same compound, other side) |
 | 30 | Push-ups (final minute) | 0662 Push-up | exact |
 
 Existing JSON per interval: `{order, name, workSeconds, restSeconds, match, exerciseId, catalogName, gif, target, bodyPart, note, comboWith?}` plus routine-level `{title, source, format, notes}`. This is an interim shape — the first build task defines the final block/routine schema and converts it.

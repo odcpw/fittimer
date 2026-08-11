@@ -721,17 +721,6 @@ export async function validateFiles(requestedFiles = []) {
           `media:${selectedPack.id}.${movementId}`,
           `is referenced by content but has no entry in ${selectedPack.id}`,
         );
-      } else if (
-        Array.isArray(entry.assets) &&
-        entry.assets.length === 0 &&
-        movementModes.get(movementId) !== 'text'
-      ) {
-        fail(
-          errors,
-          'NO_VISUAL_OR_TEXT_FALLBACK',
-          `media:${selectedPack.id}.${movementId}`,
-          'has no render assets but is not declared textOnly in content',
-        );
       }
     }
   }
