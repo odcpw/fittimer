@@ -52,6 +52,7 @@ test('approved roster is the deliberate six-creator set', () => {
     'pamela-reif',
     'sydney-cummings',
   ]);
+  assert.throws(() => compileCreatorLibrary([]), /At least one candidate document/);
 });
 
 test('candidate documents normalize inline ranges and preserve source provenance', () => {

@@ -297,6 +297,7 @@ function coverageMatrix(creators, records) {
 }
 
 export function compileCreatorLibrary(documents) {
+  if (!Array.isArray(documents) || documents.length === 0) throw new Error('At least one candidate document is required');
   const allRecords = [];
   for (const [index, document] of documents.entries()) {
     const result = validateCandidateDocument(document);
@@ -389,19 +390,35 @@ export function buildRequirementsCoverage(requirements, library) {
   };
 }
 
-async function discoverJsonInputs(inputs) {
+async function discoverJsonInputs(inputs, { candidateFilesOnly = false } = {}) {
   const files = [];
   for (const input of inputs) {
     const absolute = path.resolve(input);
-    let entries;
+    const pending = [absolute];
+    let inputWasFile = false;
     try {
-      entries = await readdir(absolute, { withFileTypes: true });
+      await readFile(absolute, 'utf8');
+      inputWasFile = true;
     } catch {
+      // Directories are traversed below; unreadable inputs fail on readdir.
+    }
+    if (inputWasFile) {
       files.push(absolute);
       continue;
     }
-    for (const entry of entries) {
-      if (entry.isFile() && entry.name.endsWith('.json')) files.push(path.join(absolute, entry.name));
+    while (pending.length > 0) {
+      const directory = pending.pop();
+      let entries;
+      try {
+        entries = await readdir(directory, { withFileTypes: true });
+      } catch (caught) {
+        throw new Error(`Cannot read input ${directory}: ${caught.message}`, { cause: caught });
+      }
+      for (const entry of entries) {
+        const entryPath = path.join(directory, entry.name);
+        if (entry.isDirectory()) pending.push(entryPath);
+        else if (entry.isFile() && entry.name.endsWith('.json') && (!candidateFilesOnly || entry.name === 'candidates.json')) files.push(entryPath);
+      }
     }
   }
   return [...new Set(files)].sort();
@@ -427,7 +444,7 @@ function argumentsFor(argv) {
 
 async function main() {
   const options = argumentsFor(process.argv.slice(2));
-  const files = await discoverJsonInputs(options.inputs);
+  const files = await discoverJsonInputs(options.inputs, { candidateFilesOnly: true });
   const documents = [];
   for (const file of files) documents.push(await readJson(file));
   const compiled = compileCreatorLibrary(documents);
