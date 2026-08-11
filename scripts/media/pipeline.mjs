@@ -39,7 +39,7 @@ export const DEFAULT_LOOP_POLICY = Object.freeze({
 });
 
 const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const SIDE_VALUES = new Set(['left', 'right', 'alternating', 'bilateral', 'unspecified']);
+const SIDE_VALUES = new Set(['left', 'right', 'first', 'second', 'alternating', 'bilateral', 'unspecified']);
 const MOVEMENT_KIND_VALUES = new Set(['normal', 'compound', 'hold', 'mobility']);
 const LOOP_KIND_VALUES = new Set(['reps', 'hold', 'mobility']);
 const SAFE_REGION_NAMES = ['hands', 'feet', 'equipment', 'movementPath'];
@@ -209,9 +209,12 @@ function validateClip(clip, index, policy, errors) {
   const location = `clips[${index}]`;
   const allowed = new Set([
     'id',
+    'intervalNumber',
+    'intervalName',
     'source',
     'timeRange',
     'movementId',
+    'coversMovementIds',
     'side',
     'equipment',
     'viewpoint',
@@ -219,12 +222,25 @@ function validateClip(clip, index, policy, errors) {
     'safeFrame',
     'loop',
     'movementKind',
+    'formNotes',
+    'seamNotes',
+    'mocapNotes',
+    'mocapRange',
   ]);
   if (!checkObject(clip, location, errors, allowed)) return;
   checkId(clip.id, `${location}.id`, errors);
-  if (checkObject(clip.source, `${location}.source`, errors, new Set(['url', 'cacheKey']))) {
+  const hasIntervalNumber = clip.intervalNumber !== undefined;
+  const hasIntervalName = clip.intervalName !== undefined;
+  if (hasIntervalNumber !== hasIntervalName) {
+    fail(errors, 'INVALID_INTERVAL_METADATA', location, 'intervalNumber and intervalName must be provided together');
+  }
+  if (hasIntervalNumber) checkInteger(clip.intervalNumber, `${location}.intervalNumber`, errors, { minimum: 1 });
+  if (hasIntervalName) checkString(clip.intervalName, `${location}.intervalName`, errors);
+  if (checkObject(clip.source, `${location}.source`, errors, new Set(['url', 'cacheKey', 'videoId', 'canonicalUrl']))) {
     checkString(clip.source.url, `${location}.source.url`, errors);
     if (clip.source.cacheKey !== undefined) checkId(clip.source.cacheKey, `${location}.source.cacheKey`, errors);
+    if (clip.source.videoId !== undefined) checkString(clip.source.videoId, `${location}.source.videoId`, errors);
+    if (clip.source.canonicalUrl !== undefined) checkString(clip.source.canonicalUrl, `${location}.source.canonicalUrl`, errors);
   }
   let duration = null;
   if (checkObject(clip.timeRange, `${location}.timeRange`, errors, new Set(['startSeconds', 'endSeconds']))) {
@@ -235,7 +251,37 @@ function validateClip(clip, index, policy, errors) {
       if (!(duration > 0)) fail(errors, 'INVALID_DURATION', `${location}.timeRange`, 'endSeconds must be greater than startSeconds');
     }
   }
+  for (const field of ['formNotes', 'seamNotes', 'mocapNotes']) {
+    if (clip[field] !== undefined) checkString(clip[field], `${location}.${field}`, errors);
+  }
+  if (clip.mocapRange !== undefined && checkObject(clip.mocapRange, `${location}.mocapRange`, errors, new Set(['startSeconds', 'endSeconds']))) {
+    const mocapStartValid = checkFiniteNumber(clip.mocapRange.startSeconds, `${location}.mocapRange.startSeconds`, errors, { minimum: 0 });
+    const mocapEndValid = checkFiniteNumber(clip.mocapRange.endSeconds, `${location}.mocapRange.endSeconds`, errors, { minimum: 0 });
+    if (mocapStartValid && mocapEndValid && clip.mocapRange.endSeconds <= clip.mocapRange.startSeconds) {
+      fail(errors, 'INVALID_MOCAP_RANGE', `${location}.mocapRange`, 'endSeconds must be greater than startSeconds');
+    }
+    if (mocapStartValid && mocapEndValid && clip.timeRange?.startSeconds !== undefined && clip.timeRange?.endSeconds !== undefined) {
+      if (clip.mocapRange.startSeconds < clip.timeRange.startSeconds || clip.mocapRange.endSeconds > clip.timeRange.endSeconds) {
+        fail(errors, 'INVALID_MOCAP_RANGE', `${location}.mocapRange`, 'must stay inside the selected time range');
+      }
+    }
+  }
   checkId(clip.movementId, `${location}.movementId`, errors);
+  if (clip.coversMovementIds !== undefined) {
+    if (!Array.isArray(clip.coversMovementIds) || clip.coversMovementIds.length === 0) {
+      fail(errors, 'INVALID_STRING_ARRAY', `${location}.coversMovementIds`, 'must be a non-empty array when present');
+    } else {
+      const coveredIds = new Set();
+      for (const [coveredIndex, movementId] of clip.coversMovementIds.entries()) {
+        const validId = checkId(movementId, `${location}.coversMovementIds[${coveredIndex}]`, errors);
+        if (!validId) continue;
+        if (movementId === clip.movementId || coveredIds.has(movementId)) {
+          fail(errors, 'DUPLICATE_COVERAGE', `${location}.coversMovementIds[${coveredIndex}]`, 'must not repeat the primary or another covered movement ID');
+        }
+        coveredIds.add(movementId);
+      }
+    }
+  }
   if (!SIDE_VALUES.has(clip.side)) fail(errors, 'INVALID_ENUM', `${location}.side`, 'must be a supported anatomical side');
   if (!Array.isArray(clip.equipment) || clip.equipment.length === 0) {
     fail(errors, 'INVALID_STRING_ARRAY', `${location}.equipment`, 'must list at least one equipment value');
@@ -331,12 +377,15 @@ export function validateCatalogue(catalogue, { loopPolicy } = {}) {
         if (ids.has(clip.id)) fail(errors, 'DUPLICATE_RECORD', `clips[${index}].id`, `duplicates clips[${ids.get(clip.id)}].id`);
         else ids.set(clip.id, index);
       }
-      if (typeof clip?.movementId === 'string' && typeof clip?.side === 'string') {
-        const mappingKey = `${clip.movementId}::${clip.side}`;
-        if (mappings.has(mappingKey)) {
-          fail(errors, 'DUPLICATE_MAPPING', `${locationFor(index)}.movementId`, `duplicates ${mappings.get(mappingKey)}`);
-        } else {
-          mappings.set(mappingKey, `clips[${index}]`);
+      if (typeof clip?.side === 'string') {
+        for (const movementId of clipCoverageMovementIds(clip)) {
+          if (typeof movementId !== 'string') continue;
+          const mappingKey = `${movementId}::${clip.side}`;
+          if (mappings.has(mappingKey)) {
+            fail(errors, 'DUPLICATE_MAPPING', `${locationFor(index)}.movementId`, `duplicates ${mappings.get(mappingKey)}`);
+          } else {
+            mappings.set(mappingKey, `clips[${index}]`);
+          }
         }
       }
     });
@@ -352,6 +401,16 @@ function expectedMappingKey(clip) {
   return `${clip.movementId}::${clip.side}`;
 }
 
+function clipCoverageMovementIds(clip) {
+  return [clip.movementId, ...(Array.isArray(clip.coversMovementIds) ? clip.coversMovementIds : [])];
+}
+
+function recordMappingKeys(record) {
+  return Array.isArray(record.mappingKeys) && record.mappingKeys.length > 0
+    ? record.mappingKeys
+    : [record.mappingKey];
+}
+
 export function validateManifestStructure(manifest, catalogue) {
   const errors = [];
   if (!checkObject(manifest, 'manifest', errors, new Set(['schemaVersion', 'kind', 'pack', 'loopPolicy', 'outputFrame', 'clips']))) {
@@ -365,7 +424,24 @@ export function validateManifestStructure(manifest, catalogue) {
     fail(errors, 'INVALID_CLIPS', 'manifest.clips', 'must be an array');
     return { valid: false, errors };
   }
-  const expected = new Map((catalogue?.clips || []).map((clip) => [expectedMappingKey(clip), clip.id]));
+  const expected = new Map();
+  const expectedPrimaryById = new Map();
+  for (const clip of catalogue?.clips || []) {
+    const primaryMappingKey = expectedMappingKey(clip);
+    if (expectedPrimaryById.has(clip.id) && expectedPrimaryById.get(clip.id) !== primaryMappingKey) {
+      fail(errors, 'DUPLICATE_RECORD', 'catalogue.clips', `record ${clip.id} has multiple primary mapping keys`);
+    } else {
+      expectedPrimaryById.set(clip.id, primaryMappingKey);
+    }
+    for (const movementId of clipCoverageMovementIds(clip)) {
+      const mappingKey = `${movementId}::${clip.side}`;
+      if (expected.has(mappingKey)) {
+        fail(errors, 'DUPLICATE_MAPPING', 'catalogue.clips', `contains duplicate ${mappingKey}`);
+      } else {
+        expected.set(mappingKey, clip.id);
+      }
+    }
+  }
   const seenIds = new Map();
   const seenMappings = new Map();
   for (const [index, record] of manifest.clips.entries()) {
@@ -373,15 +449,30 @@ export function validateManifestStructure(manifest, catalogue) {
     if (!checkObject(record, location, errors)) continue;
     if (typeof record.id !== 'string') fail(errors, 'INVALID_STRING', `${location}.id`, 'must be a string');
     if (typeof record.mappingKey !== 'string') fail(errors, 'INVALID_MAPPING', `${location}.mappingKey`, 'must be a string');
+    if (record.mappingKeys !== undefined && (!Array.isArray(record.mappingKeys) || record.mappingKeys.length === 0)) {
+      fail(errors, 'INVALID_MAPPING', `${location}.mappingKeys`, 'must be a non-empty array when present');
+    }
+    const expectedPrimary = expectedPrimaryById.get(record.id);
+    if (typeof record.mappingKey === 'string' && expectedPrimary !== undefined && record.mappingKey !== expectedPrimary) {
+      fail(errors, 'PRIMARY_MAPPING_MISMATCH', `${location}.mappingKey`, `must equal the catalogue primary mapping ${expectedPrimary}`);
+    }
+    if (Array.isArray(record.mappingKeys) && typeof record.mappingKey === 'string' && !record.mappingKeys.includes(record.mappingKey)) {
+      fail(errors, 'PRIMARY_MAPPING_MISSING', `${location}.mappingKeys`, 'must include mappingKey');
+    }
     if (typeof record.id === 'string') {
       if (seenIds.has(record.id)) fail(errors, 'DUPLICATE_RECORD', `${location}.id`, `duplicates ${seenIds.get(record.id)}`);
       else seenIds.set(record.id, location);
     }
-    if (typeof record.mappingKey === 'string') {
-      if (seenMappings.has(record.mappingKey)) fail(errors, 'DUPLICATE_MAPPING', `${location}.mappingKey`, `duplicates ${seenMappings.get(record.mappingKey)}`);
-      else seenMappings.set(record.mappingKey, location);
-      if (!expected.has(record.mappingKey)) fail(errors, 'UNMAPPED_OUTPUT', `${location}.mappingKey`, `has no catalogue record for ${record.mappingKey}`);
-      else if (expected.get(record.mappingKey) !== record.id) fail(errors, 'MAPPING_ID_MISMATCH', `${location}.id`, 'does not match the catalogue mapping');
+    for (const [mappingIndex, mappingKey] of recordMappingKeys(record).entries()) {
+      const mappingLocation = `${location}.mappingKeys[${mappingIndex}]`;
+      if (typeof mappingKey !== 'string') {
+        fail(errors, 'INVALID_MAPPING', mappingLocation, 'must be a string');
+        continue;
+      }
+      if (seenMappings.has(mappingKey)) fail(errors, 'DUPLICATE_MAPPING', mappingLocation, `duplicates ${seenMappings.get(mappingKey)}`);
+      else seenMappings.set(mappingKey, location);
+      if (!expected.has(mappingKey)) fail(errors, 'UNMAPPED_OUTPUT', mappingLocation, `has no catalogue record for ${mappingKey}`);
+      else if (expected.get(mappingKey) !== record.id) fail(errors, 'MAPPING_ID_MISMATCH', `${location}.id`, 'does not match the catalogue mapping');
     }
     if (!isObject(record.output)) fail(errors, 'MISSING_OUTPUT', `${location}.output`, 'must describe encoded outputs');
   }
@@ -675,6 +766,17 @@ export function validateVideoProbe(probe, { expectedWidth, expectedHeight, expec
   return { valid: errors.length === 0, errors };
 }
 
+export function validatePosterProbe(probe, { expectedWidth, expectedHeight, allowedCodecs = ['png'], allowedFormats = ['png_pipe', 'png'] } = {}) {
+  const errors = [];
+  if (probe.videoStreams !== 1) fail(errors, 'POSTER_STREAM_COUNT', 'probe.videoStreams', 'must contain exactly one video stream');
+  if (probe.audioStreams !== 0) fail(errors, 'POSTER_NOT_SILENT', 'probe.audioStreams', 'must contain no audio streams');
+  if (!allowedCodecs.includes(probe.codecName)) fail(errors, 'POSTER_CODEC', 'probe.codecName', `must be one of ${allowedCodecs.join(', ')}`);
+  if (!allowedFormats.includes(probe.formatName)) fail(errors, 'POSTER_FORMAT', 'probe.formatName', `must be one of ${allowedFormats.join(', ')}`);
+  if (expectedWidth !== undefined && probe.width !== expectedWidth) fail(errors, 'POSTER_DIMENSIONS', 'probe.width', `must be ${expectedWidth}`);
+  if (expectedHeight !== undefined && probe.height !== expectedHeight) fail(errors, 'POSTER_DIMENSIONS', 'probe.height', `must be ${expectedHeight}`);
+  return { valid: errors.length === 0, errors };
+}
+
 function cropPixels(crop, sourceWidth, sourceHeight) {
   let x = Math.round(crop.x * sourceWidth);
   let y = Math.round(crop.y * sourceHeight);
@@ -713,11 +815,16 @@ function filterFor(pixelCrop, output) {
 function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFingerprint) {
   return {
     id: clip.id,
+    ...(clip.intervalNumber !== undefined ? { intervalNumber: clip.intervalNumber } : {}),
+    ...(clip.intervalName !== undefined ? { intervalName: clip.intervalName } : {}),
     mappingKey: expectedMappingKey(clip),
+    mappingKeys: clipCoverageMovementIds(clip).map((movementId) => `${movementId}::${clip.side}`),
     source: {
       url: clip.source.url,
       cacheKey: sourceInfo.cacheKey,
       sha256: sourceInfo.sha256,
+      ...(clip.source.videoId !== undefined ? { videoId: clip.source.videoId } : {}),
+      ...(clip.source.canonicalUrl !== undefined ? { canonicalUrl: clip.source.canonicalUrl } : {}),
     },
     timeRange: {
       startSeconds: clip.timeRange.startSeconds,
@@ -725,6 +832,9 @@ function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFi
       durationSeconds: roundNumber(clip.timeRange.endSeconds - clip.timeRange.startSeconds),
     },
     movementId: clip.movementId,
+    ...(Array.isArray(clip.coversMovementIds) && clip.coversMovementIds.length > 0
+      ? { coversMovementIds: [...clip.coversMovementIds] }
+      : {}),
     side: clip.side,
     equipment: [...clip.equipment],
     viewpoint: clip.viewpoint,
@@ -732,6 +842,10 @@ function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFi
     safeFrame: structuredClone(clip.safeFrame),
     loop: structuredClone(clip.loop),
     movementKind: clip.movementKind,
+    ...(clip.formNotes !== undefined ? { formNotes: clip.formNotes } : {}),
+    ...(clip.seamNotes !== undefined ? { seamNotes: clip.seamNotes } : {}),
+    ...(clip.mocapNotes !== undefined ? { mocapNotes: clip.mocapNotes } : {}),
+    ...(clip.mocapRange !== undefined ? { mocapRange: structuredClone(clip.mocapRange) } : {}),
     sourceMedia: {
       width: sourceProbe.width,
       height: sourceProbe.height,
@@ -783,17 +897,19 @@ function buildMediaPack(catalogue, records) {
   };
   const entries = {};
   for (const record of [...records].sort((left, right) => left.movementId.localeCompare(right.movementId) || left.id.localeCompare(right.id))) {
-    if (!entries[record.movementId]) {
-      entries[record.movementId] = {
-        anatomicalSide: record.side === 'first' || record.side === 'second' ? 'unspecified' : record.side,
-        mirroring: 'never',
-        assets: [],
-      };
+    for (const movementId of [record.movementId, ...(record.coversMovementIds || [])]) {
+      if (!entries[movementId]) {
+        entries[movementId] = {
+          anatomicalSide: record.side === 'first' || record.side === 'second' ? 'unspecified' : record.side,
+          mirroring: 'never',
+          assets: [],
+        };
+      }
+      entries[movementId].assets.push(
+        { type: 'video', url: record.output.video, framing: profileId, side: record.side },
+        { type: 'poster', url: record.output.poster, framing: profileId, side: record.side },
+      );
     }
-    entries[record.movementId].assets.push(
-      { type: 'video', url: record.output.video, framing: profileId },
-      { type: 'poster', url: record.output.poster, framing: profileId },
-    );
   }
   return {
     schemaVersion: MEDIA_PACK_SCHEMA_VERSION,
@@ -863,9 +979,11 @@ async function encodeClip(clip, sourceInfo, sourceProbe, outputRoot, tools, maxW
   });
   throwValidation(videoValidation, `Encoded video failed validation for ${clip.id}`);
   const posterProbe = await probeMedia(posterFile, { ffprobe: tools.ffprobe });
-  if (posterProbe.videoStreams !== 1 || posterProbe.audioStreams !== 0 || posterProbe.width !== output.width || posterProbe.height !== output.height) {
-    throw new PipelineError('POSTER_INVALID', `Poster failed validation for ${clip.id}`, { posterProbe, expected: output });
-  }
+  const posterValidation = validatePosterProbe(posterProbe, {
+    expectedWidth: output.width,
+    expectedHeight: output.height,
+  });
+  throwValidation(posterValidation, `Poster failed validation for ${clip.id}`);
   const videoStat = await stat(videoFile);
   const posterStat = await stat(posterFile);
   const videoSha = await sha256File(videoFile);
@@ -985,7 +1103,11 @@ export async function runPipeline(options = {}) {
         expectedHeight: dimensions.height,
         expectedDurationSeconds: clip.timeRange.endSeconds - clip.timeRange.startSeconds,
       });
-      if (valid.valid && posterProbe.videoStreams === 1 && posterProbe.audioStreams === 0 && posterProbe.width === dimensions.width && posterProbe.height === dimensions.height && previous.output.sha256 === videoSha && previous.output.sizeBytes === videoStat.size && previous.output.posterSha256 === posterSha && previous.output.posterSizeBytes === posterStat.size) {
+      const posterValid = validatePosterProbe(posterProbe, {
+        expectedWidth: dimensions.width,
+        expectedHeight: dimensions.height,
+      });
+      if (valid.valid && posterValid.valid && previous.output.sha256 === videoSha && previous.output.sizeBytes === videoStat.size && previous.output.posterSha256 === posterSha && previous.output.posterSizeBytes === posterStat.size) {
         records.push(previous);
         counts.skipped += 1;
         log('clip-skip', { clipId: clip.id, reason: 'manifest-and-output-match' });

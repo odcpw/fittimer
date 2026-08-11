@@ -15,6 +15,7 @@ import {
   sha256File,
   validateCatalogue,
   validateManifestStructure,
+  validatePosterProbe,
   validateVideoProbe,
 } from '../scripts/media/pipeline.mjs';
 
@@ -47,9 +48,28 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
   assert.deepEqual(fixture.loopPolicy, DEFAULT_LOOP_POLICY);
   assert.equal(validateCatalogue(fixture).valid, true);
 
+  const aliasCatalogue = structuredClone(fixture);
+  aliasCatalogue.clips[0].coversMovementIds = ['synthetic-squat-alias'];
+  assert.equal(validateCatalogue(aliasCatalogue).valid, true, 'compound aliases are valid optional coverage');
+  const duplicateAlias = structuredClone(aliasCatalogue);
+  duplicateAlias.clips[0].coversMovementIds = ['synthetic-squat'];
+  const duplicateAliasResult = validateCatalogue(duplicateAlias);
+  assert.equal(duplicateAliasResult.valid, false);
+  assert.ok(duplicateAliasResult.errors.some((error) => error.code === 'DUPLICATE_COVERAGE'));
+  const duplicateAcrossRecords = structuredClone(aliasCatalogue);
+  duplicateAcrossRecords.clips[1].coversMovementIds = ['synthetic-squat-alias'];
+  duplicateAcrossRecords.clips[1].side = 'bilateral';
+  const duplicateAcrossRecordsResult = validateCatalogue(duplicateAcrossRecords);
+  assert.equal(duplicateAcrossRecordsResult.valid, false);
+  assert.ok(duplicateAcrossRecordsResult.errors.some((error) => error.code === 'DUPLICATE_MAPPING'));
+
   const defaultPolicyCatalogue = structuredClone(fixture);
   delete defaultPolicyCatalogue.loopPolicy;
   assert.equal(validateCatalogue(defaultPolicyCatalogue).valid, true, 'documented defaults must remain usable');
+  const firstSecondCatalogue = structuredClone(fixture);
+  firstSecondCatalogue.clips[0].side = 'first';
+  firstSecondCatalogue.clips[1].side = 'second';
+  assert.equal(validateCatalogue(firstSecondCatalogue).valid, true, 'first/second side labels preserve distinct source intervals');
 
   const customPolicyCatalogue = structuredClone(defaultPolicyCatalogue);
   customPolicyCatalogue.clips[0].timeRange.endSeconds = 4;
@@ -115,8 +135,24 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
   assert.ok(audioValidation.errors.some((error) => error.code === 'VIDEO_NOT_SILENT'));
 
   const catalogue = structuredClone(fixture);
+  catalogue.clips[0].coversMovementIds = ['synthetic-squat-alias'];
+  catalogue.clips[0].side = 'first';
+  catalogue.clips[1].movementId = 'synthetic-squat';
+  catalogue.clips[1].side = 'second';
   const sourceUrl = new URL(`file://${sourceFile}`).href;
   for (const clip of catalogue.clips) clip.source.url = sourceUrl;
+  Object.assign(catalogue.clips[0], {
+    intervalNumber: 1,
+    intervalName: 'Synthetic Squat',
+    formNotes: 'Keep the full foot contact visible.',
+    seamNotes: 'Start and end at matching standing phases.',
+    mocapNotes: 'Candidate range for future pose capture.',
+    mocapRange: { startSeconds: 1, endSeconds: 6 },
+  });
+  Object.assign(catalogue.clips[0].source, {
+    videoId: 'synthetic-source-v1',
+    canonicalUrl: 'https://example.invalid/synthetic-source-v1',
+  });
   const firstLogs = [];
   const first = await runPipeline({
     catalogue,
@@ -152,6 +188,20 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
     scalePolicy: 'avoid-upsample',
   });
   assert.equal(Object.keys(pack.entries).length, 2);
+  assert.deepEqual(pack.entries['synthetic-squat-alias'].assets, pack.entries['synthetic-squat'].assets.slice(-2));
+  assert.deepEqual(pack.entries['synthetic-squat'].assets.map((asset) => asset.side), ['second', 'second', 'first', 'first']);
+  assert.ok(pack.entries['synthetic-squat'].assets.every((asset) => asset.side === 'first' || asset.side === 'second'));
+  assert.deepEqual(
+    manifest.clips.find((record) => record.id === 'synthetic-squat').coversMovementIds,
+    ['synthetic-squat-alias'],
+  );
+  const metadataRecord = manifest.clips.find((record) => record.id === 'synthetic-squat');
+  assert.equal(metadataRecord.intervalNumber, 1);
+  assert.equal(metadataRecord.intervalName, 'Synthetic Squat');
+  assert.equal(metadataRecord.source.videoId, 'synthetic-source-v1');
+  assert.equal(metadataRecord.source.canonicalUrl, 'https://example.invalid/synthetic-source-v1');
+  assert.equal(metadataRecord.formNotes, 'Keep the full foot contact visible.');
+  assert.deepEqual(metadataRecord.mocapRange, { startSeconds: 1, endSeconds: 6 });
 
   for (const record of manifest.clips) {
     const videoFile = path.join(outputRoot, record.output.video);
@@ -169,6 +219,17 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
     assert.equal(posterProbe.audioStreams, 0);
     assert.equal(posterProbe.width, expectedWidth);
     assert.equal(posterProbe.height, expectedHeight);
+    assert.equal(validatePosterProbe(posterProbe, { expectedWidth, expectedHeight }).valid, true);
+    assert.equal(posterProbe.codecName, 'png');
+    assert.equal(posterProbe.formatName, 'png_pipe');
+    if (record.id === 'synthetic-squat') {
+      const invalidPosterCodec = validatePosterProbe({ ...posterProbe, codecName: 'mjpeg' }, { expectedWidth, expectedHeight });
+      assert.equal(invalidPosterCodec.valid, false);
+      assert.ok(invalidPosterCodec.errors.some((error) => error.code === 'POSTER_CODEC'));
+      const invalidPosterFormat = validatePosterProbe({ ...posterProbe, formatName: 'jpeg_pipe' }, { expectedWidth, expectedHeight });
+      assert.equal(invalidPosterFormat.valid, false);
+      assert.ok(invalidPosterFormat.errors.some((error) => error.code === 'POSTER_FORMAT'));
+    }
     assert.equal(record.output.sizeBytes, (await stat(videoFile)).size);
     assert.equal(record.output.sha256, await sha256File(videoFile));
     assert.equal(record.output.posterSizeBytes, (await stat(posterFile)).size);
@@ -190,6 +251,20 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
   const unmappedResult = validateManifestStructure(unmapped, catalogue);
   assert.equal(unmappedResult.valid, false);
   assert.ok(unmappedResult.errors.some((error) => error.code === 'UNMAPPED_OUTPUT'));
+
+  const bogusPrimary = structuredClone(manifest);
+  const aliasedRecord = bogusPrimary.clips.find((record) => record.id === 'synthetic-squat');
+  aliasedRecord.mappingKey = 'synthetic-squat-alias::first';
+  const bogusPrimaryResult = validateManifestStructure(bogusPrimary, catalogue);
+  assert.equal(bogusPrimaryResult.valid, false);
+  assert.ok(bogusPrimaryResult.errors.some((error) => error.code === 'PRIMARY_MAPPING_MISMATCH'));
+
+  const missingPrimary = structuredClone(manifest);
+  const missingPrimaryRecord = missingPrimary.clips.find((record) => record.id === 'synthetic-squat');
+  missingPrimaryRecord.mappingKeys = missingPrimaryRecord.mappingKeys.filter((key) => key !== missingPrimaryRecord.mappingKey);
+  const missingPrimaryResult = validateManifestStructure(missingPrimary, catalogue);
+  assert.equal(missingPrimaryResult.valid, false);
+  assert.ok(missingPrimaryResult.errors.some((error) => error.code === 'PRIMARY_MAPPING_MISSING'));
 
   const second = await runPipeline({
     catalogue,

@@ -32,14 +32,23 @@ go to stderr, so a caller can consume stdout without scraping progress text.
 The input is schema version 1, `kind: "clipCatalogue"`, with a pack and an
 explicit `clips` array. Each clip records:
 
-- `source.url` and an optional stable `source.cacheKey`;
+- `source.url` and an optional stable `source.cacheKey`; optional `source.videoId`
+  and `source.canonicalUrl` preserve the reviewed upstream identity when the
+  working source is a local retained file;
+- optional `intervalNumber`/`intervalName` pair for an ordered routine
+  catalogue;
 - `timeRange.startSeconds` and `endSeconds`;
-- `movementId`, anatomical `side`, `equipment`, and `viewpoint`;
+- `movementId`, anatomical `side` (`left`, `right`, `first`, `second`,
+  `alternating`, or `bilateral`), `equipment`, and `viewpoint`;
+- optional `coversMovementIds` for additional movement IDs covered by the same
+  compound sequence;
 - a normalized 16:9 `crop` and normalized `safeFrame` rectangles for
   `hands`, `feet`, `equipment`, and `movementPath`;
 - `loop.kind`, phase matching, phase notes, and either `reps` or judged
   `durationSeconds`; and
-- `movementKind`: `normal`, `compound`, `hold`, or `mobility`.
+- `movementKind`: `normal`, `compound`, `hold`, or `mobility`;
+- optional `formNotes`, `seamNotes`, `mocapNotes`, and an in-range `mocapRange`
+  for curator review and downstream capture planning.
 
 The optional root `loopPolicy` makes loop expectations configurable rather
 than implicit. Its default is:
@@ -65,7 +74,22 @@ range. Validation rejects duplicate clip IDs, duplicate `movementId::side`
 mappings, missing fields, unsafe regions outside the crop, invalid durations,
 and unsupported enums. The crop is checked again after ffprobe because a
 normalized rectangle must produce an exact 16:9 pixel rectangle at the source
-resolution.
+resolution. Every primary or covered `movementId::side` pair must be unique.
+
+`coversMovementIds` is an alias declaration, not another encode job. The
+provenance manifest preserves it and records all mapping keys; the private
+media pack emits the same video/poster URLs under each covered movement entry,
+with each asset carrying the source record's `side` metadata. A movement entry
+may therefore contain distinct `first`/`second` (or `left`/`right`) variants;
+the renderer must select by side before deduplicating identical URLs.
+This lets a later renderer deduplicate identical URLs while retaining complete
+movement-ID coverage. Older catalogues and manifests without this field remain
+valid.
+
+In `clip-manifest.json`, `mappingKey` is always the record's primary
+`movementId::side` key. When `mappingKeys` is present it must include that
+primary key as well as any covered aliases; validators reject a record whose
+primary field points at an alias or an unmapped key.
 
 ## Outputs and determinism
 
@@ -73,11 +97,12 @@ The output root contains only build artifacts:
 
 - `clips/<clip-id>.mp4`: H.264, `yuv420p`, landscape 16:9, faststart, and no
   audio stream;
-- `posters/<clip-id>.png`: one matching landscape poster frame;
+- `posters/<clip-id>.png`: one matching landscape poster frame; ffprobe must
+  report the PNG codec and PNG image format (normally `png_pipe`);
 - `clip-manifest.json`: provenance records with the effective loop policy,
-  source hash, crop/safe-frame
-  metadata, loop notes, source and output dimensions, rounded duration, byte
-  size, SHA-256, codec, pixel format, and audio-stream count; and
+  source identity/hash, ordered interval and curator crop/safe-frame metadata,
+  loop/form/seam/mocap notes, source and output dimensions, rounded duration,
+  byte size, SHA-256, codec, pixel format, and audio-stream count; and
 - `media-pack.json`: the current version-1 media-pack contract shape with
   `outputFrame`, framing profile, and movement entries. The private URLs are
   relative to this output root; promotion into `data/` is a separate reviewed
