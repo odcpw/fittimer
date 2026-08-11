@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 import {
+  chooseRoutineMediaPackId,
   collectContentUrls,
   mergePrivateMediaPackIndex,
   normalizePrivateMediaPackIndex,
@@ -115,7 +116,7 @@ test('private media index accepts only relative pack paths and merges without ab
   assert.equal(merged.privateMediaPackIndexPath, 'private-packs/index.json');
 });
 
-test('selected private packs fall back by movement and cache every source pack', () => {
+test('selected private packs never mix in reference or GIF fallback assets', () => {
   const framing = { fit: 'contain', position: 'center' };
   const packs = new Map([
     ['gif-v1', {
@@ -148,10 +149,22 @@ test('selected private packs fall back by movement and cache every source pack',
   const selected = selectMediaPack('w1w4-v1', packs);
   assert.equal(selected.id, 'w1w4-v1');
   assert.ok(selected.entries.w1w4Primary);
-  assert.ok(selected.entries.referenceFallback);
-  assert.ok(selected.entries.gifFallback);
-  assert.equal(resolveMovementVisual({ movementId: 'referenceFallback', displayName: 'Reference' }, selected).framing.fit, 'contain');
-  assert.equal(resolveMovementVisual({ movementId: 'gifFallback', displayName: 'GIF' }, selected).asset.__sourcePath, null);
+  assert.equal(selected.entries.referenceFallback, undefined);
+  assert.equal(selected.entries.gifFallback, undefined);
+  assert.equal(resolveMovementVisual({ movementId: 'referenceFallback', displayName: 'Reference' }, selected).kind, 'text');
+  assert.equal(resolveMovementVisual({ movementId: 'gifFallback', displayName: 'GIF' }, selected).kind, 'text');
+
+  assert.equal(chooseRoutineMediaPackId({
+    id: 'madfit-30min-hiit',
+    intervals: [{ movements: [{ movementId: 'referenceFallback' }] }],
+  }, packs, 'gif-v1'), 'reference-v1');
+  assert.equal(chooseRoutineMediaPackId({
+    id: 'iron-roots',
+    intervals: [{ movements: [
+      { movementId: 'w1w4Primary' },
+      { movementId: 'referenceFallback' },
+    ] }],
+  }, packs, 'reference-v1'), 'w1w4-v1');
 
   const urls = collectContentUrls({
     defaultMediaPack: 'gif-v1',
@@ -172,8 +185,9 @@ test('selected private packs fall back by movement and cache every source pack',
   }], selected);
   assert.ok(urls.includes('private-packs/index.json'));
   assert.ok(urls.includes('private-packs/w1w4-v1/media-pack.json'));
-  assert.ok(urls.includes('private-packs/reference-v1/media-pack.json'));
   assert.ok(urls.includes('private-packs/w1w4-v1/clips/primary.mp4'));
-  assert.ok(urls.includes('private-packs/reference-v1/clips/reference.mp4'));
-  assert.ok(urls.includes('data/gifs/fallback.gif'));
+  assert.ok(!urls.includes('private-packs/reference-v1/media-pack.json'));
+  assert.ok(!urls.includes('private-packs/reference-v1/clips/reference.mp4'));
+  assert.ok(!urls.includes('data/media/gif-v1.json'));
+  assert.ok(!urls.includes('data/gifs/fallback.gif'));
 });

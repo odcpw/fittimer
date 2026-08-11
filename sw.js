@@ -1,5 +1,5 @@
-// fittimer-v8 and earlier caches are intentionally superseded; activateApp removes every older cache.
-const CACHE_NAME = 'fittimer-v9';
+// fittimer-v11 and earlier caches are intentionally superseded; activateApp removes every older cache.
+const CACHE_NAME = 'fittimer-v12';
 const APP_SHELL = [
   './',
   './index.html',
@@ -300,9 +300,7 @@ self.addEventListener('message', (event) => {
           relativePath === 'data/content-index.json' ||
           relativePath.startsWith('data/blocks/') ||
           relativePath.startsWith('data/routines/') ||
-          relativePath.startsWith('data/media/') ||
-          relativePath.startsWith('data/gifs/')
-          || relativePath.startsWith('data/voice/')
+          relativePath.startsWith('data/voice/')
           || relativePath.startsWith('private-packs/')
         );
       });

@@ -16,7 +16,7 @@ Complete specification and project plan for **FitTimer**, a personal interval-wo
 
 A phone-first, fully offline **PWA interval timer** for guided workouts:
 
-- Runs timed exercise intervals (e.g. 40s work / 20s rest) with a **GIF animation of each exercise** instead of a video of a person.
+- Runs timed exercise intervals (e.g. 40s work / 20s rest) with a **silent landscape video reference** for each covered exercise.
 - Plays **audio cues and voice announcements over the user's own background music** (Spotify/YouTube Music keep playing; the app never pauses them).
 - Routines are **curated data files designed collaboratively** (owner + AI research), composed from reusable "blocks" — there is deliberately **no in-app routine editor UI**.
 - Single user, no backend, no accounts. Vanilla HTML/JS/CSS, **no build step**.
@@ -45,25 +45,29 @@ First routine: MadFit's *"30 MIN FULL BODY HIIT with weights (NO REPEATS, NO JUM
 | `data/exercises/catalog_full.json` | **Complete WorkoutX catalog: 1,327 exercises** — name, bodyPart, target, secondaryMuscles, equipment, step-by-step instructions, gifUrl, difficulty, mechanic, force, MET, caloriesPerMinute, isUnilateral, recommended sets/reps |
 | `data/exercises/bodyPartList.json` etc. | Valid filter values (body parts, targets, equipment, secondary muscles) |
 | `data/exercises/openapi.json` | Full WorkoutX API spec |
-| `data/gifs/*.gif` | **27 exercise GIFs** (360×360, watermarked) used by the MadFit routine |
+| `data/gifs/*.gif` | Archived WorkoutX source material; never loaded or cached by the current app |
 | `data/youtube/transcript.txt` | Full spoken transcript of the video (source of the exercise list) |
 | `data/youtube/oembed.json`, `thumbnail.jpg` | Video metadata |
 
-## 4. WorkoutX API (only needed for GIFs of NEW exercises)
+## 4. WorkoutX API (retired)
+
+WorkoutX is no longer part of the product or content pipeline. The notes below
+are retained only as historical provenance; do not fetch new assets or add a
+WorkoutX/GIF runtime fallback.
 
 - Base: `https://api.workoutxapp.com/v1` — auth header `X-WorkoutX-Key: <key>` (key is in the owner's welcome email; **never commit it**; read from `WORKOUTX_KEY` env var).
 - Free plan: **500 requests/month; ~330 remaining** (as of 2026-08-10). Rate limit **30 req/min**. Responses capped at **10 items/call**. GIF downloads **count against the same 500** and are watermarked; quota headers: `X-Quota-Remaining` etc.
 - Useful endpoints: `GET /exercises` (params: `name` partial match, `bodyPart`, `target`, `equipment`, `muscle`, `limit`, `offset`), `GET /exercises/exercise/{id}`, `GET /exercises/{id}/similar`, `GET /exercises/{id}/alternatives`, `GET /gifs/{id}.gif`.
-- The full catalog was already fetched once — API is only needed to **download GIFs for exercises added to new blocks** (and to re-download if the cowork assets are unrecoverable). Note: GIF ids 5202/5204 return 503 "watermarked GIF unavailable" on free plan; treat 503 as skip-and-substitute.
+- The full catalog was fetched once. No further API or GIF retrieval is planned.
 
 ## 5. The MadFit routine (mapped, interval by interval)
 
-Format: 30 intervals × (40s work + 20s rest). `match`: exact / close / combo (two catalog exercises) / loose / none, vs the WorkoutX catalog. GIF file = `data/gifs/<id>.gif`.
+Historical mapping format: 30 intervals × (40s work + 20s rest). `match`: exact / close / combo / loose / none vs the archived WorkoutX catalog. Runtime visuals now come from `reference-v1`.
 
 | # | Exercise (as coached) | Catalog id → name | Match |
 |---|---|---|---|
 | 1 | Step jacks | 3224 Jack Jump | close (step, don't jump) |
-| 2 | Bum kicks side-to-side | — | **none** (no GIF; text card or reuse #1) |
+| 2 | Bum kicks side-to-side | — | `reference-v1/clips/interval-02-bum-kicks.mp4` |
 | 3 | Half-lunge + knee drive R | 3655 Walking High Knees Lunge | close |
 | 4 | Half-lunge + knee drive L | 3655 | close |
 | 5 | Standing star crunch | 3213 Side-to-side Toe Touch | close |
@@ -97,20 +101,20 @@ Existing JSON per interval: `{order, name, workSeconds, restSeconds, match, exer
 
 ## 6. Architecture spec
 
-**Stack**: vanilla HTML/JS/CSS, no framework, no build step. Deploy on GitHub Pages. All assets local (data + GIFs shipped with the app).
+**Stack**: vanilla HTML/JS/CSS, no framework, no build step. The public shell can deploy on GitHub Pages; private video packs are served separately over Tailscale.
 
 1. **Routine/block schema** (the contract everything depends on).
    Block = named, reusable ordered list of intervals: `{exerciseId, displayName, gif, workSeconds, restSeconds, side?, coachNote?}`. Routine = metadata `{title, equipment, estDuration}` + ordered list of block refs and/or inline intervals. Must support per-side exercises, combo intervals (two movements alternated in one interval), and blocks shared across routines. Includes `data/SCHEMA.md` + a small dependency-free node validator script.
-2. **PWA shell**: manifest + service worker precaching app files, routine JSONs, and only the GIFs referenced by installed routines (not the 1,327-exercise catalog's worth). Acceptance: full session in airplane mode after one online visit; Add-to-Home-Screen works on Android + iOS.
+2. **PWA shell**: manifest + service worker precaching app files, routine JSONs, voice assets, and the automatically selected private video pack. WorkoutX GIFs are never cached. Acceptance: full session in airplane mode after one online visit; Add-to-Home-Screen works on Android + iOS.
 3. **Interval engine**: pure JS state machine (idle/work/rest/paused/done), **timestamp-anchored timing** (never accumulated `setInterval` drift), pause/resume, skip forward/back, restart. Emits events: `tick`, `intervalStart`, `intervalEnd`, `halfway`, `countdown321`. UI and audio are subscribers. Acceptance: 30-interval run within 1s of wall clock; skip/pause never desyncs.
-4. **Workout screen** (phone-first, landscape-canonical, dark): true 16:9 safely contained movement stage, prominent current GIF + name, big remaining time, next-up preview during rest, interval counter n/30, progress bar, and thumb-sized Previous / Pause / Next / End Workout controls. The installed PWA declares generic `landscape` orientation so either landscape direction works; portrait remains a supported fallback.
+4. **Workout screen** (phone-first, landscape-only, dark): true 16:9 contained video stage, prominent current movement, big remaining time, next-up preview during rest, interval counter n/30, progress bar, and thumb-sized Previous / Pause / Next / End Workout controls. The installed PWA declares generic `landscape` orientation so either landscape direction works.
 5. **Audio cues**: **WebAudio only** — short synthesized beeps (3-2-1 countdown, distinct work-start / rest-start tones, optional halfway tick). Never use an `<audio>` element / media session, which would pause or duck background music. Must be verified on Android Chrome and iOS Safari with Spotify playing.
 6. **Voice announcements**: announce next exercise (and side) during rest, "go"/"rest" at boundaries; toggleable; queued to not overlap the beeps.
    **Chosen approach**: pre-render every phrase with **FrankenTTS** (Jeff Emanuel / Dicklesworthstone — `github.com/Dicklesworthstone/franken_tts`, frankentts.com; Rust reimplementation of Qwen3-TTS; MIT + Apache-2.0 weights). It is **not viable at runtime on phones** (~2 GB model, several GB RAM, desktop-only, 0.31× real time in WASM) — but the app's vocabulary is tiny and fixed (exercise names, "go", "rest", digits), so run the **native CLI at content-build time** (fast on the owner's RTX 3090 box), ship small audio clips with the PWA, play via WebAudio. **Fallback**: browser SpeechSynthesis for any phrase lacking a clip (note: iOS requires a user-gesture unlock for speech — init on the Start tap).
 7. **Wake lock**: Screen Wake Lock API, re-acquire on `visibilitychange`. Timestamp anchoring must keep the timer honest through brief backgrounding.
-8. **Home screen**: routine picker listing `data/routines/*.json` (title, duration, equipment, exercise count). Adding a routine file must require zero code changes. History/streaks lives here later.
+8. **Home screen**: direct-start workout cards listing `data/routines/*.json` (title, duration, equipment, exercise count). There is no separate workout or media selector. Adding a routine file must require zero code changes.
 9. **History/streaks**: localStorage log `{routine, date, completedAt interval n | finished}`; month calendar with dots + current streak. No charts, no export.
-10. **GIF fetch tooling**: `scripts/fetch-gifs.mjs <ids…>` — reads `WORKOUTX_KEY` env, skips already-present files, paces under 30 req/min, appends to a committed quota ledger. Every new content block spends from the ~330-call budget.
+10. **Video clip library**: retained private landscape clips keyed by stable movement ID, selected automatically per routine. Missing clips stay explicit and are the next sourcing queue.
 
 ## 7. Build plan (2 epics + 16 tasks, dependency-ordered)
 
@@ -148,7 +152,6 @@ Tracked in beads (`.beads/issues.jsonl`, prefix `ft`); the DB also carries a sin
 
 - ~~**Data recovery**~~ done 2026-08-10: catalog, GIFs, transcript, and the original MadFit JSON recovered from the cowork session's `fittimer.zip` (they were never on GitHub, despite what the original spec claimed).
 - **API key**: never in the repo; env var only. The repo is intended to be public.
-- **Public-repo caveat**: the bundled WorkoutX GIFs are watermarked free-tier assets being redistributed in a public repo — acceptable to the owner so far, but flag if licensing matters.
 - **iOS quirks**: SpeechSynthesis needs a user-gesture unlock; Wake Lock needs iOS ≥ 16.4; test WebAudio-over-Spotify mixing on a real device early.
-- **Interval #2 (bum kicks)** has no catalog match — use a text-only card or reuse the step-jacks GIF rather than a misleading animation.
+- **Interval #2 (bum kicks)** is covered by the private `reference-v1` video pack (`interval-02-bum-kicks.mp4`).
 - Owner's dumbbells ≈ light set (video uses 2×10 lb) — relevant when designing strength blocks.

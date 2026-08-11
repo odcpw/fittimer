@@ -23,13 +23,12 @@
       "displayName": "Bum Kicks (butt kicks, side to side)",
       "workSeconds": 40,
       "restSeconds": 20,
-      "coachNote": "Visual decision: use a text-only card because the catalog has no honest butt-kick match. Do side-to-side heel-to-glute steps with optional arm swings.",
-      "match": "none",
+      "coachNote": "Side-to-side heel-to-glute steps with optional arm swings. The private reference pack shows the source movement directly.",
+      "match": "exact",
       "movements": [
         {
           "movementId": "bum-kicks",
-          "displayName": "Bum Kicks (butt kicks, side to side)",
-          "textOnly": true
+          "displayName": "Bum Kicks (butt kicks, side to side)"
         }
       ]
     },

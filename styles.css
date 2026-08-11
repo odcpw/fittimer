@@ -402,10 +402,22 @@ button:focus-visible {
 
 .routine-row__arrow {
   align-self: center;
+  padding: 10px 12px;
   color: var(--lime);
-  font-size: 2.6rem;
-  font-weight: 300;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
   line-height: 1;
+  text-transform: uppercase;
+  border: 1px solid rgba(201, 255, 61, 0.42);
+  border-radius: 999px;
+  background: rgba(201, 255, 61, 0.08);
+}
+
+.routine-row:hover .routine-row__arrow,
+.routine-row:focus-visible .routine-row__arrow {
+  color: #071006;
+  background: var(--lime);
 }
 
 .history-panel {
@@ -1217,10 +1229,11 @@ html[data-screen="workout"] .workout-header {
   position: absolute;
   z-index: 3;
   top: max(16px, env(safe-area-inset-top));
-  right: max(18px, env(safe-area-inset-right));
+  right: auto;
+  left: max(18px, env(safe-area-inset-left));
   width: auto;
   margin: 0;
-  text-align: right;
+  text-align: left;
   pointer-events: none;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }

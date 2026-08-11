@@ -13,7 +13,6 @@ import {
 import {
   CUE_PACK_IDS,
   CUE_PACK_SYNTH_V1,
-  VISUAL_PACK_IDS,
   VISUAL_PACK_GIF_V1,
   VISUAL_PACK_REFERENCE_V1,
   VISUAL_PACK_W1W4_V1,
@@ -50,10 +49,8 @@ const elements = hasDocument
       voiceExercise: document.querySelector('#settings-voice-exercise'),
       voiceSide: document.querySelector('#settings-voice-side'),
       voiceNext: document.querySelector('#settings-voice-next'),
-      visualPack: document.querySelector('#settings-visual-pack'),
       reducedMotion: document.querySelector('#settings-reduced-motion'),
       mediaStatus: document.querySelector('#settings-media-status'),
-      start: document.querySelector('#start-button'),
       offline: document.querySelector('#offline-status'),
       phase: document.querySelector('#phase-label'),
       timer: document.querySelector('#timer'),
@@ -106,6 +103,7 @@ let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
 let workoutHudTimeout = null;
+let routineStartPending = false;
 let historyMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 const stageNodeCleanups = new Set();
 const videoPlaybackFailures = new WeakMap();
@@ -124,9 +122,6 @@ const SETTINGS_PACK_LABELS = new Map([
   [CUE_PACK_SYNTH_V1, 'Synth tones'],
   [VOICE_PACK_BROWSER_V1, 'Browser voice'],
   [VOICE_PACK_FRANKENTTS_V1, 'FrankenTTS voice'],
-  [VISUAL_PACK_GIF_V1, 'GIFs'],
-  [VISUAL_PACK_REFERENCE_V1, 'Reference pack'],
-  [VISUAL_PACK_W1W4_V1, 'W1–W4 pack'],
 ]);
 
 function requestWakeLock() {
@@ -154,7 +149,7 @@ function settingsPackLabel(packId) {
 }
 
 function appSettings(settings) {
-  return normalizeSettings(settings, { visualPackIds: [...mediaPacks.keys()] });
+  return normalizeSettings(settings);
 }
 
 function safePrivatePackPath(value) {
@@ -220,71 +215,80 @@ export function mergePrivateMediaPackIndex(index, privateIndex) {
  */
 export function summarizeSettings(settings) {
   const normalized = appSettings(settings);
+  const voiceLabel = normalized.voice.enabled ? 'Voice on' : 'Voice off';
   return Object.freeze({
-    label: `${normalized.cues.enabled ? 'Sound on' : 'Sound off'} · ${settingsPackLabel(normalized.visuals.selectedPackId)}`,
+    label: `${normalized.cues.enabled ? 'Sound on' : 'Sound off'} · ${voiceLabel}`,
     cueLabel: normalized.cues.enabled ? 'Sound on' : 'Sound off',
-    visualLabel: settingsPackLabel(normalized.visuals.selectedPackId),
+    voiceLabel,
   });
 }
 
 /**
- * A valid preference may name a pack that is not installed in the current
- * content index. Keep that stable preference, but use the built-in pack for
- * rendering and offline caching until the requested pack is available.
- */
-export function resolveMediaPackPreference(index, settings) {
-  const available = isObject(index?.mediaPacks) ? index.mediaPacks : {};
-  const normalized = normalizeSettings(settings, { visualPackIds: Object.keys(available) });
-  const requestedId = normalized.visuals.selectedPackId;
-  const fallbackId = typeof index?.defaultMediaPack === 'string'
-    ? index.defaultMediaPack
-    : VISUAL_PACK_GIF_V1;
-  const effectiveId = Object.hasOwn(available, requestedId)
-    ? requestedId
-    : Object.hasOwn(available, fallbackId)
-      ? fallbackId
-      : VISUAL_PACK_GIF_V1;
-  return Object.freeze({ requestedId, effectiveId, isFallback: requestedId !== effectiveId });
-}
-
-function fallbackPackIds(packId) {
-  if (packId === VISUAL_PACK_W1W4_V1) return [VISUAL_PACK_W1W4_V1, VISUAL_PACK_REFERENCE_V1, VISUAL_PACK_GIF_V1];
-  if (packId === VISUAL_PACK_REFERENCE_V1) return [VISUAL_PACK_REFERENCE_V1, VISUAL_PACK_GIF_V1];
-  return [packId];
-}
-
-/**
- * Keep the selected pack's identity while filling missing movement entries
- * from the stable reference and GIF packs. Asset source paths travel with
- * each asset so private pack manifests can use paths relative to themselves.
+ * Use exactly one video pack. Missing movements remain written guidance so
+ * they are visible content gaps, never silently substituted GIFs.
  */
 export function selectMediaPack(packId, packs = mediaPacks) {
-  const chain = fallbackPackIds(packId)
-    .map((id) => packs.get(id))
-    .filter((pack) => isObject(pack));
-  const primary = chain[0];
+  const primary = packs.get(packId);
   if (!primary) return null;
   const entries = {};
-  for (const pack of chain) {
-    for (const [movementId, entry] of Object.entries(pack.entries ?? {})) {
-      if (Object.hasOwn(entries, movementId)) continue;
-      entries[movementId] = {
-        ...entry,
-        assets: (entry.assets ?? []).map((asset) => ({
-          ...asset,
-          __sourcePath: asset.__sourcePath ?? pack.__sourcePath ?? null,
-          __framingProfile: typeof asset.framing === 'string'
-            ? pack.framingProfiles?.[asset.framing] ?? null
-            : null,
-        })),
-      };
-    }
+  for (const [movementId, entry] of Object.entries(primary.entries ?? {})) {
+    entries[movementId] = {
+      ...entry,
+      assets: (entry.assets ?? []).map((asset) => ({
+        ...asset,
+        __sourcePath: asset.__sourcePath ?? primary.__sourcePath ?? null,
+        __framingProfile: typeof asset.framing === 'string'
+          ? primary.framingProfiles?.[asset.framing] ?? null
+          : null,
+      })),
+    };
   }
   return {
     ...primary,
     entries,
-    __sourcePackIds: chain.map((pack) => pack.id),
   };
+}
+
+function packHasVideo(pack) {
+  return Object.values(pack?.entries ?? {}).some((entry) =>
+    Array.isArray(entry?.assets) && entry.assets.some((asset) => asset?.type === 'video'));
+}
+
+/**
+ * Pick the installed pack that covers the chosen routine instead of making
+ * the user route through Settings first. MadFit prefers its own retained
+ * reference pack; the four Fable routines prefer the combined W1-W4 pack.
+ * Only packs containing real video participate.
+ */
+export function chooseRoutineMediaPackId(routine, packs) {
+  if (!(packs instanceof Map) || packs.size === 0) return null;
+  const routineDefault = routine?.id === 'madfit-30min-hiit'
+    ? VISUAL_PACK_REFERENCE_V1
+    : VISUAL_PACK_W1W4_V1;
+  const candidateIds = [...new Set([
+    routineDefault,
+    VISUAL_PACK_W1W4_V1,
+    VISUAL_PACK_REFERENCE_V1,
+    ...packs.keys(),
+  ])].filter((id) => packs.has(id) && packHasVideo(packs.get(id)));
+  const movementIds = (routine?.intervals ?? [])
+    .flatMap((interval) => interval.movements ?? [])
+    .map((movement) => movement.movementId)
+    .filter((id) => typeof id === 'string');
+  let bestId = candidateIds[0] ?? null;
+  let bestCoverage = -1;
+  for (const id of candidateIds) {
+    const pack = selectMediaPack(id, packs);
+    const coverage = movementIds.reduce((total, movementId) => {
+      const assets = pack?.entries?.[movementId]?.assets;
+      return total + (Array.isArray(assets) && assets.some((asset) => asset?.type === 'video') ? 1 : 0);
+    }, 0);
+    if (coverage > bestCoverage) {
+      bestCoverage = coverage;
+      bestId = id;
+    }
+  }
+  return bestId;
 }
 
 /**
@@ -538,7 +542,9 @@ async function loadContent() {
   }
 
   const mediaPackEntries = await Promise.all(
-    Object.entries(index.mediaPacks).map(async ([id, file]) => {
+    Object.entries(index.mediaPacks)
+      .filter(([id]) => id !== VISUAL_PACK_GIF_V1)
+      .map(async ([id, file]) => {
       const pack = await fetchJson(file);
       if (!isObject(pack) || pack.id !== id || pack.kind !== 'mediaPack') {
         throw new Error(`Media pack ${id} does not match ${file}`);
@@ -547,18 +553,13 @@ async function loadContent() {
         throw new Error(`Private media pack ${id} contains an unsafe asset path`);
       }
       return [id, file.startsWith('private-packs/') ? { ...pack, __sourcePath: file } : pack];
-    }),
+      }),
   );
   mediaPacks = new Map(mediaPackEntries);
   contentIndex = index;
-  currentSettings = settingsStore.setVisualPackIds(Object.keys(index.mediaPacks));
+  currentSettings = settingsStore.load();
   populateSettingsOptions();
-  const mediaPreference = resolveMediaPackPreference(index, currentSettings);
-  selectedMediaPack = selectMediaPack(mediaPreference.effectiveId);
-  if (!selectedMediaPack) {
-    throw new Error(`Default media pack is unavailable: ${index.defaultMediaPack}`);
-  }
-  applyOutputFrame(selectedMediaPack);
+  selectedMediaPack = null;
   renderSettings(currentSettings);
 
   const blockEntries = await Promise.all(
@@ -585,7 +586,6 @@ async function loadContent() {
   voiceCues.setIntervals(selectedRoutine?.intervals ?? []);
   startVoicePackLoad();
   renderRoutineList();
-  elements.start.disabled = selectedRoutine === null;
   return index;
 }
 
@@ -600,6 +600,7 @@ function renderRoutineList() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'routine-row';
+    button.setAttribute('aria-label', `Start ${routine.title}`);
     button.setAttribute('aria-pressed', String(routine === selectedRoutine));
     button.dataset.routineIndex = String(index);
 
@@ -618,7 +619,7 @@ function renderRoutineList() {
     const arrow = document.createElement('span');
     arrow.className = 'routine-row__arrow';
     arrow.setAttribute('aria-hidden', 'true');
-    arrow.textContent = '›';
+    arrow.textContent = 'Start ▶';
     button.append(copy, arrow);
     return button;
   });
@@ -706,13 +707,8 @@ function createPackOptions(select, ids, unavailableIds = new Set()) {
 
 function populateSettingsOptions() {
   if (!hasDocument) return;
-  const visualPackIds = [...new Set([...VISUAL_PACK_IDS, ...mediaPacks.keys()])];
-  const unavailableVisuals = new Set(
-    visualPackIds.filter((packId) => contentIndex && !mediaPacks.has(packId)),
-  );
   createPackOptions(elements.cuePack, CUE_PACK_IDS);
   createPackOptions(elements.voicePack, VOICE_PACK_IDS);
-  createPackOptions(elements.visualPack, visualPackIds, unavailableVisuals);
 }
 
 function volumeLabel(value) {
@@ -737,13 +733,11 @@ function renderSettings(settings) {
   elements.voiceExercise.checked = normalized.voice.exercise;
   elements.voiceSide.checked = normalized.voice.side;
   elements.voiceNext.checked = normalized.voice.next;
-  elements.visualPack.value = normalized.visuals.selectedPackId;
   elements.reducedMotion.checked = normalized.visuals.reducedMotion;
 
-  const mediaPreference = resolveMediaPackPreference(contentIndex, normalized);
-  elements.mediaStatus.textContent = mediaPreference.isFallback
-    ? `${settingsPackLabel(mediaPreference.requestedId)} is saved; built-in GIFs stay active until that pack is installed.`
-    : `${settingsPackLabel(mediaPreference.effectiveId)} active.`;
+  elements.mediaStatus.textContent = contentIndex?.privateMediaPackIndexPath
+    ? 'Best available videos are selected automatically for each workout.'
+    : 'No video library is installed; written movement guidance will be shown.';
 }
 
 function persistSettings(patch) {
@@ -759,12 +753,9 @@ function persistSettings(patch) {
 }
 
 function applySelectedMediaPack() {
-  if (!contentIndex) return;
-  const mediaPreference = resolveMediaPackPreference(contentIndex, currentSettings);
-  const nextPack = selectMediaPack(mediaPreference.effectiveId);
-  if (!nextPack) return;
-  selectedMediaPack = nextPack;
-  applyOutputFrame(selectedMediaPack);
+  const packId = chooseRoutineMediaPackId(selectedRoutine, mediaPacks);
+  selectedMediaPack = packId ? selectMediaPack(packId) : null;
+  if (selectedMediaPack) applyOutputFrame(selectedMediaPack);
 }
 
 function bindSettingsControls(listenerOptions) {
@@ -806,9 +797,6 @@ function bindSettingsControls(listenerOptions) {
     persistSettings({ voice: { next: event.currentTarget.checked } });
   }, listenerOptions);
 
-  elements.visualPack.addEventListener('change', (event) => {
-    persistSettings({ visuals: { selectedPackId: event.currentTarget.value } });
-  }, listenerOptions);
   elements.reducedMotion.addEventListener('change', (event) => {
     persistSettings({ visuals: { reducedMotion: event.currentTarget.checked } });
   }, listenerOptions);
@@ -883,7 +871,8 @@ function applyFraming(element, visual) {
 function textVisualNode(label) {
   const text = document.createElement('p');
   text.className = 'movement-stage__text';
-  text.textContent = label;
+  text.dataset.videoStatus = 'missing';
+  text.textContent = `Video needed · ${label}`;
   return text;
 }
 
@@ -1013,6 +1002,13 @@ function replayCurrentVideos() {
 function startWorkout(routine) {
   stopAnimationLoop();
   clearWorkoutHudTimeout();
+  const routinePackId = chooseRoutineMediaPackId(routine, mediaPacks);
+  const routinePack = routinePackId ? selectMediaPack(routinePackId) : null;
+  const mediaPackChanged = routinePack && routinePack.id !== selectedMediaPack?.id;
+  if (routinePack) {
+    selectedMediaPack = routinePack;
+    applyOutputFrame(selectedMediaPack);
+  }
   activeRoutine = routine;
   voiceCues.setIntervals(routine.intervals);
   engine = new IntervalEngine(routine.intervals);
@@ -1042,6 +1038,24 @@ function startWorkout(routine) {
   engine.start();
   requestWakeLock();
   startAnimationLoop();
+  if (mediaPackChanged && contentIndex) void prepareOffline(contentIndex).catch(showError);
+}
+
+function startRoutineFromUserGesture(routine) {
+  if (!routine || routineStartPending) return;
+  routineStartPending = true;
+  selectedRoutine = routine;
+  voiceCues.setIntervals(routine.intervals);
+  renderRoutineList();
+  elements.routineList.setAttribute('aria-busy', 'true');
+  requestWakeLock();
+  void Promise.all([audioCues.unlock(), voiceCues.unlock()])
+    .catch(showError)
+    .finally(() => {
+      routineStartPending = false;
+      elements.routineList.removeAttribute('aria-busy');
+      startWorkout(routine);
+    });
 }
 
 function startAnimationLoop() {
@@ -1201,13 +1215,10 @@ export function collectContentUrls(
     }
   }
 
-  const packId = mediaPack?.id ?? index.defaultMediaPack;
+  const packId = mediaPack?.id;
   const packFile = packId && index.mediaPacks?.[packId];
   const packFiles = new Set();
   if (packFile) packFiles.add(packFile);
-  for (const fallbackId of mediaPack?.__sourcePackIds ?? []) {
-    if (index.mediaPacks?.[fallbackId]) packFiles.add(index.mediaPacks[fallbackId]);
-  }
   for (const file of packFiles) files.add(file);
   if ([...packFiles].some((file) => file.startsWith('private-packs/')) && index.privateMediaPackIndexPath) {
     files.add(index.privateMediaPackIndexPath);
@@ -1222,7 +1233,7 @@ export function collectContentUrls(
           const resolved = new URL(asset.url, new URL(sourcePath, 'http://fittimer-content.local/'));
           if (resolved.origin === 'http://fittimer-content.local') files.add(resolved.pathname.replace(/^\//, ''));
         } catch {
-          // Ignore malformed optional private assets; the renderer falls back.
+          // Ignore malformed optional private assets; written guidance remains visible.
         }
       } else {
         files.add(asset.url);
@@ -1290,6 +1301,8 @@ function goHome() {
   disposeStageVisuals();
   engine = null;
   activeRoutine = null;
+  routineStartPending = false;
+  applySelectedMediaPack();
   elements.endConfirmation.hidden = true;
   elements.completionActions.hidden = true;
   elements.controls.hidden = false;
@@ -1357,9 +1370,8 @@ if (hasDocument) {
   elements.routineList.addEventListener('click', (event) => {
     const row = event.target instanceof Element ? event.target.closest('[data-routine-index]') : null;
     if (!row) return;
-    selectedRoutine = routines[Number(row.dataset.routineIndex)] ?? selectedRoutine;
-    voiceCues.setIntervals(selectedRoutine?.intervals ?? []);
-    renderRoutineList();
+    const routine = routines[Number(row.dataset.routineIndex)] ?? null;
+    startRoutineFromUserGesture(routine);
   }, listenerOptions);
 
   elements.historyPreviousMonth.addEventListener('click', () => {
@@ -1368,15 +1380,6 @@ if (hasDocument) {
 
   elements.historyNextMonth.addEventListener('click', () => {
     shiftHistoryMonth(1);
-  }, listenerOptions);
-
-  elements.start.addEventListener('click', () => {
-    if (selectedRoutine) requestWakeLock();
-    void Promise.all([audioCues.unlock(), voiceCues.unlock()])
-      .catch(showError)
-      .finally(() => {
-        if (selectedRoutine) startWorkout(selectedRoutine);
-    });
   }, listenerOptions);
 
   elements.workout.addEventListener('click', (event) => {

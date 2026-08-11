@@ -12,7 +12,7 @@
       "rpe": "2→4",
       "coachNote": "March easily while rolling the shoulders smoothly; no bounce.",
       "match": "none",
-      "movements": [{ "movementId": "march-shoulder-rolls", "displayName": "March + Shoulder Rolls", "textOnly": true }]
+      "movements": [{ "movementId": "march-shoulder-rolls", "displayName": "March + Shoulder Rolls" }]
     },
     {
       "displayName": "Cat-cow → Child Reach",
@@ -21,7 +21,7 @@
       "coachNote": "Move through cat-cow into a comfortable child reach; do not force the overhead position.",
       "regressions": ["Shorten the reach or keep the hips higher if the shoulder or hip feels restricted."],
       "match": "none",
-      "movements": [{ "movementId": "cat-cow-child-reach", "displayName": "Cat-cow → Child Reach", "textOnly": true }]
+      "movements": [{ "movementId": "cat-cow-child-reach", "displayName": "Cat-cow → Child Reach" }]
     },
     {
       "displayName": "90/90 Hip Switches",
@@ -31,7 +31,7 @@
       "coachNote": "Switch actively through a comfortable range; do not force the right-hip end range.",
       "regressions": ["Use hand support or a smaller range if the hip catches or pinches."],
       "match": "none",
-      "movements": [{ "movementId": "ninety-ninety-hip-switches", "displayName": "90/90 Hip Switches", "textOnly": true }]
+      "movements": [{ "movementId": "ninety-ninety-hip-switches", "displayName": "90/90 Hip Switches" }]
     },
     {
       "displayName": "Alternating Side-bend Reach",
@@ -39,7 +39,7 @@
       "restSeconds": 20,
       "coachNote": "Reach side to side symmetrically without collapsing into the low back.",
       "match": "none",
-      "movements": [{ "movementId": "alternating-side-bend-reach", "displayName": "Alternating Side-bend Reach", "textOnly": true }]
+      "movements": [{ "movementId": "alternating-side-bend-reach", "displayName": "Alternating Side-bend Reach" }]
     },
     {
       "displayName": "Wall Slides",
@@ -48,7 +48,7 @@
       "coachNote": "Slide the arms only through a comfortable range; keep the ribs controlled.",
       "regressions": ["Use a smaller range or stop before shoulder apprehension."],
       "match": "none",
-      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides", "textOnly": true }]
+      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides" }]
     },
     {
       "displayName": "Ankle Pumps + Heel-to-toe Rocks",
@@ -56,7 +56,7 @@
       "restSeconds": 20,
       "coachNote": "Prepare the ankles with pumps and heel-to-toe rocks; this is not a calf-raise station.",
       "match": "none",
-      "movements": [{ "movementId": "ankle-pumps-heel-to-toe-rocks", "displayName": "Ankle Pumps + Heel-to-toe Rocks", "textOnly": true }]
+      "movements": [{ "movementId": "ankle-pumps-heel-to-toe-rocks", "displayName": "Ankle Pumps + Heel-to-toe Rocks" }]
     },
     {
       "displayName": "Goblet Squat",
@@ -67,7 +67,7 @@
       "coachNote": "Hold one dumbbell at the chest and use a 1.5-rep or paused squat with heels down.",
       "regressions": ["Use a lighter load or a smaller range while keeping the heels down."],
       "match": "none",
-      "movements": [{ "movementId": "goblet-squat", "displayName": "Goblet Squat", "textOnly": true }]
+      "movements": [{ "movementId": "goblet-squat", "displayName": "Goblet Squat" }]
     },
     {
       "displayName": "Lateral Lunge (left)",
@@ -78,7 +78,7 @@
       "coachNote": "Use a moderate range with the whole foot planted and the knee tracking over the foot.",
       "regressions": ["Shorten the range or use support rather than forcing the great toe."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge" }]
     },
     {
       "displayName": "Lateral Lunge (right)",
@@ -89,7 +89,7 @@
       "coachNote": "Use a moderate range with the whole foot planted and the knee tracking over the foot.",
       "regressions": ["Shorten the range or use support rather than forcing the great toe."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge" }]
     },
     {
       "displayName": "B-stance RDL (left)",
@@ -101,7 +101,7 @@
       "coachNote": "Keep the rear foot flat and place about 20% of the load through it.",
       "regressions": ["Use a lighter load, a shorter range, or more rear-foot support."],
       "match": "none",
-      "movements": [{ "movementId": "b-stance-rdl", "displayName": "B-stance RDL", "textOnly": true }]
+      "movements": [{ "movementId": "b-stance-rdl", "displayName": "B-stance RDL" }]
     },
     {
       "displayName": "B-stance RDL (right)",
@@ -113,7 +113,7 @@
       "coachNote": "Keep the rear foot flat and place about 20% of the load through it.",
       "regressions": ["Use a lighter load, a shorter range, or more rear-foot support."],
       "match": "none",
-      "movements": [{ "movementId": "b-stance-rdl", "displayName": "B-stance RDL", "textOnly": true }]
+      "movements": [{ "movementId": "b-stance-rdl", "displayName": "B-stance RDL" }]
     },
     {
       "displayName": "Supported One-arm Row (left)",
@@ -125,7 +125,7 @@
       "coachNote": "Support the forearm on the thigh, pull with a quiet shoulder, and squeeze for one second.",
       "regressions": ["Use a lighter dumbbell or more support if the trunk rotates."],
       "match": "none",
-      "movements": [{ "movementId": "supported-one-arm-row", "displayName": "Supported One-arm Row", "textOnly": true }]
+      "movements": [{ "movementId": "supported-one-arm-row", "displayName": "Supported One-arm Row" }]
     },
     {
       "displayName": "Supported One-arm Row (right)",
@@ -137,7 +137,7 @@
       "coachNote": "Support the forearm on the thigh, pull with a quiet shoulder, and squeeze for one second.",
       "regressions": ["Use a lighter dumbbell or more support if the trunk rotates."],
       "match": "none",
-      "movements": [{ "movementId": "supported-one-arm-row", "displayName": "Supported One-arm Row", "textOnly": true }]
+      "movements": [{ "movementId": "supported-one-arm-row", "displayName": "Supported One-arm Row" }]
     },
     {
       "displayName": "Slow Push-up",
@@ -159,7 +159,7 @@
       "coachNote": "Press with a neutral grip and stop before shoulder apprehension; keep the ribs stacked.",
       "regressions": ["Use a lighter dumbbell or a shorter pain-free press range."],
       "match": "none",
-      "movements": [{ "movementId": "half-kneeling-press", "displayName": "Half-kneeling Press", "textOnly": true }]
+      "movements": [{ "movementId": "half-kneeling-press", "displayName": "Half-kneeling Press" }]
     },
     {
       "displayName": "Half-kneeling Press (right)",
@@ -170,7 +170,7 @@
       "coachNote": "Press with a neutral grip and stop before shoulder apprehension; keep the ribs stacked.",
       "regressions": ["Use a lighter dumbbell or a shorter pain-free press range."],
       "match": "none",
-      "movements": [{ "movementId": "half-kneeling-press", "displayName": "Half-kneeling Press", "textOnly": true }]
+      "movements": [{ "movementId": "half-kneeling-press", "displayName": "Half-kneeling Press" }]
     },
     {
       "displayName": "Diagonal Chop (left)",
@@ -181,7 +181,7 @@
       "coachNote": "Rotate through the hips and upper trunk; finish around chest or eye height rather than overhead.",
       "regressions": ["Use a lighter load and a smaller rotation if the back or shoulder complains."],
       "match": "none",
-      "movements": [{ "movementId": "diagonal-chop", "displayName": "Diagonal Chop", "textOnly": true }]
+      "movements": [{ "movementId": "diagonal-chop", "displayName": "Diagonal Chop" }]
     },
     {
       "displayName": "Diagonal Chop (right)",
@@ -192,7 +192,7 @@
       "coachNote": "Rotate through the hips and upper trunk; finish around chest or eye height rather than overhead.",
       "regressions": ["Use a lighter load and a smaller rotation if the back or shoulder complains."],
       "match": "none",
-      "movements": [{ "movementId": "diagonal-chop", "displayName": "Diagonal Chop", "textOnly": true }]
+      "movements": [{ "movementId": "diagonal-chop", "displayName": "Diagonal Chop" }]
     },
     {
       "displayName": "Front-rack Press-out",
@@ -204,7 +204,7 @@
       "coachNote": "Hold one dumbbell at the chest, press it away slowly, switch hands at 20 seconds, and keep the trunk still.",
       "regressions": ["Use a lighter load or a shorter press while keeping the ribs down."],
       "match": "none",
-      "movements": [{ "movementId": "front-rack-press-out", "displayName": "Front-rack Press-out", "textOnly": true }]
+      "movements": [{ "movementId": "front-rack-press-out", "displayName": "Front-rack Press-out" }]
     },
     {
       "displayName": "Wall-press Hip-abduction Isometric (left)",
@@ -216,7 +216,7 @@
       "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
     },
     {
       "displayName": "Wall-press Hip-abduction Isometric (right)",
@@ -228,7 +228,7 @@
       "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (left)",
@@ -240,7 +240,7 @@
       "coachNote": "Chamber slowly with the wall available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (right)",
@@ -252,7 +252,7 @@
       "coachNote": "Chamber slowly with the wall available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
     },
     {
       "displayName": "Seated Soleus Raise (left)",
@@ -264,7 +264,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
     },
     {
       "displayName": "Seated Soleus Raise (right)",
@@ -276,7 +276,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
     },
     {
       "displayName": "Tibialis Raises",
@@ -287,7 +287,7 @@
       "coachNote": "Lean into a wall and lift the toes with a two-second rise and three-second lower.",
       "regressions": ["Use a smaller range or more wall support if the shins fatigue early."],
       "match": "none",
-      "movements": [{ "movementId": "tibialis-raises", "displayName": "Tibialis Raises", "textOnly": true }]
+      "movements": [{ "movementId": "tibialis-raises", "displayName": "Tibialis Raises" }]
     },
     {
       "displayName": "DB Knee-drive March",
@@ -297,7 +297,7 @@
       "coachNote": "Use a goblet or front-rack hold, lift the knees without bouncing, and keep the trunk tall.",
       "regressions": ["Use a lighter dumbbell or lower the knee height while staying steady."],
       "match": "none",
-      "movements": [{ "movementId": "dumbbell-knee-drive-march", "displayName": "DB Knee-drive March", "textOnly": true }]
+      "movements": [{ "movementId": "dumbbell-knee-drive-march", "displayName": "DB Knee-drive March" }]
     },
     {
       "displayName": "Foot-planted Shadowboxing",
@@ -317,7 +317,7 @@
       "coachNote": "Land flat-footed, find balance, and gently lift the arch without gripping the toes.",
       "regressions": ["Use a wall or shorten the step; keep the landing flat and quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance + Short-foot", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance + Short-foot" }]
     },
     {
       "displayName": "Supported Side Reach + Breathing",

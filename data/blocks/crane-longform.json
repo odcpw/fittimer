@@ -12,7 +12,7 @@
       "rpe": "2→4",
       "coachNote": "Ramp the march with relaxed arm circles; no bounce.",
       "match": "none",
-      "movements": [{ "movementId": "march-arm-circles", "displayName": "March + Arm Circles", "textOnly": true }]
+      "movements": [{ "movementId": "march-arm-circles", "displayName": "March + Arm Circles" }]
     },
     {
       "displayName": "Cat-cow",
@@ -20,7 +20,7 @@
       "restSeconds": 20,
       "coachNote": "Move through a comfortable cat-cow range without forcing the overhead position.",
       "match": "none",
-      "movements": [{ "movementId": "cat-cow-child-reach", "displayName": "Cat-cow", "textOnly": true }]
+      "movements": [{ "movementId": "cat-cow-child-reach", "displayName": "Cat-cow" }]
     },
     {
       "displayName": "Controlled Leg Pendulum (left)",
@@ -31,7 +31,7 @@
       "coachNote": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick.",
       "regressions": ["Use a wall and keep the pendulum small if balance or the hip range is limited."],
       "match": "none",
-      "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum", "textOnly": true }]
+      "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum" }]
     },
     {
       "displayName": "Controlled Leg Pendulum (right)",
@@ -42,7 +42,7 @@
       "coachNote": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick.",
       "regressions": ["Use a wall and keep the pendulum small if balance or the hip range is limited."],
       "match": "none",
-      "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum", "textOnly": true }]
+      "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum" }]
     },
     {
       "displayName": "Lateral Squat Rock",
@@ -61,7 +61,7 @@
       "coachNote": "Slide the arms only through a comfortable range; keep the ribs controlled.",
       "regressions": ["Use a smaller range or stop before shoulder apprehension."],
       "match": "none",
-      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides", "textOnly": true }]
+      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides" }]
     },
     {
       "displayName": "Ankle Pumps + Heel-to-toe Rocks",
@@ -69,7 +69,7 @@
       "restSeconds": 20,
       "coachNote": "Prepare the ankles with pumps and heel-to-toe rocks; calf raises come later.",
       "match": "none",
-      "movements": [{ "movementId": "ankle-pumps-heel-to-toe-rocks", "displayName": "Ankle Pumps + Heel-to-toe Rocks", "textOnly": true }]
+      "movements": [{ "movementId": "ankle-pumps-heel-to-toe-rocks", "displayName": "Ankle Pumps + Heel-to-toe Rocks" }]
     },
     {
       "displayName": "Lateral Step-to-balance (left)",
@@ -80,7 +80,7 @@
       "coachNote": "Step to the left and balance on a flat foot; do not hop.",
       "regressions": ["Use a wall or shorten the step; keep the landing quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance" }]
     },
     {
       "displayName": "Lateral Step-to-balance (right)",
@@ -91,7 +91,7 @@
       "coachNote": "Step to the right and balance on a flat foot; do not hop.",
       "regressions": ["Use a wall or shorten the step; keep the landing quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance" }]
     },
     {
       "displayName": "Crane-stance Hold (left)",
@@ -102,7 +102,7 @@
       "coachNote": "Hold the left crane stance; split the interval into two holds if form fades.",
       "regressions": ["Use a toe tap or wall support and shorten the hold before balance quality drops."],
       "match": "none",
-      "movements": [{ "movementId": "crane-stance-hold", "displayName": "Crane-stance Hold", "textOnly": true }]
+      "movements": [{ "movementId": "crane-stance-hold", "displayName": "Crane-stance Hold" }]
     },
     {
       "displayName": "Crane-stance Hold (right)",
@@ -113,7 +113,7 @@
       "coachNote": "Hold the right crane stance; split the interval into two holds if form fades.",
       "regressions": ["Use a toe tap or wall support and shorten the hold before balance quality drops."],
       "match": "none",
-      "movements": [{ "movementId": "crane-stance-hold", "displayName": "Crane-stance Hold", "textOnly": true }]
+      "movements": [{ "movementId": "crane-stance-hold", "displayName": "Crane-stance Hold" }]
     },
     {
       "displayName": "Slow Step-down (left)",
@@ -125,7 +125,7 @@
       "coachNote": "Use a low step, descend for three seconds, and keep the pelvis level.",
       "regressions": ["Lower the step or use support; keep the whole foot planted."],
       "match": "none",
-      "movements": [{ "movementId": "slow-step-down", "displayName": "Slow Step-down", "textOnly": true }]
+      "movements": [{ "movementId": "slow-step-down", "displayName": "Slow Step-down" }]
     },
     {
       "displayName": "Slow Step-down (right)",
@@ -137,7 +137,7 @@
       "coachNote": "Use a low step, descend for three seconds, and keep the pelvis level.",
       "regressions": ["Lower the step or use support; keep the whole foot planted."],
       "match": "none",
-      "movements": [{ "movementId": "slow-step-down", "displayName": "Slow Step-down", "textOnly": true }]
+      "movements": [{ "movementId": "slow-step-down", "displayName": "Slow Step-down" }]
     },
     {
       "displayName": "Slow Side Kick (left)",
@@ -148,7 +148,7 @@
       "coachNote": "Kick slowly with the wall available; do not force the pivot or snap.",
       "regressions": ["Use wall support and lower the kick height."],
       "match": "none",
-      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick", "textOnly": true }]
+      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick" }]
     },
     {
       "displayName": "Slow Side Kick (right)",
@@ -159,7 +159,7 @@
       "coachNote": "Kick slowly with the wall available; do not force the pivot or snap.",
       "regressions": ["Use wall support and lower the kick height."],
       "match": "none",
-      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick", "textOnly": true }]
+      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick" }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (left)",
@@ -171,7 +171,7 @@
       "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (right)",
@@ -183,7 +183,7 @@
       "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
     },
     {
       "displayName": "Goblet Squat",
@@ -194,7 +194,7 @@
       "coachNote": "Hold one dumbbell at the chest and use a 1.5-rep or paused squat with heels down.",
       "regressions": ["Use a lighter load or smaller range while keeping the heels down."],
       "match": "none",
-      "movements": [{ "movementId": "goblet-squat", "displayName": "Goblet Squat", "textOnly": true }]
+      "movements": [{ "movementId": "goblet-squat", "displayName": "Goblet Squat" }]
     },
     {
       "displayName": "Push-up Plus",
@@ -215,7 +215,7 @@
       "coachNote": "Use a moderate range with the whole foot planted and the knee tracking over the foot.",
       "regressions": ["Shorten the range or use support rather than forcing the great toe."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge" }]
     },
     {
       "displayName": "Lateral Lunge (right)",
@@ -226,7 +226,7 @@
       "coachNote": "Use a moderate range with the whole foot planted and the knee tracking over the foot.",
       "regressions": ["Shorten the range or use support rather than forcing the great toe."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-lunge", "displayName": "Lateral Lunge" }]
     },
     {
       "displayName": "One-arm DB Snatch (left)",
@@ -259,7 +259,7 @@
       "coachNote": "Use a stable hinge, pull both dumbbells with a quiet neck, and squeeze at the top.",
       "regressions": ["Use a lighter load or a more upright hinge if the back position changes."],
       "match": "none",
-      "movements": [{ "movementId": "two-arm-bent-over-row", "displayName": "Two-arm Bent-over Row", "textOnly": true }]
+      "movements": [{ "movementId": "two-arm-bent-over-row", "displayName": "Two-arm Bent-over Row" }]
     },
     {
       "displayName": "Suitcase March",
@@ -270,7 +270,7 @@
       "coachNote": "Carry one dumbbell tall, switch hands at 20 seconds, and march without bouncing.",
       "regressions": ["Use a lighter dumbbell or lower the knee lift while keeping the trunk tall."],
       "match": "none",
-      "movements": [{ "movementId": "suitcase-march", "displayName": "Suitcase March", "textOnly": true }]
+      "movements": [{ "movementId": "suitcase-march", "displayName": "Suitcase March" }]
     },
     {
       "displayName": "Two-DB Romanian Deadlift",
@@ -281,7 +281,7 @@
       "coachNote": "Hinge with two dumbbells, pause at a strong depth, and keep the back long.",
       "regressions": ["Use lighter dumbbells or shorten the range while keeping the whole foot loaded."],
       "match": "none",
-      "movements": [{ "movementId": "two-dumbbell-romanian-deadlift", "displayName": "Two-DB Romanian Deadlift", "textOnly": true }]
+      "movements": [{ "movementId": "two-dumbbell-romanian-deadlift", "displayName": "Two-DB Romanian Deadlift" }]
     },
     {
       "displayName": "Single-leg Glute Bridge (left)",
@@ -292,7 +292,7 @@
       "coachNote": "Keep the pelvis level and use the long-lever option only if control stays clean.",
       "regressions": ["Use a bilateral bridge or shorten the lever if pelvic control fades."],
       "match": "none",
-      "movements": [{ "movementId": "single-leg-glute-bridge", "displayName": "Single-leg Glute Bridge", "textOnly": true }]
+      "movements": [{ "movementId": "single-leg-glute-bridge", "displayName": "Single-leg Glute Bridge" }]
     },
     {
       "displayName": "Single-leg Glute Bridge (right)",
@@ -303,7 +303,7 @@
       "coachNote": "Keep the pelvis level and use the long-lever option only if control stays clean.",
       "regressions": ["Use a bilateral bridge or shorten the lever if pelvic control fades."],
       "match": "none",
-      "movements": [{ "movementId": "single-leg-glute-bridge", "displayName": "Single-leg Glute Bridge", "textOnly": true }]
+      "movements": [{ "movementId": "single-leg-glute-bridge", "displayName": "Single-leg Glute Bridge" }]
     },
     {
       "displayName": "Dead Bug",
@@ -313,7 +313,7 @@
       "coachNote": "Move slowly and exhale; keep the back quiet against the floor.",
       "regressions": ["Keep the feet supported or reduce the limb range if the back arches."],
       "match": "none",
-      "movements": [{ "movementId": "dead-bug", "displayName": "Dead Bug", "textOnly": true }]
+      "movements": [{ "movementId": "dead-bug", "displayName": "Dead Bug" }]
     },
     {
       "displayName": "Weighted Straight-knee Calf Raise (left)",
@@ -325,7 +325,7 @@
       "coachNote": "Use the prescribed cadence and keep the forefoot stable; never bounce.",
       "regressions": ["Use support or less load; keep pain 0–3/10, below the 5/10 ceiling, and settled by next morning."],
       "match": "none",
-      "movements": [{ "movementId": "weighted-straight-knee-calf-raise", "displayName": "Weighted Straight-knee Calf Raise", "textOnly": true }]
+      "movements": [{ "movementId": "weighted-straight-knee-calf-raise", "displayName": "Weighted Straight-knee Calf Raise" }]
     },
     {
       "displayName": "Weighted Straight-knee Calf Raise (right)",
@@ -337,7 +337,7 @@
       "coachNote": "Use the prescribed cadence and keep the forefoot stable; never bounce.",
       "regressions": ["Use support or less load; keep pain 0–3/10, below the 5/10 ceiling, and settled by next morning."],
       "match": "none",
-      "movements": [{ "movementId": "weighted-straight-knee-calf-raise", "displayName": "Weighted Straight-knee Calf Raise", "textOnly": true }]
+      "movements": [{ "movementId": "weighted-straight-knee-calf-raise", "displayName": "Weighted Straight-knee Calf Raise" }]
     },
     {
       "displayName": "Seated Soleus Raise (left)",
@@ -349,7 +349,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
     },
     {
       "displayName": "Seated Soleus Raise (right)",
@@ -361,7 +361,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
     },
     {
       "displayName": "Hip Hitch (left)",
@@ -372,7 +372,7 @@
       "coachNote": "Control the pelvis through a small hip hitch without hiking the shoulder.",
       "regressions": ["Use wall support and reduce the range if the lateral hip becomes painful."],
       "match": "none",
-      "movements": [{ "movementId": "hip-hitch", "displayName": "Hip Hitch", "textOnly": true }]
+      "movements": [{ "movementId": "hip-hitch", "displayName": "Hip Hitch" }]
     },
     {
       "displayName": "Hip Hitch (right)",
@@ -383,7 +383,7 @@
       "coachNote": "Control the pelvis through a small hip hitch without hiking the shoulder.",
       "regressions": ["Use wall support and reduce the range if the lateral hip becomes painful."],
       "match": "none",
-      "movements": [{ "movementId": "hip-hitch", "displayName": "Hip Hitch", "textOnly": true }]
+      "movements": [{ "movementId": "hip-hitch", "displayName": "Hip Hitch" }]
     },
     {
       "displayName": "Prone Y/W",
@@ -394,7 +394,7 @@
       "coachNote": "Use unweighted Y/W shapes with a two-second hold and relaxed neck.",
       "regressions": ["Use only the range that keeps the shoulder comfortable."],
       "match": "none",
-      "movements": [{ "movementId": "prone-y-w", "displayName": "Prone Y/W", "textOnly": true }]
+      "movements": [{ "movementId": "prone-y-w", "displayName": "Prone Y/W" }]
     },
     {
       "displayName": "Toe-spread + Short-foot",
@@ -405,7 +405,7 @@
       "coachNote": "Work about 20 seconds per foot: spread the toes and gently lift the arch without gripping.",
       "regressions": ["Use a seated version or reduce the hold while keeping the foot relaxed."],
       "match": "none",
-      "movements": [{ "movementId": "toe-spread-short-foot", "displayName": "Toe-spread + Short-foot", "textOnly": true }]
+      "movements": [{ "movementId": "toe-spread-short-foot", "displayName": "Toe-spread + Short-foot" }]
     },
     {
       "displayName": "Foot-planted Shadowboxing",
@@ -425,7 +425,7 @@
       "coachNote": "Walk briskly backward with whole-foot landings and a clear path.",
       "regressions": ["Use a wall or rail for support and slow the pace."],
       "match": "none",
-      "movements": [{ "movementId": "backward-walking", "displayName": "Brisk Backward Walking", "textOnly": true }]
+      "movements": [{ "movementId": "backward-walking", "displayName": "Brisk Backward Walking" }]
     },
     {
       "displayName": "Seated Straddle Active Hinge",
@@ -435,7 +435,7 @@
       "coachNote": "Hinge actively from the hips; this is not a passive stretch.",
       "regressions": ["Bring the legs closer or reduce the hinge range while keeping the spine long."],
       "match": "none",
-      "movements": [{ "movementId": "seated-straddle-active-hinge", "displayName": "Seated Straddle Active Hinge", "textOnly": true }]
+      "movements": [{ "movementId": "seated-straddle-active-hinge", "displayName": "Seated Straddle Active Hinge" }]
     },
     {
       "displayName": "Supine Active Hamstring Extension",
@@ -446,7 +446,7 @@
       "coachNote": "Alternate sides with a three-second extension and return; keep the pelvis controlled.",
       "regressions": ["Bend the knee more or reduce the range if the back or hamstring pulls."],
       "match": "none",
-      "movements": [{ "movementId": "supine-active-hamstring-extension", "displayName": "Supine Active Hamstring Extension", "textOnly": true }]
+      "movements": [{ "movementId": "supine-active-hamstring-extension", "displayName": "Supine Active Hamstring Extension" }]
     },
     {
       "displayName": "Hip-flexor Stretch (left)",
@@ -456,7 +456,7 @@
       "coachNote": "Use a gentle stretch with a posterior pelvic tilt; do not force the front of the hip.",
       "regressions": ["Shorten the stance or raise the torso if the stretch becomes painful."],
       "match": "none",
-      "movements": [{ "movementId": "hip-flexor-stretch", "displayName": "Hip-flexor Stretch", "textOnly": true }]
+      "movements": [{ "movementId": "hip-flexor-stretch", "displayName": "Hip-flexor Stretch" }]
     },
     {
       "displayName": "Hip-flexor Stretch (right)",
@@ -466,7 +466,7 @@
       "coachNote": "Use a gentle stretch with a posterior pelvic tilt; do not force the front of the hip.",
       "regressions": ["Shorten the stance or raise the torso if the stretch becomes painful."],
       "match": "none",
-      "movements": [{ "movementId": "hip-flexor-stretch", "displayName": "Hip-flexor Stretch", "textOnly": true }]
+      "movements": [{ "movementId": "hip-flexor-stretch", "displayName": "Hip-flexor Stretch" }]
     },
     {
       "displayName": "Side-bend Holds",
@@ -477,7 +477,7 @@
       "coachNote": "Hold each side symmetrically for 20 seconds with calm breathing.",
       "regressions": ["Use a smaller side bend and keep both feet planted."],
       "match": "none",
-      "movements": [{ "movementId": "side-bend-holds", "displayName": "Side-bend Holds", "textOnly": true }]
+      "movements": [{ "movementId": "side-bend-holds", "displayName": "Side-bend Holds" }]
     },
     {
       "displayName": "Breathing",
@@ -485,7 +485,7 @@
       "restSeconds": 20,
       "coachNote": "Finish with calm breathing and keep the final 20-second rest.",
       "match": "none",
-      "movements": [{ "movementId": "breathing-easy-reach", "displayName": "Breathing", "textOnly": true }]
+      "movements": [{ "movementId": "breathing-easy-reach", "displayName": "Breathing" }]
     }
   ]
 }

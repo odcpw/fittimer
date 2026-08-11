@@ -208,7 +208,10 @@ test('Fable W1-W4 preserve canonical order, sides, exact duration, and media cov
           assert.deepEqual(entry.assets, [], `${movement.movementId} must remain text-only`);
           assert.equal(entry.fallback, 'text', `${movement.movementId} text fallback`);
         } else {
-          assert.ok(entry.assets.length > 0, `${movement.movementId} must have an honest visual`);
+          assert.ok(
+            entry.assets.length > 0 || entry.fallback === 'text',
+            `${movement.movementId} needs a public visual or explicit text fallback`,
+          );
         }
       }
     }

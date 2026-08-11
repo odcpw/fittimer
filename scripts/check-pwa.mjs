@@ -152,6 +152,7 @@ for (const voicePath of voicePaths) {
   assert.ok(shellPaths.has(`./${voicePath}`), `APP_SHELL is missing voice asset ${voicePath}`);
 }
 assert.doesNotMatch(serviceWorker, /catalog_full\.json/);
+assert.doesNotMatch(serviceWorker, /relativePath\.startsWith\('data\/gifs\/'\)/);
 const cacheVersion = serviceWorker.match(/const CACHE_NAME = ['"]fittimer-v(\d+)['"]/);
 assert.ok(cacheVersion, 'service worker cache version is declared');
 assert.ok(Number(cacheVersion[1]) >= 7, 'service worker cache must be v7 or newer');
@@ -162,6 +163,8 @@ assert.doesNotMatch(assetResponse[0], /cache\.put/);
 const html = await readFile(path.join(ROOT, 'index.html'), 'utf8');
 const application = await readFile(path.join(ROOT, 'src', 'app.mjs'), 'utf8');
 assert.doesNotMatch(html, /<audio[\s>]/i, 'HTML audio elements would interfere with background music');
+assert.doesNotMatch(html, /id="settings-visual-pack"/, 'visual pack selection is automatic');
+assert.match(application, /\.filter\(\(\[id\]\) => id !== VISUAL_PACK_GIF_V1\)/, 'WorkoutX GIF pack must not load at runtime');
 assert.doesNotMatch(application, /mediaSession/i, 'Media Session must not claim background music controls');
 
 process.stdout.write(

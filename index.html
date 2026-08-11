@@ -62,7 +62,7 @@
               <span class="settings-summary__title">Personal settings</span>
               <span class="settings-summary__hint">Sound, voice, and display</span>
             </span>
-            <span class="settings-summary__status" id="settings-summary-status">Sound on · GIFs</span>
+            <span class="settings-summary__status" id="settings-summary-status">Sound on · Voice on</span>
           </summary>
 
           <div class="settings-content" id="settings-content">
@@ -120,10 +120,6 @@
 
               <fieldset class="settings-group">
                 <legend>Display</legend>
-                <label class="settings-select" for="settings-visual-pack">
-                  <span>Media pack</span>
-                  <select id="settings-visual-pack"></select>
-                </label>
                 <label class="settings-switch">
                   <input id="settings-reduced-motion" type="checkbox">
                   <span class="settings-switch__control" aria-hidden="true"></span>
@@ -132,14 +128,13 @@
                     <small>Prefer still exercise images</small>
                   </span>
                 </label>
-                <p class="settings-media-status" id="settings-media-status" role="status">Built-in GIFs active.</p>
+                <p class="settings-media-status" id="settings-media-status" role="status">Best available videos are selected automatically.</p>
               </fieldset>
             </div>
           </div>
         </details>
 
         <div class="home-actions">
-          <button class="primary-action" id="start-button" type="button" disabled>Start workout</button>
           <p class="offline-status" id="offline-status" role="status">
             <span class="offline-dot" aria-hidden="true"></span>
             <span>Preparing offline…</span>

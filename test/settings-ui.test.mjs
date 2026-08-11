@@ -3,16 +3,14 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
-  CUE_PACK_SYNTH_V1,
   DEFAULT_SETTINGS,
-  VISUAL_PACK_GIF_V1,
   VISUAL_PACK_REFERENCE_V1,
-  VOICE_PACK_BROWSER_V1,
 } from '../src/settings.mjs';
-import { resolveMediaPackPreference, summarizeSettings } from '../src/app.mjs';
+import { summarizeSettings } from '../src/app.mjs';
 
 const html = await readFile('index.html', 'utf8');
 const styles = await readFile('styles.css', 'utf8');
+const application = await readFile('src/app.mjs', 'utf8');
 
 const settingControlIds = [
   'settings-cue-pack',
@@ -26,7 +24,6 @@ const settingControlIds = [
   'settings-voice-exercise',
   'settings-voice-side',
   'settings-voice-next',
-  'settings-visual-pack',
   'settings-reduced-motion',
 ];
 
@@ -34,6 +31,8 @@ test('home settings panel exposes every versioned preference', () => {
   assert.match(html, /<details[^>]+id="settings-panel"/);
   for (const id of settingControlIds) assert.match(html, new RegExp(`id="${id}"`));
   assert.match(html, /type="range"[^>]+min="0"[^>]+max="1"/);
+  assert.doesNotMatch(html, /id="settings-visual-pack"/);
+  assert.match(html, /Best available videos are selected automatically/);
 });
 
 test('installed landscape home owns a touch-scroll surface', () => {
@@ -42,33 +41,24 @@ test('installed landscape home owns a touch-scroll surface', () => {
   assert.match(styles, /html\[data-screen="workout"\],\s*html\[data-screen="workout"\] body\s*\{[^}]*overflow:\s*hidden/s);
 });
 
+test('workout cards are explicit direct-start controls', () => {
+  assert.match(application, /button\.setAttribute\('aria-label', `Start \$\{routine\.title\}`\)/);
+  assert.match(application, /arrow\.textContent\s*=\s*'Start ▶'/);
+  assert.match(application, /elements\.routineList\.addEventListener\('click',[\s\S]*?startRoutineFromUserGesture\(routine\)/);
+  assert.doesNotMatch(html, /id="start-button"/);
+});
+
 test('settings summary uses normalized defaults and reflects cue changes', () => {
   assert.deepEqual(summarizeSettings(DEFAULT_SETTINGS), {
-    label: 'Sound on · GIFs',
+    label: 'Sound on · Voice on',
     cueLabel: 'Sound on',
-    visualLabel: 'GIFs',
+    voiceLabel: 'Voice on',
   });
   assert.deepEqual(summarizeSettings({ cues: { enabled: false }, visuals: { selectedPackId: VISUAL_PACK_REFERENCE_V1 } }), {
-    label: 'Sound off · Reference pack',
+    label: 'Sound off · Voice on',
     cueLabel: 'Sound off',
-    visualLabel: 'Reference pack',
+    voiceLabel: 'Voice on',
   });
 });
 
-test('uninstalled but valid visual preferences fall back to the available media pack', () => {
-  const index = {
-    defaultMediaPack: VISUAL_PACK_GIF_V1,
-    mediaPacks: { [VISUAL_PACK_GIF_V1]: 'data/media/gif-v1.json' },
-  };
-  assert.deepEqual(resolveMediaPackPreference(index, {
-    cues: { packId: CUE_PACK_SYNTH_V1 },
-    voice: { packId: VOICE_PACK_BROWSER_V1 },
-    visuals: { selectedPackId: VISUAL_PACK_REFERENCE_V1 },
-  }), {
-    requestedId: VISUAL_PACK_REFERENCE_V1,
-    effectiveId: VISUAL_PACK_GIF_V1,
-    isFallback: true,
-  });
-});
-
-process.stdout.write('Settings UI tests passed: controls, summaries, and safe media fallback.\n');
+process.stdout.write('Settings UI tests passed: controls, summaries, and automatic video UI.\n');
