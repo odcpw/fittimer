@@ -48,7 +48,7 @@
       "coachNote": "Slide the arms only through a comfortable range; keep the ribs controlled.",
       "regressions": ["Use a smaller range or stop before shoulder apprehension."],
       "match": "none",
-      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides" }]
+      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides", "textOnly": true }]
     },
     {
       "displayName": "Ankle Pumps + Heel-to-toe Rocks",
@@ -240,7 +240,7 @@
       "coachNote": "Chamber slowly with the wall available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (right)",
@@ -252,7 +252,7 @@
       "coachNote": "Chamber slowly with the wall available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
     },
     {
       "displayName": "Seated Soleus Raise (left)",
@@ -264,7 +264,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Seated Soleus Raise (right)",
@@ -276,7 +276,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Tibialis Raises",
@@ -327,7 +327,7 @@
       "coachNote": "Use support for a gentle side reach, switch at 20 seconds, and breathe continuously.",
       "regressions": ["Keep both feet planted and reduce the reach if balance is uncertain."],
       "match": "none",
-      "movements": [{ "movementId": "supported-side-reach-breathing", "displayName": "Supported Side Reach + Breathing", "textOnly": true }]
+      "movements": [{ "movementId": "supported-side-reach-breathing", "displayName": "Supported Side Reach + Breathing" }]
     }
   ]
 }

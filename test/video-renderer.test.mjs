@@ -140,7 +140,7 @@ test('bounded renderer owns video properties, cleanup, visibility replay, and sa
   assert.doesNotMatch(html, /<audio\b/i);
   assert.doesNotMatch(application, /\b(?:new\s+)?Audio\s*\(/);
   assert.doesNotMatch(application, /mediaSession/i);
-  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'fittimer-v16'/);
+  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'fittimer-v17'/);
 });
 
 process.stdout.write('Video renderer tests passed: dedupe, fallback, reduced motion, cleanup, and invariants.\n');

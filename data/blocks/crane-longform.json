@@ -52,7 +52,7 @@
       "coachNote": "Rock side to side through a controlled squat range with the feet planted.",
       "regressions": ["Use a smaller range or support rather than forcing the great toe."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-squat-rock", "displayName": "Lateral Squat Rock", "textOnly": true }]
+      "movements": [{ "movementId": "lateral-squat-rock", "displayName": "Lateral Squat Rock" }]
     },
     {
       "displayName": "Wall Slides",
@@ -61,7 +61,7 @@
       "coachNote": "Slide the arms only through a comfortable range; keep the ribs controlled.",
       "regressions": ["Use a smaller range or stop before shoulder apprehension."],
       "match": "none",
-      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides" }]
+      "movements": [{ "movementId": "wall-slides", "displayName": "Wall Slides", "textOnly": true }]
     },
     {
       "displayName": "Ankle Pumps + Heel-to-toe Rocks",
@@ -171,7 +171,7 @@
       "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (right)",
@@ -183,7 +183,7 @@
       "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
-      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber" }]
+      "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
     },
     {
       "displayName": "Goblet Squat",
@@ -349,7 +349,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Seated Soleus Raise (right)",
@@ -361,7 +361,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Hip Hitch (left)",
@@ -405,7 +405,7 @@
       "coachNote": "Work about 20 seconds per foot: spread the toes and gently lift the arch without gripping.",
       "regressions": ["Use a seated version or reduce the hold while keeping the foot relaxed."],
       "match": "none",
-      "movements": [{ "movementId": "toe-spread-short-foot", "displayName": "Toe-spread + Short-foot" }]
+      "movements": [{ "movementId": "toe-spread-short-foot", "displayName": "Toe-spread + Short-foot", "textOnly": true }]
     },
     {
       "displayName": "Foot-planted Shadowboxing",
@@ -425,7 +425,7 @@
       "coachNote": "Walk briskly backward with whole-foot landings and a clear path.",
       "regressions": ["Use a wall or rail for support and slow the pace."],
       "match": "none",
-      "movements": [{ "movementId": "backward-walking", "displayName": "Brisk Backward Walking" }]
+      "movements": [{ "movementId": "backward-walking", "displayName": "Brisk Backward Walking", "textOnly": true }]
     },
     {
       "displayName": "Seated Straddle Active Hinge",

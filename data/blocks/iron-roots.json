@@ -46,7 +46,7 @@
       "restSeconds": 20,
       "coachNote": "Stand at the wall and reach without shrugging or forcing the shoulder range.",
       "match": "none",
-      "movements": [{ "movementId": "standing-wall-scapular-reach", "displayName": "Standing Wall Scapular Reach" }]
+      "movements": [{ "movementId": "standing-wall-scapular-reach", "displayName": "Standing Wall Scapular Reach", "textOnly": true }]
     },
     {
       "displayName": "Lateral Step + Relaxed Arm Sweep",
@@ -66,7 +66,7 @@
       "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
       "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
-      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
     {
       "displayName": "Split Squat (right)",
@@ -78,7 +78,7 @@
       "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
       "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
-      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
     {
       "displayName": "Push-up",
@@ -315,7 +315,7 @@
       "coachNote": "Walk briskly backward with whole-foot landings and a clear path.",
       "regressions": ["Use a wall or rail for support and slow the pace."],
       "match": "none",
-      "movements": [{ "movementId": "backward-walking", "displayName": "Backward Walking" }]
+      "movements": [{ "movementId": "backward-walking", "displayName": "Backward Walking", "textOnly": true }]
     },
     {
       "displayName": "Breathing + Easy Reach",

@@ -1,5 +1,5 @@
-// fittimer-v15 and earlier caches are intentionally superseded; activateApp removes every older cache.
-const CACHE_NAME = 'fittimer-v16';
+// fittimer-v16 and earlier caches are intentionally superseded; activateApp removes every older cache.
+const CACHE_NAME = 'fittimer-v17';
 const APP_SHELL = [
   './',
   './index.html',

@@ -12,7 +12,7 @@
       "rpe": "2→4",
       "coachNote": "Ramp the march gradually; keep the movement easy and quiet.",
       "match": "none",
-      "movements": [{ "movementId": "march-ramp", "displayName": "March Ramp", "textOnly": true }]
+      "movements": [{ "movementId": "march-ramp", "displayName": "March Ramp" }]
     },
     {
       "displayName": "Ankle Pumps + Heel-to-toe Rocks",
@@ -56,7 +56,7 @@
       "restSeconds": 20,
       "coachNote": "Reach at the wall without shrugging or forcing the shoulder range.",
       "match": "none",
-      "movements": [{ "movementId": "standing-wall-scapular-reach", "displayName": "Standing Wall Scapular Reach" }]
+      "movements": [{ "movementId": "standing-wall-scapular-reach", "displayName": "Standing Wall Scapular Reach", "textOnly": true }]
     },
     {
       "displayName": "Single-leg Balance + Short-foot (left)",
@@ -114,7 +114,7 @@
       "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
       "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
-      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
     {
       "displayName": "Split Squat (right)",
@@ -126,7 +126,7 @@
       "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
       "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
-      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat", "textOnly": true }]
+      "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
     {
       "displayName": "1.5-rep Push-up",
@@ -275,7 +275,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Seated Soleus Raise (right)",
@@ -287,7 +287,7 @@
       "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
-      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise" }]
+      "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
     },
     {
       "displayName": "Knee-lift Cardio",
@@ -297,7 +297,7 @@
       "coachNote": "Use controlled knee lifts without bouncing; keep the feet quiet on the floor between lifts.",
       "regressions": ["Reduce the knee height or use support while keeping the rhythm controlled."],
       "match": "none",
-      "movements": [{ "movementId": "knee-lift-cardio", "displayName": "Knee-lift Cardio", "textOnly": true }]
+      "movements": [{ "movementId": "knee-lift-cardio", "displayName": "Knee-lift Cardio" }]
     },
     {
       "displayName": "DB Swing",
@@ -358,7 +358,7 @@
       "coachNote": "Walk briskly backward with whole-foot landings and a clear path.",
       "regressions": ["Use a wall or rail for support and slow the pace."],
       "match": "none",
-      "movements": [{ "movementId": "backward-walking", "displayName": "Backward Walking" }]
+      "movements": [{ "movementId": "backward-walking", "displayName": "Backward Walking", "textOnly": true }]
     },
     {
       "displayName": "Two-DB Farmer Carry",
@@ -404,7 +404,7 @@
       "coachNote": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching.",
       "regressions": ["Use a smaller lift or support the trunk if the hip pinches."],
       "match": "none",
-      "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise" }]
+      "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise", "textOnly": true }]
     },
     {
       "displayName": "Seated Psoas Raise (right)",
@@ -416,7 +416,7 @@
       "coachNote": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching.",
       "regressions": ["Use a smaller lift or support the trunk if the hip pinches."],
       "match": "none",
-      "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise" }]
+      "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise", "textOnly": true }]
     },
     {
       "displayName": "Wall External-rotation Isometric (left)",
