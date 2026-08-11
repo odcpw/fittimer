@@ -3,7 +3,7 @@
   "kind": "clipSourceMap",
   "id": "w1w4-v1",
   "localOnly": true,
-  "sourceRevision": "87600c8d3ff030819123b6e9e0c63566916335f0",
+  "sourceRevision": "0096b7fcb89f49965d59e3d2955aae90790b704d",
   "targetBlockFiles": [
     "data/blocks/iron-roots.json",
     "data/blocks/silk-coils.json",
@@ -30,7 +30,9 @@
       "private:w1-w4-gap-scouts/core-wave2-terra/exact-source-map.json",
       "private:w1-w4-gap-scouts/upper-strength-wave-terra/exact-source-map.json",
       "private:w1-w4-gap-scouts/lower-wave2/exact-source-map.json",
-      "private:w1-w4-gap-scouts/locomotion-wave3-luna/exact-source-map.json"
+      "private:w1-w4-gap-scouts/locomotion-wave3-luna/exact-source-map.json",
+      "private:w1-w4-gap-scouts/mobility-wave4-luna/exact-source-map.json",
+      "private:w1-w4-gap-scouts/strength-wave5-luna/exact-source-map.json"
     ],
     "promotionRule": "Promote only retained candidates with exact declared mechanics, native/safe landscape framing, phase-matched forward loop evidence, and verified-normal-speed evidence compatible with scripts/media/source-map.mjs."
   },
@@ -1154,10 +1156,79 @@
         ],
         "form": "Hinge from the hips with a long spine; reach without forcing range."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The retained female workout material is a weighted compound with graphics and a lunge/transition, not an isolated hinge-and-reach loop."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Claire DeFitt",
+            "title": "Hinge and Reach",
+            "videoId": "S61AMIXeveg",
+            "url": "https://www.youtube.com/watch?v=S61AMIXeveg",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "bodyweight"
+          ],
+          "viewpoint": "side-wide",
+          "range": {
+            "startSeconds": 68,
+            "endSeconds": 104
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 2,
+            "phaseMatch": true,
+            "startPhase": "upright neutral with planted feet",
+            "endPhase": "upright neutral with planted feet"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Dedicated bodyweight hinge-and-reach demonstration with a visible long-spine hinge, forward reach, planted feet, and controlled return. It is not the weighted lunge compound held out of the workout corpus. Head, hands, hips, knees, both feet, floor, and the complete reach path are present in fixed landscape framing. The source side view makes the hip hinge legible."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Reviewed at 1x and sampled at 1-second intervals. Two full neutral-to-hinge-to-reach-to-neutral cycles are visible from 01:08 through 01:44 with no camera cut. Start and end at upright neutral. The selected 68-104 second window captures two complete uninterrupted cycles and excludes the opening instruction and closing transition."
+          }
+        }
+      ]
     },
     {
       "movementId": "hip-hitch",
@@ -1476,10 +1547,79 @@
         ],
         "form": "Switch actively through a comfortable range; do not force the right-hip end range."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The retained female full-body source contains only one clear switch before changing into another seated pose."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Stronger With Sara",
+            "title": "90/90 Hip Switch",
+            "videoId": "qnTSX5O7k1I",
+            "url": "https://www.youtube.com/watch?v=qnTSX5O7k1I",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "mat or floor"
+          ],
+          "viewpoint": "front-oblique-floor-wide",
+          "range": {
+            "startSeconds": 0.5,
+            "endSeconds": 30.5
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "upright seated 90/90 neutral",
+            "endPhase": "upright seated 90/90 neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Female demonstrator completes controlled upright switches without forcing an end range. The fixed camera preserves the full lower-body path and contact points. This is suitable as a future pose/mocap reference: full head, trunk, pelvis, knees, feet, and floor contact remain visible through every switch."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Reviewed at 1x with 0.5-second contact-sheet sampling. The 30-second window is continuous and contains three repeatable bilateral switch pairs with no cut or instruction transition. The selected 00:00.500 and 00:00:30.500 frames both sit in the same upright 90/90 neutral phase; do not reverse-play."
+          }
+        }
+      ]
     },
     {
       "movementId": "one-and-a-half-rep-push-up",
@@ -1781,10 +1921,81 @@
         ],
         "form": "Use a push-up plus with controlled scapular reach and no shoulder apprehension."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "No retained source separates the controlled scapular reach of a push-up plus from an ordinary push-up."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "KH Chiropractic",
+            "title": "Push Up Plus Serratus Anterior Strengthening - Preventing scapula winging KH Chiropractic",
+            "videoId": "5JoITvUqhms",
+            "url": "https://www.youtube.com/watch?v=5JoITvUqhms",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            },
+            "sha256": "d38eebf4cd65e6c4d9c5e854e86a0d67f412fcbc5f8b96efe7c9c58350c0d66f"
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "bodyweight",
+            "mat or floor"
+          ],
+          "viewpoint": "floor side-wide",
+          "range": {
+            "startSeconds": 8.2,
+            "endSeconds": 15.8
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "knees-supported high-plank neutral",
+            "endPhase": "knees-supported high-plank neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Knees-supported push-up-plus regression with repeated scapular protraction/retraction; hands, knees, feet, trunk, floor, and the complete shoulder-blade path remain visible."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Strength-wave5 records normal-speed review, four complete phase-matched repetitions, native 1280x720 full-frame landscape geometry, no cut, and retained contact-sheet evidence. The W1 routine explicitly permits the knees-down regression."
+          }
+        }
+      ]
     },
     {
       "movementId": "push-ups",
@@ -1978,10 +2189,80 @@
         ],
         "form": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The clear seated source alternates feet but does not establish anatomical left/right labels for the committed pair."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "J2N Fitness",
+            "title": "Seated Hip Flexor Lifts (Single Leg)",
+            "videoId": "0PF1fYAEyzA",
+            "url": "https://www.youtube.com/watch?v=0PF1fYAEyzA",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "when-needed",
+          "equipment": [
+            "mat or floor",
+            "firm block used as a center-line cue"
+          ],
+          "viewpoint": "front-seated-wide",
+          "range": {
+            "startSeconds": 1,
+            "endSeconds": 14
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 5,
+            "phaseMatch": true,
+            "startPhase": "upright seated neutral with both feet lowered",
+            "endPhase": "upright seated neutral with both feet lowered"
+          },
+          "form": {
+            "quality": "medium-high",
+            "notes": "Dedicated seated single-leg hip-flexor lift with an upright trunk and controlled lower. The center block is a cue/setup aid rather than a load. Full head, hands, pelvis, both feet, floor, and block remain visible. Because the camera is front-facing, assign orientation A in the production database and deliberately mirror for the opposite routine side rather than claiming screen-left is anatomical left. The front-facing source is an alternating orientation-A reference. It does not assert anatomical screen-side labels; deliberate mirroring remains allowed for a chosen routine orientation."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Reviewed at 1x and sampled at 1-second intervals. Five clear alternating single-leg lifts are visible in the selected 13-second range with no cut. Start and end with both feet lowered; preserve the alternating forward cadence."
+          }
+        }
+      ]
     },
     {
       "movementId": "seated-soleus-raise",
@@ -3223,6 +3504,42 @@
       "deliberate": {
         "reason": "No retained source combines one dumbbell, straight knee, stable forefoot, 3/1/3 cadence, and an anatomical left/right pair."
       }
+    }
+  ],
+  "conditionalLibraryLeads": [
+    {
+      "movementId": "supported-one-arm-row",
+      "suggestedMovementId": "bench-supported-one-arm-row",
+      "status": "conditional-library-lead-contract-mismatch",
+      "source": {
+        "channel": "Luke Goulden Online Coach",
+        "title": "Single Arm Row with Forearm Supported",
+        "videoId": "dHM_lc_CISQ",
+        "url": "https://www.youtube.com/watch?v=dHM_lc_CISQ",
+        "localOnly": true,
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        },
+        "sha256": "5738a72da7fa57d4ab795fc7ab065932b7183b7505bf1811e4e64b39db403d46"
+      },
+      "range": {
+        "startSeconds": 0,
+        "endSeconds": 7.6
+      },
+      "cropPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "loop": {
+        "kind": "reps",
+        "reps": 3,
+        "phase": "dumbbell dead-hang -> elbow-to-hip pull -> dead-hang; begin and end on the supported dead-hang"
+      },
+      "mechanics": "One dumbbell row with the opposite forearm visibly supported on the angled bench; the support, dumbbell, full lower-to-upper pull path, both feet, and trunk are all visible.",
+      "reason": "The source uses forearm-on-angled-bench support, while the block requires forearm-on-thigh support plus a controlled three-second eccentric and one-second squeeze."
     }
   ]
 }
