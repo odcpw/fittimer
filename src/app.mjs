@@ -11,6 +11,7 @@ import {
   loadWorkoutHistory,
 } from './workout-history.mjs';
 import {
+  CREATOR_AUTO,
   CUE_PACK_IDS,
   CUE_PACK_SYNTH_V1,
   VISUAL_PACK_GIF_V1,
@@ -49,6 +50,7 @@ const elements = hasDocument
       voiceExercise: document.querySelector('#settings-voice-exercise'),
       voiceSide: document.querySelector('#settings-voice-side'),
       voiceNext: document.querySelector('#settings-voice-next'),
+      creator: document.querySelector('#settings-creator'),
       reducedMotion: document.querySelector('#settings-reduced-motion'),
       mediaStatus: document.querySelector('#settings-media-status'),
       offline: document.querySelector('#offline-status'),
@@ -254,13 +256,25 @@ function packHasVideo(pack) {
     Array.isArray(entry?.assets) && entry.assets.some((asset) => asset?.type === 'video'));
 }
 
+function assetMatchesCreator(asset, creatorId) {
+  return creatorId === CREATOR_AUTO || asset?.creatorId === creatorId;
+}
+
+function packHasCreatorVideo(pack, creatorId = CREATOR_AUTO) {
+  return Object.values(pack?.entries ?? {}).some((entry) =>
+    Array.isArray(entry?.assets)
+      && entry.assets.some((asset) => asset?.enabled !== false
+        && asset?.type === 'video'
+        && assetMatchesCreator(asset, creatorId)));
+}
+
 /**
  * Pick the installed pack that covers the chosen routine instead of making
  * the user route through Settings first. MadFit prefers its own retained
  * reference pack; the four Fable routines prefer the combined W1-W4 pack.
  * Only packs containing real video participate.
  */
-export function chooseRoutineMediaPackId(routine, packs) {
+export function chooseRoutineMediaPackId(routine, packs, creatorId = CREATOR_AUTO) {
   if (!(packs instanceof Map) || packs.size === 0) return null;
   const routineDefault = routine?.id === 'madfit-30min-hiit'
     ? VISUAL_PACK_REFERENCE_V1
@@ -270,7 +284,7 @@ export function chooseRoutineMediaPackId(routine, packs) {
     VISUAL_PACK_W1W4_V1,
     VISUAL_PACK_REFERENCE_V1,
     ...packs.keys(),
-  ])].filter((id) => packs.has(id) && packHasVideo(packs.get(id)));
+  ])].filter((id) => packs.has(id) && packHasVideo(packs.get(id)) && packHasCreatorVideo(packs.get(id), creatorId));
   const movementIds = (routine?.intervals ?? [])
     .flatMap((interval) => interval.movements ?? [])
     .map((movement) => movement.movementId)
@@ -281,7 +295,11 @@ export function chooseRoutineMediaPackId(routine, packs) {
     const pack = selectMediaPack(id, packs);
     const coverage = movementIds.reduce((total, movementId) => {
       const assets = pack?.entries?.[movementId]?.assets;
-      return total + (Array.isArray(assets) && assets.some((asset) => asset?.type === 'video') ? 1 : 0);
+      return total + (Array.isArray(assets) && assets.some(
+        (asset) => asset?.enabled !== false
+          && asset?.type === 'video'
+          && assetMatchesCreator(asset, creatorId),
+      ) ? 1 : 0);
     }, 0);
     if (coverage > bestCoverage) {
       bestCoverage = coverage;
@@ -358,9 +376,12 @@ function shouldMirror(entry, requestedSide, selectedAsset = null) {
   return requestedSide !== sourceSide;
 }
 
-function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null) {
+function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null, creatorId = CREATOR_AUTO) {
   if (!Array.isArray(entry?.assets)) return [];
-  const available = entry.assets.filter((asset) => MEDIA_TYPES.has(asset?.type) && resolvePackAssetUrl(mediaPack, asset?.url, asset));
+  const available = entry.assets.filter((asset) => asset?.enabled !== false
+    && MEDIA_TYPES.has(asset?.type)
+    && assetMatchesCreator(asset, creatorId)
+    && resolvePackAssetUrl(mediaPack, asset?.url, asset));
   const normalizedSide = assetSide({ side: requestedSide });
   const mirroredSide = normalizedSide === 'left' ? 'right' : normalizedSide === 'right' ? 'left' : null;
   const sideAware = normalizedSide === null
@@ -385,6 +406,9 @@ function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null) {
       const sideDifference = rank(left) - rank(right);
       if (sideDifference !== 0) return sideDifference;
     }
+    const priority = (asset) => Number.isFinite(Number(asset.priority)) ? Number(asset.priority) : 100;
+    const priorityDifference = priority(left) - priority(right);
+    if (priorityDifference !== 0) return priorityDifference;
     return MEDIA_PRIORITY.get(left.type) - MEDIA_PRIORITY.get(right.type);
   });
 }
@@ -397,7 +421,7 @@ function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null) {
 export function resolveMovementVisual(
   movement,
   mediaPack,
-  { reducedMotion = false, requestedSide = undefined } = {},
+  { reducedMotion = false, requestedSide = undefined, creatorId = CREATOR_AUTO } = {},
 ) {
   const label = typeof movement?.displayName === 'string' && movement.displayName.trim()
     ? movement.displayName
@@ -419,8 +443,14 @@ export function resolveMovementVisual(
   const entry = movementId && isObject(mediaPack?.entries) ? mediaPack.entries[movementId] : null;
   if (!entry) return textResult('missing-pack-entry');
 
-  const candidates = orderedAssets(entry, reducedMotion, requestedSide, mediaPack);
-  if (candidates.length === 0) return textResult(reducedMotion ? 'no-poster' : 'empty-pack-entry');
+  const candidates = orderedAssets(entry, reducedMotion, requestedSide, mediaPack, creatorId);
+  if (candidates.length === 0) {
+    return textResult(
+      creatorId !== CREATOR_AUTO
+        ? 'creator-not-covered'
+        : reducedMotion ? 'no-poster' : 'empty-pack-entry',
+    );
+  }
   const asset = candidates[0];
   return {
     kind: mediaKind(asset.type) ?? 'text',
@@ -585,6 +615,7 @@ async function loadContent() {
   selectedRoutine = routines[0] ?? null;
   voiceCues.setIntervals(selectedRoutine?.intervals ?? []);
   startVoicePackLoad();
+  renderSettings(currentSettings);
   renderRoutineList();
   return index;
 }
@@ -610,7 +641,10 @@ function renderRoutineList() {
     title.textContent = routine.title;
     const meta = document.createElement('span');
     meta.className = 'routine-row__meta';
-    meta.textContent = `${formatDuration(routine.estimatedDurationSeconds)} · ${routine.intervals.length} intervals`;
+    const creatorId = currentSettings.visuals.creatorId;
+    const coverage = creatorId === CREATOR_AUTO ? null : routineCreatorCoverage(routine, creatorId);
+    const coverageLabel = coverage ? ` · ${coverage.covered}/${coverage.total} ${creatorLabel(creatorId)}` : '';
+    meta.textContent = `${formatDuration(routine.estimatedDurationSeconds)} · ${routine.intervals.length} intervals${coverageLabel}`;
     const equipment = document.createElement('span');
     equipment.className = 'routine-row__equipment';
     equipment.textContent = routine.equipment.join(' · ');
@@ -711,6 +745,57 @@ function populateSettingsOptions() {
   createPackOptions(elements.voicePack, VOICE_PACK_IDS);
 }
 
+function availableCreators() {
+  const creators = new Map();
+  for (const pack of mediaPacks.values()) {
+    for (const [creatorId, creator] of Object.entries(pack?.creators ?? {})) {
+      if (creator?.selectable !== true) continue;
+      if (!packHasCreatorVideo(pack, creatorId)) continue;
+      const name = typeof creator?.name === 'string' && creator.name.trim()
+        ? creator.name.trim()
+        : creatorId;
+      creators.set(creatorId, { id: creatorId, name });
+    }
+  }
+  return [...creators.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+function populateCreatorOptions(selectedId = CREATOR_AUTO) {
+  const options = [{ id: CREATOR_AUTO, name: 'Automatic · best available' }, ...availableCreators()]
+    .map(({ id, name }) => {
+      const option = document.createElement('option');
+      option.value = id;
+      option.textContent = name;
+      return option;
+    });
+  elements.creator.replaceChildren(...options);
+  elements.creator.value = options.some((option) => option.value === selectedId)
+    ? selectedId
+    : CREATOR_AUTO;
+}
+
+function routineCreatorCoverage(routine, creatorId) {
+  const movementIds = new Set((routine?.intervals ?? [])
+    .flatMap((interval) => interval.movements ?? [])
+    .map((movement) => movement?.movementId)
+    .filter((movementId) => typeof movementId === 'string'));
+  if (movementIds.size === 0) return { covered: 0, total: 0 };
+  const packId = chooseRoutineMediaPackId(routine, mediaPacks, creatorId);
+  const pack = packId ? selectMediaPack(packId) : null;
+  const covered = [...movementIds].filter((movementId) =>
+    pack?.entries?.[movementId]?.assets?.some(
+      (asset) => asset.enabled !== false
+        && asset.type === 'video'
+        && assetMatchesCreator(asset, creatorId),
+    )).length;
+  return { covered, total: movementIds.size };
+}
+
+function creatorLabel(creatorId) {
+  if (creatorId === CREATOR_AUTO) return 'Automatic';
+  return availableCreators().find((creator) => creator.id === creatorId)?.name ?? creatorId;
+}
+
 function volumeLabel(value) {
   return `${Math.round(value * 100)}%`;
 }
@@ -733,11 +818,17 @@ function renderSettings(settings) {
   elements.voiceExercise.checked = normalized.voice.exercise;
   elements.voiceSide.checked = normalized.voice.side;
   elements.voiceNext.checked = normalized.voice.next;
+  populateCreatorOptions(normalized.visuals.creatorId);
   elements.reducedMotion.checked = normalized.visuals.reducedMotion;
 
-  elements.mediaStatus.textContent = contentIndex?.privateMediaPackIndexPath
-    ? 'Best available videos are selected automatically for each workout.'
-    : 'No video library is installed; written movement guidance will be shown.';
+  if (!contentIndex?.privateMediaPackIndexPath) {
+    elements.mediaStatus.textContent = 'No video library is installed; written movement guidance will be shown.';
+  } else if (normalized.visuals.creatorId === CREATOR_AUTO) {
+    elements.mediaStatus.textContent = 'Automatic uses the best available clip for each movement.';
+  } else {
+    const coverage = routineCreatorCoverage(selectedRoutine, normalized.visuals.creatorId);
+    elements.mediaStatus.textContent = `${creatorLabel(normalized.visuals.creatorId)} only · ${coverage.covered}/${coverage.total} movements in ${selectedRoutine?.title ?? 'this workout'}. Missing clips stay visibly missing.`;
+  }
 }
 
 function persistSettings(patch) {
@@ -747,13 +838,14 @@ function persistSettings(patch) {
   startVoicePackLoad();
   if (patch?.visuals) {
     applySelectedMediaPack();
+    renderRoutineList();
     if (contentIndex) void prepareOffline(contentIndex).catch(showError);
   }
   renderSettings(currentSettings);
 }
 
 function applySelectedMediaPack() {
-  const packId = chooseRoutineMediaPackId(selectedRoutine, mediaPacks);
+  const packId = chooseRoutineMediaPackId(selectedRoutine, mediaPacks, currentSettings.visuals.creatorId);
   selectedMediaPack = packId ? selectMediaPack(packId) : null;
   if (selectedMediaPack) applyOutputFrame(selectedMediaPack);
 }
@@ -795,6 +887,10 @@ function bindSettingsControls(listenerOptions) {
   }, listenerOptions);
   elements.voiceNext.addEventListener('change', (event) => {
     persistSettings({ voice: { next: event.currentTarget.checked } });
+  }, listenerOptions);
+
+  elements.creator.addEventListener('change', (event) => {
+    persistSettings({ visuals: { creatorId: event.currentTarget.value } });
   }, listenerOptions);
 
   elements.reducedMotion.addEventListener('change', (event) => {
@@ -1002,7 +1098,7 @@ function replayCurrentVideos() {
 function startWorkout(routine) {
   stopAnimationLoop();
   clearWorkoutHudTimeout();
-  const routinePackId = chooseRoutineMediaPackId(routine, mediaPacks);
+  const routinePackId = chooseRoutineMediaPackId(routine, mediaPacks, currentSettings.visuals.creatorId);
   const routinePack = routinePackId ? selectMediaPack(routinePackId) : null;
   const mediaPackChanged = routinePack && routinePack.id !== selectedMediaPack?.id;
   if (routinePack) {
@@ -1110,9 +1206,10 @@ function renderMovement(interval) {
 
   const movementSelections = interval.movements.map((movement) => ({
     movement,
-    selection: resolveMovementVisual(movement, selectedMediaPack, {
+    selection: resolveMovementVisual({ ...movement, displayName: interval.displayName }, selectedMediaPack, {
       reducedMotion: reducedMotionPreferred(),
       requestedSide: interval.side,
+      creatorId: currentSettings.visuals.creatorId,
     }),
   }));
   const uniqueSelections = deduplicateVisualSelections(
@@ -1198,6 +1295,7 @@ export function collectContentUrls(
   installedRoutines = routines,
   mediaPack = selectedMediaPack,
   installedVoicePack = voicePack,
+  { creatorId = CREATOR_AUTO } = {},
 ) {
   const files = new Set(['data/content-index.json']);
   const installed = Array.isArray(installedRoutines) ? installedRoutines : [];
@@ -1227,6 +1325,8 @@ export function collectContentUrls(
     const entry = mediaPack?.entries?.[movementId];
     for (const asset of entry?.assets ?? []) {
       if (typeof asset.url !== 'string') continue;
+      if (asset.enabled === false) continue;
+      if (!assetMatchesCreator(asset, creatorId)) continue;
       const sourcePath = asset.__sourcePath;
       if (typeof sourcePath === 'string' && sourcePath.startsWith('private-packs/')) {
         try {
@@ -1340,7 +1440,9 @@ async function prepareOffline(index) {
   });
   worker.postMessage({
     type: 'CACHE_CONTENT',
-    urls: collectContentUrls(index, routines, selectedMediaPack, installedVoicePack),
+    urls: collectContentUrls(index, routines, selectedMediaPack, installedVoicePack, {
+      creatorId: currentSettings.visuals.creatorId,
+    }),
   }, [channel.port2]);
   try {
     await acknowledgement;

@@ -1,18 +1,22 @@
 # Clip library
 
 FitTimer treats movement visuals as a reusable private library, not as artwork
-embedded in one workout. A routine refers only to a stable `movementId`; a
-selected media pack supplies the best reviewed visual for that movement. This
-keeps W1–W4 usable now and lets later routines mix the same safe primitives
-without editing application code.
+embedded in one workout. A routine refers only to a stable `movementId`; each
+movement may have several creator-specific variants. This lets a workout use
+the best available clip, or become a patchwork made only from one creator's
+videos, without editing the routine.
+
+Every private asset records `creatorId`, `creatorName`, `variantId`, source
+video ID/title/URL, source start/end, and equipment. The pack-level `creators`
+registry decides which professional creators appear in the app. Older research
+clips stay indexed but are not exposed as creator choices.
 
 ## Delivery path
 
 1. Retain source videos, subtitles, metadata, and research contact sheets in
    the private media workspace outside Git.
-2. Record reviewed source candidates in `data/media/clip-sources.json` using
-   exact movement IDs, source ranges, side/equipment, loop phase, crop, safe
-   regions, form notes, and verification evidence.
+2. Map useful ranges to stable movement IDs and record the creator, source,
+   equipment, and timestamps.
 3. Convert approved candidates into private catalogues and run
    `scripts/media/pipeline.mjs` to create silent MP4 loops, posters, hashes,
    provenance, and media-pack records.
@@ -20,33 +24,26 @@ without editing application code.
    video bytes never enter the public repository.
 5. Reuse the same source ranges later for pose extraction and avatar rendering.
 
-The committed source map is the bridge between research and production. A
-`search-required` record is honest unfinished research; the production-ready
-gate rejects it. `reuse` is allowed only when the mechanics, side, equipment,
-and cadence are a real match rather than merely a similar-looking exercise.
+The private media pack is the runtime database. New variants can be appended
+without deleting the current clip. Set `priority: 0` to make a reviewed variant
+the Automatic choice; set `enabled: false` to retain a rejected source without
+showing it in a workout.
+
+Creator selection is strict. If Growingannanas is selected, the resolver and
+offline cache use only Growingannanas assets. A missing movement shows “Video
+needed”; it never borrows another creator or falls back to a GIF.
 
 ## Visual contract
 
-- landscape 16:9 output, normally no larger than the retained 720p source;
+- landscape 16:9 output, normally 1280×720;
 - silent H.264 video plus a matching poster;
-- a person-forward crop with reasonably consistent scale across the pack;
-- complete head, hands, feet, equipment, mat/floor contacts, and motion path;
-- normally two to five complete forward-played repetitions with matching seam
-  phases; slow compounds, holds, and mobility clips use an explicit judged
-  duration;
-- exact side and equipment metadata, with deliberate mirroring only when the
-  source side is genuinely generic; and
-- normal-speed and half-speed review before an asset is accepted.
-
-The validator resolves every normalized crop against the recorded source
-dimensions and rejects odd-pixel or non-16:9 rectangles. Every declared hand,
-foot, equipment, and movement-path safety region must also remain inside that
-crop. This catches geometry that looks plausible as decimals but would stretch
-or clip when encoded.
-
-Cropping cannot repair source framing. If the original camera cuts off an
-overhead weight, a foot, or the end of the motion path, the source is retained
-as reference material but another exact source supplies the production clip.
+- full source fitted with `contain`; do not crop the performer;
+- crop only when it cleanly removes a source timer/banner without losing the
+  person, equipment, contacts, or movement path;
+- usually a few clear repetitions, but 25–40 second workout slices are welcome;
+- tempo and demonstrated side are reference metadata, not rejection gates;
+- bodyweight or dumbbells only for the current app; and
+- honest creator/source provenance on every variant.
 
 ## Future avatar and mocap stage
 

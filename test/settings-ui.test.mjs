@@ -24,6 +24,7 @@ const settingControlIds = [
   'settings-voice-exercise',
   'settings-voice-side',
   'settings-voice-next',
+  'settings-creator',
   'settings-reduced-motion',
 ];
 
@@ -32,7 +33,8 @@ test('home settings panel exposes every versioned preference', () => {
   for (const id of settingControlIds) assert.match(html, new RegExp(`id="${id}"`));
   assert.match(html, /type="range"[^>]+min="0"[^>]+max="1"/);
   assert.doesNotMatch(html, /id="settings-visual-pack"/);
-  assert.match(html, /Best available videos are selected automatically/);
+  assert.match(html, /Video creator/);
+  assert.match(html, /Automatic/);
 });
 
 test('installed landscape home owns a touch-scroll surface', () => {

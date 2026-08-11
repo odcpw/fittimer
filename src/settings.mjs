@@ -13,6 +13,7 @@ export const VOICE_PACK_FRANKENTTS_V1 = 'frankentts-v1';
 export const VISUAL_PACK_GIF_V1 = 'gif-v1';
 export const VISUAL_PACK_REFERENCE_V1 = 'reference-v1';
 export const VISUAL_PACK_W1W4_V1 = 'w1w4-v1';
+export const CREATOR_AUTO = 'auto';
 
 export const CUE_PACK_IDS = Object.freeze([CUE_PACK_SYNTH_V1]);
 export const VOICE_PACK_IDS = Object.freeze([
@@ -69,6 +70,7 @@ export const DEFAULT_SETTINGS = deepFreeze({
   },
   visuals: {
     selectedPackId: VISUAL_PACK_GIF_V1,
+    creatorId: CREATOR_AUTO,
     reducedMotion: false,
   },
 });
@@ -105,6 +107,12 @@ function firstDefined(source, ...keys) {
 
 function validPackId(value, allowedIds, fallback) {
   return typeof value === 'string' && allowedIds.includes(value) ? value : fallback;
+}
+
+function validCreatorId(value, fallback) {
+  return typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,63}$/i.test(value)
+    ? value
+    : fallback;
 }
 
 function visualPackIds(options = undefined) {
@@ -177,6 +185,7 @@ export function normalizeSettings(value, options = undefined) {
         visualPackIds(options),
         DEFAULT_VISUAL_SETTINGS.selectedPackId,
       ),
+      creatorId: validCreatorId(visuals.creatorId, DEFAULT_VISUAL_SETTINGS.creatorId),
       reducedMotion: validBoolean(visuals.reducedMotion, DEFAULT_VISUAL_SETTINGS.reducedMotion),
     },
   };

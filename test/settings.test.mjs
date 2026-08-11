@@ -66,6 +66,7 @@ test('v1 key, pack IDs, and documented defaults are stable and isolated', () => 
     },
     visuals: {
       selectedPackId: VISUAL_PACK_GIF_V1,
+      creatorId: 'auto',
       reducedMotion: false,
     },
   });
@@ -121,6 +122,7 @@ test('save and load round-trip all cue, voice, and visual preferences', () => {
     },
     visuals: {
       selectedPackId: 'reference-v1',
+      creatorId: 'growingannanas',
       reducedMotion: true,
     },
   });
@@ -130,7 +132,7 @@ test('save and load round-trip all cue, voice, and visual preferences', () => {
   assert.deepEqual(storedSettings(storage), expected);
   assert.equal(isValidSettings(expected), true);
   assert.equal(isValidSettings({
-    visuals: { reducedMotion: true, selectedPackId: 'reference-v1' },
+    visuals: { reducedMotion: true, creatorId: 'growingannanas', selectedPackId: 'reference-v1' },
     voice: {
       next: false,
       side: true,
@@ -247,6 +249,7 @@ test('unknown IDs and malformed fields fall back independently while valid field
     },
     visuals: {
       selectedPackId: VISUAL_PACK_GIF_V1,
+      creatorId: 'auto',
       reducedMotion: true,
     },
   });

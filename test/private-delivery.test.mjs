@@ -157,14 +157,14 @@ test('selected private packs never mix in reference or GIF fallback assets', () 
   assert.equal(chooseRoutineMediaPackId({
     id: 'madfit-30min-hiit',
     intervals: [{ movements: [{ movementId: 'referenceFallback' }] }],
-  }, packs, 'gif-v1'), 'reference-v1');
+  }, packs), 'reference-v1');
   assert.equal(chooseRoutineMediaPackId({
     id: 'iron-roots',
     intervals: [{ movements: [
       { movementId: 'w1w4Primary' },
       { movementId: 'referenceFallback' },
     ] }],
-  }, packs, 'reference-v1'), 'w1w4-v1');
+  }, packs), 'w1w4-v1');
 
   const urls = collectContentUrls({
     defaultMediaPack: 'gif-v1',

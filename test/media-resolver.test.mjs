@@ -33,6 +33,42 @@ const missing = resolveMovementVisual(
 assert.equal(missing.kind, 'text');
 assert.equal(missing.reason, 'missing-pack-entry');
 
+const creatorPack = {
+  entries: {
+    squat: {
+      assets: [
+        { type: 'video', url: 'clips/anna.mp4', creatorId: 'growingannanas' },
+        { type: 'poster', url: 'posters/anna.png', creatorId: 'growingannanas' },
+        { type: 'video', url: 'clips/heather.mp4', creatorId: 'heather-robertson' },
+      ],
+    },
+  },
+};
+const annaOnly = resolveMovementVisual(
+  { movementId: 'squat', displayName: 'Squat' },
+  creatorPack,
+  { creatorId: 'growingannanas' },
+);
+assert.equal(annaOnly.asset.url, 'clips/anna.mp4');
+assert.equal(annaOnly.candidates.every((asset) => asset.creatorId === 'growingannanas'), true);
+const missingCreator = resolveMovementVisual(
+  { movementId: 'squat', displayName: 'Squat' },
+  creatorPack,
+  { creatorId: 'caroline-girvan' },
+);
+assert.equal(missingCreator.kind, 'text');
+assert.equal(missingCreator.reason, 'creator-not-covered');
+
+creatorPack.entries.squat.assets.unshift(
+  { type: 'video', url: 'clips/disabled.mp4', creatorId: 'growingannanas', enabled: false, priority: 0 },
+  { type: 'video', url: 'clips/preferred.mp4', creatorId: 'growingannanas', priority: 1 },
+);
+assert.equal(resolveMovementVisual(
+  { movementId: 'squat', displayName: 'Squat' },
+  creatorPack,
+  { creatorId: 'growingannanas' },
+).asset.url, 'clips/preferred.mp4');
+
 const mixedPack = structuredClone(pack);
 mixedPack.framingProfiles['poster-frame'] = mixedPack.framingProfiles['full-source-landscape'];
 mixedPack.entries['mixed-media'] = {
