@@ -5,6 +5,11 @@ turning curated source clips into silent landscape MP4s and posters. It is
 private tooling: source files and derived media belong outside the Git checkout
 and are never added to `data/` by this script.
 
+The upstream source-selection and future avatar workflow is documented in
+[`clip-library.md`](clip-library.md). `data/media/clip-sources.json` records
+reviewed source evidence; this pipeline consumes the separately curated private
+catalogue produced from that evidence.
+
 ## Tools and invocation
 
 The pipeline shells out to the installed `ffmpeg` and `ffprobe`. A direct
