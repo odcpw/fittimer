@@ -1,5 +1,5 @@
-// fittimer-v16 and earlier caches are intentionally superseded; activateApp removes every older cache.
-const CACHE_NAME = 'fittimer-v17';
+// fittimer-v17 and earlier caches are intentionally superseded; activateApp removes every older cache.
+const CACHE_NAME = 'fittimer-v18';
 const APP_SHELL = [
   './',
   './index.html',
@@ -268,7 +268,26 @@ async function navigationResponse(request) {
   }
 }
 
+function isMutableCatalogueRequest(request) {
+  const url = new URL(request.url);
+  return url.pathname.endsWith('.json');
+}
+
+async function networkFirstAssetResponse(request) {
+  try {
+    const response = await fetchWithTimeout(request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    return caches.match(request);
+  }
+}
+
 async function assetResponse(request) {
+  if (isMutableCatalogueRequest(request)) return networkFirstAssetResponse(request);
   const cached = await caches.match(request);
   if (cached) return cached;
   return fetchWithTimeout(request);
