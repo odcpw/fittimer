@@ -1,0 +1,2812 @@
+{
+  "schemaVersion": 1,
+  "kind": "clipSourceMap",
+  "id": "w1w4-v1",
+  "localOnly": true,
+  "sourceRevision": "87600c8d3ff030819123b6e9e0c63566916335f0",
+  "targetBlockFiles": [
+    "data/blocks/iron-roots.json",
+    "data/blocks/silk-coils.json",
+    "data/blocks/dragon-longform.json",
+    "data/blocks/crane-longform.json"
+  ],
+  "outputContract": {
+    "aspectRatio": "16:9",
+    "orientation": "landscape",
+    "normalRepRange": [
+      2,
+      5
+    ],
+    "fullMotionPath": true
+  },
+  "provenance": {
+    "reviewedArtifacts": [
+      "private:caroline-sydney-exact.json",
+      "private:other-retained-exact.json",
+      "private:w1-w4-gap-scouts/lower/exact-source-map.json",
+      "private:w1-w4-gap-scouts/core-mobility/exact-source-map.json",
+      "private:w1-w4-gap-scouts/locomotion-kicks/exact-source-map.json",
+      "private:w1-w4-gap-scouts/kicks-wave2/exact-source-map.json",
+      "private:w1-w4-gap-scouts/core-wave2-terra/exact-source-map.json",
+      "private:w1-w4-gap-scouts/upper-strength-wave-terra/exact-source-map.json"
+    ],
+    "promotionRule": "Promote only retained candidates with exact declared mechanics, native/safe landscape framing, phase-matched forward loop evidence, and verified-normal-speed evidence compatible with scripts/media/source-map.mjs."
+  },
+  "records": [
+    {
+      "movementId": "alternating-side-bend-reach",
+      "aliases": [
+        "Alternating Side-bend Reach"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Reach side to side symmetrically without collapsing into the low back."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Faith Barbare",
+            "title": "Alternating Side Bends",
+            "videoId": "LtAnmlHETPA",
+            "url": "https://www.youtube.com/watch?v=LtAnmlHETPA",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "bodyweight"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 7,
+            "endSeconds": 22.4
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 2,
+            "phaseMatch": true,
+            "startPhase": "upright neutral",
+            "endPhase": "upright neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Two standing side bends reach past the knee with planted feet, controlled lateral trunk motion, and returns through upright neutral."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Core-mobility exact map records 1x plus frame review; the tightened 07.000–22.400 window contains the complete two-bend forward pair and retains head, hands, feet, floor, and full path."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "ankle-pumps-heel-to-toe-rocks",
+      "aliases": [
+        "Ankle Pumps + Heel-to-toe Rocks"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Prepare the ankles with pumps and heel-to-toe rocks; this is not a calf-raise station."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained 1280x720 candidate is mechanically close but only frame-sampled; normal-speed verification required by the current source-map schema is not recorded."
+      }
+    },
+    {
+      "movementId": "b-stance-rdl",
+      "aliases": [
+        "B-stance RDL"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Keep the rear foot flat and place about 20% of the load through it."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained kickstand RDL has a rear toe-touch stance, conflicting with the required rear-foot-flat, approximately-20%-loaded B-stance."
+      }
+    },
+    {
+      "movementId": "backward-walking",
+      "aliases": [
+        "Backward Walking",
+        "Brisk Backward Walking"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Walk briskly backward with whole-foot landings and a clear path."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained examples travel through the frame and turn, creating a visible spatial jump at any phase-matched loop seam."
+      }
+    },
+    {
+      "movementId": "bodyweight-squat-deepening",
+      "aliases": [
+        "Bodyweight Squat, Deepening"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Begin shallow and deepen only while the heels stay down."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained candidate documents the required progressive-depth, heels-down primitive in a complete crop-safe loop."
+      }
+    },
+    {
+      "movementId": "breathing-easy-reach",
+      "aliases": [
+        "Breathing",
+        "Breathing + Easy Reach",
+        "Breathing + Reach"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use the work interval to downshift with easy reaches and calm breathing; keep the final 20-second rest."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The recovery reference is a static supine relaxation, not a repeatable easy-reach breathing cycle."
+      }
+    },
+    {
+      "movementId": "cat-cow-child-reach",
+      "aliases": [
+        "Cat-cow",
+        "Cat-cow → Child Reach"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Move through cat-cow into a comfortable child reach; do not force the overhead position."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained cat-cow and child-reach material occurs in separate work intervals; a combined loop would require a fabricated transition."
+      }
+    },
+    {
+      "movementId": "controlled-leg-pendulum",
+      "aliases": [
+        "Controlled Leg Pendulum"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "A clean retained 16:9 pendulum shows only an unlabelled side, insufficient for the committed left/right records."
+      }
+    },
+    {
+      "movementId": "crane-stance-hold",
+      "aliases": [
+        "Crane-stance Hold"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Hold the left crane stance; split the interval into two holds if form fades."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "One generic hands-free hold exists, but camera mirroring and anatomical side cannot be independently verified for the required pair."
+      }
+    },
+    {
+      "movementId": "dead-bug",
+      "aliases": [
+        "Dead Bug"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Move slowly and exhale; keep the back quiet against the floor."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Sydney Cummings Houdyshell",
+            "title": "Dead Bug Hold",
+            "videoId": "0EuxVlfxyNE",
+            "url": "https://www.youtube.com/watch?v=0EuxVlfxyNE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "three-quarter floor",
+          "range": {
+            "startSeconds": 1507,
+            "endSeconds": 1519
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "tabletop neutral",
+            "endPhase": "tabletop neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Contralateral arm-and-leg extensions return to tabletop with a quiet lumbar trunk."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x playback plus 2 fps review: three continuous extensions, full body/mat visible, no cut."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "diagonal-chop",
+      "aliases": [
+        "Diagonal Chop"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Rotate through the hips and upper trunk; finish around chest or eye height rather than overhead."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained female source finishes overhead, conflicting with the committed chest/eye-height finish."
+      }
+    },
+    {
+      "movementId": "dumbbell-knee-drive-march",
+      "aliases": [
+        "DB Knee-drive March"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Use a goblet or front-rack hold, lift the knees without bouncing, and keep the trunk tall."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained marches use suitcase, kettlebell, or overhead loading rather than the required goblet/front-rack dumbbell position."
+      }
+    },
+    {
+      "movementId": "dumbbell-snatch",
+      "aliases": [
+        "One-arm DB Snatch"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Start with 4–5 kg, keep the feet planted with no heel pop, and stop on shoulder apprehension."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained normal-speed-verified left/right snatch pair preserves planted feet and the complete overhead path."
+      }
+    },
+    {
+      "movementId": "dumbbell-swing",
+      "aliases": [
+        "DB Swing",
+        "Two-hand DB Swing"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "1 dumbbell"
+        ],
+        "form": "Hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "growingannanas",
+            "title": "Dumbbell Swings",
+            "videoId": "WxAkMuXERBE",
+            "url": "https://www.youtube.com/watch?v=WxAkMuXERBE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "1 dumbbell held with two hands"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 917,
+            "endSeconds": 927
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "bottom hinge",
+            "endPhase": "bottom hinge"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Four planted-foot, hip-driven two-hand dumbbell swings return through the bottom hinge."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x playback and frame sampling across the work interval; no cut in the four-swing range."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "farmer-carry",
+      "aliases": [
+        "Two-DB Farmer Carry"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Carry two dumbbells with a tall trunk, steady steps, and relaxed shoulders."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained stationary or loop-safe two-dumbbell farmer-carry clip avoids travel discontinuity."
+      }
+    },
+    {
+      "movementId": "foot-planted-shadowboxing",
+      "aliases": [
+        "Foot-planted Shadowboxing"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use combinations with both feet planted; do not bounce or pivot forcefully."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained boxing references shift and pivot the feet rather than showing planted-foot 2–5-cycle combinations."
+      }
+    },
+    {
+      "movementId": "front-rack-press-out",
+      "aliases": [
+        "Front-rack Press-out"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Hold one dumbbell at the chest, press it away slowly, switch hands at 20 seconds, and keep the trunk still."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained candidate verifies the single-dumbbell alternating front-rack press-out and the prescribed slow out-and-return cadence."
+      }
+    },
+    {
+      "movementId": "glute-bridge-march",
+      "aliases": [
+        "Glute Bridge March"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Keep the pelvis level while alternating the march; avoid anterior-hip pinching."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Girls Gone Strong | Women's Health & Fitness",
+            "title": "Marching Glute Bridge",
+            "videoId": "rO-hmX9Uy9w",
+            "url": "https://www.youtube.com/watch?v=rO-hmX9Uy9w",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "floor side-wide",
+          "range": {
+            "startSeconds": 1.5,
+            "endSeconds": 10
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "bridge neutral with both feet down",
+            "endPhase": "bridge neutral with both feet down"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Alternating single-foot lifts maintain an elevated, level pelvis and return to the bridge base."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Core-mobility exact map records 1x and one-second review: four alternating lifts, no cut."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "goblet-squat",
+      "aliases": [
+        "Goblet Squat"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Hold one dumbbell at the chest and use a 1.5-rep or paused squat with heels down."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The verified Caroline clip is a plain goblet squat, while the blocks require a 1.5-rep or paused cadence; do not silently substitute the primitive."
+      }
+    },
+    {
+      "movementId": "half-kneeling-press",
+      "aliases": [
+        "Half-kneeling Press"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Press with a neutral grip and stop before shoulder apprehension; keep the ribs stacked."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Heather Robertson",
+            "title": "Kneeling Press (R)",
+            "videoId": "g-i3S1fnQbQ",
+            "url": "https://www.youtube.com/watch?v=g-i3S1fnQbQ",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "right",
+          "mirroring": "never",
+          "equipment": [
+            "1 dumbbell",
+            "mat"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 864,
+            "endSeconds": 872
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "dumbbell at shoulder height",
+            "endPhase": "dumbbell at shoulder height"
+          },
+          "form": {
+            "quality": "medium-high",
+            "notes": "True half-kneeling, neutral-grip press with the opposite foot planted and the lower-body stance fixed."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records a 1x and frame review; source side label and anatomical stance agree."
+          }
+        },
+        {
+          "source": {
+            "channel": "Heather Robertson",
+            "title": "Kneeling Press (L)",
+            "videoId": "g-i3S1fnQbQ",
+            "url": "https://www.youtube.com/watch?v=g-i3S1fnQbQ",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "never",
+          "equipment": [
+            "1 dumbbell",
+            "mat"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 924,
+            "endSeconds": 932
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "dumbbell at shoulder height",
+            "endPhase": "dumbbell at shoulder height"
+          },
+          "form": {
+            "quality": "medium-high",
+            "notes": "True half-kneeling, neutral-grip press with the opposite foot planted and the lower-body stance fixed."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records a 1x and frame review; source side label and anatomical stance agree."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "hip-flexor-stretch",
+      "aliases": [
+        "Hip-flexor Stretch"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Use a gentle stretch with a posterior pelvic tilt; do not force the front of the hip."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "growingannanas",
+            "title": "Lunge Stretch (left)",
+            "videoId": "R0eqxnSyRkM",
+            "url": "https://www.youtube.com/watch?v=R0eqxnSyRkM",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "side-wide",
+          "range": {
+            "startSeconds": 500,
+            "endSeconds": 506
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "hold",
+            "durationSeconds": 6,
+            "phaseMatch": true,
+            "startPhase": "settled half-kneeling lunge stretch",
+            "endPhase": "settled half-kneeling lunge stretch"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Front foot is planted and rear knee is on the mat in a settled half-kneeling hip-flexor stretch."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review after the source countdown; six seconds are a continuous left-side hold."
+          }
+        },
+        {
+          "source": {
+            "channel": "growingannanas",
+            "title": "Lunge Stretch (right)",
+            "videoId": "R0eqxnSyRkM",
+            "url": "https://www.youtube.com/watch?v=R0eqxnSyRkM",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "right",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "side-wide",
+          "range": {
+            "startSeconds": 620,
+            "endSeconds": 626
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "hold",
+            "durationSeconds": 6,
+            "phaseMatch": true,
+            "startPhase": "settled half-kneeling lunge stretch",
+            "endPhase": "settled half-kneeling lunge stretch"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Front foot is planted and rear knee is on the mat in a settled half-kneeling hip-flexor stretch."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review after the source countdown; six seconds are a continuous right-side hold."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "hip-hinge-reach",
+      "aliases": [
+        "Hip Hinge + Reach"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Hinge from the hips with a long spine; reach without forcing range."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained female workout material is a weighted compound with graphics and a lunge/transition, not an isolated hinge-and-reach loop."
+      }
+    },
+    {
+      "movementId": "hip-hitch",
+      "aliases": [
+        "Hip Hitch"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Control the pelvis through a small hip hitch without hiking the shoulder."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The clean female physio reference demonstrates one unlabelled side only; it cannot close the left/right records."
+      }
+    },
+    {
+      "movementId": "horse-stance-goblet-hold",
+      "aliases": [
+        "Horse-stance Goblet Hold"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Use a moderate stance width, hold the dumbbell at the chest, and keep breathing."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained fixed 16:9 hold verifies the committed moderate horse stance and chest-held dumbbell together."
+      }
+    },
+    {
+      "movementId": "inchworm",
+      "aliases": [
+        "Inchworm"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Walk the hands out and back with the toe-safe knees-down option available."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source demonstrates the knees-down toe-safe walkout-and-return primitive in a phase-matched loop."
+      }
+    },
+    {
+      "movementId": "knee-lift-cardio",
+      "aliases": [
+        "Knee-lift Cardio"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use controlled knee lifts without bouncing; keep the feet quiet on the floor between lifts."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained quiet, controlled knee-lift source preserves the full body without unrelated jumping or loading."
+      }
+    },
+    {
+      "movementId": "lateral-lunge",
+      "aliases": [
+        "Lateral Lunge"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a moderate range with the whole foot planted and the knee tracking over the foot."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "growingannanas",
+            "title": "Lateral Lunges",
+            "videoId": "KIcAjq0MuoI",
+            "url": "https://www.youtube.com/watch?v=KIcAjq0MuoI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "bodyweight"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 417,
+            "endSeconds": 425
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "wide center stance",
+            "endPhase": "wide center stance"
+          },
+          "form": {
+            "quality": "medium-high",
+            "notes": "Two left and two right whole-foot lateral-lunge excursions return through center without a curtsy or jump phase."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and one-second review confirming alternating complete left/right lunges and no cut."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "lateral-squat-rock",
+      "aliases": [
+        "Lateral Squat Rock"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Rock side to side through a controlled squat range with the feet planted."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Available material is loaded or unilateral rather than the committed unloaded bilateral controlled rock."
+      }
+    },
+    {
+      "movementId": "lateral-step-and-reach",
+      "aliases": [
+        "Lateral Step-and-reach"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "low step"
+        ],
+        "form": "Step and reach to the left with a flat, quiet landing; keep the range comfortable."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained flat, quiet, anatomically verified left/right step-and-reach pair is available."
+      }
+    },
+    {
+      "movementId": "lateral-step-arm-sweep",
+      "aliases": [
+        "Lateral Step + Relaxed Arm Sweep"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "low step"
+        ],
+        "form": "Step side to side with relaxed arms; keep the landings quiet and planted."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained stepping material uses jack-pattern arms rather than the committed relaxed arm sweep."
+      }
+    },
+    {
+      "movementId": "lateral-step-to-balance-short-foot",
+      "aliases": [
+        "Lateral Step-to-balance",
+        "Lateral Step-to-balance + Short-foot"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral",
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "low step"
+        ],
+        "form": "Land flat-footed, find balance, and gently lift the arch without gripping the toes."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source makes a flat-foot landing, balance, and visible arch lift readable together."
+      }
+    },
+    {
+      "movementId": "march-arm-circles",
+      "aliases": [
+        "March + Arm Circles"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Ramp from easy marching to a steady pattern with relaxed arm circles; no bounce."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The purported 1280x720 source embeds portrait video with black pillars and a large lower banner; head and full arm path cannot meet the 16:9 crop contract."
+      }
+    },
+    {
+      "movementId": "march-ramp",
+      "aliases": [
+        "March Ramp"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Ramp the march gradually; keep the movement easy and quiet."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "A gradual intensity ramp is not evidenced by a steady cyclic source clip."
+      }
+    },
+    {
+      "movementId": "march-shoulder-rolls",
+      "aliases": [
+        "March + Shoulder Rolls"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "March easily while rolling the shoulders smoothly; no bounce."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No native-landscape retained source combines marching with clear shoulder rolls."
+      }
+    },
+    {
+      "movementId": "ninety-ninety-hip-switches",
+      "aliases": [
+        "90/90 Hip Switches"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Switch actively through a comfortable range; do not force the right-hip end range."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained female full-body source contains only one clear switch before changing into another seated pose."
+      }
+    },
+    {
+      "movementId": "one-and-a-half-rep-push-up",
+      "aliases": [
+        "1.5-rep Push-up"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a 1.5-rep push-up with a neutral shoulder and a controlled trunk."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Caroline Girvan",
+            "title": "DIVERSE 30 MIN FULL BODY WORKOUT - Dumbbells & Bodyweight | No Repeat",
+            "videoId": "kaNktg56JaI",
+            "url": "https://www.youtube.com/watch?v=kaNktg56JaI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "mat",
+            "bodyweight"
+          ],
+          "viewpoint": "floor side-wide",
+          "range": {
+            "startSeconds": 852,
+            "endSeconds": 868
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 2,
+            "phaseMatch": true,
+            "startPhase": "full-plank top",
+            "endPhase": "full-plank top"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Two complete 1.5-rep push-ups visibly follow the full lower, partial rise, full lower, then return-to-full-plank sequence."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Upper-strength-wave-terra records dense four-fps frame review and normal-speed review; the source labels the 1 1/2 REP PUSH UPS movement and the selected range excludes setup."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "one-arm-row",
+      "aliases": [
+        "One-arm Row"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Use 7 kg if form stays clean; support the free hand and keep the shoulder away from the ear."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Caroline Girvan",
+            "title": "X1 Arm Row - Hold - Row (left)",
+            "videoId": "kaNktg56JaI",
+            "url": "https://www.youtube.com/watch?v=kaNktg56JaI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "never",
+          "equipment": [
+            "1 dumbbell"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 140,
+            "endSeconds": 149
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "hinged neutral with dumbbell lowered",
+            "endPhase": "hinged neutral with dumbbell lowered"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Unilateral row keeps a stable hip hinge and controlled top hold before the lower."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review: three same-side row phases, no side-switch transition."
+          }
+        },
+        {
+          "source": {
+            "channel": "Caroline Girvan",
+            "title": "X1 Arm Row - Hold - Row (right)",
+            "videoId": "kaNktg56JaI",
+            "url": "https://www.youtube.com/watch?v=kaNktg56JaI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "right",
+          "mirroring": "never",
+          "equipment": [
+            "1 dumbbell"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 200,
+            "endSeconds": 209
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "hinged neutral with dumbbell lowered",
+            "endPhase": "hinged neutral with dumbbell lowered"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Unilateral row keeps a stable hip hinge and controlled top hold before the lower."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review: three same-side row phases, no side-switch transition."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "prone-w-raise",
+      "aliases": [
+        "Prone W Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Lift into a comfortable W, squeeze for two seconds, and keep the neck relaxed."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained female ITWY source is a torso-oriented combination, not an isolated full-body W-raise loop."
+      }
+    },
+    {
+      "movementId": "prone-y-w",
+      "aliases": [
+        "Prone Y/W"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Use unweighted Y/W shapes with a two-second hold and relaxed neck."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained female ITWY source has no isolated forward Y-to-W pair in a stable full-body crop."
+      }
+    },
+    {
+      "movementId": "push-up-plus",
+      "aliases": [
+        "Push-up Plus"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a push-up plus with controlled scapular reach and no shoulder apprehension."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source separates the controlled scapular reach of a push-up plus from an ordinary push-up."
+      }
+    },
+    {
+      "movementId": "push-ups",
+      "aliases": [
+        "Push-up"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a standard, knees-down, or hands-elevated push-up; never use fists as a toe-safe regression."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "MadFit",
+            "title": "30 MIN FULL BODY HIIT with weights (NO REPEATS, NO JUMPING)",
+            "videoId": "07c6wlJh89U",
+            "url": "https://www.youtube.com/watch?v=07c6wlJh89U",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "mat",
+            "bodyweight"
+          ],
+          "viewpoint": "floor side-wide",
+          "range": {
+            "startSeconds": 1839,
+            "endSeconds": 1845.5
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "kneeling push-up top",
+            "endPhase": "kneeling push-up top"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Three controlled kneeling push-ups return from chest-near-mat depth to the same top phase; the Iron Roots block explicitly permits this regression."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Upper-strength-wave-terra records frame-windowed and normal-speed review: full head, hands, knees, lower legs, mat, and path remain visible across the top-to-top three-rep range."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "quadruped-thread-the-needle",
+      "aliases": [
+        "Quadruped Thread-the-needle"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Thread one arm under the body, switch sides at 20 seconds, and rotate only through a comfortable range."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Restore Physical Therapy",
+            "title": "Quadruped active thread the needle",
+            "videoId": "TD0cXrbjpAc",
+            "url": "https://www.youtube.com/watch?v=TD0cXrbjpAc",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "alternating",
+          "mirroring": "never",
+          "equipment": [
+            "mat or floor surface"
+          ],
+          "viewpoint": "wide three-quarter",
+          "range": {
+            "startSeconds": 3,
+            "endSeconds": 21.5
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "neutral quadruped",
+            "endPhase": "neutral quadruped"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Each side threads under the torso, returns through neutral, then opens into controlled thoracic rotation."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Core-mobility exact map records 1x and one-second review: four complete alternating under-and-open cycles, no cut."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "seated-psoas-raise",
+      "aliases": [
+        "Seated Psoas Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The clear seated source alternates feet but does not establish anatomical left/right labels for the committed pair."
+      }
+    },
+    {
+      "movementId": "seated-soleus-raise",
+      "aliases": [
+        "Seated Soleus Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained sources are either 4:3 or change to feet-only framing, preventing a stable full-body, loaded left/right loop."
+      }
+    },
+    {
+      "movementId": "seated-straddle-active-hinge",
+      "aliases": [
+        "Seated Straddle Active Hinge"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Hinge actively from the hips; this is not a passive stretch."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained straddle material is a passive hold rather than active hip-hinge repetitions."
+      }
+    },
+    {
+      "movementId": "side-bend-holds",
+      "aliases": [
+        "Side-bend Holds"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Hold each side symmetrically for 20 seconds with calm breathing."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained standing source has one useful roughly seven-second hold and a substantially shorter opposite-side hold; it does not yield a symmetric alternating hold reference without freeze, mirroring, or a fabricated duration."
+      }
+    },
+    {
+      "movementId": "single-leg-balance-short-foot",
+      "aliases": [
+        "Single-leg Balance + Short-foot"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Balance on the left and gently lift the arch without gripping the toes."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Shoes hide the arch action in the retained balance source and the demonstrated side is unlabelled."
+      }
+    },
+    {
+      "movementId": "single-leg-calf-raise",
+      "aliases": [
+        "Single-leg Calf Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a dumbbell if stable; load the calf deliberately, never bounce, and keep pressure distributed across the forefoot."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The promising wall-supported source shows one unlabelled side and cannot close both prescribed side-specific cadence records."
+      }
+    },
+    {
+      "movementId": "single-leg-glute-bridge",
+      "aliases": [
+        "Single-leg Glute Bridge"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Keep the pelvis level and avoid anterior-hip pinching."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Sydney Cummings Houdyshell",
+            "title": "Single-Leg Glute Bridge (right)",
+            "videoId": "0EuxVlfxyNE",
+            "url": "https://www.youtube.com/watch?v=0EuxVlfxyNE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "right",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "three-quarter floor",
+          "range": {
+            "startSeconds": 142,
+            "endSeconds": 154
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "low bridge",
+            "endPhase": "low bridge"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Slow unilateral bridge keeps the non-working leg elevated and pelvis level through each lift."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x plus 2 fps review: three full right-side bridge cycles before transition."
+          }
+        },
+        {
+          "source": {
+            "channel": "Sydney Cummings Houdyshell",
+            "title": "Single-Leg Glute Bridge (left)",
+            "videoId": "0EuxVlfxyNE",
+            "url": "https://www.youtube.com/watch?v=0EuxVlfxyNE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "never",
+          "equipment": [
+            "mat"
+          ],
+          "viewpoint": "three-quarter floor",
+          "range": {
+            "startSeconds": 202,
+            "endSeconds": 214
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "low bridge",
+            "endPhase": "low bridge"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Slow unilateral bridge keeps the non-working leg elevated and pelvis level through each lift."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x plus 2 fps review: three full left-side bridge cycles before transition."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "single-leg-rdl",
+      "aliases": [
+        "Single-leg RDL"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Use dumbbells with a flat back, square pelvis, and eyes on a fixed spot."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Heather Robertson",
+            "title": "Single Leg RDL (right)",
+            "videoId": "g-i3S1fnQbQ",
+            "url": "https://www.youtube.com/watch?v=g-i3S1fnQbQ",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "right",
+          "mirroring": "never",
+          "equipment": [
+            "2 dumbbells"
+          ],
+          "viewpoint": "side-three-quarter",
+          "range": {
+            "startSeconds": 1782,
+            "endSeconds": 1792
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "standing neutral",
+            "endPhase": "standing neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "The planted foot, square pelvis, long back, and free-leg extension remain visible through the controlled hinge-return cycles."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review: four right-side cycles with source-side label retained."
+          }
+        },
+        {
+          "source": {
+            "channel": "Heather Robertson",
+            "title": "Single Leg RDL (left)",
+            "videoId": "g-i3S1fnQbQ",
+            "url": "https://www.youtube.com/watch?v=g-i3S1fnQbQ",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "never",
+          "equipment": [
+            "2 dumbbells"
+          ],
+          "viewpoint": "side-three-quarter",
+          "range": {
+            "startSeconds": 1842,
+            "endSeconds": 1852
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "standing neutral",
+            "endPhase": "standing neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "The planted foot, square pelvis, long back, and free-leg extension remain visible through the controlled hinge-return cycles."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review: four left-side cycles with source-side label retained."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "slow-front-kick",
+      "aliases": [
+        "Slow Front Kick"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Kick slowly with a controlled hold and return; keep the standing foot stable."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained native-landscape demonstrations are substantially faster than the 4-second out/hold/4-second return requirement."
+      }
+    },
+    {
+      "movementId": "slow-push-up",
+      "aliases": [
+        "Slow Push-up"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use a slow push-up with a neutral shoulder and controlled trunk."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source independently verifies the slow push-up cadence and full-body crop."
+      }
+    },
+    {
+      "movementId": "slow-roundhouse-chamber",
+      "aliases": [
+        "Slow Roundhouse Chamber"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Chamber slowly with the wall available; avoid a forceful pivot or snap."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained tutorials are explanations or one-off demonstrations, not two to five slow same-side chamber holds without a snap."
+      }
+    },
+    {
+      "movementId": "slow-side-kick",
+      "aliases": [
+        "Slow Side Kick"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Kick slowly with the wall available; do not force the pivot or snap."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "A generic mechanics clip exists, but its anatomical side is unresolved; it cannot close the required left/right pair."
+      }
+    },
+    {
+      "movementId": "slow-step-down",
+      "aliases": [
+        "Slow Step-down"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "low step"
+        ],
+        "form": "Use a low step, descend for three seconds, and keep the pelvis level."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained step footage is heel-drop instruction or a single explanation, not a side-specific controlled eccentric loop."
+      }
+    },
+    {
+      "movementId": "slow-step-up",
+      "aliases": [
+        "Slow Step-up"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "low step"
+        ],
+        "form": "Use a low step and control the pelvis; place the whole foot on the step."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained low-step female demonstration provides only one unlabelled side, not a verified left/right pair."
+      }
+    },
+    {
+      "movementId": "split-squat",
+      "aliases": [
+        "Split Squat"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained source uses rear-toe support, while the committed form requires the rear instep flat."
+      }
+    },
+    {
+      "movementId": "standing-wall-scapular-reach",
+      "aliases": [
+        "Standing Wall Scapular Reach"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "wall"
+        ],
+        "form": "Stand at the wall and reach without shrugging or forcing the shoulder range."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained wall-slide footage lacks lower-body/wall context and cannot distinguish the requested scapular reach."
+      }
+    },
+    {
+      "movementId": "suitcase-march",
+      "aliases": [
+        "Suitcase March"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Carry 7 kg tall, switch hands at 20 seconds, and march briskly without bouncing."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The otherwise loopable source uses free-hand rack support, removing the unsupported anti-lateral-flexion demand."
+      }
+    },
+    {
+      "movementId": "supine-active-hamstring-extension",
+      "aliases": [
+        "Supine Active Hamstring Extension"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "mat or floor"
+        ],
+        "form": "Alternate sides with a three-second extension and return; keep the pelvis controlled."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained source holds the raised-leg position rather than repeating the prescribed active extension-and-return cadence."
+      }
+    },
+    {
+      "movementId": "supported-one-arm-row",
+      "aliases": [
+        "Supported One-arm Row"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Support the forearm on the thigh, pull with a quiet shoulder, and squeeze for one second."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source verifies the thigh-supported, side-specific one-arm row with its distinct support pattern."
+      }
+    },
+    {
+      "movementId": "supported-side-reach-breathing",
+      "aliases": [
+        "Supported Side Reach + Breathing"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use support for a gentle side reach, switch at 20 seconds, and breathe continuously."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained side-reach source is seated on a Swiss ball rather than standing with wall/stable support."
+      }
+    },
+    {
+      "movementId": "supported-standing-side-leg-raise",
+      "aliases": [
+        "Supported Standing Side-leg Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use support, keep the pelvis level, and control the whole arc."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "Retained material is a loaded compound rather than an isolated supported side-leg raise."
+      }
+    },
+    {
+      "movementId": "tibialis-raises",
+      "aliases": [
+        "Tibialis Raises"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Lean into a wall and lift the toes with a two-second rise and three-second lower."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained source is mechanically strong but only frame-sampled; normal-speed verification required by the current source-map schema is not recorded."
+      }
+    },
+    {
+      "movementId": "toe-spread-short-foot",
+      "aliases": [
+        "Toe-spread + Short-foot"
+      ],
+      "requirements": {
+        "sides": [
+          "alternating"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Work about 20 seconds per foot: spread the toes and gently lift the arch without gripping."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained landscape-safe source makes toe spread and arch lift independently visible with whole-body foot-loading context."
+      }
+    },
+    {
+      "movementId": "two-arm-bent-over-row",
+      "aliases": [
+        "Two-arm Bent-over Row"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Use a stable hinge, pull both dumbbells with a quiet neck, and squeeze at the top."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Pamela Reif",
+            "title": "Back Rows, Narrow",
+            "videoId": "GJiEUi92-xE",
+            "url": "https://www.youtube.com/watch?v=GJiEUi92-xE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "2 dumbbells"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 375,
+            "endSeconds": 381
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "hinged neutral with dumbbells lowered",
+            "endPhase": "hinged neutral with dumbbells lowered"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "A stable hinge and simultaneous dumbbell pull/lower remain fully visible for three bilateral rows."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x plus 2 fps review: three rows before the source work phase transitions."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "two-dumbbell-romanian-deadlift",
+      "aliases": [
+        "Two-DB Romanian Deadlift"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Hinge with two dumbbells, pause at a strong depth, and keep the back long."
+      },
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Caroline Girvan",
+            "title": "RDL",
+            "videoId": "kaNktg56JaI",
+            "url": "https://www.youtube.com/watch?v=kaNktg56JaI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "bilateral",
+          "mirroring": "never",
+          "equipment": [
+            "2 dumbbells"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 500,
+            "endSeconds": 509
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "standing neutral",
+            "endPhase": "standing neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Bilateral long-spine hip hinge keeps head, feet, floor, and both dumbbells visible throughout."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Other-retained-exact records 1x and frame review: three RDL cycles with the rest/preview excluded."
+          }
+        }
+      ]
+    },
+    {
+      "movementId": "wall-external-rotation-isometric",
+      "aliases": [
+        "Wall External-rotation Isometric"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "wall"
+        ],
+        "form": "Keep the elbow at the side and press the back of the hand into the wall for repeated short holds."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The wall-contact mechanics are retained, but the source establishes only one unlabelled anatomical side and cannot close the committed left/right pair."
+      }
+    },
+    {
+      "movementId": "wall-press-hip-abduction-isometric",
+      "aliases": [
+        "Wall-press Hip Isometric",
+        "Wall-press Hip-abduction Isometric"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "dumbbell(s)"
+        ],
+        "form": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained full-body source shows one unlabelled side and does not close the prescribed left/right stance-leg-knee wall-press records."
+      }
+    },
+    {
+      "movementId": "wall-slides",
+      "aliases": [
+        "Wall Slides"
+      ],
+      "requirements": {
+        "sides": [
+          "bilateral"
+        ],
+        "equipment": [
+          "wall"
+        ],
+        "form": "Slide the arms only through a comfortable range; keep the ribs controlled."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "The retained crop omits the feet/lower-body wall context and carries graphics."
+      }
+    },
+    {
+      "movementId": "weighted-straight-knee-calf-raise",
+      "aliases": [
+        "Weighted Straight-knee Calf Raise"
+      ],
+      "requirements": {
+        "sides": [
+          "left",
+          "right"
+        ],
+        "equipment": [
+          "bodyweight"
+        ],
+        "form": "Use the prescribed cadence and keep the forefoot stable; never bounce."
+      },
+      "resolution": "search-required",
+      "deliberate": {
+        "reason": "No retained source combines one dumbbell, straight knee, stable forefoot, 3/1/3 cadence, and an anatomical left/right pair."
+      }
+    }
+  ]
+}

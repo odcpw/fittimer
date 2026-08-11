@@ -160,6 +160,17 @@ function validateCandidate(candidate, location, errors) {
   }
 }
 
+function candidateCoversSide(candidate, requiredSide) {
+  if (requiredSide === 'bilateral') return candidate.side === 'bilateral' || candidate.side === 'alternating';
+  if (requiredSide === 'alternating') return candidate.side === 'alternating';
+  if (candidate.side === requiredSide || candidate.side === 'alternating') return true;
+  if (candidate.mirroring !== 'when-needed') return false;
+  return (requiredSide === 'left' && candidate.side === 'right')
+    || (requiredSide === 'right' && candidate.side === 'left')
+    || (requiredSide === 'first' && candidate.side === 'second')
+    || (requiredSide === 'second' && candidate.side === 'first');
+}
+
 function validateRecord(record, location, errors, seen) {
   if (!object(record)) {
     error(errors, 'EXPECTED_RECORD', location, 'must be an object');
@@ -185,6 +196,11 @@ function validateRecord(record, location, errors, seen) {
       error(errors, 'MISSING_CANDIDATE', `${location}.candidates`, 'exact resolution requires at least one candidate');
     } else {
       record.candidates.forEach((candidate, index) => validateCandidate(candidate, `${location}.candidates[${index}]`, errors));
+      for (const requiredSide of record.requirements?.sides ?? []) {
+        if (!record.candidates.some((candidate) => candidateCoversSide(candidate, requiredSide))) {
+          error(errors, 'UNCOVERED_REQUIRED_SIDE', `${location}.candidates`, `no candidate covers the required ${requiredSide} side`);
+        }
+      }
     }
   } else if (record.resolution === 'reuse') {
     if (!object(record.reuse) || !string(record.reuse.packId) || !string(record.reuse.movementId) || !SIDES.has(record.reuse.side) || !string(record.reuse.notes)) {

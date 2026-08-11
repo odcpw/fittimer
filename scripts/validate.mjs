@@ -4,6 +4,8 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { movementInventory, validateClipSourceMap } from './media/source-map.mjs';
+
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BLOCKS_DIR = path.join(REPO_ROOT, 'data', 'blocks');
 const MEDIA_DIR = path.join(REPO_ROOT, 'data', 'media');
@@ -649,10 +651,30 @@ export async function validateFiles(requestedFiles = []) {
 
   const mediaPacks = new Map();
   const mediaPackSummaries = [];
+  const sourceMapSummaries = [];
   for (const absoluteFile of await jsonFiles(MEDIA_DIR)) {
     const file = repoRelative(absoluteFile);
     try {
-      const summary = await validateMediaPack(await readJson(file), file, errors);
+      const document = await readJson(file);
+      if (document.kind === 'clipSourceMap') {
+        const inventory = await movementInventory(document.targetBlockFiles ?? []);
+        const result = validateClipSourceMap(document, {
+          requiredMovementIds: inventory.map(({ movementId }) => movementId),
+        });
+        for (const entry of result.errors) {
+          fail(errors, entry.code, `${file}${entry.location === '$' ? '' : entry.location.slice(1)}`, entry.message);
+        }
+        sourceMapSummaries.push({
+          id: document.id,
+          file,
+          movementCount: inventory.length,
+          ready: result.ready,
+          pendingCount: result.pending.length,
+        });
+        continue;
+      }
+
+      const summary = await validateMediaPack(document, file, errors);
       if (!summary || typeof summary.id !== 'string') continue;
       if (mediaPacks.has(summary.id)) {
         fail(errors, 'DUPLICATE_MEDIA_PACK_ID', `${file}.id`, `duplicates media pack id ${summary.id}`);
@@ -729,6 +751,7 @@ export async function validateFiles(requestedFiles = []) {
     schemaVersion: CONTENT_SCHEMA_VERSION,
     valid: errors.length === 0,
     mediaPacks: mediaPackSummaries.map(({ id, file, entryCount }) => ({ id, file, entryCount })),
+    sourceMaps: sourceMapSummaries,
     blocks: blockSummaries.map(({ id, file, intervalCount, durationSeconds }) => ({
       id,
       file,
@@ -752,7 +775,8 @@ async function main() {
     const intervalCount = result.routines.reduce((total, routine) => total + routine.intervalCount, 0);
     process.stdout.write(
       `Validated ${result.routines.length} routine(s), ${result.blocks.length} block(s), ` +
-        `${result.mediaPacks.length} media pack(s), ${intervalCount} expanded interval(s).\n`,
+        `${result.mediaPacks.length} media pack(s), ${result.sourceMaps.length} source map(s), ` +
+        `${intervalCount} expanded interval(s).\n`,
     );
   } else {
     for (const error of result.errors) {

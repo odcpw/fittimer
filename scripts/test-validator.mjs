@@ -31,6 +31,10 @@ assert.deepEqual(
   realResult.routines.map((routine) => routine.id).sort(),
   ['crane-longform', 'dragon-longform', 'iron-roots', 'madfit-30min-hiit', 'silk-coils'],
 );
+assert.deepEqual(
+  realResult.sourceMaps.map(({ id, movementCount }) => ({ id, movementCount })),
+  [{ id: 'w1w4-v1', movementCount: 71 }],
+);
 
 const fixtureFiles = (await readdir(FIXTURES_DIR)).filter((name) => name.endsWith('.json')).sort();
 const fixtures = fixtureFiles.filter((name) => !['valid-shared-block.json', MEDIA_FIXTURE].includes(name));

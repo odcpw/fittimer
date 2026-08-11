@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 
-import { movementInventory, validateClipSourceMap } from '../scripts/media/source-map.mjs';
+import { movementInventory, validateClipSourceMap, validateClipSourceMapFile } from '../scripts/media/source-map.mjs';
 
 const TARGETS = [
   'data/blocks/iron-roots.json',
@@ -69,6 +70,17 @@ test('W1-W4 inventory has 71 stable movement IDs after push-up identity split', 
   );
 });
 
+test('committed W1-W4 source map covers the current inventory without private paths', async () => {
+  const result = await validateClipSourceMapFile('data/media/clip-sources.json', {
+    requiredMovementIds: (await movementInventory(TARGETS)).map(({ movementId }) => movementId),
+  });
+  assert.equal(result.valid, true, JSON.stringify(result.errors));
+  assert.equal(result.ready, result.pending.length === 0);
+
+  const raw = await readFile(new URL('../data/media/clip-sources.json', import.meta.url), 'utf8');
+  assert.doesNotMatch(raw, /(?:\/home\/|sourcePath|localPath|file:\/\/)/);
+});
+
 test('source map enforces exact candidate evidence and readiness separately', () => {
   const exact = exactRecord('example-movement');
   const ready = validateClipSourceMap(mapWith([exact]), { requiredMovementIds: ['example-movement'], requireReady: true });
@@ -117,4 +129,17 @@ test('source map rejects distorted pixel crops and safe regions outside the crop
   for (const code of ['NON_16_9_PIXEL_CROP', 'UNSAFE_REGION_OUTSIDE_CROP']) {
     assert.ok(result.errors.some((entry) => entry.code === code), `${code}: ${JSON.stringify(result.errors)}`);
   }
+});
+
+test('source map requires honest side coverage or an explicit mirrorable side', () => {
+  const missingRight = exactRecord('example-movement');
+  missingRight.requirements.sides = ['left', 'right'];
+  missingRight.candidates[0].side = 'left';
+  const rejected = validateClipSourceMap(mapWith([missingRight]), { requiredMovementIds: ['example-movement'] });
+  assert.equal(rejected.valid, false);
+  assert.ok(rejected.errors.some(({ code }) => code === 'UNCOVERED_REQUIRED_SIDE'));
+
+  missingRight.candidates[0].mirroring = 'when-needed';
+  const accepted = validateClipSourceMap(mapWith([missingRight]), { requiredMovementIds: ['example-movement'] });
+  assert.equal(accepted.valid, true, JSON.stringify(accepted.errors));
 });
