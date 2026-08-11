@@ -28,7 +28,9 @@
       "private:w1-w4-gap-scouts/locomotion-kicks/exact-source-map.json",
       "private:w1-w4-gap-scouts/kicks-wave2/exact-source-map.json",
       "private:w1-w4-gap-scouts/core-wave2-terra/exact-source-map.json",
-      "private:w1-w4-gap-scouts/upper-strength-wave-terra/exact-source-map.json"
+      "private:w1-w4-gap-scouts/upper-strength-wave-terra/exact-source-map.json",
+      "private:w1-w4-gap-scouts/lower-wave2/exact-source-map.json",
+      "private:w1-w4-gap-scouts/locomotion-wave3-luna/exact-source-map.json"
     ],
     "promotionRule": "Promote only retained candidates with exact declared mechanics, native/safe landscape framing, phase-matched forward loop evidence, and verified-normal-speed evidence compatible with scripts/media/source-map.mjs."
   },
@@ -255,10 +257,79 @@
         ],
         "form": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "A clean retained 16:9 pendulum shows only an unlabelled side, insufficient for the committed left/right records."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Physio Logic NYC",
+            "title": "Hip Pendulums | Physical Therapy Exercises for Hip Pain",
+            "videoId": "NDEYkrgjpKI",
+            "url": "https://www.youtube.com/watch?v=NDEYkrgjpKI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "wall or vertical support"
+          ],
+          "viewpoint": "front-oblique-wide",
+          "range": {
+            "startSeconds": 5,
+            "endSeconds": 21
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 4,
+            "phaseMatch": true,
+            "startPhase": "supported upright neutral",
+            "endPhase": "supported upright neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Light wall/vertical support, quiet trunk, both feet and floor visible, and controlled forward/return leg arcs without a ballistic kick. The unlabelled source is deliberately assigned as routine orientation A/left; the right routine rendering must use a deliberate horizontal mirror."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Locomotion-wave3 normal-speed review tightens the native 1280x720 full-body/support/path range to 05.000–21.000: four complete continuous arcs with matching supported-neutral boundaries and no cut. The orientation assignment does not claim source anatomical left/right."
+          }
+        }
+      ]
     },
     {
       "movementId": "crane-stance-hold",
@@ -275,10 +346,79 @@
         ],
         "form": "Hold the left crane stance; split the interval into two holds if form fades."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "One generic hands-free hold exists, but camera mirroring and anatomical side cannot be independently verified for the required pair."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Jessica Valant",
+            "title": "10 Minute Balance Exercises - To Do Everyday for Improved Balance!",
+            "videoId": "uth_9K3EmDI",
+            "url": "https://www.youtube.com/watch?v=uth_9K3EmDI",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "no equipment; chair nearby for optional regression"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 198,
+            "endSeconds": 202
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "hold",
+            "durationSeconds": 4,
+            "phaseMatch": true,
+            "startPhase": "upright hands-free knee-up crane stance",
+            "endPhase": "upright hands-free knee-up crane stance"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "A four-second upright hands-free knee-up hold keeps the trunk quiet, raised knee near hip height, stance foot, floor, and nearby chair regression context in the full native frame. The generic source is assigned orientation A/left; render the right routine side with a deliberate horizontal mirror."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Locomotion-wave3 records normal-speed review and retained contact evidence for a stable native 1280x720 four-second hold with no cut. Its spoken side cue is not used as anatomical proof; mirroring is a deliberate rendering orientation."
+          }
+        }
+      ]
     },
     {
       "movementId": "dead-bug",
@@ -1936,10 +2076,79 @@
         ],
         "form": "Use a dumbbell if stable; load the calf deliberately, never bounce, and keep pressure distributed across the forefoot."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The promising wall-supported source shows one unlabelled side and cannot close both prescribed side-specific cadence records."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Dr. Susie Spirlock",
+            "title": "Wall Supported Single Leg Calf Raise",
+            "videoId": "wVlBrZWUtcM",
+            "url": "https://www.youtube.com/watch?v=wVlBrZWUtcM",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "wall support"
+          ],
+          "viewpoint": "three-quarter-wide",
+          "range": {
+            "startSeconds": 2,
+            "endSeconds": 24
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 3,
+            "phaseMatch": true,
+            "startPhase": "wall-supported single-leg standing neutral",
+            "endPhase": "wall-supported single-leg standing neutral"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Wall-supported bodyweight single-leg raises keep the support hand, raised leg, standing foot, and floor visible through repeated rise/pause/slow-lower cycles. Optional dumbbell loading is not shown, and the source demonstrates pause/slow lower rather than a verified numeric 3/1/3 cadence. The unlabelled source is assigned orientation A/left; render the right routine side with a deliberate horizontal mirror."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Lower-wave2 accepted mechanics review records native 1280x720 full framing and normal-speed source inspection with at least three uninterrupted complete cycles. This is an honest bodyweight/support visual-reference regression, not evidence that the source anatomy or the precise 3/1/3 tempo was labelled."
+          }
+        }
+      ]
     },
     {
       "movementId": "single-leg-glute-bridge",
@@ -2333,10 +2542,79 @@
         ],
         "form": "Kick slowly with the wall available; do not force the pivot or snap."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "A generic mechanics clip exists, but its anatomical side is unresolved; it cannot close the required left/right pair."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Pride Martial Arts",
+            "title": "Slow Side Kick",
+            "videoId": "-fTuTC06JJE",
+            "url": "https://www.youtube.com/watch?v=-fTuTC06JJE",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "bodyweight"
+          ],
+          "viewpoint": "side-on person-forward",
+          "range": {
+            "startSeconds": 30,
+            "endSeconds": 70
+          },
+          "crop": {
+            "x": 0.125,
+            "y": 0.125,
+            "width": 0.75,
+            "height": 0.75
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0.125,
+              "y": 0.125,
+              "width": 0.75,
+              "height": 0.75
+            },
+            "feet": {
+              "x": 0.125,
+              "y": 0.125,
+              "width": 0.75,
+              "height": 0.75
+            },
+            "equipment": {
+              "x": 0.125,
+              "y": 0.125,
+              "width": 0.75,
+              "height": 0.75
+            },
+            "movementPath": {
+              "x": 0.125,
+              "y": 0.125,
+              "width": 0.75,
+              "height": 0.75
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 2,
+            "phaseMatch": true,
+            "startPhase": "upright guarded grounded stance",
+            "endPhase": "upright guarded grounded stance"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Two controlled same-side chamber, side-extension, and return cycles stay inside the person-forward 160,90 960x540 crop: head, guard hands, both feet, support-foot floor contact, and full chamber-to-extension-to-return path are retained. The generic source is assigned orientation A/left; render the right routine side with a deliberate horizontal mirror."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Locomotion-wave3 normal-speed review and retained contact evidence confirm two uninterrupted slow kicks, no cut, and matching upright guarded/grounded boundary phases in 30.000–70.000. Crop geometry is exact 16:9 and even yuv420p pixels (160,90 960x540) within the native 1280x720 source; source anatomy remains unclaimed."
+          }
+        }
+      ]
     },
     {
       "movementId": "slow-step-down",
@@ -2373,10 +2651,79 @@
         ],
         "form": "Use a low step and control the pelvis; place the whole foot on the step."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The retained low-step female demonstration provides only one unlabelled side, not a verified left/right pair."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Cornerstone Physiotherapy",
+            "title": "Step Up Exercise | Osteoarthritis Physiotherapy",
+            "videoId": "wfhXnLILqdk",
+            "url": "https://www.youtube.com/watch?v=wfhXnLILqdk",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "low step"
+          ],
+          "viewpoint": "profile-wide",
+          "range": {
+            "startSeconds": 0.5,
+            "endSeconds": 6.5
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "reps",
+            "reps": 2,
+            "phaseMatch": true,
+            "startPhase": "lead foot grounded on low step",
+            "endPhase": "lead foot grounded on low step"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Two controlled same-side step-up/return cycles retain head, both feet, whole lead foot on the low step, quiet trailing foot, and floor contact. The source is assigned orientation A/left despite unresolved source anatomy; the opposite routine side requires a deliberate horizontal mirror."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Lower-wave2 accepted mechanics review records native 1280x720 full-body/step framing, two continuous phase-matched cycles, and normal-speed source inspection. The source is qualitatively controlled but establishes no numeric slow cadence."
+          }
+        }
+      ]
     },
     {
       "movementId": "split-squat",
@@ -2764,10 +3111,79 @@
         ],
         "form": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level."
       },
-      "resolution": "search-required",
-      "deliberate": {
-        "reason": "The retained full-body source shows one unlabelled side and does not close the prescribed left/right stance-leg-knee wall-press records."
-      }
+      "resolution": "exact",
+      "candidates": [
+        {
+          "source": {
+            "channel": "Sarah Keates Andrews",
+            "title": "Standing Hip Abductor Wall Press",
+            "videoId": "pYOucqFpwCw",
+            "url": "https://www.youtube.com/watch?v=pYOucqFpwCw",
+            "localOnly": true,
+            "dimensions": {
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "side": "left",
+          "mirroring": "when-needed",
+          "equipment": [
+            "wall"
+          ],
+          "viewpoint": "front-wide",
+          "range": {
+            "startSeconds": 20,
+            "endSeconds": 33.1
+          },
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "safeFrame": {
+            "hands": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "feet": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "equipment": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            },
+            "movementPath": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          "loop": {
+            "kind": "hold",
+            "durationSeconds": 13.100000000000001,
+            "phaseMatch": true,
+            "startPhase": "settled wall press with closest knee into wall and opposite stance leg loaded",
+            "endPhase": "settled wall press with closest knee into wall and opposite stance leg loaded"
+          },
+          "form": {
+            "quality": "high",
+            "notes": "Full native frame retains head, both feet, wall, knee contact, and floor while the closest knee presses the wall and the opposite stance/support leg remains loaded with a level pelvis. The record assigns that stance leg orientation A/left despite unresolved source anatomy; render the right routine side with a deliberate horizontal mirror. Source supplies one 13.1-second hold, not two demonstrated 15-second bouts."
+          },
+          "verification": {
+            "status": "verified-normal-speed",
+            "notes": "Lower-wave2 accepted mechanics review records normal-speed native 1280x720 inspection, a continuous stable 13.1-second hold, complete wall/stance context, and no cut. The spoken 10/20/30-second instruction is not treated as proof of a second 15-second bout."
+          }
+        }
+      ]
     },
     {
       "movementId": "wall-slides",
