@@ -305,7 +305,71 @@ function coverageMatrix(creators, records) {
   return { schemaVersion: 1, kind: 'creatorMovementMatrix', creators: creatorIds, creatorCoverage, movements };
 }
 
-export function compileCreatorLibrary(documents) {
+function displayNameForId(movementId) {
+  return movementId.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+}
+
+function recordsFromPacks(packs, creators, sources, existingRecords) {
+  const sourceByKey = new Map(Object.values(sources).map((source) => [`${source.creatorId}::${source.videoId}`, source]));
+  const seen = new Set(existingRecords.filter((record) => record.status === 'ready').map((record) => [
+    record.movementId,
+    record.creatorId,
+    record.source.videoId,
+    record.range.startSeconds,
+    record.range.endSeconds,
+  ].join('::')));
+  const imported = [];
+  for (const pack of packs) {
+    if (!object(pack) || pack.kind !== 'mediaPack' || !object(pack.entries)) throw new Error('Imported mappings must be mediaPack documents');
+    for (const [movementId, entry] of Object.entries(pack.entries)) {
+      for (const asset of entry?.assets ?? []) {
+        if (asset?.type !== 'video' || !creators[asset.creatorId]) continue;
+        const source = sourceByKey.get(`${asset.creatorId}::${asset.sourceVideoId}`);
+        if (!source) throw new Error(`Approved pack mapping has no retained source: ${asset.creatorId}/${asset.sourceVideoId}`);
+        const sourceChapterRange = { startSeconds: asset.sourceStartSeconds, endSeconds: asset.sourceEndSeconds };
+        const sourceDuration = sourceChapterRange.endSeconds - sourceChapterRange.startSeconds;
+        if (!Number.isFinite(sourceDuration) || sourceDuration < 2) throw new Error(`Approved pack mapping has an invalid source range: ${movementId}/${asset.variantId}`);
+        const range = sourceDuration <= 40 ? sourceChapterRange : {
+          startSeconds: sourceChapterRange.startSeconds + Math.min(5, (sourceDuration - 40) / 2),
+          endSeconds: sourceChapterRange.startSeconds + Math.min(5, (sourceDuration - 40) / 2) + 40,
+        };
+        const key = [movementId, asset.creatorId, asset.sourceVideoId, range.startSeconds, range.endSeconds].join('::');
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const digest = createHash('sha256').update(key).digest('hex').slice(0, 10);
+        imported.push({
+          id: `${movementId}-${asset.creatorId}-${digest}`,
+          movementId,
+          displayName: displayNameForId(movementId),
+          aliases: [movementId],
+          creatorId: asset.creatorId,
+          source: {
+            id: source.id,
+            videoId: source.videoId,
+            url: source.url,
+            title: asset.sourceTitle ?? source.title,
+            localPath: source.localPath,
+            ...(source.channelId ? { channelId: source.channelId } : {}),
+          },
+          range,
+          side: asset.side ?? entry.anatomicalSide ?? 'unspecified',
+          equipment: Array.isArray(asset.equipment) && asset.equipment.length > 0 ? asset.equipment : ['bodyweight'],
+          viewpoint: 'approved-private-pack',
+          framing: 'Existing approved private-pack mapping; the complete performer frame is retained and fitted to landscape.',
+          movementKind: 'normal',
+          status: 'ready',
+          formNotes: `Imported from approved private pack ${pack.id ?? 'unknown'} with creator and source provenance intact.`,
+          mocapRange: range,
+          importedFromPack: pack.id ?? 'unknown',
+          ...(sourceDuration > 40 ? { sourceChapterRange } : {}),
+        });
+      }
+    }
+  }
+  return imported;
+}
+
+export function compileCreatorLibrary(documents, { packs = [] } = {}) {
   if (!Array.isArray(documents) || documents.length === 0) throw new Error('At least one candidate document is required');
   const allRecords = [];
   for (const [index, document] of documents.entries()) {
@@ -317,12 +381,13 @@ export function compileCreatorLibrary(documents) {
     }
     allRecords.push(...result.records);
   }
+  const creators = creatorRegistry(documents);
+  const sources = sourceRegistry(documents);
+  allRecords.push(...recordsFromPacks(packs, creators, sources, allRecords));
   const records = allRecords.sort((left, right) => left.movementId.localeCompare(right.movementId)
     || left.creatorId.localeCompare(right.creatorId)
     || left.source.videoId.localeCompare(right.source.videoId)
     || left.range.startSeconds - right.range.startSeconds);
-  const creators = creatorRegistry(documents);
-  const sources = sourceRegistry(documents);
   const ids = new Set(records.map((record) => record.id));
   if (ids.size !== records.length) throw new Error('Duplicate record IDs across candidate documents');
   const library = {
@@ -500,6 +565,7 @@ function argumentsFor(argv) {
   let verifyFiles = false;
   let retainedRoot = null;
   let requireAllRetained = false;
+  const importPacks = [];
   for (let index = 0; index < argv.length; index += 1) {
     if (argv[index] === '--input') inputs.push(argv[index += 1]);
     else if (argv[index] === '--requirements') requirements.push(argv[index += 1]);
@@ -507,13 +573,14 @@ function argumentsFor(argv) {
     else if (argv[index] === '--verify-files') verifyFiles = true;
     else if (argv[index] === '--retained-root') retainedRoot = argv[index += 1];
     else if (argv[index] === '--require-all-retained') requireAllRetained = true;
+    else if (argv[index] === '--import-pack') importPacks.push(argv[index += 1]);
     else throw new Error(`Unknown argument: ${argv[index]}`);
   }
   if (inputs.length === 0 || !output) {
     throw new Error('Usage: creator-library.mjs --input FILE_OR_DIR [--input ...] --output DIRECTORY [--verify-files]');
   }
   if (requireAllRetained && !retainedRoot) throw new Error('--require-all-retained requires --retained-root');
-  return { inputs, requirements, output: path.resolve(output), verifyFiles, retainedRoot, requireAllRetained };
+  return { inputs, requirements, output: path.resolve(output), verifyFiles, retainedRoot, requireAllRetained, importPacks };
 }
 
 async function main() {
@@ -521,7 +588,9 @@ async function main() {
   const files = await discoverJsonInputs(options.inputs, { candidateFilesOnly: true });
   const documents = [];
   for (const file of files) documents.push(await readJson(file));
-  const compiled = compileCreatorLibrary(documents);
+  const packs = [];
+  for (const file of options.importPacks) packs.push(await readJson(path.resolve(file)));
+  const compiled = compileCreatorLibrary(documents, { packs });
   const requirementFiles = await discoverJsonInputs(options.requirements);
   const requirements = [];
   for (const file of requirementFiles) requirements.push({ file, document: await readJson(file) });
@@ -547,6 +616,7 @@ async function main() {
   }
   process.stdout.write(`${JSON.stringify({
     inputFiles: files.length,
+    importedPacks: packs.length,
     creators: Object.keys(compiled.library.creators).length,
     sources: Object.keys(compiled.library.sources).length,
     movements: Object.keys(compiled.matrix.movements).length,

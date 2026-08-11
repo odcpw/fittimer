@@ -122,6 +122,38 @@ test('requirements coverage reports missing moves and honest one-creator workout
   });
 });
 
+test('approved private-pack mappings add stable workout IDs without collapsing source movement names', () => {
+  const growing = documentFor();
+  const pack = {
+    schemaVersion: 1,
+    kind: 'mediaPack',
+    id: 'approved-existing-v1',
+    entries: {
+      'bodyweight-squat-deepening': {
+        anatomicalSide: 'bilateral',
+        assets: [{
+          type: 'video',
+          creatorId: 'growingannanas',
+          sourceVideoId: 'video-one',
+          sourceTitle: 'Retained workout source',
+          sourceStartSeconds: 10,
+          sourceEndSeconds: 65,
+          equipment: ['bodyweight'],
+          variantId: 'existing-stable-mapping',
+        }],
+      },
+    },
+  };
+  const compiled = compileCreatorLibrary([growing], { packs: [pack] });
+  assert.equal(compiled.library.records.length, 2);
+  assert.deepEqual(compiled.library.records.map((record) => record.movementId), ['bodyweight-squat', 'bodyweight-squat-deepening']);
+  assert.equal(compiled.library.records.find((record) => record.movementId === 'bodyweight-squat-deepening').importedFromPack, 'approved-existing-v1');
+  assert.deepEqual(compiled.library.records.find((record) => record.movementId === 'bodyweight-squat-deepening').range, {
+    startSeconds: 15,
+    endSeconds: 55,
+  });
+});
+
 test('retained source audit measures every unique approved channel video without fuzzy-name leakage', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'creator-source-audit-'));
   await mkdir(path.join(root, 'one'));

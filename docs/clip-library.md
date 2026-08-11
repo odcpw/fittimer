@@ -22,6 +22,8 @@ and creator are preserved as variants rather than silently collapsed.
 node scripts/media/creator-library.mjs \
   --input /home/oliver/Projects/fittimer-media-research/approved-creator-library-v1 \
   --requirements data/blocks \
+  --import-pack /home/oliver/Projects/fittimer-private-packs/w1w4-v1/media-pack.json \
+  --import-pack /home/oliver/Projects/fittimer-private-packs/reference-v1/media-pack.json \
   --retained-root /home/oliver/Projects/fittimer-media-research \
   --require-all-retained \
   --output /home/oliver/Projects/fittimer-private-packs/creator-library-v1/catalogue \
@@ -38,6 +40,10 @@ movement search queue.
 `--retained-root` deduplicates the approved channels' yt-dlp metadata by creator
 and video ID; `--require-all-retained` makes an omitted retained source a hard
 failure while allowing newly downloaded, fully indexed library sources.
+`--import-pack` carries forward stable FitTimer movement mappings that already
+passed private-pack review. The descriptive source movement remains in the
+database as its own variant; importing adds the stable workout ID rather than
+renaming or erasing source evidence.
 
 Ready records are encoded as practical reference clips with the companion
 `creator-clip-pipeline.mjs`:
