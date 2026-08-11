@@ -1127,6 +1127,29 @@ html[data-phase="paused"] .phase-label {
   }
 }
 
+/* Standalone mobile PWAs are inconsistent about touch-scrolling the document
+   in forced landscape. Give the home surface one explicit, bounded scroll
+   owner; workout playback keeps its separate fixed, non-scrolling canvas. */
+html[data-screen="home"],
+html[data-screen="home"] body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-screen="home"] .app-shell {
+  height: 100dvh;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+html[data-screen="home"] .home-screen {
+  min-height: 100%;
+}
+
 /* Workout playback is an intentionally landscape-only surface. In portrait
    viewports the surface is rotated as a single canvas so the person using the
    timer physically turns the phone; the home picker remains unrotated. */

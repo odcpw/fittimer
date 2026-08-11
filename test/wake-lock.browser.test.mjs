@@ -18,7 +18,7 @@ test('browser integration keeps wake lock lifecycle outside timer and audio owne
   assert.match(application, /engine\.update\(\)/);
   assert.doesNotMatch(application, /<audio\b/i);
   assert.doesNotMatch(application, /mediaSession/i);
-  assert.match(serviceWorker, /fittimer-v6/);
+  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'fittimer-v9'/);
   assert.match(serviceWorker, /\.\/src\/wake-lock\.mjs/);
 });
 

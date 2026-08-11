@@ -12,6 +12,7 @@ import {
 import { resolveMediaPackPreference, summarizeSettings } from '../src/app.mjs';
 
 const html = await readFile('index.html', 'utf8');
+const styles = await readFile('styles.css', 'utf8');
 
 const settingControlIds = [
   'settings-cue-pack',
@@ -33,6 +34,12 @@ test('home settings panel exposes every versioned preference', () => {
   assert.match(html, /<details[^>]+id="settings-panel"/);
   for (const id of settingControlIds) assert.match(html, new RegExp(`id="${id}"`));
   assert.match(html, /type="range"[^>]+min="0"[^>]+max="1"/);
+});
+
+test('installed landscape home owns a touch-scroll surface', () => {
+  assert.match(styles, /html\[data-screen="home"\] \.app-shell\s*\{[^}]*height:\s*100dvh[^}]*overflow-y:\s*auto[^}]*touch-action:\s*pan-y/s);
+  assert.match(styles, /html\[data-screen="home"\],\s*html\[data-screen="home"\] body\s*\{[^}]*overflow:\s*hidden/s);
+  assert.match(styles, /html\[data-screen="workout"\],\s*html\[data-screen="workout"\] body\s*\{[^}]*overflow:\s*hidden/s);
 });
 
 test('settings summary uses normalized defaults and reflects cue changes', () => {
