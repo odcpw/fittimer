@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import {
   DEFAULT_LOOP_POLICY,
   DEFAULT_OUTPUT_MAX_WIDTH,
+  MAX_REFERENCE_DURATION_SECONDS,
   PipelineError,
   probeMedia,
   runPipeline,
@@ -282,6 +283,99 @@ test('media pipeline validates the contract and proves real-tool idempotence', a
   assert.equal(second.packChanged, false);
   assert.equal(await readFile(manifestFile, 'utf8'), manifestSource);
   assert.equal(await readFile(packFile, 'utf8'), packSource);
+
+  const dualCatalogue = structuredClone(catalogue);
+  dualCatalogue.clips[0].referenceRange = { startSeconds: 0, endSeconds: 10 };
+  assert.equal(validateCatalogue(dualCatalogue).valid, true, 'an optional up-to-40-second reference range is valid');
+  const tooLongReference = structuredClone(dualCatalogue);
+  tooLongReference.clips[0].referenceRange.endSeconds = MAX_REFERENCE_DURATION_SECONDS + 0.01;
+  const tooLongReferenceResult = validateCatalogue(tooLongReference);
+  assert.equal(tooLongReferenceResult.valid, false);
+  assert.ok(tooLongReferenceResult.errors.some((error) => error.code === 'INVALID_DURATION'));
+  const loopOutsideReference = structuredClone(dualCatalogue);
+  loopOutsideReference.clips[0].referenceRange.endSeconds = 5;
+  const loopOutsideReferenceResult = validateCatalogue(loopOutsideReference);
+  assert.equal(loopOutsideReferenceResult.valid, false);
+  assert.ok(loopOutsideReferenceResult.errors.some((error) => error.code === 'INVALID_REFERENCE_RANGE'));
+
+  const dualOutputRoot = path.join(runRoot, 'dual-pipeline-output');
+  const dualLogs = [];
+  const dualFirst = await runPipeline({
+    catalogue: dualCatalogue,
+    sourceCacheRoot,
+    outputRoot: dualOutputRoot,
+    ffmpeg: FFMPEG,
+    ffprobe: FFPROBE,
+    logger: (event, details) => dualLogs.push({ event, ...details }),
+  });
+  assert.equal(dualFirst.clips, 2);
+  assert.equal(dualFirst.encoded, 3, 'one reference plus two short loops are encoded');
+  assert.equal(dualFirst.references, 1);
+  assert.equal(dualFirst.loops, 2);
+  assert.equal(dualFirst.posters, 2);
+  assert.equal(dualFirst.skipped, 0);
+  assert.deepEqual(
+    dualLogs.filter((entry) => entry.event === 'encode-start').map((entry) => entry.outputKind),
+    ['reference', 'loop', 'loop'],
+  );
+  assert.ok(
+    dualLogs.filter((entry) => entry.event === 'encode-start' || entry.event === 'poster-start')
+      .every((entry) => entry.seek === 'input'),
+    'every derived output uses input-side seeking',
+  );
+
+  const dualManifestFile = path.join(dualOutputRoot, 'clip-manifest.json');
+  const dualPackFile = path.join(dualOutputRoot, 'media-pack.json');
+  const dualManifestSource = await readFile(dualManifestFile, 'utf8');
+  const dualPackSource = await readFile(dualPackFile, 'utf8');
+  const dualManifest = parseJson(dualManifestSource, dualManifestFile);
+  const dualPack = parseJson(await readFile(dualPackFile, 'utf8'), dualPackFile);
+  assert.equal(validateManifestStructure(dualManifest, dualCatalogue).valid, true);
+  const dualRecord = dualManifest.clips.find((record) => record.id === 'synthetic-squat');
+  assert.deepEqual(dualRecord.referenceRange, {
+    startSeconds: 0,
+    endSeconds: 10,
+    durationSeconds: 10,
+  });
+  assert.equal(dualRecord.output.reference.video, 'references/synthetic-squat.mp4');
+  assert.equal(dualRecord.output.loop.video, 'clips/synthetic-squat.mp4');
+  assert.equal(dualRecord.output.loop.poster, 'posters/synthetic-squat.png');
+  assert.ok(dualPack.entries['synthetic-squat'].assets.some((asset) => asset.url === 'clips/synthetic-squat.mp4'));
+  assert.ok(dualPack.entries['synthetic-squat'].assets.some((asset) => asset.url === 'posters/synthetic-squat.png'));
+
+  const dualVideoProbes = [
+    ['reference', dualRecord.output.reference, 10],
+    ['loop', dualRecord.output.loop, 6],
+  ];
+  for (const [kind, output, expectedDuration] of dualVideoProbes) {
+    const videoFile = path.join(dualOutputRoot, output.video);
+    const videoProbe = await probeMedia(videoFile, { ffprobe: FFPROBE });
+    assert.equal(videoProbe.audioStreams, 0, `${kind} output must be silent`);
+    assert.equal(videoProbe.codecName, 'h264');
+    assert.equal(videoProbe.pixelFormat, 'yuv420p');
+    assert.equal(videoProbe.width, 1280);
+    assert.equal(videoProbe.height, 720);
+    assert.ok(Math.abs(videoProbe.durationSeconds - expectedDuration) <= 0.15);
+    assert.equal(output.sizeBytes, (await stat(videoFile)).size);
+    assert.equal(output.sha256, await sha256File(videoFile));
+  }
+
+  const dualSecond = await runPipeline({
+    catalogue: dualCatalogue,
+    sourceCacheRoot,
+    outputRoot: dualOutputRoot,
+    ffmpeg: FFMPEG,
+    ffprobe: FFPROBE,
+  });
+  assert.equal(dualSecond.encoded, 0);
+  assert.equal(dualSecond.references, 0);
+  assert.equal(dualSecond.loops, 0);
+  assert.equal(dualSecond.posters, 0);
+  assert.equal(dualSecond.skipped, 2);
+  assert.equal(dualSecond.manifestChanged, false);
+  assert.equal(dualSecond.packChanged, false);
+  assert.equal(await readFile(dualManifestFile, 'utf8'), dualManifestSource);
+  assert.equal(await readFile(dualPackFile, 'utf8'), dualPackSource);
 
   const catalogueFile = path.join(runRoot, 'catalogue.json');
   await writeFile(catalogueFile, `${JSON.stringify(catalogue, null, 2)}\n`, 'utf8');

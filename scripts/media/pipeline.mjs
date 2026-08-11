@@ -25,6 +25,7 @@ export const CATALOGUE_SCHEMA_VERSION = 1;
 export const CLIP_MANIFEST_SCHEMA_VERSION = 1;
 export const MEDIA_PACK_SCHEMA_VERSION = 1;
 export const DEFAULT_OUTPUT_MAX_WIDTH = 1280;
+export const MAX_REFERENCE_DURATION_SECONDS = 40;
 export const DEFAULT_LOOP_POLICY = Object.freeze({
   normal: Object.freeze({
     minReps: 2,
@@ -213,6 +214,7 @@ function validateClip(clip, index, policy, errors) {
     'intervalName',
     'source',
     'timeRange',
+    'referenceRange',
     'movementId',
     'coversMovementIds',
     'side',
@@ -249,6 +251,23 @@ function validateClip(clip, index, policy, errors) {
     if (startValid && endValid) {
       duration = clip.timeRange.endSeconds - clip.timeRange.startSeconds;
       if (!(duration > 0)) fail(errors, 'INVALID_DURATION', `${location}.timeRange`, 'endSeconds must be greater than startSeconds');
+    }
+  }
+  if (clip.referenceRange !== undefined) {
+    if (checkObject(clip.referenceRange, `${location}.referenceRange`, errors, new Set(['startSeconds', 'endSeconds']))) {
+      const startValid = checkFiniteNumber(clip.referenceRange.startSeconds, `${location}.referenceRange.startSeconds`, errors, { minimum: 0 });
+      const endValid = checkFiniteNumber(clip.referenceRange.endSeconds, `${location}.referenceRange.endSeconds`, errors, { minimum: 0 });
+      if (startValid && endValid) {
+        const referenceDuration = clip.referenceRange.endSeconds - clip.referenceRange.startSeconds;
+        if (!(referenceDuration > 0)) {
+          fail(errors, 'INVALID_DURATION', `${location}.referenceRange`, 'endSeconds must be greater than startSeconds');
+        } else if (referenceDuration > MAX_REFERENCE_DURATION_SECONDS) {
+          fail(errors, 'INVALID_DURATION', `${location}.referenceRange`, `reference segments must be at most ${MAX_REFERENCE_DURATION_SECONDS} seconds`);
+        }
+        if (duration !== null && (clip.timeRange.startSeconds < clip.referenceRange.startSeconds || clip.timeRange.endSeconds > clip.referenceRange.endSeconds)) {
+          fail(errors, 'INVALID_REFERENCE_RANGE', `${location}.referenceRange`, 'must contain the short loop timeRange');
+        }
+      }
     }
   }
   for (const field of ['formNotes', 'seamNotes', 'mocapNotes']) {
@@ -411,6 +430,23 @@ function recordMappingKeys(record) {
     : [record.mappingKey];
 }
 
+function sameTimeRange(left, right) {
+  return isObject(left) && isObject(right)
+    && left.startSeconds === right.startSeconds
+    && left.endSeconds === right.endSeconds;
+}
+
+function loopOutputFromRecord(record) {
+  return isObject(record?.output?.loop) ? record.output.loop : record?.output;
+}
+
+function validateOutputDescriptor(output, location, errors, { poster = false } = {}) {
+  if (!checkObject(output, location, errors)) return false;
+  let valid = checkString(output.video, `${location}.video`, errors);
+  if (poster) valid = checkString(output.poster, `${location}.poster`, errors) && valid;
+  return valid;
+}
+
 export function validateManifestStructure(manifest, catalogue) {
   const errors = [];
   if (!checkObject(manifest, 'manifest', errors, new Set(['schemaVersion', 'kind', 'pack', 'loopPolicy', 'outputFrame', 'clips']))) {
@@ -474,7 +510,31 @@ export function validateManifestStructure(manifest, catalogue) {
       if (!expected.has(mappingKey)) fail(errors, 'UNMAPPED_OUTPUT', mappingLocation, `has no catalogue record for ${mappingKey}`);
       else if (expected.get(mappingKey) !== record.id) fail(errors, 'MAPPING_ID_MISMATCH', `${location}.id`, 'does not match the catalogue mapping');
     }
-    if (!isObject(record.output)) fail(errors, 'MISSING_OUTPUT', `${location}.output`, 'must describe encoded outputs');
+    if (!isObject(record.output)) {
+      fail(errors, 'MISSING_OUTPUT', `${location}.output`, 'must describe encoded outputs');
+    } else {
+      const catalogueClip = (catalogue?.clips || []).find((clip) => clip?.id === record.id);
+      if (catalogueClip?.referenceRange !== undefined) {
+        if (!sameTimeRange(record.referenceRange, catalogueClip.referenceRange)) {
+          fail(errors, 'REFERENCE_RANGE_MISMATCH', `${location}.referenceRange`, 'must match the catalogue referenceRange');
+        }
+        if (!isObject(record.output.reference)) {
+          fail(errors, 'MISSING_REFERENCE_OUTPUT', `${location}.output.reference`, 'must describe the encoded reference segment');
+        } else {
+          validateOutputDescriptor(record.output.reference, `${location}.output.reference`, errors);
+        }
+        if (!isObject(record.output.loop)) {
+          fail(errors, 'MISSING_LOOP_OUTPUT', `${location}.output.loop`, 'must describe the encoded short loop');
+        } else {
+          validateOutputDescriptor(record.output.loop, `${location}.output.loop`, errors, { poster: true });
+        }
+      } else {
+        validateOutputDescriptor(record.output, `${location}.output`, errors, { poster: true });
+      }
+      if (!isObject(loopOutputFromRecord(record))) {
+        fail(errors, 'MISSING_LOOP_OUTPUT', `${location}.output`, 'must describe the encoded short loop');
+      }
+    }
   }
   for (const [mappingKey, id] of expected) {
     if (!seenMappings.has(mappingKey)) fail(errors, 'MISSING_OUTPUT', 'manifest.clips', `missing output for ${mappingKey} (${id})`);
@@ -812,7 +872,38 @@ function filterFor(pixelCrop, output) {
   return `crop=${pixelCrop.width}:${pixelCrop.height}:${pixelCrop.x}:${pixelCrop.y},scale=${output.width}:${output.height}:flags=lanczos,setsar=1`;
 }
 
-function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFingerprint) {
+function outputToRecord(output, { video, poster } = {}) {
+  return {
+    video,
+    ...(poster ? { poster } : {}),
+    width: output.width,
+    height: output.height,
+    durationSeconds: output.durationSeconds,
+    sizeBytes: output.sizeBytes,
+    sha256: output.sha256,
+    codec: output.codec,
+    pixelFormat: output.pixelFormat,
+    audioStreams: output.audioStreams,
+    ...(output.poster ? {
+      posterWidth: output.poster.width,
+      posterHeight: output.poster.height,
+      posterSizeBytes: output.poster.sizeBytes,
+      posterSha256: output.poster.sha256,
+    } : {}),
+  };
+}
+
+function mappingToRecord(clip, sourceInfo, sourceProbe, loop, reference, recordFingerprint) {
+  const loopOutput = outputToRecord(loop.output, {
+    video: `clips/${clip.id}.mp4`,
+    poster: `posters/${clip.id}.png`,
+  });
+  const output = reference
+    ? {
+        reference: outputToRecord(reference.output, { video: `references/${clip.id}.mp4` }),
+        loop: loopOutput,
+      }
+    : loopOutput;
   return {
     id: clip.id,
     ...(clip.intervalNumber !== undefined ? { intervalNumber: clip.intervalNumber } : {}),
@@ -831,6 +922,15 @@ function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFi
       endSeconds: clip.timeRange.endSeconds,
       durationSeconds: roundNumber(clip.timeRange.endSeconds - clip.timeRange.startSeconds),
     },
+    ...(clip.referenceRange !== undefined
+      ? {
+          referenceRange: {
+            startSeconds: clip.referenceRange.startSeconds,
+            endSeconds: clip.referenceRange.endSeconds,
+            durationSeconds: roundNumber(clip.referenceRange.endSeconds - clip.referenceRange.startSeconds),
+          },
+        }
+      : {}),
     movementId: clip.movementId,
     ...(Array.isArray(clip.coversMovementIds) && clip.coversMovementIds.length > 0
       ? { coversMovementIds: [...clip.coversMovementIds] }
@@ -852,22 +952,7 @@ function mappingToRecord(clip, sourceInfo, sourceProbe, output, poster, recordFi
       durationSeconds: roundNullable(sourceProbe.durationSeconds),
       audioStreams: sourceProbe.audioStreams,
     },
-    output: {
-      video: `clips/${clip.id}.mp4`,
-      poster: `posters/${clip.id}.png`,
-      width: output.width,
-      height: output.height,
-      durationSeconds: output.durationSeconds,
-      sizeBytes: output.sizeBytes,
-      sha256: output.sha256,
-      codec: output.codec,
-      pixelFormat: output.pixelFormat,
-      audioStreams: output.audioStreams,
-      posterWidth: poster.width,
-      posterHeight: poster.height,
-      posterSizeBytes: poster.sizeBytes,
-      posterSha256: poster.sha256,
-    },
+    output,
     recordFingerprint,
   };
 }
@@ -897,6 +982,7 @@ function buildMediaPack(catalogue, records) {
   };
   const entries = {};
   for (const record of [...records].sort((left, right) => left.movementId.localeCompare(right.movementId) || left.id.localeCompare(right.id))) {
+    const loopOutput = loopOutputFromRecord(record);
     for (const movementId of [record.movementId, ...(record.coversMovementIds || [])]) {
       if (!entries[movementId]) {
         entries[movementId] = {
@@ -906,8 +992,8 @@ function buildMediaPack(catalogue, records) {
         };
       }
       entries[movementId].assets.push(
-        { type: 'video', url: record.output.video, framing: profileId, side: record.side },
-        { type: 'poster', url: record.output.poster, framing: profileId, side: record.side },
+        { type: 'video', url: loopOutput.video, framing: profileId, side: record.side },
+        { type: 'poster', url: loopOutput.poster, framing: profileId, side: record.side },
       );
     }
   }
@@ -922,25 +1008,25 @@ function buildMediaPack(catalogue, records) {
   };
 }
 
-async function encodeClip(clip, sourceInfo, sourceProbe, outputRoot, tools, maxWidth, log) {
-  if (sourceProbe.width === null || sourceProbe.height === null) {
-    throw new PipelineError('SOURCE_NO_VIDEO', `Source has no video dimensions: ${sourceInfo.file}`, { file: sourceInfo.file });
-  }
-  const pixelCrop = cropPixels(clip.crop, sourceProbe.width, sourceProbe.height);
-  const output = outputDimensions(pixelCrop, maxWidth);
-  const filter = filterFor(pixelCrop, output);
-  const duration = clip.timeRange.endSeconds - clip.timeRange.startSeconds;
-  const videoFile = path.join(outputRoot, 'clips', `${clip.id}.mp4`);
-  const posterFile = path.join(outputRoot, 'posters', `${clip.id}.png`);
-  await mkdir(path.dirname(videoFile), { recursive: true });
-  await mkdir(path.dirname(posterFile), { recursive: true });
-  log('encode-start', { clipId: clip.id, durationSeconds: duration, width: output.width, height: output.height });
+async function encodeVideoOutput({ clipId, outputKind, range, sourceInfo, sourceProbe, outputFile, filter, dimensions, tools, log }) {
+  const duration = range.endSeconds - range.startSeconds;
+  await mkdir(path.dirname(outputFile), { recursive: true });
+  log('encode-start', {
+    clipId,
+    outputKind,
+    durationSeconds: duration,
+    width: dimensions.width,
+    height: dimensions.height,
+    seek: 'input',
+  });
   await runRequiredTool(
     tools.ffmpeg,
     [
       '-hide_banner', '-loglevel', 'error', '-y',
+      // Keep seeking before the input so late source ranges do not decode from
+      // time zero for every derived output. -t remains an output duration gate.
+      '-ss', String(range.startSeconds),
       '-i', sourceInfo.file,
-      '-ss', String(clip.timeRange.startSeconds),
       '-t', String(duration),
       '-map', '0:v:0',
       '-vf', filter,
@@ -952,56 +1038,136 @@ async function encodeClip(clip, sourceInfo, sourceProbe, outputRoot, tools, maxW
       '-r', '30',
       '-movflags', '+faststart',
       '-map_metadata', '-1',
-      videoFile,
+      outputFile,
     ],
-    'ffmpeg video encode',
+    `ffmpeg ${outputKind} video encode`,
   );
-  await runRequiredTool(
-    tools.ffmpeg,
-    [
-      '-hide_banner', '-loglevel', 'error', '-y',
-      '-i', sourceInfo.file,
-      '-ss', String(clip.timeRange.startSeconds),
-      '-map', '0:v:0',
-      '-vf', filter,
-      '-frames:v', '1',
-      '-an',
-      '-map_metadata', '-1',
-      posterFile,
-    ],
-    'ffmpeg poster encode',
-  );
-  const videoProbe = await probeMedia(videoFile, { ffprobe: tools.ffprobe });
+  const videoProbe = await probeMedia(outputFile, { ffprobe: tools.ffprobe });
   const videoValidation = validateVideoProbe(videoProbe, {
-    expectedWidth: output.width,
-    expectedHeight: output.height,
+    expectedWidth: dimensions.width,
+    expectedHeight: dimensions.height,
     expectedDurationSeconds: duration,
   });
-  throwValidation(videoValidation, `Encoded video failed validation for ${clip.id}`);
-  const posterProbe = await probeMedia(posterFile, { ffprobe: tools.ffprobe });
-  const posterValidation = validatePosterProbe(posterProbe, {
-    expectedWidth: output.width,
-    expectedHeight: output.height,
-  });
-  throwValidation(posterValidation, `Poster failed validation for ${clip.id}`);
-  const videoStat = await stat(videoFile);
-  const posterStat = await stat(posterFile);
-  const videoSha = await sha256File(videoFile);
-  const posterSha = await sha256File(posterFile);
+  throwValidation(videoValidation, `Encoded ${outputKind} video failed validation for ${clipId}`);
+  const videoStat = await stat(outputFile);
+  const videoSha = await sha256File(outputFile);
   return {
     videoProbe,
-    posterProbe,
     videoStat,
-    posterStat,
     videoSha,
-    posterSha,
     output: {
+      width: videoProbe.width,
+      height: videoProbe.height,
       durationSeconds: roundNumber(videoProbe.durationSeconds),
       sizeBytes: videoStat.size,
       sha256: videoSha,
       codec: videoProbe.codecName,
       pixelFormat: videoProbe.pixelFormat,
       audioStreams: videoProbe.audioStreams,
+    },
+  };
+}
+
+async function encodePoster({ clipId, range, sourceInfo, outputFile, filter, dimensions, tools, log }) {
+  await mkdir(path.dirname(outputFile), { recursive: true });
+  log('poster-start', {
+    clipId,
+    durationSeconds: 0,
+    width: dimensions.width,
+    height: dimensions.height,
+    seek: 'input',
+  });
+  await runRequiredTool(
+    tools.ffmpeg,
+    [
+      '-hide_banner', '-loglevel', 'error', '-y',
+      // The poster uses the same input-side seek as the short loop.
+      '-ss', String(range.startSeconds),
+      '-i', sourceInfo.file,
+      '-map', '0:v:0',
+      '-vf', filter,
+      '-frames:v', '1',
+      '-an',
+      '-map_metadata', '-1',
+      outputFile,
+    ],
+    'ffmpeg poster encode',
+  );
+  const posterProbe = await probeMedia(outputFile, { ffprobe: tools.ffprobe });
+  const posterValidation = validatePosterProbe(posterProbe, {
+    expectedWidth: dimensions.width,
+    expectedHeight: dimensions.height,
+  });
+  throwValidation(posterValidation, `Poster failed validation for ${clipId}`);
+  const posterStat = await stat(outputFile);
+  const posterSha = await sha256File(outputFile);
+  return {
+    posterProbe,
+    posterStat,
+    posterSha,
+    output: {
+      width: posterProbe.width,
+      height: posterProbe.height,
+      sizeBytes: posterStat.size,
+      sha256: posterSha,
+    },
+  };
+}
+
+async function encodeClip(clip, sourceInfo, sourceProbe, outputRoot, tools, maxWidth, log) {
+  if (sourceProbe.width === null || sourceProbe.height === null) {
+    throw new PipelineError('SOURCE_NO_VIDEO', `Source has no video dimensions: ${sourceInfo.file}`, { file: sourceInfo.file });
+  }
+  const pixelCrop = cropPixels(clip.crop, sourceProbe.width, sourceProbe.height);
+  const output = outputDimensions(pixelCrop, maxWidth);
+  const filter = filterFor(pixelCrop, output);
+  const videoFile = path.join(outputRoot, 'clips', `${clip.id}.mp4`);
+  const posterFile = path.join(outputRoot, 'posters', `${clip.id}.png`);
+  const referenceFile = clip.referenceRange ? path.join(outputRoot, 'references', `${clip.id}.mp4`) : null;
+  const reference = clip.referenceRange
+    ? await encodeVideoOutput({
+        clipId: clip.id,
+        outputKind: 'reference',
+        range: clip.referenceRange,
+        sourceInfo,
+        sourceProbe,
+        outputFile: referenceFile,
+        filter,
+        dimensions: output,
+        tools,
+        log,
+      })
+    : null;
+  const loop = await encodeVideoOutput({
+    clipId: clip.id,
+    outputKind: 'loop',
+    range: clip.timeRange,
+    sourceInfo,
+    sourceProbe,
+    outputFile: videoFile,
+    filter,
+    dimensions: output,
+    tools,
+    log,
+  });
+  const poster = await encodePoster({
+    clipId: clip.id,
+    range: clip.timeRange,
+    sourceInfo,
+    outputFile: posterFile,
+    filter,
+    dimensions: output,
+    tools,
+    log,
+  });
+  return {
+    reference,
+    loop: {
+      ...loop,
+      output: {
+        ...loop.output,
+        poster: poster.output,
+      },
     },
   };
 }
@@ -1015,8 +1181,13 @@ function assertNoUnexpectedExistingOutput(outputRoot, existingManifest, clip) {
   if (existingManifest) return;
   const videoFile = path.join(outputRoot, 'clips', `${clip.id}.mp4`);
   const posterFile = path.join(outputRoot, 'posters', `${clip.id}.png`);
-  if (pathExistsSync(videoFile) || pathExistsSync(posterFile)) {
-    throw new PipelineError('OUTPUT_EXISTS_WITHOUT_MANIFEST', `Output exists without a pipeline manifest for ${clip.id}`, { videoFile, posterFile });
+  const referenceFile = clip.referenceRange ? path.join(outputRoot, 'references', `${clip.id}.mp4`) : null;
+  if (pathExistsSync(videoFile) || pathExistsSync(posterFile) || (referenceFile && pathExistsSync(referenceFile))) {
+    throw new PipelineError('OUTPUT_EXISTS_WITHOUT_MANIFEST', `Output exists without a pipeline manifest for ${clip.id}`, {
+      videoFile,
+      posterFile,
+      ...(referenceFile ? { referenceFile } : {}),
+    });
   }
 }
 
@@ -1061,7 +1232,7 @@ export async function runPipeline(options = {}) {
   const existingManifest = await loadExistingManifest(outputManifestFile);
   if (existingManifest) throwValidation(validateManifestStructure(existingManifest, catalogue), 'Existing clip manifest does not match the catalogue');
   const existingById = new Map((existingManifest?.clips || []).map((record) => [record.id, record]));
-  const counts = { cached: 0, copied: 0, downloaded: 0, encoded: 0, posters: 0, skipped: 0 };
+  const counts = { cached: 0, copied: 0, downloaded: 0, encoded: 0, references: 0, loops: 0, posters: 0, skipped: 0 };
   const records = [];
   const started = Date.now();
   for (const clip of catalogue.clips) {
@@ -1074,8 +1245,18 @@ export async function runPipeline(options = {}) {
     if (sourceProbe.videoStreams !== 1 || sourceProbe.width === null || sourceProbe.height === null) {
       throw new PipelineError('SOURCE_VIDEO_INVALID', `Source must contain exactly one video stream: ${clip.id}`, { source: sourceInfo.file, probe: sourceProbe });
     }
-    if (sourceProbe.durationSeconds === null || clip.timeRange.endSeconds > sourceProbe.durationSeconds + 0.05) {
-      throw new PipelineError('INVALID_DURATION', `Time range exceeds source duration for ${clip.id}`, { clip: clip.timeRange, sourceDurationSeconds: sourceProbe.durationSeconds });
+    const ranges = [
+      { name: 'timeRange', value: clip.timeRange },
+      ...(clip.referenceRange ? [{ name: 'referenceRange', value: clip.referenceRange }] : []),
+    ];
+    for (const range of ranges) {
+      if (sourceProbe.durationSeconds === null || range.value.endSeconds > sourceProbe.durationSeconds + 0.05) {
+        throw new PipelineError('INVALID_DURATION', `${range.name} exceeds source duration for ${clip.id}`, {
+          clip: range.value,
+          range: range.name,
+          sourceDurationSeconds: sourceProbe.durationSeconds,
+        });
+      }
     }
     // This is the source-resolution crop gate. Safe-frame containment was checked structurally above.
     const pixelCrop = cropPixels(clip.crop, sourceProbe.width, sourceProbe.height);
@@ -1084,6 +1265,7 @@ export async function runPipeline(options = {}) {
     const previous = existingById.get(clip.id);
     const videoFile = path.join(outputRoot, 'clips', `${clip.id}.mp4`);
     const posterFile = path.join(outputRoot, 'posters', `${clip.id}.png`);
+    const referenceFile = clip.referenceRange ? path.join(outputRoot, 'references', `${clip.id}.mp4`) : null;
     let encoded;
     if (previous && previous.recordFingerprint !== fingerprint) {
       throw new PipelineError('STALE_OUTPUT', `Catalogue record changed for existing output ${clip.id}; use a new output root or remove only that owned output`, { clipId: clip.id });
@@ -1091,7 +1273,9 @@ export async function runPipeline(options = {}) {
     if (previous && previous.source?.sha256 !== sourceInfo.sha256) {
       throw new PipelineError('STALE_SOURCE_CACHE', `Source changed for existing output ${clip.id}; use a new cache/output key`, { clipId: clip.id });
     }
-    if (previous && await pathExists(videoFile) && await pathExists(posterFile)) {
+    if (previous && await pathExists(videoFile) && await pathExists(posterFile) && (!referenceFile || await pathExists(referenceFile))) {
+      const loopOutput = loopOutputFromRecord(previous);
+      const referenceOutput = isObject(previous.output?.reference) ? previous.output.reference : null;
       const videoProbe = await probeMedia(videoFile, { ffprobe: tools.ffprobe });
       const posterProbe = await probeMedia(posterFile, { ffprobe: tools.ffprobe });
       const videoStat = await stat(videoFile);
@@ -1107,7 +1291,35 @@ export async function runPipeline(options = {}) {
         expectedWidth: dimensions.width,
         expectedHeight: dimensions.height,
       });
-      if (valid.valid && posterValid.valid && previous.output.sha256 === videoSha && previous.output.sizeBytes === videoStat.size && previous.output.posterSha256 === posterSha && previous.output.posterSizeBytes === posterStat.size) {
+      let referenceValid = { valid: true, errors: [] };
+      let referenceMatches = true;
+      if (clip.referenceRange) {
+        const referenceProbe = await probeMedia(referenceFile, { ffprobe: tools.ffprobe });
+        referenceValid = validateVideoProbe(referenceProbe, {
+          expectedWidth: dimensions.width,
+          expectedHeight: dimensions.height,
+          expectedDurationSeconds: clip.referenceRange.endSeconds - clip.referenceRange.startSeconds,
+        });
+        const referenceStat = await stat(referenceFile);
+        const referenceSha = await sha256File(referenceFile);
+        referenceMatches = Boolean(referenceOutput)
+          && referenceOutput.video === `references/${clip.id}.mp4`
+          && referenceOutput.sha256 === referenceSha
+          && referenceOutput.sizeBytes === referenceStat.size;
+      }
+      if (
+        valid.valid
+        && posterValid.valid
+        && referenceValid.valid
+        && isObject(loopOutput)
+        && loopOutput.video === `clips/${clip.id}.mp4`
+        && loopOutput.poster === `posters/${clip.id}.png`
+        && loopOutput.sha256 === videoSha
+        && loopOutput.sizeBytes === videoStat.size
+        && loopOutput.posterSha256 === posterSha
+        && loopOutput.posterSizeBytes === posterStat.size
+        && referenceMatches
+      ) {
         records.push(previous);
         counts.skipped += 1;
         log('clip-skip', { clipId: clip.id, reason: 'manifest-and-output-match' });
@@ -1115,22 +1327,16 @@ export async function runPipeline(options = {}) {
       }
     }
     encoded = await encodeClip(clip, sourceInfo, sourceProbe, outputRoot, tools, maxWidth, log);
-    counts.encoded += 1;
+    counts.encoded += clip.referenceRange ? 2 : 1;
+    counts.references += clip.referenceRange ? 1 : 0;
+    counts.loops += 1;
     counts.posters += 1;
     records.push(mappingToRecord(
       clip,
       sourceInfo,
       sourceProbe,
-      {
-        ...encoded.output,
-        durationSeconds: encoded.output.durationSeconds,
-      },
-      {
-        width: encoded.posterProbe.width,
-        height: encoded.posterProbe.height,
-        sizeBytes: encoded.posterStat.size,
-        sha256: encoded.posterSha,
-      },
+      encoded.loop,
+      encoded.reference,
       fingerprint,
     ));
   }
