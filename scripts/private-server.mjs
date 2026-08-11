@@ -243,8 +243,8 @@ export function createPrivateServer(options = {}) {
       if (privatePackRoot && privatePathAllowed(privateRelative)) {
         resolved = await resolveFile(privatePackRoot, privateRelative);
       }
-    } else if (isPublicPath(relative)) {
-      resolved = await resolveFile(root, relative);
+    } else if (relative === '' || isPublicPath(relative)) {
+      resolved = await resolveFile(root, relative || 'index.html');
     }
     if (!resolved) {
       sendText(response, 404, 'Not Found');

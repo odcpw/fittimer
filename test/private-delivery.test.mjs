@@ -45,6 +45,10 @@ test('private localhost server allowlists app paths, serves HEAD/MIME, and suppo
     assert.equal(index.status, 200);
     assert.match(index.headers.get('content-type'), /^text\/html/);
 
+    const rootIndex = await fetch(`${base}/`);
+    assert.equal(rootIndex.status, 200);
+    assert.equal(await rootIndex.text(), '<!doctype html>');
+
     const moduleHead = await fetch(`${base}/src/app.mjs`, { method: 'HEAD' });
     assert.equal(moduleHead.status, 200);
     assert.match(moduleHead.headers.get('content-type'), /^text\/javascript/);
