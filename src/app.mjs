@@ -105,6 +105,7 @@ let engine = null;
 let animationFrame = null;
 let renderedInterval = null;
 let renderedPhase = null;
+let workoutHudTimeout = null;
 let historyMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 const stageNodeCleanups = new Set();
 const videoPlaybackFailures = new WeakMap();
@@ -116,6 +117,7 @@ const voiceCues = new VoiceCueQueue({ settings: currentSettings });
 const wakeLockController = createWakeLockController();
 
 const WORKOUT_STATES = new Set(['work', 'rest', 'paused']);
+export const WORKOUT_HUD_DURATION_MS = 10_000;
 
 const SETTINGS_PACK_LABELS = new Map([
   [CUE_PACK_SYNTH_V1, 'Synth tones'],
@@ -198,6 +200,23 @@ export function workoutNavigationState(snapshot) {
     endEnabled: inWorkout,
     activeControlsVisible: !completed,
     completionActionsVisible: completed,
+  });
+}
+
+/**
+ * The timer is the one workout element that never disappears. The exercise
+ * HUD is transient during active playback, but pausing or finishing a workout
+ * makes the explanatory copy and its available actions persistent again.
+ */
+export function workoutHudState(snapshot, hudVisible = true) {
+  const state = snapshot?.state;
+  const persistent = state === 'paused' || state === 'done';
+  const detailsVisible = persistent || hudVisible === true;
+  return Object.freeze({
+    timerVisible: true,
+    detailsVisible,
+    controlsVisible: state !== 'done' && WORKOUT_STATES.has(state) && detailsVisible,
+    completionActionsVisible: state === 'done',
   });
 }
 
@@ -647,6 +666,28 @@ function setButtonLabel(button, label) {
   if (span) span.textContent = label;
 }
 
+function clearWorkoutHudTimeout() {
+  if (workoutHudTimeout !== null) clearTimeout(workoutHudTimeout);
+  workoutHudTimeout = null;
+}
+
+function setWorkoutHudVisible(visible) {
+  if (!hasDocument) return;
+  elements.workout.dataset.hud = visible ? 'visible' : 'timer';
+}
+
+function revealWorkoutHud({ temporary = true } = {}) {
+  if (!hasDocument) return;
+  clearWorkoutHudTimeout();
+  setWorkoutHudVisible(true);
+  if (!temporary) return;
+  workoutHudTimeout = setTimeout(() => {
+    workoutHudTimeout = null;
+    const state = engine?.getSnapshot().state;
+    if (state && !['paused', 'done'].includes(state)) setWorkoutHudVisible(false);
+  }, WORKOUT_HUD_DURATION_MS);
+}
+
 function setPauseControl(state) {
   const paused = state === 'paused';
   setButtonLabel(elements.pause, paused ? 'Resume' : 'Pause');
@@ -673,20 +714,15 @@ function reducedMotionPreferred() {
 }
 
 function applyFraming(element, visual) {
-  const framing = visual.framing;
-  if (!framing) return;
   element.style.display = 'block';
   element.style.width = '100%';
   element.style.height = '100%';
-  element.style.objectFit = framing.fit;
-  if (framing.anchor) {
-    element.style.objectPosition = `${framing.anchor.x * 100}% ${framing.anchor.y * 100}%`;
-  }
-  const cropScale = framing.crop
-    ? Math.max(1 / framing.crop.width, 1 / framing.crop.height)
-    : 1;
-  const zoom = (Number.isFinite(framing.zoom) ? framing.zoom : 1) * cropScale;
-  element.style.transform = `scaleX(${visual.mirror ? -1 : 1}) scale(${zoom})`;
+  // Workout playback is a full-frame, landscape surface. Keep the complete
+  // source visible even when a pack carries older crop/zoom metadata; only a
+  // deliberate anatomical mirror is allowed to transform the pixels.
+  element.style.objectFit = 'contain';
+  element.style.objectPosition = 'center';
+  element.style.transform = `scaleX(${visual.mirror ? -1 : 1})`;
   element.dataset.anatomicalSide = visual.anatomicalSide ?? 'unspecified';
   element.dataset.mirroring = visual.mirror ? 'mirrored' : 'source';
 }
@@ -823,6 +859,7 @@ function replayCurrentVideos() {
 
 function startWorkout(routine) {
   stopAnimationLoop();
+  clearWorkoutHudTimeout();
   activeRoutine = routine;
   voiceCues.setIntervals(routine.intervals);
   engine = new IntervalEngine(routine.intervals);
@@ -845,6 +882,10 @@ function startWorkout(routine) {
   elements.controls.hidden = false;
   elements.completionActions.hidden = true;
   document.documentElement.dataset.phase = 'work';
+  document.documentElement.dataset.screen = 'workout';
+  elements.workout.dataset.confirmation = 'closed';
+  elements.workout.dataset.workoutState = 'ready';
+  setWorkoutHudVisible(true);
   engine.start();
   requestWakeLock();
   startAnimationLoop();
@@ -922,6 +963,7 @@ function renderWorkout(snapshot) {
   const phase = snapshot.state === 'paused' ? 'paused' : snapshot.state;
   const displayInterval = movementForSnapshot(snapshot);
   document.documentElement.dataset.phase = phase;
+  elements.workout.dataset.workoutState = snapshot.state;
 
   const labels = { work: 'WORK', rest: 'REST', paused: 'PAUSED', done: 'DONE', idle: 'READY' };
   elements.phase.textContent = labels[phase] ?? phase.toUpperCase();
@@ -930,10 +972,18 @@ function renderWorkout(snapshot) {
 
   const showingNext = snapshot.phase === 'rest' && snapshot.intervalIndex + 1 < activeRoutine.intervals.length;
   const renderKey = displayInterval ? snapshot.intervalIndex + (showingNext ? 1 : 0) : -1;
-  if (renderedInterval !== renderKey || renderedPhase !== snapshot.phase) {
+  const movementChanged = renderedInterval !== renderKey || renderedPhase !== snapshot.phase;
+  if (movementChanged) {
     renderMovement(displayInterval);
     renderedInterval = renderKey;
     renderedPhase = snapshot.phase;
+  }
+
+  if (snapshot.state === 'paused' || snapshot.state === 'done') {
+    clearWorkoutHudTimeout();
+    setWorkoutHudVisible(true);
+  } else if (movementChanged) {
+    revealWorkoutHud();
   }
 
   if (snapshot.state === 'done') {
@@ -1019,6 +1069,7 @@ export function collectContentUrls(
 function resumePausedWorkout() {
   if (!engine || engine.getSnapshot().state !== 'paused') return false;
   if (!engine.resume()) return false;
+  revealWorkoutHud();
   requestWakeLock();
   startAnimationLoop();
   return true;
@@ -1035,12 +1086,16 @@ function openEndConfirmation() {
     stopAnimationLoop();
   }
   releaseWakeLock();
+  clearWorkoutHudTimeout();
+  setWorkoutHudVisible(true);
+  elements.workout.dataset.confirmation = 'open';
   elements.endConfirmation.hidden = false;
   elements.keepGoing.focus({ preventScroll: true });
 }
 
 function closeEndConfirmation({ resume = true } = {}) {
   elements.endConfirmation.hidden = true;
+  elements.workout.dataset.confirmation = 'closed';
   if (resume) resumePausedWorkout();
   elements.end.focus({ preventScroll: true });
 }
@@ -1058,6 +1113,7 @@ function restartCompletedWorkout() {
 function goHome() {
   releaseWakeLock();
   stopAnimationLoop();
+  clearWorkoutHudTimeout();
   voiceCues.clear();
   disposeStageVisuals();
   engine = null;
@@ -1070,7 +1126,11 @@ function goHome() {
   elements.workout.hidden = true;
   elements.home.hidden = false;
   elements.next.disabled = false;
+  elements.workout.dataset.confirmation = 'closed';
+  elements.workout.dataset.workoutState = 'idle';
+  setWorkoutHudVisible(true);
   document.documentElement.dataset.phase = 'home';
+  document.documentElement.dataset.screen = 'home';
 }
 
 async function prepareOffline(index) {
@@ -1109,7 +1169,12 @@ async function prepareOffline(index) {
 if (hasDocument) {
   const pageLifetime = new AbortController();
   const listenerOptions = { signal: pageLifetime.signal };
+  document.documentElement.dataset.screen = 'home';
+  elements.workout.dataset.hud = 'visible';
+  elements.workout.dataset.confirmation = 'closed';
+  elements.workout.dataset.workoutState = 'idle';
   window.addEventListener('pagehide', () => {
+    clearWorkoutHudTimeout();
     void voiceCues.dispose().catch(() => {});
     void wakeLockController.dispose();
     pageLifetime.abort();
@@ -1139,7 +1204,16 @@ if (hasDocument) {
       .catch(showError)
       .finally(() => {
         if (selectedRoutine) startWorkout(selectedRoutine);
-      });
+    });
+  }, listenerOptions);
+
+  elements.workout.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (target?.closest('button, a, input, select, textarea, [role="dialog"], .workout-controls, .completion-actions')) {
+      return;
+    }
+    const snapshot = engine?.getSnapshot();
+    if (snapshot && WORKOUT_STATES.has(snapshot.state)) revealWorkoutHud();
   }, listenerOptions);
 
   elements.pause.addEventListener('click', () => {

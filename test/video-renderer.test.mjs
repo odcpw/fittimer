@@ -131,6 +131,12 @@ test('bounded renderer owns video properties, cleanup, visibility replay, and sa
   assert.match(application, /deduplicateVisualSelections/);
   assert.match(styles, /\.movement-stage[\s\S]*?aspect-ratio:\s*16\s*\/\s*9/);
   assert.match(styles, /\.movement-stage[\s\S]*?overflow:\s*hidden/);
+  assert.match(application, /element\.style\.objectFit\s*=\s*'contain'/);
+  assert.match(styles, /html\[data-screen="workout"\][\s\S]*?\.movement-stage__media[\s\S]*?object-fit:\s*contain/);
+  assert.match(styles, /@media \(orientation: portrait\)[\s\S]*?transform:\s*rotate\(90deg\)/);
+  assert.match(application, /WORKOUT_HUD_DURATION_MS\s*=\s*10_000/);
+  assert.match(application, /event\.target[\s\S]*?closest\('button/);
+  assert.doesNotMatch(application, /requestFullscreen|screen\.orientation/);
   assert.doesNotMatch(html, /<audio\b/i);
   assert.doesNotMatch(application, /\b(?:new\s+)?Audio\s*\(/);
   assert.doesNotMatch(application, /mediaSession/i);

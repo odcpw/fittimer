@@ -1126,3 +1126,203 @@ html[data-phase="paused"] .phase-label {
     padding-inline: 8px;
   }
 }
+
+/* Workout playback is an intentionally landscape-only surface. In portrait
+   viewports the surface is rotated as a single canvas so the person using the
+   timer physically turns the phone; the home picker remains unrotated. */
+html[data-screen="workout"],
+html[data-screen="workout"] body {
+  overflow: hidden;
+}
+
+html[data-screen="workout"] .app-shell {
+  width: 100%;
+  max-width: none;
+  min-height: 100dvh;
+  margin: 0;
+  border-radius: 0;
+}
+
+html[data-screen="workout"] .workout-screen {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 0;
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+  background: #05080c;
+}
+
+@media (orientation: portrait) {
+  html[data-screen="workout"] .workout-screen {
+    width: 100dvh;
+    height: 100dvw;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+  }
+}
+
+html[data-screen="workout"] .movement-stage {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  box-shadow: none;
+}
+
+html[data-screen="workout"] .movement-stage__media {
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+html[data-screen="workout"] .workout-header {
+  position: absolute;
+  z-index: 3;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(18px, env(safe-area-inset-right));
+  width: auto;
+  margin: 0;
+  text-align: right;
+  pointer-events: none;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+html[data-screen="workout"] .phase-label,
+html[data-screen="workout"] .interval-count {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+html[data-screen="workout"] .timer {
+  color: #fff;
+  font-size: clamp(3.4rem, 14vmin, 7rem);
+  line-height: 0.86;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95);
+}
+
+html[data-screen="workout"] .phase-label {
+  font-size: clamp(0.82rem, 2.5vmin, 1.05rem);
+}
+
+html[data-screen="workout"] .interval-count {
+  margin-top: 5px;
+  font-size: clamp(0.82rem, 2.5vmin, 1.15rem);
+}
+
+html[data-screen="workout"] .exercise-copy {
+  position: absolute;
+  z-index: 3;
+  right: auto;
+  bottom: max(112px, calc(env(safe-area-inset-bottom) + 112px));
+  left: max(20px, env(safe-area-inset-left));
+  width: min(48%, 580px);
+  min-height: 0;
+  margin: 0;
+  text-align: left;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+html[data-screen="workout"] .exercise-copy h2 {
+  font-size: clamp(1.35rem, 3.2vmin, 2.2rem);
+}
+
+html[data-screen="workout"] .exercise-copy p {
+  margin-left: 0;
+  font-size: clamp(0.82rem, 2.2vmin, 1rem);
+}
+
+html[data-screen="workout"] .progress-track {
+  position: absolute;
+  z-index: 3;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(92px, calc(env(safe-area-inset-bottom) + 92px));
+  left: max(20px, env(safe-area-inset-left));
+  width: auto;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+html[data-screen="workout"] .next-up {
+  position: absolute;
+  z-index: 3;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
+  left: max(20px, env(safe-area-inset-left));
+  min-height: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+html[data-screen="workout"] .workout-controls {
+  position: absolute;
+  z-index: 4;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: auto;
+  width: min(48%, 520px);
+  margin: 0;
+  padding: 0;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+html[data-screen="workout"] .control-button {
+  min-height: clamp(56px, 13vmin, 76px);
+  background: rgba(8, 14, 21, 0.84);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+html[data-screen="workout"] .completion-actions {
+  position: absolute;
+  z-index: 4;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: auto;
+  width: min(48%, 520px);
+}
+
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .phase-label,
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .interval-count,
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .exercise-copy,
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .progress-track,
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .next-up,
+html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .workout-controls {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+html[data-screen="workout"] .workout-screen[data-confirmation="open"] .workout-controls,
+html[data-screen="workout"] .workout-screen[data-workout-state="paused"] .workout-controls,
+html[data-screen="workout"] .workout-screen[data-workout-state="done"] .completion-actions {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-screen="workout"] .phase-label,
+  html[data-screen="workout"] .interval-count,
+  html[data-screen="workout"] .exercise-copy,
+  html[data-screen="workout"] .progress-track,
+  html[data-screen="workout"] .next-up,
+  html[data-screen="workout"] .workout-controls {
+    transition-duration: 0.01ms;
+  }
+}

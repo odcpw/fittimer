@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { workoutNavigationState } from '../src/app.mjs';
+import { WORKOUT_HUD_DURATION_MS, workoutHudState, workoutNavigationState } from '../src/app.mjs';
 
 test('Previous is disabled for every phase of interval 1', () => {
   for (const state of ['work', 'rest', 'paused']) {
@@ -26,6 +26,28 @@ test('completion replaces active controls with explicit Home and Restart actions
     previousDisabled: true,
     endEnabled: false,
     activeControlsVisible: false,
+    completionActionsVisible: true,
+  });
+});
+
+test('transient workout HUD keeps the timer visible and restores controls for paused/done states', () => {
+  assert.equal(WORKOUT_HUD_DURATION_MS, 10_000);
+  assert.deepEqual(workoutHudState({ state: 'work' }, false), {
+    timerVisible: true,
+    detailsVisible: false,
+    controlsVisible: false,
+    completionActionsVisible: false,
+  });
+  assert.deepEqual(workoutHudState({ state: 'paused' }, false), {
+    timerVisible: true,
+    detailsVisible: true,
+    controlsVisible: true,
+    completionActionsVisible: false,
+  });
+  assert.deepEqual(workoutHudState({ state: 'done' }, false), {
+    timerVisible: true,
+    detailsVisible: true,
+    controlsVisible: false,
     completionActionsVisible: true,
   });
 });
