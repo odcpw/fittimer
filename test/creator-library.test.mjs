@@ -161,9 +161,14 @@ test('retained source audit measures every unique approved channel video without
   await mkdir(path.join(root, 'other'));
   const approvedInfo = { id: 'video-one', uploader: 'growingannanas', title: 'Workout', webpage_url: 'https://youtube.test/video-one' };
   await writeFile(path.join(root, 'one', 'video-one.info.json'), JSON.stringify(approvedInfo));
+  await writeFile(path.join(root, 'one', 'video-one.mp4'), 'video');
   await writeFile(path.join(root, 'duplicate', 'video-one.info.json'), JSON.stringify(approvedInfo));
+  await writeFile(path.join(root, 'duplicate', 'video-one.mp4'), 'video');
   await writeFile(path.join(root, 'other', 'lookalike.info.json'), JSON.stringify({ id: 'lookalike', uploader: 'MadFit With Sandra' }));
+  await writeFile(path.join(root, 'other', 'lookalike.mp4'), 'video');
   await writeFile(path.join(root, 'other', 'missing.info.json'), JSON.stringify({ id: 'missing', uploader: 'Caroline Girvan', title: 'Missing' }));
+  await writeFile(path.join(root, 'other', 'missing.mp4'), 'video');
+  await writeFile(path.join(root, 'other', 'metadata-only.info.json'), JSON.stringify({ id: 'metadata-only', uploader: 'MadFit', title: 'Search result metadata only' }));
   const compiled = compileCreatorLibrary([documentFor()]);
   const audit = await auditRetainedSources(root, compiled.library);
   assert.deepEqual(audit.totals, { retained: 2, accounted: 1, missing: 1 });

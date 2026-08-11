@@ -20,6 +20,7 @@ const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const STATUSES = new Set(['ready', 'approximate', 'candidate', 'rejected']);
 const SIDES = new Set(['left', 'right', 'first', 'second', 'alternating', 'bilateral', 'unspecified']);
 const MOVEMENT_KINDS = new Set(['normal', 'compound', 'hold', 'mobility']);
+const RETAINED_VIDEO_EXTENSIONS = new Set(['.mp4', '.mkv', '.webm', '.mov', '.m4v']);
 const CREATOR_CHANNEL_NAMES = new Map([
   ['madfit', 'madfit'],
   ['growingannanas', 'growingannanas'],
@@ -480,6 +481,9 @@ export async function auditRetainedSources(root, library) {
     } catch (caught) {
       throw new Error(`Cannot scan retained media directory ${directory}: ${caught.message}`, { cause: caught });
     }
+    const retainedVideoBasenames = new Set(entries
+      .filter((entry) => entry.isFile() && RETAINED_VIDEO_EXTENSIONS.has(path.extname(entry.name).toLowerCase()))
+      .map((entry) => entry.name.slice(0, -path.extname(entry.name).length)));
     for (const entry of entries) {
       const entryPath = path.join(directory, entry.name);
       if (entry.isDirectory()) {
@@ -487,6 +491,8 @@ export async function auditRetainedSources(root, library) {
         continue;
       }
       if (!entry.isFile() || !entry.name.endsWith('.info.json')) continue;
+      const mediaBasename = entry.name.slice(0, -'.info.json'.length);
+      if (!retainedVideoBasenames.has(mediaBasename)) continue;
       const info = await readJson(entryPath);
       const channelName = String(info.uploader ?? info.channel ?? '').trim().toLowerCase();
       const creatorId = CREATOR_CHANNEL_NAMES.get(channelName);
