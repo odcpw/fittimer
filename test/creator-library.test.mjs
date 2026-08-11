@@ -204,6 +204,12 @@ test('conflicting creator or retained source identities fail cross-document comp
   creatorConflict.creators[0].channelId = 'different-channel';
   assert.throws(() => compileCreatorLibrary([left, creatorConflict]), /Conflicting creator metadata/);
 
+  const compatible = documentFor({ videoId: 'video-three' });
+  compatible.creators[0] = { id: 'growingannanas', name: 'Growingannanas', channelUrl: 'https://youtube.test/growingannanas' };
+  const merged = compileCreatorLibrary([left, compatible]);
+  assert.equal(merged.library.creators.growingannanas.channelId, 'channel-growingannanas');
+  assert.equal(merged.library.creators.growingannanas.channelUrl, 'https://youtube.test/growingannanas');
+
   const sourceConflict = documentFor();
   sourceConflict.sources[0].localPath = '/home/oliver/Projects/fittimer-media-research/elsewhere/video-one.mp4';
   assert.throws(() => compileCreatorLibrary([left, sourceConflict]), /Conflicting retained paths/);

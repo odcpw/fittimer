@@ -255,10 +255,14 @@ function creatorRegistry(documents) {
   for (const document of documents) {
     for (const creator of document.creators) {
       const previous = found.get(creator.id);
-      if (previous && JSON.stringify(previous) !== JSON.stringify(creator)) {
-        throw new Error(`Conflicting creator metadata for ${creator.id}`);
+      if (previous) {
+        for (const field of ['name', 'channelId', 'channelUrl']) {
+          if (previous[field] && creator[field] && previous[field] !== creator[field]) {
+            throw new Error(`Conflicting creator metadata for ${creator.id}: ${field}`);
+          }
+        }
       }
-      found.set(creator.id, structuredClone(creator));
+      found.set(creator.id, { ...structuredClone(previous ?? {}), ...structuredClone(creator) });
     }
   }
   return Object.fromEntries([...found].sort(([left], [right]) => left.localeCompare(right)));
