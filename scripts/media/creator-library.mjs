@@ -20,6 +20,15 @@ const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const STATUSES = new Set(['ready', 'approximate', 'candidate', 'rejected']);
 const SIDES = new Set(['left', 'right', 'first', 'second', 'alternating', 'bilateral', 'unspecified']);
 const MOVEMENT_KINDS = new Set(['normal', 'compound', 'hold', 'mobility']);
+const CREATOR_CHANNEL_NAMES = new Map([
+  ['madfit', 'madfit'],
+  ['growingannanas', 'growingannanas'],
+  ['caroline girvan', 'caroline-girvan'],
+  ['sydney cummings houdyshell', 'sydney-cummings'],
+  ['sydney cummings', 'sydney-cummings'],
+  ['heather robertson', 'heather-robertson'],
+  ['pamela reif', 'pamela-reif'],
+]);
 
 function object(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -390,6 +399,66 @@ export function buildRequirementsCoverage(requirements, library) {
   };
 }
 
+export async function auditRetainedSources(root, library) {
+  const absoluteRoot = path.resolve(root);
+  const pending = [absoluteRoot];
+  const retained = new Map();
+  while (pending.length > 0) {
+    const directory = pending.pop();
+    let entries;
+    try {
+      entries = await readdir(directory, { withFileTypes: true });
+    } catch (caught) {
+      throw new Error(`Cannot scan retained media directory ${directory}: ${caught.message}`, { cause: caught });
+    }
+    for (const entry of entries) {
+      const entryPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        pending.push(entryPath);
+        continue;
+      }
+      if (!entry.isFile() || !entry.name.endsWith('.info.json')) continue;
+      const info = await readJson(entryPath);
+      const channelName = String(info.uploader ?? info.channel ?? '').trim().toLowerCase();
+      const creatorId = CREATOR_CHANNEL_NAMES.get(channelName);
+      const videoId = String(info.id ?? info.display_id ?? '').trim();
+      if (!creatorId || !videoId) continue;
+      const key = `${creatorId}::${videoId}`;
+      const value = retained.get(key) ?? {
+        creatorId,
+        videoId,
+        title: info.title ?? null,
+        url: info.webpage_url ?? `https://www.youtube.com/watch?v=${videoId}`,
+        metadataFiles: [],
+      };
+      value.metadataFiles.push(entryPath);
+      retained.set(key, value);
+    }
+  }
+  const libraryKeys = new Set(Object.values(library.sources ?? {}).map((source) => `${source.creatorId}::${source.videoId}`));
+  const retainedSources = [...retained].sort(([left], [right]) => left.localeCompare(right)).map(([key, source]) => ({
+    ...source,
+    metadataFiles: [...source.metadataFiles].sort(),
+    accounted: libraryKeys.has(key),
+  }));
+  const retainedKeys = new Set(retained.keys());
+  return {
+    schemaVersion: 1,
+    kind: 'retainedApprovedCreatorSourceAudit',
+    root: absoluteRoot,
+    retainedSources,
+    totals: {
+      retained: retainedSources.length,
+      accounted: retainedSources.filter((source) => source.accounted).length,
+      missing: retainedSources.filter((source) => !source.accounted).length,
+    },
+    missingRetainedSources: retainedSources.filter((source) => !source.accounted),
+    additionalLibrarySources: Object.values(library.sources ?? {})
+      .filter((source) => !retainedKeys.has(`${source.creatorId}::${source.videoId}`))
+      .sort((left, right) => left.creatorId.localeCompare(right.creatorId) || left.videoId.localeCompare(right.videoId)),
+  };
+}
+
 async function discoverJsonInputs(inputs, { candidateFilesOnly = false } = {}) {
   const files = [];
   for (const input of inputs) {
@@ -429,17 +498,22 @@ function argumentsFor(argv) {
   const requirements = [];
   let output = null;
   let verifyFiles = false;
+  let retainedRoot = null;
+  let requireAllRetained = false;
   for (let index = 0; index < argv.length; index += 1) {
     if (argv[index] === '--input') inputs.push(argv[index += 1]);
     else if (argv[index] === '--requirements') requirements.push(argv[index += 1]);
     else if (argv[index] === '--output') output = argv[index += 1];
     else if (argv[index] === '--verify-files') verifyFiles = true;
+    else if (argv[index] === '--retained-root') retainedRoot = argv[index += 1];
+    else if (argv[index] === '--require-all-retained') requireAllRetained = true;
     else throw new Error(`Unknown argument: ${argv[index]}`);
   }
   if (inputs.length === 0 || !output) {
     throw new Error('Usage: creator-library.mjs --input FILE_OR_DIR [--input ...] --output DIRECTORY [--verify-files]');
   }
-  return { inputs, requirements, output: path.resolve(output), verifyFiles };
+  if (requireAllRetained && !retainedRoot) throw new Error('--require-all-retained requires --retained-root');
+  return { inputs, requirements, output: path.resolve(output), verifyFiles, retainedRoot, requireAllRetained };
 }
 
 async function main() {
@@ -451,6 +525,11 @@ async function main() {
   const requirementFiles = await discoverJsonInputs(options.requirements);
   const requirements = [];
   for (const file of requirementFiles) requirements.push({ file, document: await readJson(file) });
+  const retainedAudit = options.retainedRoot ? await auditRetainedSources(options.retainedRoot, compiled.library) : null;
+  if (options.requireAllRetained && retainedAudit.totals.missing > 0) {
+    const missing = retainedAudit.missingRetainedSources.map((source) => `${source.creatorId}/${source.videoId}`);
+    throw new Error(`Approved retained sources are missing from the library: ${missing.join(', ')}`);
+  }
   if (options.verifyFiles) {
     for (const record of compiled.readyRecords) await access(record.source.localPath);
   }
@@ -461,6 +540,7 @@ async function main() {
     'ready-records.json': { schemaVersion: 1, kind: 'readyCreatorMovementRecords', records: compiled.readyRecords },
     'review-queue.json': { schemaVersion: 1, kind: 'creatorMovementReviewQueue', records: compiled.reviewQueue },
     ...(requirements.length > 0 ? { 'requirements-coverage.json': buildRequirementsCoverage(requirements, compiled.library) } : {}),
+    ...(retainedAudit ? { 'retained-source-audit.json': retainedAudit } : {}),
   };
   for (const [name, value] of Object.entries(outputs)) {
     await writeFile(path.join(options.output, name), `${JSON.stringify(value, null, 2)}\n`);
@@ -474,6 +554,7 @@ async function main() {
     readyRecords: compiled.readyRecords.length,
     reviewRecords: compiled.reviewQueue.length,
     requirementFiles: requirements.length,
+    ...(retainedAudit ? { retainedSources: retainedAudit.totals } : {}),
     output: options.output,
   })}\n`);
 }

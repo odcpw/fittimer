@@ -22,6 +22,8 @@ and creator are preserved as variants rather than silently collapsed.
 node scripts/media/creator-library.mjs \
   --input /home/oliver/Projects/fittimer-media-research/approved-creator-library-v1 \
   --requirements data/blocks \
+  --retained-root /home/oliver/Projects/fittimer-media-research \
+  --require-all-retained \
   --output /home/oliver/Projects/fittimer-private-packs/creator-library-v1/catalogue \
   --verify-files
 ```
@@ -33,6 +35,9 @@ reviewed; `candidate`, `approximate`, and `rejected` records remain searchable
 and must carry an honest reason. Supplying routine or block JSON through
 `--requirements` also writes exact per-workout creator totals and the uncovered
 movement search queue.
+`--retained-root` deduplicates the approved channels' yt-dlp metadata by creator
+and video ID; `--require-all-retained` makes an omitted retained source a hard
+failure while allowing newly downloaded, fully indexed library sources.
 
 Ready records are encoded as practical reference clips with the companion
 `creator-clip-pipeline.mjs`:

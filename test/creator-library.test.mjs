@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import { test } from 'node:test';
 
 import {
   APPROVED_CREATORS,
+  auditRetainedSources,
   buildRequirementsCoverage,
   compileCreatorLibrary,
   validateCandidateDocument,
@@ -116,6 +120,24 @@ test('requirements coverage reports missing moves and honest one-creator workout
     total: 3,
     missing: ['missing-move', 'reverse-lunge'],
   });
+});
+
+test('retained source audit measures every unique approved channel video without fuzzy-name leakage', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'creator-source-audit-'));
+  await mkdir(path.join(root, 'one'));
+  await mkdir(path.join(root, 'duplicate'));
+  await mkdir(path.join(root, 'other'));
+  const approvedInfo = { id: 'video-one', uploader: 'growingannanas', title: 'Workout', webpage_url: 'https://youtube.test/video-one' };
+  await writeFile(path.join(root, 'one', 'video-one.info.json'), JSON.stringify(approvedInfo));
+  await writeFile(path.join(root, 'duplicate', 'video-one.info.json'), JSON.stringify(approvedInfo));
+  await writeFile(path.join(root, 'other', 'lookalike.info.json'), JSON.stringify({ id: 'lookalike', uploader: 'MadFit With Sandra' }));
+  await writeFile(path.join(root, 'other', 'missing.info.json'), JSON.stringify({ id: 'missing', uploader: 'Caroline Girvan', title: 'Missing' }));
+  const compiled = compileCreatorLibrary([documentFor()]);
+  const audit = await auditRetainedSources(root, compiled.library);
+  assert.deepEqual(audit.totals, { retained: 2, accounted: 1, missing: 1 });
+  assert.equal(audit.retainedSources.find((source) => source.videoId === 'video-one').metadataFiles.length, 2);
+  assert.deepEqual(audit.missingRetainedSources.map((source) => source.videoId), ['missing']);
+  assert.equal(audit.retainedSources.some((source) => source.videoId === 'lookalike'), false);
 });
 
 test('non-ready records require an honest reason and ready records require form review', () => {
