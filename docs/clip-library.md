@@ -34,6 +34,21 @@ and must carry an honest reason. Supplying routine or block JSON through
 `--requirements` also writes exact per-workout creator totals and the uncovered
 movement search queue.
 
+Ready records are encoded as practical reference clips with the companion
+`creator-clip-pipeline.mjs`:
+
+```sh
+node scripts/media/creator-clip-pipeline.mjs \
+  --library /home/oliver/Projects/fittimer-private-packs/creator-library-v1/catalogue/creator-movement-library.json \
+  --output /home/oliver/Projects/fittimer-private-packs/creator-library-v1/pack
+```
+
+This path accepts reviewed 2–40 second ranges, removes audio, fits the complete
+source frame into landscape 16:9 without cropping, and emits H.264 clips,
+posters, hashes, a provenance manifest, and a multi-variant creator-aware media
+pack. It deliberately does not demand matching loop seams, a prescribed tempo,
+or a particular demonstrated side.
+
 ## Delivery path
 
 1. Retain source videos, subtitles, metadata, and research contact sheets in
