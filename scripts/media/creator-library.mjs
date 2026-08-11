@@ -33,6 +33,15 @@ function error(errors, code, location, message) {
   errors.push({ code, location, message });
 }
 
+async function readJson(file) {
+  const source = await readFile(file, 'utf8');
+  try {
+    return JSON.parse(source);
+  } catch (caught) {
+    throw new Error(`Invalid JSON in ${file}: ${caught.message}`, { cause: caught });
+  }
+}
+
 function checkText(value, location, errors) {
   if (!text(value)) {
     error(errors, 'INVALID_STRING', location, 'must be a non-empty string');
@@ -420,11 +429,11 @@ async function main() {
   const options = argumentsFor(process.argv.slice(2));
   const files = await discoverJsonInputs(options.inputs);
   const documents = [];
-  for (const file of files) documents.push(JSON.parse(await readFile(file, 'utf8')));
+  for (const file of files) documents.push(await readJson(file));
   const compiled = compileCreatorLibrary(documents);
   const requirementFiles = await discoverJsonInputs(options.requirements);
   const requirements = [];
-  for (const file of requirementFiles) requirements.push({ file, document: JSON.parse(await readFile(file, 'utf8')) });
+  for (const file of requirementFiles) requirements.push({ file, document: await readJson(file) });
   if (options.verifyFiles) {
     for (const record of compiled.readyRecords) await access(record.source.localPath);
   }
