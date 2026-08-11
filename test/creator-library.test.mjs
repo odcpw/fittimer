@@ -3,6 +3,7 @@ import { test } from 'node:test';
 
 import {
   APPROVED_CREATORS,
+  buildRequirementsCoverage,
   compileCreatorLibrary,
   validateCandidateDocument,
 } from '../scripts/media/creator-library.mjs';
@@ -85,6 +86,35 @@ test('compiler preserves creator variants instead of collapsing a movement to on
     rejected: 0,
   });
   assert.equal(compiled.matrix.creatorCoverage['caroline-girvan'].readyMovements, 1);
+});
+
+test('requirements coverage reports missing moves and honest one-creator workout totals', () => {
+  const growing = documentFor();
+  const caroline = documentFor({ creatorId: 'caroline-girvan', creatorName: 'Caroline Girvan', videoId: 'video-two' });
+  caroline.records[0].movementId = 'reverse-lunge';
+  caroline.records[0].displayName = 'Reverse lunge';
+  const compiled = compileCreatorLibrary([growing, caroline]);
+  const coverage = buildRequirementsCoverage([{
+    file: '/private/example-workout.json',
+    document: {
+      id: 'example-workout',
+      title: 'Example Workout',
+      intervals: [
+        { movements: [{ movementId: 'bodyweight-squat', displayName: 'Squat' }] },
+        { movements: [{ movementId: 'bodyweight-squat', displayName: 'Squat' }] },
+        { movements: [{ movementId: 'reverse-lunge', displayName: 'Lunge' }] },
+        { movements: [{ movementId: 'missing-move', displayName: 'Missing move' }] },
+      ],
+    },
+  }], compiled.library);
+  assert.deepEqual(coverage.uncoveredMovementIds, ['missing-move']);
+  assert.equal(coverage.movements['bodyweight-squat'].uses, 2);
+  assert.deepEqual(coverage.movements['bodyweight-squat'].readyCreators, ['growingannanas']);
+  assert.deepEqual(coverage.workouts['example-workout'].creators.growingannanas, {
+    ready: 1,
+    total: 3,
+    missing: ['missing-move', 'reverse-lunge'],
+  });
 });
 
 test('non-ready records require an honest reason and ready records require form review', () => {

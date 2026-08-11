@@ -321,6 +321,65 @@ export function compileCreatorLibrary(documents) {
   };
 }
 
+function movementsIn(value, found = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) movementsIn(item, found);
+  } else if (object(value)) {
+    if (text(value.movementId)) {
+      found.push({ movementId: value.movementId, displayName: text(value.displayName) ? value.displayName : value.movementId });
+    }
+    for (const child of Object.values(value)) movementsIn(child, found);
+  }
+  return found;
+}
+
+export function buildRequirementsCoverage(requirements, library) {
+  const creatorIds = Object.keys(library.creators).sort();
+  const ready = library.records.filter((record) => record.status === 'ready');
+  const workouts = {};
+  const aggregate = new Map();
+  for (const requirement of requirements) {
+    const uses = movementsIn(requirement.document);
+    const movementIds = [...new Set(uses.map((use) => use.movementId))].sort();
+    const id = text(requirement.document.id) ? requirement.document.id : path.basename(requirement.file, '.json');
+    workouts[id] = {
+      title: text(requirement.document.title) ? requirement.document.title : id,
+      sourceFile: requirement.file,
+      movements: movementIds.length,
+      movementUses: uses.length,
+      creators: Object.fromEntries(creatorIds.map((creatorId) => {
+        const covered = movementIds.filter((movementId) => ready.some((record) => record.movementId === movementId && record.creatorId === creatorId));
+        return [creatorId, { ready: covered.length, total: movementIds.length, missing: movementIds.filter((movementId) => !covered.includes(movementId)) }];
+      })),
+    };
+    for (const use of uses) {
+      const value = aggregate.get(use.movementId) ?? { displayNames: new Set(), uses: 0, requiredBy: new Set() };
+      value.displayNames.add(use.displayName);
+      value.uses += 1;
+      value.requiredBy.add(id);
+      aggregate.set(use.movementId, value);
+    }
+  }
+  const movements = {};
+  for (const [movementId, requirement] of [...aggregate].sort(([left], [right]) => left.localeCompare(right))) {
+    const readyCreators = creatorIds.filter((creatorId) => ready.some((record) => record.movementId === movementId && record.creatorId === creatorId));
+    movements[movementId] = {
+      displayNames: [...requirement.displayNames].sort(),
+      uses: requirement.uses,
+      requiredBy: [...requirement.requiredBy].sort(),
+      readyCreators,
+      missingCreators: creatorIds.filter((creatorId) => !readyCreators.includes(creatorId)),
+    };
+  }
+  return {
+    schemaVersion: 1,
+    kind: 'creatorLibraryRequirementsCoverage',
+    workouts,
+    movements,
+    uncoveredMovementIds: Object.entries(movements).filter(([, movement]) => movement.readyCreators.length === 0).map(([movementId]) => movementId),
+  };
+}
+
 async function discoverJsonInputs(inputs) {
   const files = [];
   for (const input of inputs) {
@@ -341,10 +400,12 @@ async function discoverJsonInputs(inputs) {
 
 function argumentsFor(argv) {
   const inputs = [];
+  const requirements = [];
   let output = null;
   let verifyFiles = false;
   for (let index = 0; index < argv.length; index += 1) {
     if (argv[index] === '--input') inputs.push(argv[index += 1]);
+    else if (argv[index] === '--requirements') requirements.push(argv[index += 1]);
     else if (argv[index] === '--output') output = argv[index += 1];
     else if (argv[index] === '--verify-files') verifyFiles = true;
     else throw new Error(`Unknown argument: ${argv[index]}`);
@@ -352,7 +413,7 @@ function argumentsFor(argv) {
   if (inputs.length === 0 || !output) {
     throw new Error('Usage: creator-library.mjs --input FILE_OR_DIR [--input ...] --output DIRECTORY [--verify-files]');
   }
-  return { inputs, output: path.resolve(output), verifyFiles };
+  return { inputs, requirements, output: path.resolve(output), verifyFiles };
 }
 
 async function main() {
@@ -361,6 +422,9 @@ async function main() {
   const documents = [];
   for (const file of files) documents.push(JSON.parse(await readFile(file, 'utf8')));
   const compiled = compileCreatorLibrary(documents);
+  const requirementFiles = await discoverJsonInputs(options.requirements);
+  const requirements = [];
+  for (const file of requirementFiles) requirements.push({ file, document: JSON.parse(await readFile(file, 'utf8')) });
   if (options.verifyFiles) {
     for (const record of compiled.readyRecords) await access(record.source.localPath);
   }
@@ -370,6 +434,7 @@ async function main() {
     'creator-movement-matrix.json': compiled.matrix,
     'ready-records.json': { schemaVersion: 1, kind: 'readyCreatorMovementRecords', records: compiled.readyRecords },
     'review-queue.json': { schemaVersion: 1, kind: 'creatorMovementReviewQueue', records: compiled.reviewQueue },
+    ...(requirements.length > 0 ? { 'requirements-coverage.json': buildRequirementsCoverage(requirements, compiled.library) } : {}),
   };
   for (const [name, value] of Object.entries(outputs)) {
     await writeFile(path.join(options.output, name), `${JSON.stringify(value, null, 2)}\n`);
@@ -382,6 +447,7 @@ async function main() {
     records: compiled.library.records.length,
     readyRecords: compiled.readyRecords.length,
     reviewRecords: compiled.reviewQueue.length,
+    requirementFiles: requirements.length,
     output: options.output,
   })}\n`);
 }

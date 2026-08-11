@@ -21,6 +21,7 @@ and creator are preserved as variants rather than silently collapsed.
 ```sh
 node scripts/media/creator-library.mjs \
   --input /home/oliver/Projects/fittimer-media-research/approved-creator-library-v1 \
+  --requirements data/blocks \
   --output /home/oliver/Projects/fittimer-private-packs/creator-library-v1/catalogue \
   --verify-files
 ```
@@ -29,7 +30,9 @@ node scripts/media/creator-library.mjs \
 source. The generated files contain private paths and therefore remain outside
 Git. A range is `ready` only when its movement semantics and framing were
 reviewed; `candidate`, `approximate`, and `rejected` records remain searchable
-and must carry an honest reason.
+and must carry an honest reason. Supplying routine or block JSON through
+`--requirements` also writes exact per-workout creator totals and the uncovered
+movement search queue.
 
 ## Delivery path
 
