@@ -53,7 +53,7 @@ arch lift without toe gripping.
   media pack has an explicit text fallback for any unresolved movement.
 - Push-up variants retain their stable IDs and display labels until the future
   creator-library pack can prove that folding them is safe for voice aliases.
-- The MadFit 28/28 single-creator block is unchanged.
+- The MadFit 30/30 single-creator block is unchanged.
 
 ## Mining handoff
 

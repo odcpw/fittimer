@@ -34,7 +34,30 @@
       "private:w1-w4-gap-scouts/mobility-wave4-luna/exact-source-map.json",
       "private:w1-w4-gap-scouts/strength-wave5-luna/exact-source-map.json"
     ],
-    "promotionRule": "Promote only retained candidates with exact declared mechanics, native/safe landscape framing, phase-matched forward loop evidence, and verified-normal-speed evidence compatible with scripts/media/source-map.mjs."
+    "promotionRule": "Promote only retained candidates with exact declared mechanics, native/safe landscape framing, phase-matched forward loop evidence, and verified-normal-speed evidence compatible with scripts/media/source-map.mjs.",
+    "miningWaves": [
+      {
+        "id": "v3-roster-wave-2026-08-13",
+        "status": "completed",
+        "sourceCount": 16,
+        "downloadedSourceCount": 9,
+        "retainedSourceCount": 8,
+        "invalidSourceIds": ["I2W1QfiteOs"],
+        "clipCount": 9,
+        "movementIds": [
+          "cat-cow-child-reach",
+          "quadruped-thread-the-needle",
+          "dead-bug",
+          "side-plank-crunch",
+          "glute-bridges",
+          "goblet-squat",
+          "two-arm-bent-over-row",
+          "single-leg-glute-bridge"
+        ],
+        "mediaRoot": "private:fittimer-private-packs/creator-library-v1/pack",
+        "notes": "Metadata-first pass over the six approved fitness creators. Clips are silent 16:9 landscape containment exports with creator/source/range provenance. The Sydney source was rejected after both a 403 high-format fetch and an invalid low-format stream; no approximation was promoted. Unmatched movements remain textOnly or search-required in this map."
+      }
+    ]
   },
   "records": [
     {
