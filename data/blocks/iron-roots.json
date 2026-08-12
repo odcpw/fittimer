@@ -63,8 +63,8 @@
       "side": "left",
       "tempo": "3 s down / pause / controlled rise",
       "rpe": "8",
-      "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
-      "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
+      "coachNote": "Use dumbbells if stable; keep the rear instep flat (or use a folded mat under it) and breathe through the pause.",
+      "regressions": ["Keep the rear instep flat or use a folded mat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
       "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
@@ -75,8 +75,8 @@
       "side": "right",
       "tempo": "3 s down / pause / controlled rise",
       "rpe": "8",
-      "coachNote": "Use dumbbells if stable; keep the rear instep flat and breathe through the pause.",
-      "regressions": ["Keep the rear instep flat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
+      "coachNote": "Use dumbbells if stable; keep the rear instep flat (or use a folded mat under it) and breathe through the pause.",
+      "regressions": ["Keep the rear instep flat or use a folded mat.", "Shorten the stance rather than forcing the great toe.", "Use bodyweight or support if needed."],
       "match": "none",
       "movements": [{ "movementId": "split-squat", "displayName": "Split Squat" }]
     },
@@ -280,10 +280,10 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall for about 2 × 15 seconds while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
     },
     {
       "displayName": "Wall-press Hip-abduction Isometric (right)",
@@ -292,17 +292,17 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall for about 2 × 15 seconds while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
     },
     {
       "displayName": "Two-hand DB Swing",
       "workSeconds": 40,
       "restSeconds": 20,
       "rpe": "6–7",
-      "coachNote": "Hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop.",
+      "coachNote": "After the warm-up, hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop.",
       "regressions": ["Use a lighter load or reduce the range; never jump the weight."],
       "match": "close",
       "movements": [{ "movementId": "dumbbell-swing", "exerciseId": "0549", "displayName": "Two-hand DB Swing" }]

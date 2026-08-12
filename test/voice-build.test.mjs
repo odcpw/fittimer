@@ -43,7 +43,7 @@ test('voice inventory is mechanically complete for MadFit and W1-W4', () => {
     ['madfit-30min-hiit', 'iron-roots', 'silk-coils', 'dragon-longform', 'crane-longform'],
   );
   assert.equal(inventory.intervals.length, 180);
-  assert.equal(inventory.phrases.length, 203);
+  assert.equal(inventory.phrases.length, 202);
   assert.deepEqual(inventory.sideValues, ['alternating', 'first', 'left', 'right', 'second']);
   for (const requiredId of ['go', 'rest', 'next', 'digit-1', 'digit-2', 'digit-3', 'side-left', 'side-right']) {
     assert.ok(inventory.phrases.some((phrase) => phrase.id === requiredId), requiredId);

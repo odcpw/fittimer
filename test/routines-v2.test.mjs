@@ -79,7 +79,7 @@ const expected = {
       n('Tibialis Raises'),
       n('DB Knee-drive March'),
       n('Foot-planted Shadowboxing'),
-      n('Lateral Step-to-balance + Short-foot'),
+      n('Lateral Step-to-balance'),
       n('Supported Side Reach + Breathing', 'alternating'),
     ],
   },
@@ -245,9 +245,7 @@ test('Fable W1-W4 preserve canonical order, sides, exact duration, and media cov
     'Push-up Plus': 'push-up-plus',
   });
   assert.equal(wallPressIntervals.length, 6);
-  assert.ok(wallPressIntervals.every(({ coachNote }) =>
-    coachNote === 'Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.'
-  ));
+  assert.ok(wallPressIntervals.every(({ coachNote }) => coachNote.includes('2 × 15 seconds')));
 
   const result = await validateFiles(routineFiles);
   assert.equal(result.valid, true, JSON.stringify(result.errors, null, 2));

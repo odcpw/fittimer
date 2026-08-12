@@ -286,6 +286,7 @@
     "lateral-step-and-reach": { "anatomicalSide": "unspecified", "mirroring": "never", "assets": [], "fallback": "text" },
     "lateral-step-arm-sweep": { "anatomicalSide": "bilateral", "mirroring": "never", "assets": [], "fallback": "text" },
     "lateral-step-to-balance-short-foot": { "anatomicalSide": "unspecified", "mirroring": "never", "assets": [], "fallback": "text" },
+    "lateral-step-to-balance": { "anatomicalSide": "unspecified", "mirroring": "never", "assets": [], "fallback": "text" },
     "march-arm-circles": { "anatomicalSide": "bilateral", "mirroring": "never", "assets": [], "fallback": "text" },
     "march-ramp": { "anatomicalSide": "bilateral", "mirroring": "never", "assets": [], "fallback": "text" },
     "march-shoulder-rolls": { "anatomicalSide": "bilateral", "mirroring": "never", "assets": [], "fallback": "text" },

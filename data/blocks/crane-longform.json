@@ -28,7 +28,7 @@
       "restSeconds": 20,
       "side": "left",
       "rpe": "5–7",
-      "coachNote": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick.",
+      "coachNote": "After an easy start, swing the leg from small to larger arcs with a stable trunk; no snap or ballistic kick.",
       "regressions": ["Use a wall and keep the pendulum small if balance or the hip range is limited."],
       "match": "none",
       "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum" }]
@@ -39,7 +39,7 @@
       "restSeconds": 20,
       "side": "right",
       "rpe": "5–7",
-      "coachNote": "Swing the leg from small to bigger arcs with a stable trunk; no ballistic kick.",
+      "coachNote": "After an easy start, swing the leg from small to larger arcs with a stable trunk; no snap or ballistic kick.",
       "regressions": ["Use a wall and keep the pendulum small if balance or the hip range is limited."],
       "match": "none",
       "movements": [{ "movementId": "controlled-leg-pendulum", "displayName": "Controlled Leg Pendulum" }]
@@ -80,7 +80,7 @@
       "coachNote": "Step to the left and balance on a flat foot; do not hop.",
       "regressions": ["Use a wall or shorten the step; keep the landing quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance" }]
+      "movements": [{ "movementId": "lateral-step-to-balance", "displayName": "Lateral Step-to-balance" }]
     },
     {
       "displayName": "Lateral Step-to-balance (right)",
@@ -91,7 +91,7 @@
       "coachNote": "Step to the right and balance on a flat foot; do not hop.",
       "regressions": ["Use a wall or shorten the step; keep the landing quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance" }]
+      "movements": [{ "movementId": "lateral-step-to-balance", "displayName": "Lateral Step-to-balance" }]
     },
     {
       "displayName": "Crane-stance Hold (left)",
@@ -145,10 +145,10 @@
       "restSeconds": 20,
       "side": "left",
       "rpe": "5–7",
-      "coachNote": "Kick slowly with the wall available; do not force the pivot or snap.",
+      "coachNote": "After the warm-up, kick slowly with the wall available; do not force the pivot or snap.",
       "regressions": ["Use wall support and lower the kick height."],
       "match": "none",
-      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick" }]
+      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick", "textOnly": true }]
     },
     {
       "displayName": "Slow Side Kick (right)",
@@ -156,10 +156,10 @@
       "restSeconds": 20,
       "side": "right",
       "rpe": "5–7",
-      "coachNote": "Kick slowly with the wall available; do not force the pivot or snap.",
+      "coachNote": "After the warm-up, kick slowly with the wall available; do not force the pivot or snap.",
       "regressions": ["Use wall support and lower the kick height."],
       "match": "none",
-      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick" }]
+      "movements": [{ "movementId": "slow-side-kick", "displayName": "Slow Side Kick", "textOnly": true }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (left)",
@@ -168,7 +168,7 @@
       "side": "left",
       "tempo": "2 s chamber hold; no snap",
       "rpe": "5–7",
-      "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
+      "coachNote": "After the warm-up, chamber slowly with wall support available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
       "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
@@ -180,7 +180,7 @@
       "side": "right",
       "tempo": "2 s chamber hold; no snap",
       "rpe": "5–7",
-      "coachNote": "Chamber slowly with wall support available; avoid a forceful pivot.",
+      "coachNote": "After the warm-up, chamber slowly with wall support available; avoid a forceful pivot or snap.",
       "regressions": ["Use wall support and reduce the knee height or range."],
       "match": "none",
       "movements": [{ "movementId": "slow-roundhouse-chamber", "displayName": "Slow Roundhouse Chamber", "textOnly": true }]
@@ -234,7 +234,7 @@
       "restSeconds": 20,
       "side": "left",
       "rpe": "6–7",
-      "coachNote": "Start with 4–5 kg, keep the feet planted with no heel pop, and stop on shoulder apprehension.",
+      "coachNote": "Only after the warm-up, start with 4–5 kg, keep the feet planted with no heel pop, and stop on shoulder apprehension.",
       "regressions": ["Use a lighter dumbbell or a high-pull range that stays comfortable."],
       "match": "exact",
       "movements": [{ "movementId": "dumbbell-snatch", "exerciseId": "3888", "displayName": "One-arm DB Snatch" }]
@@ -245,7 +245,7 @@
       "restSeconds": 20,
       "side": "right",
       "rpe": "6–7",
-      "coachNote": "Start with 4–5 kg, keep the feet planted with no heel pop, and stop on shoulder apprehension.",
+      "coachNote": "Only after the warm-up, start with 4–5 kg, keep the feet planted with no heel pop, and stop on shoulder apprehension.",
       "regressions": ["Use a lighter dumbbell or a high-pull range that stays comfortable."],
       "match": "exact",
       "movements": [{ "movementId": "dumbbell-snatch", "exerciseId": "3888", "displayName": "One-arm DB Snatch" }]
@@ -346,7 +346,7 @@
       "side": "left",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
@@ -358,7 +358,7 @@
       "side": "right",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]

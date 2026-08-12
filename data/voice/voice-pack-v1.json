@@ -32,9 +32,9 @@
       "crane-longform"
     ],
     "intervalCount": 180,
-    "phraseCount": 203,
-    "assetCount": 203,
-    "digest": "0f5a88607d3f10763f6ea2df0e3c9857069b3652a98f46bf26960d6a9d39116f"
+    "phraseCount": 202,
+    "assetCount": 202,
+    "digest": "899417f69e80e26b79d6113964595827f6b20cf7c9ec82c8a7995cdece45300a"
   },
   "generatedAt": "2026-08-10T23:26:28.350Z",
   "phrases": [
@@ -2435,15 +2435,18 @@
       "text": "Lateral Step-to-balance",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "crane-longform",
+          "silk-coils"
         ],
         "blockIds": [
-          "crane-longform"
+          "crane-longform",
+          "silk-coils"
         ],
         "movementIds": [
-          "lateral-step-to-balance-short-foot"
+          "lateral-step-to-balance"
         ],
         "roles": [
+          "interval-display-name",
           "movement-display-name"
         ]
       },
@@ -2469,7 +2472,7 @@
           "crane-longform"
         ],
         "movementIds": [
-          "lateral-step-to-balance-short-foot"
+          "lateral-step-to-balance"
         ],
         "roles": [
           "interval-display-name"
@@ -2486,35 +2489,6 @@
       }
     },
     {
-      "id": "movement-lateral-step-to-balance-plus-short-foot",
-      "kind": "movement",
-      "text": "Lateral Step-to-balance + Short-foot",
-      "source": {
-        "routineIds": [
-          "silk-coils"
-        ],
-        "blockIds": [
-          "silk-coils"
-        ],
-        "movementIds": [
-          "lateral-step-to-balance-short-foot"
-        ],
-        "roles": [
-          "interval-display-name",
-          "movement-display-name"
-        ]
-      },
-      "asset": {
-        "type": "audio/mpeg",
-        "url": "data/voice/assets/movement-lateral-step-to-balance-plus-short-foot.mp3",
-        "bytes": 44204,
-        "sha256": "f0b8192e9fd9a3dbf900df3f3c2478ee6d96c94be53143254435b1378be2a987",
-        "sourceWavSha256": "bdc2740737d9039f56f4e7e49cc3e7e38a05803062ef36acadd584122d8b0b84",
-        "sourceTextSha256": "6a4055babeda6cd57c5137ac40e2633b8f9e2eab48853e0ae75ae04ade1b6614",
-        "sourceVoice": "matt"
-      }
-    },
-    {
       "id": "movement-lateral-step-to-balance-right",
       "kind": "movement",
       "text": "Lateral Step-to-balance (right)",
@@ -2526,7 +2500,7 @@
           "crane-longform"
         ],
         "movementIds": [
-          "lateral-step-to-balance-short-foot"
+          "lateral-step-to-balance"
         ],
         "roles": [
           "interval-display-name"

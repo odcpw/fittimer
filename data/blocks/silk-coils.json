@@ -213,10 +213,10 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall for about 2 × 15 seconds while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
     },
     {
       "displayName": "Wall-press Hip-abduction Isometric (right)",
@@ -225,10 +225,10 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Load the stance leg and press the inside knee into the wall for about 2 × 15 seconds while keeping the pelvis level.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip-abduction Isometric", "textOnly": true }]
     },
     {
       "displayName": "Slow Roundhouse Chamber (left)",
@@ -261,7 +261,7 @@
       "side": "left",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
@@ -273,7 +273,7 @@
       "side": "right",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus with a deliberate cadence.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work; keep pain 0–3/10 and below the 5/10 ceiling."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
@@ -310,14 +310,14 @@
       "movements": [{ "movementId": "foot-planted-shadowboxing", "displayName": "Foot-planted Shadowboxing", "textOnly": true }]
     },
     {
-      "displayName": "Lateral Step-to-balance + Short-foot",
+      "displayName": "Lateral Step-to-balance",
       "workSeconds": 40,
       "restSeconds": 20,
       "rpe": "5–7",
       "coachNote": "Land flat-footed, find balance, and gently lift the arch without gripping the toes.",
       "regressions": ["Use a wall or shorten the step; keep the landing flat and quiet."],
       "match": "none",
-      "movements": [{ "movementId": "lateral-step-to-balance-short-foot", "displayName": "Lateral Step-to-balance + Short-foot" }]
+      "movements": [{ "movementId": "lateral-step-to-balance", "displayName": "Lateral Step-to-balance" }]
     },
     {
       "displayName": "Supported Side Reach + Breathing",

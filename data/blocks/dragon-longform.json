@@ -10,7 +10,7 @@
       "workSeconds": 40,
       "restSeconds": 20,
       "rpe": "2→4",
-      "coachNote": "Ramp the march gradually; keep the movement easy and quiet.",
+      "coachNote": "March easily; the ramp is a cue rather than a tempo prescription, and the movement stays quiet.",
       "match": "none",
       "movements": [{ "movementId": "march-ramp", "displayName": "March Ramp" }]
     },
@@ -272,7 +272,7 @@
       "side": "left",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
@@ -284,7 +284,7 @@
       "side": "right",
       "tempo": "3 s up / 1 s pause / 3 s down",
       "rpe": "~8",
-      "coachNote": "Place a dumbbell on the thigh and load the soleus deliberately.",
+      "coachNote": "Place a dumbbell on the thigh and load the soleus at 3 seconds up / 1 second hold / 3 seconds down.",
       "regressions": ["Use less load or bilateral work within the same pain rules."],
       "match": "none",
       "movements": [{ "movementId": "seated-soleus-raise", "displayName": "Seated Soleus Raise", "textOnly": true }]
@@ -304,7 +304,7 @@
       "workSeconds": 40,
       "restSeconds": 20,
       "rpe": "6–7",
-      "coachNote": "Hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop.",
+      "coachNote": "After the warm-up, hold one 7 kg dumbbell with both hands; drive from the hips with feet planted and no heel pop.",
       "regressions": ["Use a lighter load or reduce the range; never jump the weight."],
       "match": "close",
       "movements": [{ "movementId": "dumbbell-swing", "exerciseId": "0549", "displayName": "DB Swing" }]
@@ -377,10 +377,10 @@
       "side": "left",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Press the inside knee into the wall for about 2 × 15 seconds with the pelvis level; this is a text cue, not a visual equivalence claim.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric", "textOnly": true }]
     },
     {
       "displayName": "Wall-press Hip Isometric (right)",
@@ -389,10 +389,10 @@
       "side": "right",
       "tempo": "2 × 15 s within the interval",
       "rpe": "5–7",
-      "coachNote": "Load the stance leg and press the inside knee into the wall in two bouts while keeping the pelvis level.",
+      "coachNote": "Press the inside knee into the wall for about 2 × 15 seconds with the pelvis level; this is a text cue, not a visual equivalence claim.",
       "regressions": ["Reduce wall pressure or shorten the holds if lateral-hip pain appears."],
       "match": "none",
-      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric" }]
+      "movements": [{ "movementId": "wall-press-hip-abduction-isometric", "displayName": "Wall-press Hip Isometric", "textOnly": true }]
     },
     {
       "displayName": "Seated Psoas Raise (left)",
@@ -401,7 +401,7 @@
       "side": "left",
       "tempo": "Slow lower",
       "rpe": "6–7",
-      "coachNote": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching.",
+      "coachNote": "Raise slowly and lower for a deliberate eccentric; avoid leaning the trunk or provoking anterior pinching.",
       "regressions": ["Use a smaller lift or support the trunk if the hip pinches."],
       "match": "none",
       "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise", "textOnly": true }]
@@ -413,7 +413,7 @@
       "side": "right",
       "tempo": "Slow lower",
       "rpe": "6–7",
-      "coachNote": "Raise slowly, lower for control, and avoid leaning the trunk or provoking anterior pinching.",
+      "coachNote": "Raise slowly and lower for a deliberate eccentric; avoid leaning the trunk or provoking anterior pinching.",
       "regressions": ["Use a smaller lift or support the trunk if the hip pinches."],
       "match": "none",
       "movements": [{ "movementId": "seated-psoas-raise", "displayName": "Seated Psoas Raise", "textOnly": true }]

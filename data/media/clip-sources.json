@@ -1455,7 +1455,7 @@
       }
     },
     {
-      "movementId": "lateral-step-to-balance-short-foot",
+      "movementId": "lateral-step-to-balance",
       "aliases": [
         "Lateral Step-to-balance",
         "Lateral Step-to-balance + Short-foot"
@@ -1473,7 +1473,7 @@
       },
       "resolution": "search-required",
       "deliberate": {
-        "reason": "No retained source makes a flat-foot landing, balance, and visible arch lift readable together."
+        "reason": "No retained source makes a flat-foot landing and balance readable together; short-foot remains a text cue."
       }
     },
     {
