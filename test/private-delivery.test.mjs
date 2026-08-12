@@ -5,8 +5,11 @@ import path from 'node:path';
 import test from 'node:test';
 
 import {
+  APPROVED_CREATOR_IDS,
   chooseRoutineMediaPackId,
+  chooseRoutineCreatorId,
   collectContentUrls,
+  creatorCoverageForRoutine,
   mergePrivateMediaPackIndex,
   normalizePrivateMediaPackIndex,
   resolveMovementVisual,
@@ -131,18 +134,20 @@ test('selected private packs never mix in reference or GIF fallback assets', () 
       id: 'reference-v1',
       kind: 'mediaPack',
       __sourcePath: 'private-packs/reference-v1/media-pack.json',
+      creators: { growingannanas: { selectable: true, name: 'Growingannanas' } },
       framingProfiles: { full: framing },
       entries: {
-        referenceFallback: { assets: [{ type: 'video', url: 'clips/reference.mp4', framing: 'full' }] },
+        referenceFallback: { assets: [{ type: 'video', url: 'clips/reference.mp4', framing: 'full', creatorId: 'growingannanas' }] },
       },
     }],
     ['w1w4-v1', {
       id: 'w1w4-v1',
       kind: 'mediaPack',
       __sourcePath: 'private-packs/w1w4-v1/media-pack.json',
+      creators: { growingannanas: { selectable: true, name: 'Growingannanas' } },
       framingProfiles: { full: framing },
       entries: {
-        w1w4Primary: { assets: [{ type: 'video', url: 'clips/primary.mp4', framing: 'full' }] },
+        w1w4Primary: { assets: [{ type: 'video', url: 'clips/primary.mp4', framing: 'full', creatorId: 'growingannanas' }] },
       },
     }],
   ]);
@@ -190,4 +195,86 @@ test('selected private packs never mix in reference or GIF fallback assets', () 
   assert.ok(!urls.includes('private-packs/reference-v1/clips/reference.mp4'));
   assert.ok(!urls.includes('data/media/gif-v1.json'));
   assert.ok(!urls.includes('data/gifs/fallback.gif'));
+});
+
+test('v3 creator runtime picks one approved automatic winner and caches only that creator', () => {
+  assert.deepEqual(new Set(APPROVED_CREATOR_IDS), new Set([
+    'madfit',
+    'growingannanas',
+    'caroline-girvan',
+    'sydney-cummings',
+    'heather-robertson',
+    'pamela-reif',
+  ]));
+
+  const creators = Object.fromEntries(APPROVED_CREATOR_IDS.map((id) => [id, {
+    id,
+    name: id,
+    selectable: true,
+  }]));
+  const pack = {
+    id: 'creator-library-v1',
+    kind: 'mediaPack',
+    __sourcePath: 'private-packs/creator-library-v1/pack/media-pack.json',
+    creators,
+    outputFrame: { orientation: 'landscape', width: 16, height: 9 },
+    entries: {
+      alpha: {
+        assets: [
+          { type: 'video', url: 'clips/madfit-alpha.mp4', creatorId: 'madfit' },
+          { type: 'video', url: 'clips/growing-alpha.mp4', creatorId: 'growingannanas' },
+          { type: 'video', url: 'clips/rejected-alpha.mp4', creatorId: 'rejected-source' },
+        ],
+      },
+      beta: {
+        assets: [
+          { type: 'video', url: 'clips/growing-beta.mp4', creatorId: 'growingannanas' },
+          { type: 'video', url: 'clips/heather-beta.mp4', creatorId: 'heather-robertson' },
+        ],
+      },
+      cueOnly: {
+        assets: [{ type: 'video', url: 'clips/must-not-play.mp4', creatorId: 'growingannanas' }],
+      },
+    },
+  };
+  const routine = {
+    id: 'iron-roots',
+    file: 'data/routines/iron-roots.json',
+    sequence: [],
+    intervals: [{ movements: [
+      { movementId: 'alpha' },
+      { movementId: 'beta' },
+      { movementId: 'cueOnly', textOnly: true },
+    ] }],
+  };
+
+  assert.equal(chooseRoutineCreatorId(routine, pack), 'growingannanas');
+  assert.deepEqual(creatorCoverageForRoutine(routine, pack, 'growingannanas'), {
+    covered: 2,
+    total: 2,
+    textOnly: 1,
+  });
+  assert.equal(resolveMovementVisual(
+    { movementId: 'alpha', displayName: 'Alpha' },
+    pack,
+    { creatorId: 'growingannanas' },
+  ).asset.creatorId, 'growingannanas');
+  const textOnly = resolveMovementVisual(
+    { movementId: 'cueOnly', displayName: 'Cue only', textOnly: true },
+    pack,
+    { creatorId: 'growingannanas' },
+  );
+  assert.equal(textOnly.kind, 'text');
+  assert.equal(textOnly.videoNeeded, false);
+
+  const selected = selectMediaPack('creator-library-v1', new Map([['creator-library-v1', pack]]));
+  const urls = collectContentUrls({
+    mediaPacks: { 'creator-library-v1': 'private-packs/creator-library-v1/pack/media-pack.json' },
+    privateMediaPackIndexPath: 'private-packs/index.json',
+    blocks: {},
+  }, [routine], selected, null);
+  assert.ok(urls.includes('private-packs/creator-library-v1/pack/clips/growing-alpha.mp4'));
+  assert.ok(urls.includes('private-packs/creator-library-v1/pack/clips/growing-beta.mp4'));
+  assert.ok(!urls.some((url) => url.includes('madfit-alpha') || url.includes('heather-beta') || url.includes('rejected-alpha')));
+  assert.ok(!urls.includes('private-packs/creator-library-v1/pack/clips/must-not-play.mp4'));
 });

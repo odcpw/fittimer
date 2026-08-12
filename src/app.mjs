@@ -92,6 +92,16 @@ const MEDIA_PRIORITY = new Map([
   ['poster', 3],
 ]);
 
+export const APPROVED_CREATOR_IDS = Object.freeze([
+  'madfit',
+  'growingannanas',
+  'caroline-girvan',
+  'sydney-cummings',
+  'heather-robertson',
+  'pamela-reif',
+]);
+const APPROVED_CREATOR_SET = new Set(APPROVED_CREATOR_IDS);
+
 let routines = [];
 let selectedRoutine = null;
 let activeRoutine = null;
@@ -256,8 +266,49 @@ function packHasVideo(pack) {
     Array.isArray(entry?.assets) && entry.assets.some((asset) => asset?.type === 'video'));
 }
 
-function assetMatchesCreator(asset, creatorId) {
-  return creatorId === CREATOR_AUTO || asset?.creatorId === creatorId;
+function isApprovedCreatorId(creatorId) {
+  return typeof creatorId === 'string' && APPROVED_CREATOR_SET.has(creatorId);
+}
+
+function isLegacyPublicPack(pack) {
+  return !pack?.__sourcePath
+    && !isObject(pack?.creators)
+    && (pack?.id === VISUAL_PACK_GIF_V1 || pack?.id === undefined);
+}
+
+function routineMovements(routine) {
+  const movements = new Map();
+  for (const interval of routine?.intervals ?? []) {
+    for (const movement of interval.movements ?? []) {
+      if (typeof movement?.movementId !== 'string' || movement.textOnly === true) continue;
+      movements.set(movement.movementId, movement);
+    }
+  }
+  return [...movements.values()];
+}
+
+function routineTextOnlyCount(routine) {
+  const movementIds = new Set();
+  for (const interval of routine?.intervals ?? []) {
+    for (const movement of interval.movements ?? []) {
+      if (movement?.textOnly === true && typeof movement.movementId === 'string') {
+        movementIds.add(movement.movementId);
+      }
+    }
+  }
+  return movementIds.size;
+}
+
+function assetMatchesCreator(asset, creatorId, mediaPack = null) {
+  if (creatorId === null || creatorId === undefined) return false;
+  if (isApprovedCreatorId(asset?.creatorId)) {
+    return creatorId === CREATOR_AUTO || asset.creatorId === creatorId;
+  }
+  // Retain the public GIF resolver contract for the legacy built-in pack. It
+  // is never loaded into the private runtime and has no creator metadata.
+  return creatorId === CREATOR_AUTO
+    && isLegacyPublicPack(mediaPack)
+    && asset?.creatorId === undefined;
 }
 
 function packHasCreatorVideo(pack, creatorId = CREATOR_AUTO) {
@@ -265,7 +316,51 @@ function packHasCreatorVideo(pack, creatorId = CREATOR_AUTO) {
     Array.isArray(entry?.assets)
       && entry.assets.some((asset) => asset?.enabled !== false
         && asset?.type === 'video'
-        && assetMatchesCreator(asset, creatorId)));
+        && (creatorId === CREATOR_AUTO
+          ? isApprovedCreatorId(asset?.creatorId)
+          : assetMatchesCreator(asset, creatorId, pack))));
+}
+
+function creatorCandidates(pack) {
+  const registered = APPROVED_CREATOR_IDS.filter((creatorId) =>
+    pack?.creators?.[creatorId]?.selectable === true
+    && packHasCreatorVideo(pack, creatorId));
+  if (registered.length > 0) return registered;
+  return APPROVED_CREATOR_IDS.filter((creatorId) => packHasCreatorVideo(pack, creatorId));
+}
+
+export function creatorCoverageForRoutine(routine, mediaPack, creatorId = CREATOR_AUTO) {
+  const movements = routineMovements(routine);
+  const covered = movements.filter((movement) => {
+    const assets = mediaPack?.entries?.[movement.movementId]?.assets;
+    return Array.isArray(assets) && assets.some((asset) => asset?.enabled !== false
+      && asset?.type === 'video'
+      && assetMatchesCreator(asset, creatorId, mediaPack));
+  }).length;
+  return Object.freeze({
+    covered,
+    total: movements.length,
+    textOnly: routineTextOnlyCount(routine),
+  });
+}
+
+export function chooseRoutineCreatorId(routine, mediaPack, creatorId = CREATOR_AUTO) {
+  if (creatorId !== CREATOR_AUTO) return isApprovedCreatorId(creatorId) ? creatorId : null;
+  let bestCreator = null;
+  let bestCoverage = 0;
+  for (const candidate of creatorCandidates(mediaPack)) {
+    const coverage = creatorCoverageForRoutine(routine, mediaPack, candidate).covered;
+    if (coverage > bestCoverage) {
+      bestCoverage = coverage;
+      bestCreator = candidate;
+    }
+  }
+  return bestCreator;
+}
+
+function playbackCreatorId(routine, mediaPack, requestedCreatorId) {
+  if (requestedCreatorId === CREATOR_AUTO && isLegacyPublicPack(mediaPack)) return CREATOR_AUTO;
+  return chooseRoutineCreatorId(routine, mediaPack, requestedCreatorId);
 }
 
 /**
@@ -285,22 +380,14 @@ export function chooseRoutineMediaPackId(routine, packs, creatorId = CREATOR_AUT
     VISUAL_PACK_REFERENCE_V1,
     ...packs.keys(),
   ])].filter((id) => packs.has(id) && packHasVideo(packs.get(id)) && packHasCreatorVideo(packs.get(id), creatorId));
-  const movementIds = (routine?.intervals ?? [])
-    .flatMap((interval) => interval.movements ?? [])
-    .map((movement) => movement.movementId)
-    .filter((id) => typeof id === 'string');
   let bestId = candidateIds[0] ?? null;
   let bestCoverage = -1;
   for (const id of candidateIds) {
     const pack = selectMediaPack(id, packs);
-    const coverage = movementIds.reduce((total, movementId) => {
-      const assets = pack?.entries?.[movementId]?.assets;
-      return total + (Array.isArray(assets) && assets.some(
-        (asset) => asset?.enabled !== false
-          && asset?.type === 'video'
-          && assetMatchesCreator(asset, creatorId),
-      ) ? 1 : 0);
-    }, 0);
+    const coverage = creatorId === CREATOR_AUTO
+      ? Math.max(0, ...creatorCandidates(pack).map((candidate) =>
+        creatorCoverageForRoutine(routine, pack, candidate).covered))
+      : creatorCoverageForRoutine(routine, pack, creatorId).covered;
     if (coverage > bestCoverage) {
       bestCoverage = coverage;
       bestId = id;
@@ -380,7 +467,7 @@ function orderedAssets(entry, reducedMotion, requestedSide, mediaPack = null, cr
   if (!Array.isArray(entry?.assets)) return [];
   const available = entry.assets.filter((asset) => asset?.enabled !== false
     && MEDIA_TYPES.has(asset?.type)
-    && assetMatchesCreator(asset, creatorId)
+    && assetMatchesCreator(asset, creatorId, mediaPack)
     && resolvePackAssetUrl(mediaPack, asset?.url, asset));
   const normalizedSide = assetSide({ side: requestedSide });
   const mirroredSide = normalizedSide === 'left' ? 'right' : normalizedSide === 'right' ? 'left' : null;
@@ -427,6 +514,9 @@ export function resolveMovementVisual(
     ? movement.displayName
     : 'Movement';
   const movementId = typeof movement?.movementId === 'string' ? movement.movementId : null;
+  const resolverCreatorId = creatorId === CREATOR_AUTO && !isLegacyPublicPack(mediaPack)
+    ? creatorCandidates(mediaPack)[0] ?? null
+    : creatorId;
   const textResult = (reason) => ({
     kind: 'text',
     movementId,
@@ -434,6 +524,7 @@ export function resolveMovementVisual(
     reason,
     candidates: [],
     fallback: 'text',
+    videoNeeded: reason !== 'text-only',
     mirror: false,
     framing: null,
     mediaPackBasePath: mediaPack?.__sourcePath ?? null,
@@ -443,10 +534,10 @@ export function resolveMovementVisual(
   const entry = movementId && isObject(mediaPack?.entries) ? mediaPack.entries[movementId] : null;
   if (!entry) return textResult('missing-pack-entry');
 
-  const candidates = orderedAssets(entry, reducedMotion, requestedSide, mediaPack, creatorId);
+  const candidates = orderedAssets(entry, reducedMotion, requestedSide, mediaPack, resolverCreatorId);
   if (candidates.length === 0) {
     return textResult(
-      creatorId !== CREATOR_AUTO
+      resolverCreatorId !== CREATOR_AUTO
         ? 'creator-not-covered'
         : reducedMotion ? 'no-poster' : 'empty-pack-entry',
     );
@@ -642,8 +733,9 @@ function renderRoutineList() {
     const meta = document.createElement('span');
     meta.className = 'routine-row__meta';
     const creatorId = currentSettings.visuals.creatorId;
-    const coverage = creatorId === CREATOR_AUTO ? null : routineCreatorCoverage(routine, creatorId);
-    const coverageLabel = coverage ? ` · ${coverage.covered}/${coverage.total} ${creatorLabel(creatorId)}` : '';
+    const coverage = routineCreatorCoverage(routine, creatorId);
+    const coverageCreatorId = coverage.creatorId ?? creatorId;
+    const coverageLabel = ` · ${coverage.covered}/${coverage.total} ${creatorLabel(coverageCreatorId)}`;
     meta.textContent = `${formatDuration(routine.estimatedDurationSeconds)} · ${routine.intervals.length} intervals${coverageLabel}`;
     const equipment = document.createElement('span');
     equipment.className = 'routine-row__equipment';
@@ -749,6 +841,7 @@ function availableCreators() {
   const creators = new Map();
   for (const pack of mediaPacks.values()) {
     for (const [creatorId, creator] of Object.entries(pack?.creators ?? {})) {
+      if (!isApprovedCreatorId(creatorId)) continue;
       if (creator?.selectable !== true) continue;
       if (!packHasCreatorVideo(pack, creatorId)) continue;
       const name = typeof creator?.name === 'string' && creator.name.trim()
@@ -774,21 +867,14 @@ function populateCreatorOptions(selectedId = CREATOR_AUTO) {
     : CREATOR_AUTO;
 }
 
-function routineCreatorCoverage(routine, creatorId) {
-  const movementIds = new Set((routine?.intervals ?? [])
-    .flatMap((interval) => interval.movements ?? [])
-    .map((movement) => movement?.movementId)
-    .filter((movementId) => typeof movementId === 'string'));
-  if (movementIds.size === 0) return { covered: 0, total: 0 };
+export function routineCreatorCoverage(routine, creatorId = CREATOR_AUTO) {
   const packId = chooseRoutineMediaPackId(routine, mediaPacks, creatorId);
   const pack = packId ? selectMediaPack(packId) : null;
-  const covered = [...movementIds].filter((movementId) =>
-    pack?.entries?.[movementId]?.assets?.some(
-      (asset) => asset.enabled !== false
-        && asset.type === 'video'
-        && assetMatchesCreator(asset, creatorId),
-    )).length;
-  return { covered, total: movementIds.size };
+  const selectedCreatorId = playbackCreatorId(routine, pack, creatorId);
+  return {
+    ...creatorCoverageForRoutine(routine, pack, selectedCreatorId),
+    creatorId: selectedCreatorId,
+  };
 }
 
 function creatorLabel(creatorId) {
@@ -824,7 +910,9 @@ function renderSettings(settings) {
   if (!contentIndex?.privateMediaPackIndexPath) {
     elements.mediaStatus.textContent = 'No video library is installed; written movement guidance will be shown.';
   } else if (normalized.visuals.creatorId === CREATOR_AUTO) {
-    elements.mediaStatus.textContent = 'Automatic uses the best available clip for each movement.';
+    const coverage = routineCreatorCoverage(selectedRoutine, normalized.visuals.creatorId);
+    const winner = coverage.creatorId ? `${creatorLabel(coverage.creatorId)} only` : 'no creator clip selected';
+    elements.mediaStatus.textContent = `Automatic · ${winner} · ${coverage.covered}/${coverage.total} movements in ${selectedRoutine?.title ?? 'this workout'}. Text-only intervals stay cue-only; missing clips stay visibly missing.`;
   } else {
     const coverage = routineCreatorCoverage(selectedRoutine, normalized.visuals.creatorId);
     elements.mediaStatus.textContent = `${creatorLabel(normalized.visuals.creatorId)} only · ${coverage.covered}/${coverage.total} movements in ${selectedRoutine?.title ?? 'this workout'}. Missing clips stay visibly missing.`;
@@ -964,11 +1052,11 @@ function applyFraming(element, visual) {
   element.dataset.mirroring = visual.mirror ? 'mirrored' : 'source';
 }
 
-function textVisualNode(label) {
+function textVisualNode(label, videoNeeded = true) {
   const text = document.createElement('p');
   text.className = 'movement-stage__text';
-  text.dataset.videoStatus = 'missing';
-  text.textContent = `Video needed · ${label}`;
+  text.dataset.videoStatus = videoNeeded ? 'missing' : 'text-only';
+  text.textContent = videoNeeded ? `Video needed · ${label}` : label;
   return text;
 }
 
@@ -1015,7 +1103,7 @@ function playVideo(node, onFailure) {
 
 function createVisualNode(movement, interval, selection, candidateIndex = 0) {
   const asset = selection.candidates[candidateIndex];
-  if (!asset) return textVisualNode(selection.label);
+  if (!asset) return textVisualNode(selection.label, selection.videoNeeded !== false);
   const visual = {
     ...selection,
     asset,
@@ -1023,12 +1111,12 @@ function createVisualNode(movement, interval, selection, candidateIndex = 0) {
     framing: resolveFraming(selectedMediaPack, asset),
     mirror: shouldMirror(selection.entry, interval?.side, asset),
   };
-  if (visual.kind === 'text') return textVisualNode(selection.label);
+  if (visual.kind === 'text') return textVisualNode(selection.label, selection.videoNeeded !== false);
   if (reducedMotionPreferred() && asset.type !== 'poster') {
     const posterIndex = selection.candidates.findIndex((candidate) => candidate.type === 'poster');
     return posterIndex >= 0
       ? createVisualNode(movement, interval, selection, posterIndex)
-      : textVisualNode(selection.label);
+      : textVisualNode(selection.label, selection.videoNeeded !== false);
   }
 
   const node = visual.kind === 'video'
@@ -1209,7 +1297,7 @@ function renderMovement(interval) {
     selection: resolveMovementVisual({ ...movement, displayName: interval.displayName }, selectedMediaPack, {
       reducedMotion: reducedMotionPreferred(),
       requestedSide: interval.side,
-      creatorId: currentSettings.visuals.creatorId,
+      creatorId: playbackCreatorId(activeRoutine ?? selectedRoutine, selectedMediaPack, currentSettings.visuals.creatorId),
     }),
   }));
   const uniqueSelections = deduplicateVisualSelections(
@@ -1300,16 +1388,10 @@ export function collectContentUrls(
   const files = new Set(['data/content-index.json']);
   const installed = Array.isArray(installedRoutines) ? installedRoutines : [];
 
-  const movementIds = new Set();
   for (const routine of installed) {
     if (routine.file) files.add(routine.file);
     for (const item of routine.sequence ?? []) {
       if (item.blockId && index.blocks?.[item.blockId]) files.add(index.blocks[item.blockId]);
-    }
-    for (const interval of routineIntervals(routine)) {
-      for (const movement of interval.movements ?? []) {
-        if (movement.movementId) movementIds.add(movement.movementId);
-      }
     }
   }
 
@@ -1321,22 +1403,26 @@ export function collectContentUrls(
   if ([...packFiles].some((file) => file.startsWith('private-packs/')) && index.privateMediaPackIndexPath) {
     files.add(index.privateMediaPackIndexPath);
   }
-  for (const movementId of movementIds) {
-    const entry = mediaPack?.entries?.[movementId];
-    for (const asset of entry?.assets ?? []) {
-      if (typeof asset.url !== 'string') continue;
-      if (asset.enabled === false) continue;
-      if (!assetMatchesCreator(asset, creatorId)) continue;
-      const sourcePath = asset.__sourcePath;
-      if (typeof sourcePath === 'string' && sourcePath.startsWith('private-packs/')) {
-        try {
-          const resolved = new URL(asset.url, new URL(sourcePath, 'http://fittimer-content.local/'));
-          if (resolved.origin === 'http://fittimer-content.local') files.add(resolved.pathname.replace(/^\//, ''));
-        } catch {
-          // Ignore malformed optional private assets; written guidance remains visible.
+  for (const routine of installed) {
+    const selectedCreatorId = playbackCreatorId(routine, mediaPack, creatorId);
+    const movementIds = new Set(routineMovements(routine).map((movement) => movement.movementId));
+    for (const movementId of movementIds) {
+      const entry = mediaPack?.entries?.[movementId];
+      for (const asset of entry?.assets ?? []) {
+        if (typeof asset.url !== 'string') continue;
+        if (asset.enabled === false) continue;
+        if (!assetMatchesCreator(asset, selectedCreatorId, mediaPack)) continue;
+        const sourcePath = asset.__sourcePath;
+        if (typeof sourcePath === 'string' && sourcePath.startsWith('private-packs/')) {
+          try {
+            const resolved = new URL(asset.url, new URL(sourcePath, 'http://fittimer-content.local/'));
+            if (resolved.origin === 'http://fittimer-content.local') files.add(resolved.pathname.replace(/^\//, ''));
+          } catch {
+            // Ignore malformed optional private assets; written guidance remains visible.
+          }
+        } else {
+          files.add(asset.url);
         }
-      } else {
-        files.add(asset.url);
       }
     }
   }
