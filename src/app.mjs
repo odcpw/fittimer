@@ -101,6 +101,9 @@ export const APPROVED_CREATOR_IDS = Object.freeze([
   'pamela-reif',
 ]);
 const APPROVED_CREATOR_SET = new Set(APPROVED_CREATOR_IDS);
+const FIXED_ROUTINE_CREATORS = Object.freeze({
+  'madfit-30min-hiit': 'madfit',
+});
 
 let routines = [];
 let selectedRoutine = null;
@@ -345,6 +348,8 @@ export function creatorCoverageForRoutine(routine, mediaPack, creatorId = CREATO
 }
 
 export function chooseRoutineCreatorId(routine, mediaPack, creatorId = CREATOR_AUTO) {
+  const fixedCreatorId = FIXED_ROUTINE_CREATORS[routine?.id];
+  if (fixedCreatorId) return fixedCreatorId;
   if (creatorId !== CREATOR_AUTO) return isApprovedCreatorId(creatorId) ? creatorId : null;
   let bestCreator = null;
   let bestCoverage = 0;

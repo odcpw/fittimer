@@ -249,6 +249,7 @@ test('v3 creator runtime picks one approved automatic winner and caches only tha
   };
 
   assert.equal(chooseRoutineCreatorId(routine, pack), 'growingannanas');
+  assert.equal(chooseRoutineCreatorId({ ...routine, id: 'madfit-30min-hiit' }, pack), 'madfit');
   assert.deepEqual(creatorCoverageForRoutine(routine, pack, 'growingannanas'), {
     covered: 2,
     total: 2,
