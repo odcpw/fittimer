@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "kind": "describedExerciseMotion",
+  "movementId": "dead-bug",
+  "title": "Dead bug · contralateral",
+  "fps": 30,
+  "durationSeconds": 15,
+  "sources": [
+    {
+      "title": "Bodyweight Strength Training Anatomy",
+      "author": "Bret Contreras",
+      "publisher": "Human Kinetics",
+      "url": "https://us.humankinetics.com/products/bodyweight-strength-training-anatomy-pdf"
+    },
+    {
+      "title": "NSCA TSAC Report, Issue 52 · Dead Bug",
+      "publisher": "National Strength and Conditioning Association",
+      "url": "https://www.nsca.com/globalassets/education/tsac-report/tsac_report_52.pdf"
+    },
+    {
+      "title": "Dead Bug Exercise Library",
+      "publisher": "National Academy of Sports Medicine",
+      "url": "https://www.nasm.org/resource-center/exercise-library/dead-bug"
+    }
+  ],
+  "coordinateSystem": {
+    "units": "meters",
+    "up": "+Y",
+    "headward": "-X",
+    "left": "-Z"
+  },
+  "invariants": [
+    "supine torso and head remain on the floor",
+    "pelvis, lumbar spine and ribcage do not rotate with the limbs",
+    "elbows remain extended",
+    "the moving knee extends without hyperextension",
+    "contralateral arm and leg move together",
+    "the hand and heel approach but do not strike the floor"
+  ],
+  "targets": {
+    "tabletop": {
+      "armDirection": [0.0, 1.0, 0.0],
+      "thighDirection": [0.0, 1.0, 0.0],
+      "shinDirection": [1.0, 0.0, 0.0],
+      "footDirection": [0.0, 1.0, 0.0]
+    },
+    "extended": {
+      "armDirection": [-0.985, 0.17, 0.0],
+      "thighDirection": [0.985, -0.17, 0.0],
+      "shinDirection": [0.995, -0.1, 0.0],
+      "footDirection": [0.0, 1.0, 0.0]
+    }
+  },
+  "keyframes": [
+    { "timeSeconds": 0.0, "pose": "tabletop" },
+    { "timeSeconds": 0.75, "pose": "tabletop" },
+    { "timeSeconds": 3.25, "pose": "left-arm-right-leg" },
+    { "timeSeconds": 3.75, "pose": "left-arm-right-leg" },
+    { "timeSeconds": 6.25, "pose": "tabletop" },
+    { "timeSeconds": 7.5, "pose": "tabletop" },
+    { "timeSeconds": 10.0, "pose": "right-arm-left-leg" },
+    { "timeSeconds": 10.5, "pose": "right-arm-left-leg" },
+    { "timeSeconds": 13.0, "pose": "tabletop" },
+    { "timeSeconds": 15.0, "pose": "tabletop" }
+  ]
+}

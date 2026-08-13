@@ -12,14 +12,18 @@ Creator and source provenance are stored in each animation's glTF extras. The
 Motion Lab is an online evaluation surface and is not loaded by the offline
 workout PWA.
 
-## Direct SMPL-X dead bug
+## Description-constrained SMPL-X dead bug
 
-`/avatar-lab/wholebody-deadbug.html` maps the 15-second RTMW3D-X dead-bug
-capture directly onto the native 55-joint SMPL-X skeleton and its 10,475-vertex
-skin. The default view is the animated human body; **Capture overlay** reveals
-the underlying 133-point observation for comparison. The fit includes explicit
-supine torso/face orientation and per-frame floor contact and does not pass
-through OpenSim or the Michelle/Mixamo rig.
+`/avatar-lab/wholebody-deadbug.html` builds a 15-second contralateral dead bug
+from a structured written-form specification derived from Contreras, NSCA, and
+NASM descriptions. A constrained solver creates three key poses on the native
+55-joint SMPL-X skeleton; smooth joint rotations connect them while the trunk
+stays fixed. No video observation, pose detector, OpenSim retarget, or
+Michelle/Mixamo rig drives this version. **Joint rig** reveals its armature.
+
+The earlier direct RTMW3D-X artifacts remain available for diagnosis, but are
+not loaded by this page because their monocular frame jitter produced unstable
+full-body motion.
 
 ## OpenSim dead bug
 

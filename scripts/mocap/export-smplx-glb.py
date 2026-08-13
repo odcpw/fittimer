@@ -94,7 +94,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--fps", type=float, default=30.0)
-    parser.add_argument("--name", default="Dead bug · direct SMPL-X")
+    parser.add_argument("--name", default="SMPL-X exercise loop")
+    parser.add_argument("--motion", default="fitted SMPL-X motion")
     return parser.parse_args(argv)
 
 
@@ -203,6 +204,7 @@ def animate(
     axis_angle: np.ndarray,
     translation: np.ndarray,
     fps: float,
+    action_name: str,
 ) -> None:
     scene = bpy.context.scene
     scene.render.fps = round(fps)
@@ -232,7 +234,7 @@ def animate(
 
     if armature.animation_data and armature.animation_data.action:
         action = armature.animation_data.action
-        action.name = "Dead bug · 15 second loop"
+        action.name = action_name
 
 
 def main() -> None:
@@ -249,11 +251,11 @@ def main() -> None:
 
     armature = make_armature(joints, parents)
     body = make_skinned_body(armature, shaped, faces, weights)
-    animate(armature, axis_angle, translation, args.fps)
+    animate(armature, axis_angle, translation, args.fps, args.name)
     armature["fitTimerMotion"] = {
         "schemaVersion": 1,
         "model": "SMPL-X neutral",
-        "motion": "direct RTMW3D-X fit",
+        "motion": args.motion,
         "frames": len(axis_angle),
         "fps": args.fps,
         "loopSeconds": len(axis_angle) / args.fps,

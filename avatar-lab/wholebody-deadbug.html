@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0d11">
-  <title>FitTimer Whole-Body Dead Bug</title>
+  <title>FitTimer Description-Built Dead Bug</title>
   <link rel="stylesheet" href="lab.css">
 </head>
 <body>
@@ -18,48 +18,43 @@
 
   <main class="lab-shell">
     <aside class="exercise-rail">
-      <h1>Direct skinned fit</h1>
+      <h1>Description-constrained</h1>
       <div class="exercise-list">
         <button class="exercise-button is-active" type="button" aria-pressed="true">
           <span class="exercise-index">01</span>
           <span class="exercise-label">
-            <strong>Dead bug · bilateral</strong>
-            <span>MadFit · RTMW3D-X → SMPL-X</span>
+            <strong>Dead bug · contralateral</strong>
+            <span>Written form → constrained SMPL-X</span>
           </span>
         </button>
       </div>
       <dl class="capture-stats">
-        <div><dt>Observed</dt><dd>133 points</dd></div>
+        <div><dt>Input</dt><dd>Written form</dd></div>
         <div><dt>Skeleton</dt><dd>55 joints</dd></div>
         <div><dt>Skin</dt><dd>10,475 vertices</dd></div>
-        <div><dt>Source</dt><dd>40 seconds</dd></div>
+        <div><dt>Key poses</dt><dd>3 constrained</dd></div>
         <div><dt>Loop</dt><dd>15 seconds</dd></div>
       </dl>
       <p class="rail-note">
-        Frames 773–1180 were selected from the full capture, then fitted
-        directly to a native SMPL-X skeleton and skin. No OpenSim retarget.
+        The torso stays fixed while endpoint constraints solve tabletop and
+        both contralateral extensions. No video or pose estimator drives it.
       </p>
     </aside>
 
-    <section class="stage" aria-label="Interactive skinned SMPL-X dead-bug preview">
+    <section class="stage" aria-label="Interactive description-built SMPL-X dead-bug preview">
       <div id="canvas-host"></div>
       <div class="stage-copy">
-        <strong>Skinned whole-body motion</strong>
-        <span>Direct RTMW3D-X fit · full 40s source → clean 15s loop</span>
+        <strong>Book-described dead bug</strong>
+        <span>Contreras · NSCA · NASM → reusable motion specification</span>
       </div>
-      <div id="joint-legend" class="joint-legend is-hidden" aria-hidden="true">
-        <span class="legend-left">Left</span>
-        <span class="legend-right">Right</span>
-        <span class="legend-center">Centre</span>
-      </div>
-      <p class="prototype-note">Direct 55-joint SMPL-X skin · no OpenSim</p>
+      <p class="prototype-note">Description-constrained SMPL-X · no video</p>
       <output id="load-state" class="load-state" aria-live="polite">Loading skinned body…</output>
     </section>
 
     <section class="transport" aria-label="Animation playback controls">
       <button id="play-toggle" class="primary-control" type="button" disabled>Pause</button>
       <button id="restart" type="button" disabled>Restart</button>
-      <button id="overlay-toggle" type="button" aria-pressed="false" disabled>Capture overlay off</button>
+      <button id="skeleton-toggle" type="button" aria-pressed="false" disabled>Joint rig off</button>
       <span id="current-time" class="time">0:00.00</span>
       <label class="timeline-label">
         <span class="sr-only">Animation position</span>
@@ -83,6 +78,6 @@
       }
     }
   </script>
-  <script type="module" src="wholebody-deadbug.mjs?v=2"></script>
+  <script type="module" src="wholebody-deadbug.mjs?v=4"></script>
 </body>
 </html>
