@@ -420,6 +420,67 @@ button:focus-visible {
   background: var(--lime);
 }
 
+.motion-lab-card {
+  display: grid;
+  gap: 7px;
+  margin-top: 18px;
+  padding: 18px;
+  overflow: hidden;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid rgba(255, 128, 109, 0.5);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 128, 109, 0.2), transparent 42%),
+    rgba(17, 26, 37, 0.82);
+}
+
+.motion-lab-card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.motion-lab-card__eyebrow {
+  color: #ff9b8c;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.motion-lab-card__title {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.motion-lab-card__copy {
+  max-width: 38ch;
+  color: #dce2e8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.motion-lab-card__action {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 8px 12px;
+  color: #1b0e0b;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: #ff806d;
+}
+
+.motion-lab-card:hover .motion-lab-card__action,
+.motion-lab-card:focus-visible .motion-lab-card__action {
+  background: #ffad9f;
+}
+
 .history-panel {
   margin-top: 18px;
   padding: 14px;

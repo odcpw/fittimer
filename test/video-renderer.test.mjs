@@ -140,7 +140,7 @@ test('bounded renderer owns video properties, cleanup, visibility replay, and sa
   assert.doesNotMatch(html, /<audio\b/i);
   assert.doesNotMatch(application, /\b(?:new\s+)?Audio\s*\(/);
   assert.doesNotMatch(application, /mediaSession/i);
-  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'fittimer-v18'/);
+  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'fittimer-v19'/);
   assert.match(serviceWorker, /isMutableCatalogueRequest[\s\S]*?url\.pathname\.endsWith\('\.json'\)/);
   assert.match(serviceWorker, /isMutableCatalogueRequest\(request\)[\s\S]*?networkFirstAssetResponse\(request\)/);
   assert.match(serviceWorker, /networkFirstAssetResponse[\s\S]*?cache\.put\(request, response\.clone\(\)\)[\s\S]*?caches\.match\(request\)/);

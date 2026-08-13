@@ -20,6 +20,7 @@ const PUBLIC_FILES = new Set([
 ]);
 const PUBLIC_DIRECTORIES = [
   'icons',
+  'avatar-lab',
   'src',
   'data/blocks',
   'data/routines',
@@ -42,6 +43,7 @@ const PRIVATE_EXTENSIONS = new Set([
 const MIME_TYPES = new Map([
   ['.css', 'text/css; charset=utf-8'],
   ['.gif', 'image/gif'],
+  ['.glb', 'model/gltf-binary'],
   ['.html', 'text/html; charset=utf-8'],
   ['.jpeg', 'image/jpeg'],
   ['.jpg', 'image/jpeg'],

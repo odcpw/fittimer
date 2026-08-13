@@ -1,0 +1,145 @@
+:root {
+  color-scheme: dark;
+  --bg: #080b0f;
+  --panel: #0d1218;
+  --panel-raised: #131a22;
+  --line: #27313d;
+  --text: #f5f7fa;
+  --muted: #909ba8;
+  --accent: #ff806d;
+  --accent-dark: #d75d4d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-width: 320px; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); }
+button, input { font: inherit; }
+button { color: inherit; }
+
+.lab-header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8, 11, 15, 0.96);
+}
+
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-size: 23px; letter-spacing: -0.025em; }
+.brand span { color: var(--accent); }
+.brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--accent); border-radius: 50%; transform: rotate(-20deg); }
+.lab-header p { margin: 0; color: var(--muted); font-size: 13px; }
+
+.lab-shell {
+  height: calc(100% - 72px);
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 88px;
+}
+
+.exercise-rail {
+  grid-row: 1;
+  min-height: 0;
+  padding: 28px 18px;
+  border-right: 1px solid var(--line);
+  background: #0a0e13;
+  overflow-y: auto;
+}
+
+.exercise-rail h1 { margin: 0 10px 18px; color: var(--muted); font-size: 12px; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; }
+.exercise-list { display: grid; gap: 10px; }
+.exercise-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.exercise-button:hover { background: var(--panel); }
+.exercise-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.exercise-button.is-active { border-color: var(--accent); background: var(--panel-raised); box-shadow: inset 3px 0 var(--accent); }
+.exercise-index { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #1b232d; color: var(--muted); font-variant-numeric: tabular-nums; }
+.exercise-button.is-active .exercise-index { background: var(--accent); color: #190d0a; }
+.exercise-label { display: grid; gap: 4px; }
+.exercise-label strong { font-size: 14px; font-weight: 650; }
+.exercise-label span { color: var(--muted); font-size: 12px; }
+.rail-note { margin: 24px 10px 0; color: #6f7a87; font-size: 11px; line-height: 1.55; }
+
+.stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: radial-gradient(circle at 50% 38%, #1d2228 0, #0d1116 48%, #080b0f 100%); }
+#canvas-host, #canvas-host canvas { display: block; width: 100%; height: 100%; }
+.stage-copy { position: absolute; z-index: 2; top: 22px; left: 24px; display: grid; gap: 4px; pointer-events: none; text-shadow: 0 2px 10px #000; }
+.stage-copy strong { font-size: 18px; letter-spacing: -0.015em; }
+.stage-copy span { color: var(--muted); font-size: 12px; }
+.load-state { position: absolute; z-index: 3; inset: 0; display: grid; place-items: center; color: var(--muted); background: rgba(8, 11, 15, 0.7); transition: opacity 180ms ease; pointer-events: none; }
+.load-state.is-hidden { opacity: 0; }
+.load-state.is-error { color: #ffb4aa; opacity: 1; }
+
+.prototype-note {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  margin: 0;
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 11, 15, 0.82);
+  pointer-events: none;
+}
+
+.transport {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto auto auto minmax(140px, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  border-top: 1px solid var(--line);
+  background: #0b1016;
+}
+.transport button { min-height: 44px; padding: 0 18px; border: 1px solid var(--line); border-radius: 8px; background: #151c24; cursor: pointer; }
+.transport button:hover:not(:disabled) { border-color: #435161; background: #1a232d; }
+.transport button:disabled { opacity: 0.45; cursor: wait; }
+.transport .primary-control { min-width: 94px; border-color: var(--accent); background: var(--accent); color: #1b0e0b; font-weight: 750; }
+.time { min-width: 58px; color: var(--accent); font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+.time.muted { color: var(--muted); text-align: left; }
+.timeline-label { display: flex; }
+#timeline { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.speed-controls { display: flex; gap: 6px; margin: 0; padding: 0; border: 0; }
+.speed-controls button { min-width: 54px; padding: 0 12px; }
+.speed-controls button.is-active { border-color: var(--accent); color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 760px) {
+  .lab-header { height: 56px; padding: 0 14px; }
+  .brand { font-size: 17px; }
+  .brand-mark { width: 28px; height: 28px; }
+  .lab-header p { display: none; }
+  .lab-shell { height: calc(100% - 56px); grid-template-columns: 150px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 72px; }
+  .exercise-rail { padding: 16px 8px; }
+  .exercise-rail h1 { margin: 0 6px 10px; }
+  .exercise-button { grid-template-columns: 1fr; gap: 6px; padding: 10px 8px; }
+  .exercise-index { display: none; }
+  .exercise-label strong { font-size: 12px; }
+  .rail-note, .exercise-label span { display: none; }
+  .prototype-note { right: 10px; bottom: 10px; font-size: 9px; }
+  .transport { grid-template-columns: auto auto minmax(100px, 1fr) auto; gap: 8px; padding: 10px 12px; }
+  .transport button { min-height: 40px; padding: 0 12px; }
+  .transport .time { display: none; }
+  .speed-controls button[data-speed="0.5"], .speed-controls button[data-speed="1.5"] { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .load-state { transition: none; }
+}
