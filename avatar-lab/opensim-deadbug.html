@@ -4,39 +4,49 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0d11">
-  <title>FitTimer Motion Lab</title>
+  <title>FitTimer OpenSim Dead Bug</title>
   <link rel="stylesheet" href="lab.css">
 </head>
 <body>
   <header class="lab-header">
-    <a class="brand" href="../" aria-label="Back to FitTimer">
+    <a class="brand" href="index.html" aria-label="Back to the skinned motion lab">
       <span class="brand-mark" aria-hidden="true">↗</span>
-      <strong><span>FitTimer</span> Motion Lab</strong>
+      <strong><span>FitTimer</span> Biomechanics Lab</strong>
     </a>
-    <p><a class="lab-switch" href="opensim-deadbug.html">OpenSim dead bug →</a> · Drag to rotate · Scroll or pinch to zoom</p>
+    <p>Drag to rotate · Scroll or pinch to zoom · Double-click to reset</p>
   </header>
 
   <main class="lab-shell">
-    <aside class="exercise-rail" aria-label="Exercise animations">
-      <h1>Michelle</h1>
-      <div id="exercise-list" class="exercise-list"></div>
-      <p class="rail-note">One skinned target. Three creator-sourced motion captures.</p>
+    <aside class="exercise-rail">
+      <h1>OpenSim result</h1>
+      <div class="exercise-list">
+        <button class="exercise-button is-active" type="button" aria-pressed="true">
+          <span class="exercise-index">01</span>
+          <span class="exercise-label">
+            <strong>Dead bug</strong>
+            <span>MadFit · side view</span>
+          </span>
+        </button>
+      </div>
+      <p class="rail-note">
+        LaiUhlrich2022 articulated body fitted to 360 measured COCO joints.
+        Perspective reprojection RMS: 9.6 px on a 1280×720 source.
+      </p>
     </aside>
 
-    <section class="stage" aria-label="Interactive 3D exercise preview">
+    <section class="stage" aria-label="Interactive OpenSim dead-bug preview">
       <div id="canvas-host"></div>
       <div class="stage-copy">
-        <strong id="movement-name">Loading model…</strong>
-        <span id="movement-source"></span>
+        <strong>OpenSim dead bug</strong>
+        <span>MadFit reference · 2D perspective inverse kinematics</span>
       </div>
-      <p class="prototype-note">Visual mocap prototype · not yet biomechanical</p>
-      <output id="load-state" class="load-state" aria-live="polite">Preparing skinned avatar…</output>
+      <p class="prototype-note">Kinematic fit · no force or loading claims</p>
+      <output id="load-state" class="load-state" aria-live="polite">Loading OpenSim motion…</output>
     </section>
 
     <section class="transport" aria-label="Animation playback controls">
       <button id="play-toggle" class="primary-control" type="button" disabled>Pause</button>
       <button id="restart" type="button" disabled>Restart</button>
-      <button id="skeleton-toggle" type="button" aria-pressed="true" disabled>Joint rig</button>
       <span id="current-time" class="time">0:00.00</span>
       <label class="timeline-label">
         <span class="sr-only">Animation position</span>
@@ -60,6 +70,6 @@
       }
     }
   </script>
-  <script type="module" src="lab.mjs?v=5"></script>
+  <script type="module" src="opensim-deadbug.mjs?v=1"></script>
 </body>
 </html>

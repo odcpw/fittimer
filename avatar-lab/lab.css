@@ -31,6 +31,8 @@ button { color: inherit; }
 .brand span { color: var(--accent); }
 .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--accent); border-radius: 50%; transform: rotate(-20deg); }
 .lab-header p { margin: 0; color: var(--muted); font-size: 13px; }
+.lab-switch { color: var(--accent); text-decoration: none; }
+.lab-switch:hover { text-decoration: underline; }
 
 .lab-shell {
   height: calc(100% - 72px);
