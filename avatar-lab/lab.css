@@ -85,6 +85,7 @@ button { color: inherit; }
 .stage-copy strong { font-size: 18px; letter-spacing: -0.015em; }
 .stage-copy span { color: var(--muted); font-size: 12px; }
 .joint-legend { position: absolute; z-index: 2; top: 22px; right: 22px; display: flex; gap: 12px; color: var(--muted); font-size: 11px; text-shadow: 0 2px 10px #000; pointer-events: none; }
+.joint-legend.is-hidden { display: none; }
 .joint-legend span::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 5px; border-radius: 50%; background: currentColor; }
 .legend-left { color: #5dc9ff; }
 .legend-right { color: #ff806d; }

@@ -12,6 +12,15 @@ Creator and source provenance are stored in each animation's glTF extras. The
 Motion Lab is an online evaluation surface and is not loaded by the offline
 workout PWA.
 
+## Direct SMPL-X dead bug
+
+`/avatar-lab/wholebody-deadbug.html` maps the 15-second RTMW3D-X dead-bug
+capture directly onto the native 55-joint SMPL-X skeleton and its 10,475-vertex
+skin. The default view is the animated human body; **Capture overlay** reveals
+the underlying 133-point observation for comparison. The fit includes explicit
+supine torso/face orientation and per-frame floor contact and does not pass
+through OpenSim or the Michelle/Mixamo rig.
+
 ## OpenSim dead bug
 
 `/avatar-lab/opensim-deadbug.html` is the first biomechanics-backed evaluation

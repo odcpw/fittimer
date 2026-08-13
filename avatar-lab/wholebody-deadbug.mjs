@@ -1,12 +1,14 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const elements = {
   host: document.querySelector('#canvas-host'),
   load: document.querySelector('#load-state'),
   play: document.querySelector('#play-toggle'),
   restart: document.querySelector('#restart'),
-  face: document.querySelector('#face-toggle'),
+  overlay: document.querySelector('#overlay-toggle'),
+  legend: document.querySelector('#joint-legend'),
   timeline: document.querySelector('#timeline'),
   current: document.querySelector('#current-time'),
   duration: document.querySelector('#duration'),
@@ -23,6 +25,9 @@ scene.add(keyLight);
 const rimLight = new THREE.DirectionalLight(0xff806d, 1.8);
 rimLight.position.set(-3, 2, -3);
 scene.add(rimLight);
+const evidenceGroup = new THREE.Group();
+evidenceGroup.visible = false;
+scene.add(evidenceGroup);
 
 const floor = new THREE.Mesh(
   new THREE.CircleGeometry(3.2, 80),
@@ -67,10 +72,11 @@ let joints = [];
 let bones = [];
 let torso = null;
 let head = null;
+let mixer = null;
 let playhead = 0;
 let playing = true;
 let speed = 1;
-let faceVisible = false;
+let overlayVisible = false;
 
 function formatTime(seconds) {
   const safe = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
@@ -122,7 +128,7 @@ function makeJoint(index) {
     new THREE.MeshStandardMaterial({ color: colorFor(index), roughness: 0.46, metalness: 0.04 }),
   );
   joint.visible = !isFace(index);
-  scene.add(joint);
+  evidenceGroup.add(joint);
   return joint;
 }
 
@@ -132,7 +138,7 @@ function makeBone([first, second]) {
     new THREE.CylinderGeometry(detail ? 0.006 : 0.018, detail ? 0.008 : 0.024, 1, detail ? 8 : 14),
     new THREE.MeshStandardMaterial({ color: colorFor(first), roughness: 0.5, metalness: 0.03 }),
   );
-  scene.add(bone);
+  evidenceGroup.add(bone);
   return { first, second, mesh: bone };
 }
 
@@ -191,18 +197,22 @@ function resetCamera() {
 function setEnabled(enabled) {
   elements.play.disabled = !enabled;
   elements.restart.disabled = !enabled;
-  elements.face.disabled = !enabled;
+  elements.overlay.disabled = !enabled;
   elements.timeline.disabled = !enabled;
   elements.speeds.disabled = !enabled;
 }
 
-async function loadMotion() {
-  motion = await fetch('assets/deadbug-rtmw3d.json?v=1', {
-    signal: AbortSignal.timeout(10000),
-  }).then((response) => {
-    if (!response.ok) throw new Error(`Motion request failed: ${response.status}`);
-    return response.json();
-  });
+async function loadExperience() {
+  const [motionData, gltf] = await Promise.all([
+    fetch('assets/deadbug-rtmw3d.json?v=1', {
+      signal: AbortSignal.timeout(10000),
+    }).then((response) => {
+      if (!response.ok) throw new Error(`Motion request failed: ${response.status}`);
+      return response.json();
+    }),
+    new GLTFLoader().loadAsync('assets/deadbug-smplx.glb?v=1'),
+  ]);
+  motion = motionData;
   if (motion.modelLandmarks !== 133 || motion.frames.some((frame) => frame.length !== 133)) {
     throw new Error('Whole-body motion does not contain 133 landmarks per frame');
   }
@@ -223,18 +233,34 @@ async function loadMotion() {
       roughness: 0.72,
     }),
   );
-  scene.add(torso);
+  evidenceGroup.add(torso);
   head = new THREE.Mesh(
     new THREE.SphereGeometry(0.10, 24, 18),
     new THREE.MeshStandardMaterial({ color: 0xd7dee7, transparent: true, opacity: 0.58, roughness: 0.58 }),
   );
-  scene.add(head);
+  evidenceGroup.add(head);
+
+  if (gltf.animations.length !== 1) {
+    throw new Error('SMPL-X body must contain one animation loop');
+  }
+  gltf.scene.traverse((item) => {
+    if (!item.isMesh) return;
+    item.frustumCulled = false;
+    item.material = item.material.clone();
+    item.material.color.setHex(0xd88b72);
+    item.material.roughness = 0.64;
+  });
+  scene.add(gltf.scene);
+  mixer = new THREE.AnimationMixer(gltf.scene);
+  const action = mixer.clipAction(gltf.animations[0]);
+  action.setLoop(THREE.LoopRepeat, Infinity);
+  action.play();
+  mixer.setTime(0);
 
   setInterpolatedFrame(0);
   elements.duration.textContent = formatTime(motion.durationSeconds);
   setEnabled(true);
-  const detailPoints = motion.modelLandmarks - (motion.keypointParts.face[1] - motion.keypointParts.face[0]);
-  elements.load.textContent = `${detailPoints} movement points shown · 133 captured`;
+  elements.load.textContent = 'SMPL-X body · 55 articulated joints · 133-point evidence available';
   elements.load.classList.add('is-hidden');
 }
 
@@ -246,21 +272,22 @@ elements.play.onclick = () => {
 elements.restart.onclick = () => {
   playhead = 0;
   setInterpolatedFrame(0);
+  mixer?.setTime(0);
 };
 
-elements.face.onclick = () => {
-  faceVisible = !faceVisible;
-  joints.forEach((joint, index) => {
-    if (isFace(index)) joint.visible = faceVisible;
-  });
-  elements.face.setAttribute('aria-pressed', String(faceVisible));
-  elements.face.textContent = `Face points ${faceVisible ? 'on' : 'off'}`;
+elements.overlay.onclick = () => {
+  overlayVisible = !overlayVisible;
+  evidenceGroup.visible = overlayVisible;
+  elements.legend.classList.toggle('is-hidden', !overlayVisible);
+  elements.overlay.setAttribute('aria-pressed', String(overlayVisible));
+  elements.overlay.textContent = `Capture overlay ${overlayVisible ? 'on' : 'off'}`;
 };
 
 elements.timeline.oninput = () => {
   if (!motion) return;
   playhead = Number(elements.timeline.value) * motion.durationSeconds;
   setInterpolatedFrame(playhead * motion.fps);
+  mixer?.setTime(playhead);
 };
 
 elements.speeds.onclick = (event) => {
@@ -285,6 +312,7 @@ renderer.setAnimationLoop(() => {
   if (motion) {
     if (playing) playhead = (playhead + timer.getDelta() * speed) % motion.durationSeconds;
     setInterpolatedFrame(playhead * motion.fps);
+    mixer?.setTime(playhead);
     elements.timeline.value = String(playhead / motion.durationSeconds);
     elements.current.textContent = formatTime(playhead);
   }
@@ -293,8 +321,8 @@ renderer.setAnimationLoop(() => {
 });
 
 resetCamera();
-loadMotion().catch((error) => {
+loadExperience().catch((error) => {
   console.error(error);
-  elements.load.textContent = 'Could not load the RTMW3D dead-bug motion';
+  elements.load.textContent = 'Could not load the skinned SMPL-X dead-bug motion';
   elements.load.className = 'load-state is-error';
 });

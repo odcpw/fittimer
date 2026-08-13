@@ -18,48 +18,48 @@
 
   <main class="lab-shell">
     <aside class="exercise-rail">
-      <h1>Direct capture</h1>
+      <h1>Direct skinned fit</h1>
       <div class="exercise-list">
         <button class="exercise-button is-active" type="button" aria-pressed="true">
           <span class="exercise-index">01</span>
           <span class="exercise-label">
             <strong>Dead bug · bilateral</strong>
-            <span>MadFit · RTMW3D-X</span>
+            <span>MadFit · RTMW3D-X → SMPL-X</span>
           </span>
         </button>
       </div>
       <dl class="capture-stats">
         <div><dt>Observed</dt><dd>133 points</dd></div>
-        <div><dt>Hands</dt><dd>42 points</dd></div>
-        <div><dt>Feet</dt><dd>6 points</dd></div>
+        <div><dt>Skeleton</dt><dd>55 joints</dd></div>
+        <div><dt>Skin</dt><dd>10,475 vertices</dd></div>
         <div><dt>Source</dt><dd>40 seconds</dd></div>
         <div><dt>Loop</dt><dd>15 seconds</dd></div>
       </dl>
       <p class="rail-note">
-        Frames 773–1180 were selected from the full capture: two alternating
-        repetitions with matching tabletop endpoints.
+        Frames 773–1180 were selected from the full capture, then fitted
+        directly to a native SMPL-X skeleton and skin. No OpenSim retarget.
       </p>
     </aside>
 
-    <section class="stage" aria-label="Interactive RTMW3D dead-bug preview">
+    <section class="stage" aria-label="Interactive skinned SMPL-X dead-bug preview">
       <div id="canvas-host"></div>
       <div class="stage-copy">
-        <strong>Direct whole-body observation</strong>
-        <span>RTMW3D-X · full 40s source → clean bilateral loop</span>
+        <strong>Skinned whole-body motion</strong>
+        <span>Direct RTMW3D-X fit · full 40s source → clean 15s loop</span>
       </div>
-      <div class="joint-legend" aria-hidden="true">
+      <div id="joint-legend" class="joint-legend is-hidden" aria-hidden="true">
         <span class="legend-left">Left</span>
         <span class="legend-right">Right</span>
         <span class="legend-center">Centre</span>
       </div>
-      <p class="prototype-note">Direct monocular estimate · no OpenSim fit</p>
-      <output id="load-state" class="load-state" aria-live="polite">Loading 133-point motion…</output>
+      <p class="prototype-note">Direct 55-joint SMPL-X skin · no OpenSim</p>
+      <output id="load-state" class="load-state" aria-live="polite">Loading skinned body…</output>
     </section>
 
     <section class="transport" aria-label="Animation playback controls">
       <button id="play-toggle" class="primary-control" type="button" disabled>Pause</button>
       <button id="restart" type="button" disabled>Restart</button>
-      <button id="face-toggle" type="button" aria-pressed="false" disabled>Face points off</button>
+      <button id="overlay-toggle" type="button" aria-pressed="false" disabled>Capture overlay off</button>
       <span id="current-time" class="time">0:00.00</span>
       <label class="timeline-label">
         <span class="sr-only">Animation position</span>
@@ -83,6 +83,6 @@
       }
     }
   </script>
-  <script type="module" src="wholebody-deadbug.mjs?v=1"></script>
+  <script type="module" src="wholebody-deadbug.mjs?v=2"></script>
 </body>
 </html>
