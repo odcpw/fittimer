@@ -430,6 +430,7 @@ export function workoutHudState(snapshot, hudVisible = true) {
   const detailsVisible = persistent || hudVisible === true;
   return Object.freeze({
     timerVisible: true,
+    nextUpVisible: true,
     detailsVisible,
     controlsVisible: state !== 'done' && WORKOUT_STATES.has(state) && detailsVisible,
     completionActionsVisible: state === 'done',

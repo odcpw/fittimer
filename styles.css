@@ -1296,12 +1296,18 @@ html[data-screen="workout"] .progress-track {
 html[data-screen="workout"] .next-up {
   position: absolute;
   z-index: 3;
+  top: max(18px, env(safe-area-inset-top));
   right: max(20px, env(safe-area-inset-right));
-  bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
-  left: max(20px, env(safe-area-inset-left));
+  bottom: auto;
+  left: auto;
+  max-width: min(56%, 640px);
   min-height: 0;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(5, 8, 12, 0.58);
+  text-align: right;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
-  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
 }
 
 html[data-screen="workout"] .workout-controls {
@@ -1335,7 +1341,6 @@ html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-
 html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .interval-count,
 html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .exercise-copy,
 html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .progress-track,
-html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .next-up,
 html[data-screen="workout"] .workout-screen[data-hud="timer"]:not([data-workout-state="paused"]):not([data-workout-state="done"]) .workout-controls {
   visibility: hidden;
   opacity: 0;
@@ -1357,7 +1362,6 @@ html[data-screen="workout"] .workout-screen[data-workout-state="done"] .completi
   html[data-screen="workout"] .interval-count,
   html[data-screen="workout"] .exercise-copy,
   html[data-screen="workout"] .progress-track,
-  html[data-screen="workout"] .next-up,
   html[data-screen="workout"] .workout-controls {
     transition-duration: 0.01ms;
   }
