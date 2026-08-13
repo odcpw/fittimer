@@ -4,51 +4,65 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0d11">
-  <title>FitTimer Description-Built Dead Bug</title>
+  <title>FitTimer Skinned Dead Bug Comparison</title>
   <link rel="stylesheet" href="lab.css">
 </head>
 <body>
   <header class="lab-header">
     <a class="brand" href="index.html" aria-label="Back to the skinned motion lab">
       <span class="brand-mark" aria-hidden="true">↗</span>
-      <strong><span>FitTimer</span> Observation Lab</strong>
+      <strong><span>FitTimer</span> Avatar Lab</strong>
     </a>
     <p>Drag to rotate · Scroll or pinch to zoom · Double-click to reset</p>
   </header>
 
   <main class="lab-shell">
     <aside class="exercise-rail">
-      <h1>Description-constrained</h1>
-      <div class="exercise-list">
-        <button class="exercise-button is-active" type="button" aria-pressed="true">
+      <h1>Character view</h1>
+      <div id="model-controls" class="exercise-list">
+        <button class="exercise-button is-active" type="button" data-model="realistic" aria-pressed="true">
           <span class="exercise-index">01</span>
           <span class="exercise-label">
-            <strong>Dead bug · contralateral</strong>
-            <span>Written form → constrained SMPL-X</span>
+            <strong>Realistic woman</strong>
+            <span>Vitruvian skin · native Rigify joints</span>
+          </span>
+        </button>
+        <button class="exercise-button" type="button" data-model="baseline" aria-pressed="false">
+          <span class="exercise-index">02</span>
+          <span class="exercise-label">
+            <strong>Pose baseline</strong>
+            <span>Clean description-built SMPL-X</span>
+          </span>
+        </button>
+        <button class="exercise-button" type="button" data-model="compare" aria-pressed="false">
+          <span class="exercise-index">03</span>
+          <span class="exercise-label">
+            <strong>Compare together</strong>
+            <span>Synchronized 15-second loop</span>
           </span>
         </button>
       </div>
       <dl class="capture-stats">
         <div><dt>Input</dt><dd>Written form</dd></div>
-        <div><dt>Skeleton</dt><dd>55 joints</dd></div>
-        <div><dt>Skin</dt><dd>10,475 vertices</dd></div>
-        <div><dt>Key poses</dt><dd>3 constrained</dd></div>
+        <div><dt>Character</dt><dd id="character-stat">Vitruvian</dd></div>
+        <div><dt>Skin</dt><dd id="skin-stat">37,436 vertices</dd></div>
+        <div><dt>Motion</dt><dd>3 constrained poses</dd></div>
         <div><dt>Loop</dt><dd>15 seconds</dd></div>
       </dl>
       <p class="rail-note">
-        The torso stays fixed while endpoint constraints solve tabletop and
-        both contralateral extensions. Native leg lanes prevent inward collapse.
+        The same book-derived movement drives both bodies. The realistic model
+        keeps its own proportions, skin weights and knee/elbow joint helpers.
       </p>
     </aside>
 
-    <section class="stage" aria-label="Interactive description-built SMPL-X dead-bug preview">
+    <section class="stage" aria-label="Interactive skinned dead-bug character comparison">
       <div id="canvas-host"></div>
       <div class="stage-copy">
-        <strong>Book-described dead bug</strong>
-        <span>Contreras · NSCA · NASM → reusable motion specification</span>
+        <strong id="view-name">Dead bug · realistic Vitruvian</strong>
+        <span id="view-detail">Book-described motion → native skinned character</span>
       </div>
-      <p class="prototype-note">Description-constrained SMPL-X · no video</p>
-      <output id="load-state" class="load-state" aria-live="polite">Loading skinned body…</output>
+      <p class="prototype-note">Visual skin/rig test · not yet an anatomical simulation</p>
+      <output id="load-state" class="load-state" aria-live="polite">Loading both skinned bodies…</output>
     </section>
 
     <section class="transport" aria-label="Animation playback controls">
@@ -78,6 +92,6 @@
       }
     }
   </script>
-  <script type="module" src="wholebody-deadbug.mjs?v=6"></script>
+  <script type="module" src="wholebody-deadbug.mjs?v=8"></script>
 </body>
 </html>

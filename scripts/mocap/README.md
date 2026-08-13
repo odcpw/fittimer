@@ -76,3 +76,39 @@ Different YouTube performances are not synchronized cameras and therefore
 cannot be stereo-triangulated. They can be fitted independently and compared
 for anatomical consistency. Literal triangulation requires synchronized views
 of the same repetition with calibrated cameras.
+
+## CharMorph Vitruvian web character
+
+The realistic dead-bug comparison uses the CC0 Vitruvian character pack and
+CharMorph generator pinned in the private external toolchain at
+`/home/oliver/Projects/fittimer-avatar-toolchain`. Generation is pinned to the
+portable Blender 4.5 LTS runtime there because CharMorph finalization is not
+reliable on Blender 5.x. The repository contains only the reproducible scripts
+and browser-ready output, not the 1.2 GB authoring pack.
+
+Build the athletic female Rigify authoring character:
+
+```sh
+/home/oliver/Projects/fittimer-avatar-toolchain/blender-4.5.12-linux-x64/blender \
+  --background --python scripts/mocap/build-vitruvian-character.py -- \
+  --addon-dir /home/oliver/Projects/fittimer-avatar-toolchain/addons \
+  --output /home/oliver/Projects/fittimer-avatar-toolchain/vitruvian-athletic-rigify-v1.blend \
+  --texture-size 1K
+```
+
+Retarget the clean 15-second SMPL-X description motion and export the web GLB:
+
+```sh
+/home/oliver/Projects/fittimer-avatar-toolchain/blender-4.5.12-linux-x64/blender \
+  --background --python scripts/mocap/retarget-rigify.py -- \
+  --target /home/oliver/Projects/fittimer-avatar-toolchain/vitruvian-athletic-rigify-v1.blend \
+  --source avatar-lab/assets/deadbug-described-smplx.glb \
+  --output avatar-lab/assets/deadbug-vitruvian.glb \
+  --work-dir /home/oliver/Projects/fittimer-avatar-toolchain/generated \
+  --poster avatar-lab/assets/deadbug-vitruvian.png
+```
+
+The exporter transfers anatomical joint directions into the native Rigify FK
+controls, retains the target's proportions and deform helpers, and collapses
+Vitruvian's seventh authoring UV set to `TEXCOORD_0` for reliable Three.js skin
+rendering. It does not claim OpenSim dynamics or internal anatomy.

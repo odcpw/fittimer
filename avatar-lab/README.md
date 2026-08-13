@@ -12,18 +12,24 @@ Creator and source provenance are stored in each animation's glTF extras. The
 Motion Lab is an online evaluation surface and is not loaded by the offline
 workout PWA.
 
-## Description-constrained SMPL-X dead bug
+## Description-constrained skinned dead bug
 
 `/avatar-lab/wholebody-deadbug.html` builds a 15-second contralateral dead bug
 from a structured written-form specification derived from Contreras, NSCA, and
 NASM descriptions. A constrained solver creates three key poses on the native
 55-joint SMPL-X skeleton; smooth joint rotations connect them while the trunk
-stays fixed. No video observation, pose detector, OpenSim retarget, or
-Michelle/Mixamo rig drives this version. **Joint rig** reveals its armature.
-Knees, ankles, and feet retain the target skeleton's native lateral lanes so
-the limbs cannot collapse toward or cross the midline. The older simple-pose
-capture remains useful as a flexion/extension reference, but its side-view
-depth is not used as lateral-spacing evidence.
+stays fixed. The page can show that clean motion source, a realistic CharMorph
+Vitruvian woman driven through her native Rigify controls, or both synchronized
+side by side. **Joint rig** reveals the active armatures. The retarget preserves
+the Vitruvian body's own segment lengths and uses its sliding knee and elbow
+helpers; this is still a visual skin/rig prototype rather than an anatomical
+force or tissue simulation.
+
+No video observation, pose detector, OpenSim fit, or Michelle/Mixamo motion
+drives this version. Knees, ankles, and feet retain the target skeleton's
+native lateral lanes so the limbs cannot collapse toward or cross the midline.
+The older simple-pose capture remains useful as a flexion/extension reference,
+but its side-view depth is not used as lateral-spacing evidence.
 
 The earlier direct RTMW3D-X artifacts remain available for diagnosis, but are
 not loaded by this page because their monocular frame jitter produced unstable
