@@ -9,6 +9,14 @@ const assets = [
   ['butt-kicks.glb', 'Butt kicks'],
 ];
 
+const ironRootAssets = [
+  'iron-roots-march-arm-circles.glb',
+  'iron-roots-deepening-squat.glb',
+  'iron-roots-hip-hinge-reach.glb',
+  'iron-roots-ankle-calf-rocks.glb',
+  'iron-roots-wall-scapular-reach.glb',
+];
+
 async function readGlbJson(file) {
   const buffer = await readFile(path.join('avatar-lab', 'assets', file));
   assert.equal(buffer.subarray(0, 4).toString(), 'glTF');
@@ -71,4 +79,31 @@ test('FitTimer links to a Michelle lab with three creator-labelled assessment co
   for (const [file] of assets) assert.match(source, new RegExp(file.replaceAll('.', '\\.')));
   for (const creator of ['MadFit', 'Sydney Cummings', 'Growingannanas']) assert.match(source, new RegExp(creator));
   assert.match(css, /@media \(max-width: 760px\)/);
+});
+
+test('Iron Roots lab ships five selectable 15-second Vitruvian motion loops', async () => {
+  const html = await readFile('avatar-lab/iron-roots-motion.html', 'utf8');
+  const source = await readFile('avatar-lab/iron-roots-motion.mjs', 'utf8');
+
+  assert.equal(html.match(/data-motion=/g)?.length, 5);
+  assert.match(html, /March \+ Arm Circles/);
+  assert.match(html, /Deepening Squat/);
+  assert.match(html, /Hip Hinge \+ Reach/);
+  assert.match(html, /Ankle Pumps \+ Heel-to-toe Rocks/);
+  assert.match(html, /Wall Scapular Reach/);
+  assert.match(source, /new OrbitControls/);
+  assert.match(source, /THREE\.LoopRepeat/);
+
+  for (const file of ironRootAssets) {
+    assert.match(source, new RegExp(file.replaceAll('.', '\\.')));
+    const gltf = await readGlbJson(file);
+    assert.equal(gltf.skins.length, 1);
+    assert.equal(gltf.meshes.length, 1);
+    assert.equal(gltf.animations.length, 1);
+    assert.ok(gltf.animations[0].channels.length > 500);
+    const motion = gltf.nodes.find((node) => node.extras?.fitTimerMotion)?.extras.fitTimerMotion;
+    assert.equal(motion?.kind, 'fitTimerRtmw3dRigifyMotion');
+    assert.equal(motion?.durationSeconds, 15);
+    assert.equal(motion?.loop, true);
+  }
 });

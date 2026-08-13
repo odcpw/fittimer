@@ -51,8 +51,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--end-frame", required=True, type=int)
     parser.add_argument("--duration", default=15.0, type=float)
     parser.add_argument("--output-fps", default=30.0, type=float)
+    parser.add_argument(
+        "--ping-pong",
+        action="store_true",
+        help="Mirror a one-way action back to its start to create a complete loop.",
+    )
     parser.add_argument("--torso-meters", default=0.52, type=float)
     parser.add_argument("--confidence-threshold", default=0.35, type=float)
+    parser.add_argument(
+        "--grounding",
+        choices=("foot-contact", "fixed-root"),
+        default="foot-contact",
+        help="Use fixed-root when feet are occluded and the stance is stationary.",
+    )
     return parser.parse_args()
 
 
@@ -206,17 +217,36 @@ def main() -> None:
     positions = smooth_reflect(positions, 7)
     selected = positions[args.start_frame : args.end_frame + 1].copy()
     targets = segment_targets(selected)
-    source_seam = selected[-1] - selected[0]
-    blend = np.linspace(0.0, 1.0, len(selected))[:, None, None]
-    selected -= blend * source_seam
+    if args.ping_pong:
+        selected = np.concatenate((selected, selected[-2:0:-1]), axis=0)
+        source_seam = selected[-1] - selected[0]
+        selection_method = "reviewed one-way action mirrored back to its start"
+    else:
+        source_seam = selected[-1] - selected[0]
+        blend = np.linspace(0.0, 1.0, len(selected))[:, None, None]
+        selected -= blend * source_seam
+        selection_method = (
+            "phase-aligned bilateral repetition window, time-stretched to 15 seconds"
+        )
 
     output_frames = round(args.duration * args.output_fps)
     cycle = resample(selected, output_frames)
     cycle = circular_smooth(cycle, 3)
     cycle = stabilize_articulated_lengths(cycle, targets)
     movement = np.r_[0:23, 91:133]
-    floor_height = float(cycle[:, movement, 1].min())
-    cycle[..., 1] += 0.025 - floor_height
+    # Root-centering removes camera translation, but a standing character still
+    # needs its pelvis to rise and fall relative to the planted foot. Ground each
+    # frame on its lowest observed foot landmark so squats retain depth, marches
+    # retain their support leg, and calf raises retain heel lift instead of
+    # turning into a floating wooden doll.
+    if args.grounding == "foot-contact":
+        foot_height = cycle[:, 15:23, 1].min(axis=1)
+        cycle[..., 1] += (0.025 - foot_height)[:, None]
+        grounding = "per-frame lowest observed foot landmark"
+    else:
+        floor_height = float(cycle[:, movement, 1].min())
+        cycle[..., 1] += 0.025 - floor_height
+        grounding = "fixed root; global movement clearance"
     output_seam = cycle[0] - cycle[-1]
 
     selected_confidence = confidence[args.start_frame : args.end_frame + 1]
@@ -242,7 +272,7 @@ def main() -> None:
             "sourceDurationSeconds": (args.end_frame - args.start_frame)
             / capture["fps"],
             "outputFrames": output_frames,
-            "method": "phase-aligned bilateral repetition window, time-stretched to 15 seconds",
+            "method": selection_method,
         },
         "filter": {
             "confidenceThreshold": args.confidence_threshold,
@@ -252,6 +282,7 @@ def main() -> None:
             "perFrameTorsoScaleStabilized": True,
             "articulatedSegmentLengthsStabilized": True,
             "groundClearanceMeters": 0.025,
+            "grounding": grounding,
             "biomechanicalFit": False,
         },
         "quality": {
