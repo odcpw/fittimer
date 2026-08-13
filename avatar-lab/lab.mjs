@@ -3,9 +3,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const EXERCISES = Object.freeze([
-  { id: 'squat', name: 'Bodyweight squat', creator: 'MadFit', asset: 'assets/bodyweight-squat.glb', camera: [0, 1.0, -4.1], target: [0, 0.88, 0] },
-  { id: 'lunge', name: 'Reverse lunge + knee drive', creator: 'Sydney Cummings', asset: 'assets/reverse-lunge-knee-drive.glb', camera: [0, 1.0, -4.3], target: [0, 0.86, 0] },
-  { id: 'butt-kicks', name: 'Butt kicks', creator: 'Growingannanas', asset: 'assets/butt-kicks.glb', camera: [0, 1.0, -4.3], target: [0, 0.88, 0] },
+  { id: 'squat', name: 'Bodyweight squat', creator: 'MadFit', asset: 'assets/bodyweight-squat.glb?v=4', camera: [0, 1.0, -4.1], target: [0, 0.88, 0] },
+  { id: 'lunge', name: 'Reverse lunge + knee drive', creator: 'Sydney Cummings', asset: 'assets/reverse-lunge-knee-drive.glb?v=4', camera: [0, 1.0, -4.3], target: [0, 0.86, 0] },
+  { id: 'butt-kicks', name: 'Butt kicks', creator: 'Growingannanas', asset: 'assets/butt-kicks.glb?v=4', camera: [0, 1.0, -4.3], target: [0, 0.88, 0] },
 ]);
 
 const TARGET_MODEL = 'Mixamo Michelle';
@@ -18,6 +18,7 @@ const elements = {
   loadState: document.querySelector('#load-state'),
   play: document.querySelector('#play-toggle'),
   restart: document.querySelector('#restart'),
+  skeleton: document.querySelector('#skeleton-toggle'),
   timeline: document.querySelector('#timeline'),
   current: document.querySelector('#current-time'),
   duration: document.querySelector('#duration'),
@@ -64,16 +65,20 @@ controls.enableDamping = true;
 controls.enablePan = false;
 controls.minDistance = 1.25;
 controls.maxDistance = 8;
+controls.minPolarAngle = 0.05;
+controls.maxPolarAngle = Math.PI * 0.495;
 
 const loader = new GLTFLoader();
 const timer = new THREE.Timer();
 timer.connect(document);
 let avatar = null;
+let skeletonHelper = null;
 let mixer = null;
 let actions = [];
 let duration = 0;
 let playing = true;
 let speed = 1;
+let skeletonVisible = true;
 let selected = EXERCISES[0];
 let loadGeneration = 0;
 
@@ -86,6 +91,7 @@ function formatTime(seconds) {
 function setEnabled(enabled) {
   elements.play.disabled = !enabled;
   elements.restart.disabled = !enabled;
+  elements.skeleton.disabled = !enabled;
   elements.timeline.disabled = !enabled;
   elements.speeds.disabled = !enabled;
 }
@@ -99,6 +105,11 @@ function resetCamera(exercise = selected) {
 
 function disposeAvatar() {
   if (!avatar) return;
+  if (skeletonHelper) {
+    scene.remove(skeletonHelper);
+    skeletonHelper.material.dispose();
+    skeletonHelper = null;
+  }
   scene.remove(avatar);
   avatar.traverse((item) => {
     item.geometry?.dispose?.();
@@ -109,6 +120,29 @@ function disposeAvatar() {
   mixer = null;
   actions = [];
   avatar = null;
+}
+
+function groundAvatar(root) {
+  root.updateMatrixWorld(true);
+  const bounds = new THREE.Box3().setFromObject(root, true);
+  if (!Number.isFinite(bounds.min.y)) return 0;
+  const correction = -bounds.min.y;
+  root.position.y += correction;
+  root.updateMatrixWorld(true);
+  return correction;
+}
+
+function attachSkeleton(root) {
+  skeletonHelper = new THREE.SkeletonHelper(root);
+  skeletonHelper.material.color.set(0xc9ff3d);
+  skeletonHelper.material.depthTest = false;
+  skeletonHelper.material.transparent = true;
+  skeletonHelper.material.opacity = 0.86;
+  skeletonHelper.renderOrder = 4;
+  skeletonHelper.visible = skeletonVisible;
+  scene.add(skeletonHelper);
+  elements.skeleton.setAttribute('aria-pressed', String(skeletonVisible));
+  elements.skeleton.textContent = skeletonVisible ? 'Joint rig on' : 'Joint rig off';
 }
 
 function updateButtons() {
@@ -143,6 +177,9 @@ async function loadExercise(exercise) {
     mixer = new THREE.AnimationMixer(avatar);
     duration = gltf.animations.reduce((maximum, clip) => Math.max(maximum, clip.duration), 0);
     actions = gltf.animations.map((clip) => mixer.clipAction(clip).setLoop(THREE.LoopRepeat, Infinity).play());
+    mixer.setTime(0);
+    groundAvatar(avatar);
+    attachSkeleton(avatar);
     mixer.timeScale = playing ? speed : 0;
     elements.duration.textContent = formatTime(duration);
     elements.timeline.value = '0';
@@ -188,6 +225,13 @@ elements.play.onclick = () => {
 elements.restart.onclick = () => {
   mixer?.setTime(0);
   for (const action of actions) action.play();
+};
+
+elements.skeleton.onclick = () => {
+  skeletonVisible = !skeletonVisible;
+  if (skeletonHelper) skeletonHelper.visible = skeletonVisible;
+  elements.skeleton.setAttribute('aria-pressed', String(skeletonVisible));
+  elements.skeleton.textContent = skeletonVisible ? 'Joint rig on' : 'Joint rig off';
 };
 
 elements.timeline.oninput = () => {

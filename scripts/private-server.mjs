@@ -278,10 +278,14 @@ export function createPrivateServer(options = {}) {
 async function main() {
   const options = parseServerArgs(process.argv.slice(2));
   if (options.help) {
-    process.stdout.write('Usage: node scripts/private-server.mjs [--port PORT] [--host 127.0.0.1] [--private-pack-root DIR]\n');
+    process.stdout.write('Usage: node scripts/private-server.mjs --private-pack-root DIR [--port PORT] [--host 127.0.0.1]\n');
     return;
   }
+  if (!options.privatePackRoot) {
+    throw new Error('private pack root is required; pass --private-pack-root DIR or FITTIMER_PRIVATE_PACK_ROOT');
+  }
   await access(options.root);
+  await access(path.join(options.privatePackRoot, 'index.json'));
   const app = createPrivateServer(options);
   const address = await app.listen();
   const port = typeof address === 'object' && address ? address.port : options.port;

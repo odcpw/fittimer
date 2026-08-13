@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -16,6 +17,15 @@ import {
   selectMediaPack,
 } from '../src/app.mjs';
 import { createPrivateServer } from '../scripts/private-server.mjs';
+
+test('private server CLI refuses a shell-only launch without the video pack index', () => {
+  const result = spawnSync(process.execPath, ['scripts/private-server.mjs', '--port', '0'], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /private pack root is required/);
+});
 
 async function makeServerFixture() {
   const root = await mkdtemp(path.join(tmpdir(), 'fittimer-app-'));

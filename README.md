@@ -43,9 +43,16 @@ python -m http.server 8000
 
 Then open `http://localhost:8000/`.
 
-To install the deployed app, open `https://odcpw.github.io/fittimer/` on the
-phone. In Android Chrome use **Install app**; in iOS Safari use **Share → Add
-to Home Screen**. Visit once online before testing a workout in airplane mode.
+The public GitHub Pages build contains the app shell but deliberately has no
+creator videos. For the complete app, join the private tailnet and install
+`https://3090.tail52e2c8.ts.net/` on the phone. In Android Chrome use
+**Install app**; in iOS Safari use **Share → Add to Home Screen**. Visit once
+online before testing a workout offline.
+
+The private origin is backed by the enabled `fittimer-private.service` user
+service. Direct launches of `scripts/private-server.mjs` require an explicit
+`--private-pack-root`; the server refuses to start without the video index so a
+shell-only process cannot silently replace the working service.
 
 ## Data provenance
 

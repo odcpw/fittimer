@@ -101,7 +101,7 @@ button { color: inherit; }
 .transport {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: auto auto auto minmax(140px, 1fr) auto auto;
+  grid-template-columns: auto auto auto auto minmax(140px, 1fr) auto auto;
   align-items: center;
   gap: 16px;
   padding: 16px 28px;
@@ -134,7 +134,7 @@ button { color: inherit; }
   .exercise-label strong { font-size: 12px; }
   .rail-note, .exercise-label span { display: none; }
   .prototype-note { right: 10px; bottom: 10px; font-size: 9px; }
-  .transport { grid-template-columns: auto auto minmax(100px, 1fr) auto; gap: 8px; padding: 10px 12px; }
+  .transport { grid-template-columns: auto auto auto minmax(100px, 1fr) auto; gap: 8px; padding: 10px 12px; }
   .transport button { min-height: 40px; padding: 0 12px; }
   .transport .time { display: none; }
   .speed-controls button[data-speed="0.5"], .speed-controls button[data-speed="1.5"] { display: none; }

@@ -34,6 +34,12 @@ test('avatar lab ships one real skinned target with a loop for every assessment 
     assert.equal(gltf.animations[0].name, expectedName);
     assert.ok(gltf.animations[0].channels.length > 60, `${file} must animate the armature, not a prop`);
 
+    const motion = gltf.nodes.find((node) => node.extras?.fitTimerMotion)?.extras.fitTimerMotion;
+    assert.equal(motion?.retargetSpace, 'world-rest-basis-v2');
+    assert.ok(motion.verification.maxJointDirectionErrorDegrees < 3, `${file} must follow source joint directions`);
+    assert.ok(motion.verification.maxFootDirectionErrorDegrees < 3, `${file} must keep feet on their explicit target`);
+    assert.ok(motion.verification.maxGroundErrorMeters < 0.002, `${file} must stay grounded`);
+
     const durations = [...new Set(gltf.animations[0].samplers.map((sampler) => sampler.input))]
       .map((accessor) => gltf.accessors[accessor].max[0]);
     assert.ok(durations.every((duration) => duration >= 2 && duration <= 5), `${file} needs a short review loop`);
@@ -52,8 +58,12 @@ test('FitTimer links to a Michelle lab with three creator-labelled assessment co
   assert.match(html, /Drag to rotate/);
   assert.match(html, /Scroll or pinch to zoom/);
   assert.match(html, /id="timeline"/);
+  assert.match(html, /id="skeleton-toggle"/);
   assert.match(source, /new OrbitControls/);
   assert.match(source, /controls\.enablePan = false/);
+  assert.match(source, /controls\.maxPolarAngle/);
+  assert.match(source, /new THREE\.SkeletonHelper/);
+  assert.match(source, /new THREE\.Box3\(\)\.setFromObject/);
   assert.match(source, /THREE\.LoopRepeat/);
   assert.match(html, /not yet biomechanical/);
   assert.doesNotMatch(source, /dead-bug-experimental\.glb/);
