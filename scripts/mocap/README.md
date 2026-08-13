@@ -1,4 +1,52 @@
-# OpenSim motion fitting
+# Mocap pipelines
+
+## Direct 133-point whole-body capture
+
+The current dead-bug observation lab uses RTMW3D-X directly. It retains all
+133 output landmarks (body, feet, face, and both hands) from every frame of the
+40-second source. It does **not** fit the motion back to OpenSim.
+
+Raw video, the complete observation arrays, and review overlays remain in
+`/home/oliver/Projects/fittimer-mocap-tools`. The reproducible 15-second browser
+loop is committed as `avatar-lab/assets/deadbug-rtmw3d.json`.
+
+Capture the retained MadFit source on `3090`:
+
+```sh
+RTMW_LIB_ROOT=/home/oliver/Projects/fittimer-mocap-tools/GVHMR/.venv/lib/python3.10/site-packages/nvidia
+export LD_LIBRARY_PATH="$RTMW_LIB_ROOT/cublas/lib:$RTMW_LIB_ROOT/cuda_runtime/lib:$RTMW_LIB_ROOT/cufft/lib:$RTMW_LIB_ROOT/curand/lib:$RTMW_LIB_ROOT/cusolver/lib:$RTMW_LIB_ROOT/cusparse/lib:$RTMW_LIB_ROOT/nvjitlink/lib:${LD_LIBRARY_PATH:-}"
+
+/home/oliver/Projects/fittimer-mocap-tools/rtmlib/.venv/bin/python \
+  scripts/mocap/capture-rtmw3d.py \
+  --video /home/oliver/Projects/fittimer-private-packs/creator-library-v1/pack/clips/wave-v3-dead-bug-madfit.mp4 \
+  --output-dir /home/oliver/Projects/fittimer-mocap-tools/deadbug-rtmw3d-v1 \
+  --preview /home/oliver/Projects/fittimer-mocap-tools/deadbug-rtmw3d-v1/wholebody-overlay.mp4 \
+  --rtmlib-root /home/oliver/Projects/fittimer-mocap-tools/rtmlib \
+  --source-id wave-v3-dead-bug-madfit
+```
+
+Build the reviewed bilateral loop:
+
+```sh
+/home/oliver/Projects/fittimer-mocap-tools/rtmlib/.venv/bin/python \
+  scripts/mocap/build-rtmw3d-loop.py \
+  --observations /home/oliver/Projects/fittimer-mocap-tools/deadbug-rtmw3d-v1/observations.npz \
+  --capture /home/oliver/Projects/fittimer-mocap-tools/deadbug-rtmw3d-v1/capture.json \
+  --rtmlib-root /home/oliver/Projects/fittimer-mocap-tools/rtmlib \
+  --output avatar-lab/assets/deadbug-rtmw3d.json \
+  --start-frame 773 \
+  --end-frame 1180 \
+  --duration 15 \
+  --output-fps 30
+```
+
+The loop keeps RTMW3D's observed joint directions. Low-confidence samples are
+interpolated, all trajectories are temporally smoothed, and 54 connected
+body/finger/foot segments keep fixed lengths so an isolated depth outlier
+cannot stretch a limb. This is still a monocular estimate, not ground-truth
+depth or a force model.
+
+## OpenSim motion fitting
 
 The dead-bug lab uses OpenSim 4.4.1 and the LaiUhlrich2022 model from the
 pinned OpenCap Monocular checkout. Creator media, pose arrays, fitted models,

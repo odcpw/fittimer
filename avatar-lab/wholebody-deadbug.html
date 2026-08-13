@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0d11">
+  <title>FitTimer Whole-Body Dead Bug</title>
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+  <header class="lab-header">
+    <a class="brand" href="index.html" aria-label="Back to the skinned motion lab">
+      <span class="brand-mark" aria-hidden="true">↗</span>
+      <strong><span>FitTimer</span> Observation Lab</strong>
+    </a>
+    <p>Drag to rotate · Scroll or pinch to zoom · Double-click to reset</p>
+  </header>
+
+  <main class="lab-shell">
+    <aside class="exercise-rail">
+      <h1>Direct capture</h1>
+      <div class="exercise-list">
+        <button class="exercise-button is-active" type="button" aria-pressed="true">
+          <span class="exercise-index">01</span>
+          <span class="exercise-label">
+            <strong>Dead bug · bilateral</strong>
+            <span>MadFit · RTMW3D-X</span>
+          </span>
+        </button>
+      </div>
+      <dl class="capture-stats">
+        <div><dt>Observed</dt><dd>133 points</dd></div>
+        <div><dt>Hands</dt><dd>42 points</dd></div>
+        <div><dt>Feet</dt><dd>6 points</dd></div>
+        <div><dt>Source</dt><dd>40 seconds</dd></div>
+        <div><dt>Loop</dt><dd>15 seconds</dd></div>
+      </dl>
+      <p class="rail-note">
+        Frames 773–1180 were selected from the full capture: two alternating
+        repetitions with matching tabletop endpoints.
+      </p>
+    </aside>
+
+    <section class="stage" aria-label="Interactive RTMW3D dead-bug preview">
+      <div id="canvas-host"></div>
+      <div class="stage-copy">
+        <strong>Direct whole-body observation</strong>
+        <span>RTMW3D-X · full 40s source → clean bilateral loop</span>
+      </div>
+      <div class="joint-legend" aria-hidden="true">
+        <span class="legend-left">Left</span>
+        <span class="legend-right">Right</span>
+        <span class="legend-center">Centre</span>
+      </div>
+      <p class="prototype-note">Direct monocular estimate · no OpenSim fit</p>
+      <output id="load-state" class="load-state" aria-live="polite">Loading 133-point motion…</output>
+    </section>
+
+    <section class="transport" aria-label="Animation playback controls">
+      <button id="play-toggle" class="primary-control" type="button" disabled>Pause</button>
+      <button id="restart" type="button" disabled>Restart</button>
+      <button id="face-toggle" type="button" aria-pressed="false" disabled>Face points off</button>
+      <span id="current-time" class="time">0:00.00</span>
+      <label class="timeline-label">
+        <span class="sr-only">Animation position</span>
+        <input id="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled>
+      </label>
+      <span id="duration" class="time muted">0:15.00</span>
+      <fieldset id="speed-controls" class="speed-controls" disabled>
+        <legend class="sr-only">Playback speed</legend>
+        <button type="button" data-speed="0.5">0.5×</button>
+        <button type="button" data-speed="1" class="is-active">1×</button>
+        <button type="button" data-speed="1.5">1.5×</button>
+      </fieldset>
+    </section>
+  </main>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="wholebody-deadbug.mjs?v=1"></script>
+</body>
+</html>
