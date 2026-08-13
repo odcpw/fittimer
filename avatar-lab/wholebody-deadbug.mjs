@@ -83,7 +83,7 @@ function setEnabled(enabled) {
 }
 
 async function loadExperience() {
-  const gltf = await new GLTFLoader().loadAsync('assets/deadbug-described-smplx.glb?v=2');
+  const gltf = await new GLTFLoader().loadAsync('assets/deadbug-described-smplx.glb?v=4');
   if (gltf.animations.length !== 1) throw new Error('SMPL-X body must contain one animation loop');
 
   gltf.scene.traverse((item) => {

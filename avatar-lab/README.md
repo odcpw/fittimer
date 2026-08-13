@@ -20,6 +20,10 @@ NASM descriptions. A constrained solver creates three key poses on the native
 55-joint SMPL-X skeleton; smooth joint rotations connect them while the trunk
 stays fixed. No video observation, pose detector, OpenSim retarget, or
 Michelle/Mixamo rig drives this version. **Joint rig** reveals its armature.
+Knees, ankles, and feet retain the target skeleton's native lateral lanes so
+the limbs cannot collapse toward or cross the midline. The older simple-pose
+capture remains useful as a flexion/extension reference, but its side-view
+depth is not used as lateral-spacing evidence.
 
 The earlier direct RTMW3D-X artifacts remain available for diagnosis, but are
 not loaded by this page because their monocular frame jitter produced unstable

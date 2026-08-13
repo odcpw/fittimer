@@ -106,6 +106,25 @@ def segment_length(rest: np.ndarray, first: int, second: int) -> float:
     return float(np.linalg.norm(rest[second] - rest[first]))
 
 
+def endpoint_in_native_lane(
+    origin: np.ndarray,
+    direction: np.ndarray,
+    length: float,
+    lane: float,
+) -> np.ndarray:
+    """Place a limb endpoint without collapsing its native lateral lane."""
+    sagittal_direction = direction.copy()
+    sagittal_direction[2] = 0
+    sagittal_direction = unit(sagittal_direction.tolist())
+    lateral_distance = lane - float(origin[2])
+    if abs(lateral_distance) >= length:
+        raise ValueError("native lateral lane exceeds the connected segment length")
+    sagittal_length = float(np.sqrt(length**2 - lateral_distance**2))
+    endpoint = origin + sagittal_direction * sagittal_length
+    endpoint[2] = lane
+    return endpoint
+
+
 def described_targets(
     spec: dict, rest: np.ndarray, base_world: np.ndarray, pose_name: str
 ) -> dict[str, np.ndarray]:
@@ -141,9 +160,21 @@ def described_targets(
         thigh = segment_length(rest, hip, knee)
         shin = segment_length(rest, knee, ankle)
         foot_length = segment_length(rest, ankle, foot)
-        targets[f"{side}Knee"] = base_world[hip] + thigh_direction * thigh
-        targets[f"{side}Ankle"] = targets[f"{side}Knee"] + shin_direction * shin
-        targets[f"{side}Foot"] = targets[f"{side}Ankle"] + foot_direction * foot_length
+        targets[f"{side}Knee"] = endpoint_in_native_lane(
+            base_world[hip], thigh_direction, thigh, float(base_world[knee, 2])
+        )
+        targets[f"{side}Ankle"] = endpoint_in_native_lane(
+            targets[f"{side}Knee"],
+            shin_direction,
+            shin,
+            float(base_world[ankle, 2]),
+        )
+        targets[f"{side}Foot"] = endpoint_in_native_lane(
+            targets[f"{side}Ankle"],
+            foot_direction,
+            foot_length,
+            float(base_world[foot, 2]),
+        )
     return targets
 
 
@@ -253,7 +284,7 @@ def floor_translation(
     model: SMPLX,
     axis_angle: torch.Tensor,
     betas: torch.Tensor,
-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
     frame_count = len(axis_angle)
     device = axis_angle.device
     output = model(
@@ -271,11 +302,31 @@ def floor_translation(
     torso_joints = torch.tensor((0, 3, 6, 9, 12, 15), device=device)
     torso_weights = model.lbs_weights[:, torso_joints].sum(dim=1)
     torso_vertices = torso_weights >= 0.55
-    offset = 0.012 - output.vertices[:, torso_vertices, 1].amin()
+    torso_offset = 0.012 - output.vertices[:, torso_vertices, 1].amin()
+    whole_body_offset = 0.002 - output.vertices[..., 1].amin()
+    offset = torch.maximum(torso_offset, whole_body_offset)
     translation = torch.zeros(frame_count, 3, device=device)
     translation[:, 1] = offset
     vertices = output.vertices + translation[:, None]
-    return translation, vertices, torso_vertices
+    joints = output.joints[:, :55] + translation[:, None]
+    return translation, vertices, joints, torso_vertices
+
+
+def lane_report(joints: torch.Tensor) -> dict:
+    reports = {}
+    for name, left, right in (
+        ("knees", 4, 5),
+        ("ankles", 7, 8),
+        ("feet", 10, 11),
+    ):
+        signed_separation = joints[:, right, 2] - joints[:, left, 2]
+        reports[name] = {
+            "minimumSeparationMillimeters": float(
+                signed_separation.min().cpu() * 1000
+            ),
+            "crossedFrames": int((signed_separation <= 0).sum().cpu()),
+        }
+    return reports
 
 
 def main() -> None:
@@ -321,7 +372,7 @@ def main() -> None:
     axis_angle_numpy = build_timeline(spec, solved)
     axis_angle = torch.as_tensor(axis_angle_numpy, device=device)
     with torch.no_grad():
-        translation, vertices, torso_vertices = floor_translation(
+        translation, vertices, joints, torso_vertices = floor_translation(
             model, axis_angle, betas
         )
 
@@ -374,6 +425,7 @@ def main() -> None:
             ),
             "minimumWholeBodyMeters": float(vertices[..., 1].amin().cpu()),
         },
+        "lateralLanes": lane_report(joints),
         "artifacts": {"parameters": params_path.name},
     }
     report_path = args.output_dir / "build-report.json"

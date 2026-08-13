@@ -21,7 +21,9 @@ def parse_args() -> argparse.Namespace:
     source.add_argument("--glb", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--frame", type=int, default=0)
-    parser.add_argument("--view", choices=("side", "three-quarter"), default="side")
+    parser.add_argument(
+        "--view", choices=("side", "three-quarter", "top"), default="side"
+    )
     return parser.parse_args(argv)
 
 
@@ -61,6 +63,9 @@ def main() -> None:
                 "left_hip",
                 "left_knee",
                 "left_ankle",
+                "right_hip",
+                "right_knee",
+                "right_ankle",
             ):
                 point = armature.matrix_world @ armature.pose.bones[name].head
                 pose_joints[name] = [round(value, 6) for value in point]
@@ -113,6 +118,10 @@ def main() -> None:
     camera = bpy.context.object
     if args.view == "side":
         camera.location = (0.0, -3.65, 1.1)
+    elif args.view == "top":
+        camera.location = (0.0, 0.0, 4.0)
+        camera.data.type = "ORTHO"
+        camera.data.ortho_scale = 2.35
     else:
         camera.location = (2.45, -2.85, 1.75)
     camera.data.lens = 58
