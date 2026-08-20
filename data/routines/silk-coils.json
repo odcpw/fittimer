@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "kind": "routine",
   "id": "silk-coils",
-  "title": "Silk Coils",
+  "title": "Rotation, Lateral & Pull",
   "description": "A 30-minute rotation, lateral, and pull routine with active mobility and foot control.",
   "equipment": ["1–2 light dumbbells", "mat", "wall or stable support"],
   "estimatedDurationSeconds": 1800,

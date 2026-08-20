@@ -81,7 +81,7 @@ test('FitTimer links to a Michelle lab with three creator-labelled assessment co
   assert.match(css, /@media \(max-width: 760px\)/);
 });
 
-test('Iron Roots lab ships five selectable 15-second Vitruvian motion loops', async () => {
+test('hinge-and-push lab ships five selectable 15-second Vitruvian motion loops', async () => {
   const html = await readFile('avatar-lab/iron-roots-motion.html', 'utf8');
   const source = await readFile('avatar-lab/iron-roots-motion.mjs', 'utf8');
 

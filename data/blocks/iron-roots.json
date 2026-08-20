@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "kind": "block",
   "id": "iron-roots",
-  "title": "Iron Roots",
-  "description": "Thirty hinge-and-push intervals from the canonical Fable W1 routine.",
+  "title": "Hinge & Push Strength",
+  "description": "Thirty hinge-and-push strength, tendon, and mobility intervals.",
   "intervals": [
     {
       "displayName": "March + Arm Circles",

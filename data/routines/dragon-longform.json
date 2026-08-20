@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "kind": "routine",
   "id": "dragon-longform",
-  "title": "Dragon Longform",
+  "title": "Full-Body Strength & Conditioning",
   "description": "A 45-minute full-integration routine spanning strength, tendon, cardio-chain, and cuff work.",
   "equipment": ["1–2 light dumbbells", "mat", "wall or stable support"],
   "estimatedDurationSeconds": 2700,
