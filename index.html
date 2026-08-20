@@ -148,6 +148,14 @@
         </details>
 
         <div class="home-actions">
+          <button class="offline-download" id="download-all-button" type="button">
+            <span class="offline-download__icon" aria-hidden="true">↓</span>
+            <span class="offline-download__copy">
+              <strong id="download-all-label">Download all videos</strong>
+              <small>All workouts and creator choices · phone-sized</small>
+            </span>
+          </button>
+          <progress class="offline-progress" id="offline-progress" max="1" value="0" aria-label="Offline video download progress" hidden></progress>
           <p class="offline-status" id="offline-status" role="status">
             <span class="offline-dot" aria-hidden="true"></span>
             <span>Preparing offline…</span>

@@ -3,11 +3,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const motions = {
-  march: { name: 'March + Arm Circles', creator: 'Garage Fitness Girl', selected: '11.5 s selected', ground: 'Observed foot contact', asset: 'assets/iron-roots-march-arm-circles.glb?v=2' },
-  squat: { name: 'Deepening Squat', creator: 'MadFit', selected: '5.0 s selected', ground: 'Observed foot contact', asset: 'assets/iron-roots-deepening-squat.glb?v=2' },
-  hinge: { name: 'Hip Hinge + Reach', creator: 'Claire DeFitt', selected: '11.0 s selected', ground: 'Fixed planted stance', asset: 'assets/iron-roots-hip-hinge-reach.glb?v=7' },
-  ankle: { name: 'Ankle Pumps + Heel-to-toe Rocks', creator: 'Dynamic Health', selected: '5.6 s selected', ground: 'Observed foot contact', asset: 'assets/iron-roots-ankle-calf-rocks.glb?v=2' },
-  wall: { name: 'Wall Scapular Reach', creator: 'Inspired Life Fitness', selected: '7.6 s selected', ground: 'Fixed planted stance', asset: 'assets/iron-roots-wall-scapular-reach.glb?v=4' },
+  march: { name: 'March + Arm Circles', creator: 'Garage Fitness Girl', selected: '11.5 s selected', ground: 'Observed foot contact', asset: 'assets/hinge-push-march-arm-circles.glb?v=2' },
+  squat: { name: 'Deepening Squat', creator: 'MadFit', selected: '5.0 s selected', ground: 'Observed foot contact', asset: 'assets/hinge-push-deepening-squat.glb?v=2' },
+  hinge: { name: 'Hip Hinge + Reach', creator: 'Claire DeFitt', selected: '11.0 s selected', ground: 'Fixed planted stance', asset: 'assets/hinge-push-hip-hinge-reach.glb?v=7' },
+  ankle: { name: 'Ankle Pumps + Heel-to-toe Rocks', creator: 'Dynamic Health', selected: '5.6 s selected', ground: 'Observed foot contact', asset: 'assets/hinge-push-ankle-calf-rocks.glb?v=2' },
+  wall: { name: 'Wall Scapular Reach', creator: 'Inspired Life Fitness', selected: '7.6 s selected', ground: 'Fixed planted stance', asset: 'assets/hinge-push-wall-scapular-reach.glb?v=4' },
 };
 
 const elements = {

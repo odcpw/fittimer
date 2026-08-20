@@ -20,16 +20,16 @@ const MEDIA_FIXTURE = 'invalid-media-pack.json';
 
 const productionRoutines = [
   'data/routines/madfit-30min-hiit.json',
-  'data/routines/iron-roots.json',
-  'data/routines/silk-coils.json',
-  'data/routines/dragon-longform.json',
-  'data/routines/crane-longform.json',
+  'data/routines/hinge-push-strength.json',
+  'data/routines/rotation-lateral-pull.json',
+  'data/routines/full-body-strength-conditioning.json',
+  'data/routines/balance-active-flexibility.json',
 ];
 const realResult = await validateFiles(productionRoutines);
 assert.equal(realResult.valid, true, JSON.stringify(realResult.errors, null, 2));
 assert.deepEqual(
   realResult.routines.map((routine) => routine.id).sort(),
-  ['crane-longform', 'dragon-longform', 'iron-roots', 'madfit-30min-hiit', 'silk-coils'],
+  ['balance-active-flexibility', 'full-body-strength-conditioning', 'hinge-push-strength', 'madfit-30min-hiit', 'rotation-lateral-pull'],
 );
 assert.deepEqual(
   realResult.sourceMaps.map(({ id, movementCount }) => ({ id, movementCount })),

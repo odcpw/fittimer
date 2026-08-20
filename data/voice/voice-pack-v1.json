@@ -19,22 +19,22 @@
     "source": "data/content-index.json",
     "routineIds": [
       "madfit-30min-hiit",
-      "iron-roots",
-      "silk-coils",
-      "dragon-longform",
-      "crane-longform"
+      "hinge-push-strength",
+      "rotation-lateral-pull",
+      "full-body-strength-conditioning",
+      "balance-active-flexibility"
     ],
     "blockIds": [
       "madfit-30min-hiit",
-      "iron-roots",
-      "silk-coils",
-      "dragon-longform",
-      "crane-longform"
+      "hinge-push-strength",
+      "rotation-lateral-pull",
+      "full-body-strength-conditioning",
+      "balance-active-flexibility"
     ],
     "intervalCount": 180,
     "phraseCount": 202,
     "assetCount": 202,
-    "digest": "899417f69e80e26b79d6113964595827f6b20cf7c9ec82c8a7995cdece45300a"
+    "digest": "c7a2466b85a19c9a74c79eef1c3e6cdd6ed425cb794ad6b5f2af6b4e3888cd45"
   },
   "generatedAt": "2026-08-10T23:26:28.350Z",
   "phrases": [
@@ -44,18 +44,18 @@
       "text": "1",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -78,18 +78,18 @@
       "text": "2",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -112,18 +112,18 @@
       "text": "3",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -146,18 +146,18 @@
       "text": "Go",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -180,10 +180,10 @@
       "text": "1.5-rep Push-up",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "one-and-a-half-rep-push-up"
@@ -209,12 +209,12 @@
       "text": "90/90 Hip Switches",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "ninety-ninety-hip-switches"
@@ -268,10 +268,10 @@
       "text": "Alternating Side-bend Reach",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "alternating-side-bend-reach"
@@ -297,16 +297,16 @@
       "text": "Ankle Pumps + Heel-to-toe Rocks",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "ankle-pumps-heel-to-toe-rocks"
@@ -360,10 +360,10 @@
       "text": "B-stance RDL",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "b-stance-rdl"
@@ -388,10 +388,10 @@
       "text": "B-stance RDL (left)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "b-stance-rdl"
@@ -416,10 +416,10 @@
       "text": "B-stance RDL (right)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "b-stance-rdl"
@@ -444,12 +444,12 @@
       "text": "Backward Walking",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "backward-walking"
@@ -531,12 +531,12 @@
       "text": "Bodyweight Squat, Deepening",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "bodyweight-squat-deepening"
@@ -590,10 +590,10 @@
       "text": "Breathing",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "breathing-easy-reach"
@@ -619,10 +619,10 @@
       "text": "Breathing + Easy Reach",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "breathing-easy-reach"
@@ -648,10 +648,10 @@
       "text": "Breathing + Reach",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "breathing-easy-reach"
@@ -677,10 +677,10 @@
       "text": "Brisk Backward Walking",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "backward-walking"
@@ -763,10 +763,10 @@
       "text": "Cat-cow",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "cat-cow-child-reach"
@@ -792,10 +792,10 @@
       "text": "Cat-cow → Child Reach",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "cat-cow-child-reach"
@@ -878,10 +878,10 @@
       "text": "Controlled Leg Pendulum",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "controlled-leg-pendulum"
@@ -906,10 +906,10 @@
       "text": "Controlled Leg Pendulum (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "controlled-leg-pendulum"
@@ -934,10 +934,10 @@
       "text": "Controlled Leg Pendulum (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "controlled-leg-pendulum"
@@ -962,10 +962,10 @@
       "text": "Crane-stance Hold",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "crane-stance-hold"
@@ -990,10 +990,10 @@
       "text": "Crane-stance Hold (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "crane-stance-hold"
@@ -1018,10 +1018,10 @@
       "text": "Crane-stance Hold (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "crane-stance-hold"
@@ -1074,10 +1074,10 @@
       "text": "DB Knee-drive March",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "dumbbell-knee-drive-march"
@@ -1103,10 +1103,10 @@
       "text": "DB Swing",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "dumbbell-swing"
@@ -1132,12 +1132,12 @@
       "text": "Dead Bug",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "dead-bug"
@@ -1192,10 +1192,10 @@
       "text": "Diagonal Chop",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "diagonal-chop"
@@ -1220,10 +1220,10 @@
       "text": "Diagonal Chop (left)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "diagonal-chop"
@@ -1248,10 +1248,10 @@
       "text": "Diagonal Chop (right)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "diagonal-chop"
@@ -1500,14 +1500,14 @@
       "text": "Foot-planted Shadowboxing",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "foot-planted-shadowboxing"
@@ -1533,10 +1533,10 @@
       "text": "Front-rack Press-out",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "front-rack-press-out"
@@ -1562,10 +1562,10 @@
       "text": "Glute Bridge March",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "glute-bridge-march"
@@ -1619,12 +1619,12 @@
       "text": "Goblet Squat",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "goblet-squat"
@@ -1650,12 +1650,12 @@
       "text": "Half-kneeling Press",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "half-kneeling-press"
@@ -1680,12 +1680,12 @@
       "text": "Half-kneeling Press (left)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "half-kneeling-press"
@@ -1710,12 +1710,12 @@
       "text": "Half-kneeling Press (right)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "dragon-longform",
-          "silk-coils"
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "half-kneeling-press"
@@ -1768,12 +1768,12 @@
       "text": "Hip-flexor Stretch",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "hip-flexor-stretch"
@@ -1798,12 +1798,12 @@
       "text": "Hip-flexor Stretch (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "hip-flexor-stretch"
@@ -1828,12 +1828,12 @@
       "text": "Hip-flexor Stretch (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "hip-flexor-stretch"
@@ -1858,12 +1858,12 @@
       "text": "Hip Hinge + Reach",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "hip-hinge-reach"
@@ -1889,10 +1889,10 @@
       "text": "Hip Hitch",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "hip-hitch"
@@ -1917,10 +1917,10 @@
       "text": "Hip Hitch (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "hip-hitch"
@@ -1945,10 +1945,10 @@
       "text": "Hip Hitch (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "hip-hitch"
@@ -1973,12 +1973,12 @@
       "text": "Horse-stance Goblet Hold",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "horse-stance-goblet-hold"
@@ -2004,11 +2004,11 @@
       "text": "Inchworm",
       "source": {
         "routineIds": [
-          "dragon-longform",
+          "full-body-strength-conditioning",
           "madfit-30min-hiit"
         ],
         "blockIds": [
-          "dragon-longform",
+          "full-body-strength-conditioning",
           "madfit-30min-hiit"
         ],
         "movementIds": [
@@ -2146,10 +2146,10 @@
       "text": "Knee-lift Cardio",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "knee-lift-cardio"
@@ -2175,10 +2175,10 @@
       "text": "Knees-down Inchworm Walkout",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "inchworm"
@@ -2203,12 +2203,12 @@
       "text": "Lateral Lunge",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "lateral-lunge"
@@ -2233,12 +2233,12 @@
       "text": "Lateral Lunge (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "lateral-lunge"
@@ -2263,12 +2263,12 @@
       "text": "Lateral Lunge (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "lateral-lunge"
@@ -2293,10 +2293,10 @@
       "text": "Lateral Squat Rock",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "lateral-squat-rock"
@@ -2322,10 +2322,10 @@
       "text": "Lateral Step-and-reach",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "lateral-step-and-reach"
@@ -2350,10 +2350,10 @@
       "text": "Lateral Step-and-reach (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "lateral-step-and-reach"
@@ -2378,10 +2378,10 @@
       "text": "Lateral Step-and-reach (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "lateral-step-and-reach"
@@ -2406,10 +2406,10 @@
       "text": "Lateral Step + Relaxed Arm Sweep",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "lateral-step-arm-sweep"
@@ -2435,12 +2435,12 @@
       "text": "Lateral Step-to-balance",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "lateral-step-to-balance"
@@ -2466,10 +2466,10 @@
       "text": "Lateral Step-to-balance (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "lateral-step-to-balance"
@@ -2494,10 +2494,10 @@
       "text": "Lateral Step-to-balance (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "lateral-step-to-balance"
@@ -2550,12 +2550,12 @@
       "text": "March + Arm Circles",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "march-arm-circles"
@@ -2581,10 +2581,10 @@
       "text": "March + Shoulder Rolls",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "march-shoulder-rolls"
@@ -2610,10 +2610,10 @@
       "text": "March Ramp",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "march-ramp"
@@ -2667,10 +2667,10 @@
       "text": "One-arm DB Snatch",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "dumbbell-snatch"
@@ -2695,10 +2695,10 @@
       "text": "One-arm DB Snatch (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "dumbbell-snatch"
@@ -2723,10 +2723,10 @@
       "text": "One-arm DB Snatch (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "dumbbell-snatch"
@@ -2835,12 +2835,12 @@
       "text": "One-arm Row",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "one-arm-row"
@@ -2865,12 +2865,12 @@
       "text": "One-arm Row (left)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "one-arm-row"
@@ -2895,12 +2895,12 @@
       "text": "One-arm Row (right)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "one-arm-row"
@@ -3038,10 +3038,10 @@
       "text": "Prone W Raise",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "prone-w-raise"
@@ -3067,10 +3067,10 @@
       "text": "Prone Y/W",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "prone-y-w"
@@ -3096,11 +3096,11 @@
       "text": "Push-up",
       "source": {
         "routineIds": [
-          "iron-roots",
+          "hinge-push-strength",
           "madfit-30min-hiit"
         ],
         "blockIds": [
-          "iron-roots",
+          "hinge-push-strength",
           "madfit-30min-hiit"
         ],
         "movementIds": [
@@ -3127,10 +3127,10 @@
       "text": "Push-up Plus",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "push-up-plus"
@@ -3212,10 +3212,10 @@
       "text": "Quadruped Thread-the-needle",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "quadruped-thread-the-needle"
@@ -3241,10 +3241,10 @@
       "text": "Seated Psoas Raise",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "seated-psoas-raise"
@@ -3269,10 +3269,10 @@
       "text": "Seated Psoas Raise (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "seated-psoas-raise"
@@ -3297,10 +3297,10 @@
       "text": "Seated Psoas Raise (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "seated-psoas-raise"
@@ -3325,14 +3325,14 @@
       "text": "Seated Soleus Raise",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "seated-soleus-raise"
@@ -3357,14 +3357,14 @@
       "text": "Seated Soleus Raise (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "seated-soleus-raise"
@@ -3389,14 +3389,14 @@
       "text": "Seated Soleus Raise (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "seated-soleus-raise"
@@ -3421,10 +3421,10 @@
       "text": "Seated Straddle Active Hinge",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "seated-straddle-active-hinge"
@@ -3450,10 +3450,10 @@
       "text": "Side-bend Holds",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "side-bend-holds"
@@ -3647,10 +3647,10 @@
       "text": "Single-leg Balance + Short-foot",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-balance-short-foot"
@@ -3675,10 +3675,10 @@
       "text": "Single-leg Balance + Short-foot (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-balance-short-foot"
@@ -3703,10 +3703,10 @@
       "text": "Single-leg Balance + Short-foot (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-balance-short-foot"
@@ -3731,10 +3731,10 @@
       "text": "Single-leg Calf Raise",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-calf-raise"
@@ -3759,10 +3759,10 @@
       "text": "Single-leg Calf Raise (left)",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-calf-raise"
@@ -3787,10 +3787,10 @@
       "text": "Single-leg Calf Raise (right)",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-calf-raise"
@@ -3815,12 +3815,12 @@
       "text": "Single-leg Glute Bridge",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-glute-bridge"
@@ -3845,12 +3845,12 @@
       "text": "Single-leg Glute Bridge (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-glute-bridge"
@@ -3875,12 +3875,12 @@
       "text": "Single-leg Glute Bridge (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "single-leg-glute-bridge"
@@ -3905,12 +3905,12 @@
       "text": "Single-leg RDL",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-rdl"
@@ -3935,12 +3935,12 @@
       "text": "Single-leg RDL (left)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-rdl"
@@ -3965,12 +3965,12 @@
       "text": "Single-leg RDL (right)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "single-leg-rdl"
@@ -4051,12 +4051,12 @@
       "text": "Slow Front Kick",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-front-kick"
@@ -4081,12 +4081,12 @@
       "text": "Slow Front Kick (left)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-front-kick"
@@ -4111,12 +4111,12 @@
       "text": "Slow Front Kick (right)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-front-kick"
@@ -4141,10 +4141,10 @@
       "text": "Slow Push-up",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "slow-push-up"
@@ -4170,12 +4170,12 @@
       "text": "Slow Roundhouse Chamber",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "slow-roundhouse-chamber"
@@ -4200,12 +4200,12 @@
       "text": "Slow Roundhouse Chamber (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "slow-roundhouse-chamber"
@@ -4230,12 +4230,12 @@
       "text": "Slow Roundhouse Chamber (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "slow-roundhouse-chamber"
@@ -4260,10 +4260,10 @@
       "text": "Slow Side Kick",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-side-kick"
@@ -4288,10 +4288,10 @@
       "text": "Slow Side Kick (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-side-kick"
@@ -4316,10 +4316,10 @@
       "text": "Slow Side Kick (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-side-kick"
@@ -4344,10 +4344,10 @@
       "text": "Slow Step-down",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-step-down"
@@ -4372,10 +4372,10 @@
       "text": "Slow Step-down (left)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-step-down"
@@ -4400,10 +4400,10 @@
       "text": "Slow Step-down (right)",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "slow-step-down"
@@ -4428,10 +4428,10 @@
       "text": "Slow Step-up",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-step-up"
@@ -4456,10 +4456,10 @@
       "text": "Slow Step-up (left)",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-step-up"
@@ -4484,10 +4484,10 @@
       "text": "Slow Step-up (right)",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "slow-step-up"
@@ -4512,12 +4512,12 @@
       "text": "Split Squat",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "split-squat"
@@ -4542,12 +4542,12 @@
       "text": "Split Squat (left)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "split-squat"
@@ -4572,12 +4572,12 @@
       "text": "Split Squat (right)",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "split-squat"
@@ -4743,12 +4743,12 @@
       "text": "Standing Wall Scapular Reach",
       "source": {
         "routineIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "dragon-longform",
-          "iron-roots"
+          "full-body-strength-conditioning",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "standing-wall-scapular-reach"
@@ -4802,12 +4802,12 @@
       "text": "Suitcase March",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "crane-longform",
-          "iron-roots"
+          "balance-active-flexibility",
+          "hinge-push-strength"
         ],
         "movementIds": [
           "suitcase-march"
@@ -4833,10 +4833,10 @@
       "text": "Supine Active Hamstring Extension",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "supine-active-hamstring-extension"
@@ -4862,10 +4862,10 @@
       "text": "Supported One-arm Row",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "supported-one-arm-row"
@@ -4890,10 +4890,10 @@
       "text": "Supported One-arm Row (left)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "supported-one-arm-row"
@@ -4918,10 +4918,10 @@
       "text": "Supported One-arm Row (right)",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "supported-one-arm-row"
@@ -4946,10 +4946,10 @@
       "text": "Supported Side Reach + Breathing",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "supported-side-reach-breathing"
@@ -4975,10 +4975,10 @@
       "text": "Supported Standing Side-leg Raise",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "supported-standing-side-leg-raise"
@@ -5003,10 +5003,10 @@
       "text": "Supported Standing Side-leg Raise (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "supported-standing-side-leg-raise"
@@ -5031,10 +5031,10 @@
       "text": "Supported Standing Side-leg Raise (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "supported-standing-side-leg-raise"
@@ -5059,10 +5059,10 @@
       "text": "Tibialis Raises",
       "source": {
         "routineIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "tibialis-raises"
@@ -5088,10 +5088,10 @@
       "text": "Toe-spread + Short-foot",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "toe-spread-short-foot"
@@ -5117,10 +5117,10 @@
       "text": "Two-arm Bent-over Row",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "two-arm-bent-over-row"
@@ -5146,10 +5146,10 @@
       "text": "Two-DB Farmer Carry",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "farmer-carry"
@@ -5175,10 +5175,10 @@
       "text": "Two-DB Romanian Deadlift",
       "source": {
         "routineIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "blockIds": [
-          "crane-longform"
+          "balance-active-flexibility"
         ],
         "movementIds": [
           "two-dumbbell-romanian-deadlift"
@@ -5204,10 +5204,10 @@
       "text": "Two-hand DB Swing",
       "source": {
         "routineIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "blockIds": [
-          "iron-roots"
+          "hinge-push-strength"
         ],
         "movementIds": [
           "dumbbell-swing"
@@ -5261,10 +5261,10 @@
       "text": "Wall External-rotation Isometric",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-external-rotation-isometric"
@@ -5289,10 +5289,10 @@
       "text": "Wall External-rotation Isometric (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-external-rotation-isometric"
@@ -5317,10 +5317,10 @@
       "text": "Wall External-rotation Isometric (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-external-rotation-isometric"
@@ -5345,12 +5345,12 @@
       "text": "Wall-press Hip-abduction Isometric",
       "source": {
         "routineIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5375,12 +5375,12 @@
       "text": "Wall-press Hip-abduction Isometric (left)",
       "source": {
         "routineIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5405,12 +5405,12 @@
       "text": "Wall-press Hip-abduction Isometric (right)",
       "source": {
         "routineIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "iron-roots",
-          "silk-coils"
+          "hinge-push-strength",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5435,10 +5435,10 @@
       "text": "Wall-press Hip Isometric",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5463,10 +5463,10 @@
       "text": "Wall-press Hip Isometric (left)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5491,10 +5491,10 @@
       "text": "Wall-press Hip Isometric (right)",
       "source": {
         "routineIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "dragon-longform"
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "wall-press-hip-abduction-isometric"
@@ -5519,12 +5519,12 @@
       "text": "Wall Slides",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "silk-coils"
+          "balance-active-flexibility",
+          "rotation-lateral-pull"
         ],
         "movementIds": [
           "wall-slides"
@@ -5607,12 +5607,12 @@
       "text": "Weighted Straight-knee Calf Raise",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "weighted-straight-knee-calf-raise"
@@ -5637,12 +5637,12 @@
       "text": "Weighted Straight-knee Calf Raise (left)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "weighted-straight-knee-calf-raise"
@@ -5667,12 +5667,12 @@
       "text": "Weighted Straight-knee Calf Raise (right)",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform"
+          "balance-active-flexibility",
+          "full-body-strength-conditioning"
         ],
         "movementIds": [
           "weighted-straight-knee-calf-raise"
@@ -5697,18 +5697,18 @@
       "text": "Next",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5731,18 +5731,18 @@
       "text": "Rest",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5765,18 +5765,18 @@
       "text": "Alternating sides",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5799,18 +5799,18 @@
       "text": "First side",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5833,18 +5833,18 @@
       "text": "Left",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5867,18 +5867,18 @@
       "text": "Right",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [
@@ -5901,18 +5901,18 @@
       "text": "Second side",
       "source": {
         "routineIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "blockIds": [
-          "crane-longform",
-          "dragon-longform",
-          "iron-roots",
+          "balance-active-flexibility",
+          "full-body-strength-conditioning",
+          "hinge-push-strength",
           "madfit-30min-hiit",
-          "silk-coils"
+          "rotation-lateral-pull"
         ],
         "movementIds": [],
         "roles": [

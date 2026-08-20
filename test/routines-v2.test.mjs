@@ -16,19 +16,19 @@ const index = await readJson('data/content-index.json');
 const mediaPack = await readJson('data/media/gif-v1.json');
 
 const routineFiles = [
-  'data/routines/iron-roots.json',
-  'data/routines/silk-coils.json',
-  'data/routines/dragon-longform.json',
-  'data/routines/crane-longform.json',
+  'data/routines/hinge-push-strength.json',
+  'data/routines/rotation-lateral-pull.json',
+  'data/routines/full-body-strength-conditioning.json',
+  'data/routines/balance-active-flexibility.json',
 ];
 
 const n = (name, side = null) => ({ name, side });
 const pair = (name) => [n(`${name} (left)`, 'left'), n(`${name} (right)`, 'right')];
 
 const expected = {
-  'iron-roots': {
+  'hinge-push-strength': {
     duration: 1800,
-    block: 'iron-roots',
+    block: 'hinge-push-strength',
     intervals: [
       n('March + Arm Circles'),
       n('Bodyweight Squat, Deepening'),
@@ -55,9 +55,9 @@ const expected = {
       n('Breathing + Easy Reach'),
     ],
   },
-  'silk-coils': {
+  'rotation-lateral-pull': {
     duration: 1800,
-    block: 'silk-coils',
+    block: 'rotation-lateral-pull',
     intervals: [
       n('March + Shoulder Rolls'),
       n('Cat-cow → Child Reach'),
@@ -83,9 +83,9 @@ const expected = {
       n('Supported Side Reach + Breathing', 'alternating'),
     ],
   },
-  'dragon-longform': {
+  'full-body-strength-conditioning': {
     duration: 2700,
-    block: 'dragon-longform',
+    block: 'full-body-strength-conditioning',
     intervals: [
       n('March Ramp'),
       n('Ankle Pumps + Heel-to-toe Rocks'),
@@ -119,9 +119,9 @@ const expected = {
       n('Breathing + Reach'),
     ],
   },
-  'crane-longform': {
+  'balance-active-flexibility': {
     duration: 2700,
-    block: 'crane-longform',
+    block: 'balance-active-flexibility',
     intervals: [
       n('March + Arm Circles'),
       n('Cat-cow'),
@@ -228,7 +228,7 @@ test('Fable W1-W4 preserve canonical order, sides, exact duration, and media cov
 
   const pushUpIdsByName = new Map();
   const wallPressIntervals = [];
-  for (const blockId of ['iron-roots', 'silk-coils', 'dragon-longform', 'crane-longform']) {
+  for (const blockId of ['hinge-push-strength', 'rotation-lateral-pull', 'full-body-strength-conditioning', 'balance-active-flexibility']) {
     for (const interval of blocks.get(blockId).intervals) {
       if (interval.displayName.includes('Push-up')) {
         pushUpIdsByName.set(interval.displayName, interval.movements[0].movementId);

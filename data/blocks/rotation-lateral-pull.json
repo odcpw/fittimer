@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "kind": "block",
-  "id": "silk-coils",
+  "id": "rotation-lateral-pull",
   "title": "Rotation, Lateral & Pull",
   "description": "Thirty rotation, lateral-strength, pulling, mobility, and foot-control intervals.",
   "intervals": [

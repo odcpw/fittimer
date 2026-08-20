@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
   "kind": "routine",
-  "id": "silk-coils",
-  "title": "Rotation, Lateral & Pull",
-  "description": "A 30-minute rotation, lateral, and pull routine with active mobility and foot control.",
-  "equipment": ["1–2 light dumbbells", "mat", "wall or stable support"],
-  "estimatedDurationSeconds": 1800,
+  "id": "balance-active-flexibility",
+  "title": "Balance & Active Flexibility",
+  "description": "A 45-minute balance and active-flexibility routine with planted-foot strength and tendon work.",
+  "equipment": ["1–2 light dumbbells", "mat", "wall or stable support", "low step"],
+  "estimatedDurationSeconds": 2700,
   "notes": [
-    "Canonical Fable W2 routine from docs/research/draft-routines-v2.md.",
-    "Thirty 40-second work intervals retain every following 20-second rest, including the final rest.",
+    "Canonical Fable W4 routine from docs/research/draft-routines-v2.md.",
+    "Forty-five 40-second work intervals retain every following 20-second rest, including the final rest.",
     "Only honest built-in GIF matches are visual; all other movements deliberately use text fallback."
   ],
   "safetyCues": [
@@ -21,7 +21,8 @@
     "Swings, snatches, and shadowboxing target RPE 6–7; slow kicks and balance target RPE 5–7; cuff, short-foot, and low-load hip-control work targets RPE 5–7.",
     "Every routine includes at least one weighted calf pair, one lateral-hip station, and one foot or cuff station.",
     "Warm-ups run at least 6 minutes in 30-minute routines; ankle prep is always pumps plus heel-to-toe rocks, not calf raises, which are reserved for later stations.",
-    "The final interval's 20-second rest is retained so the routine duration is exactly 30:00."
+    "The 45-minute routine carries both knee-angle calf pairs, psoas work, and cuff clusters.",
+    "The final interval's 20-second rest is retained so the routine duration is exactly 45:00."
   ],
-  "sequence": [{ "blockId": "silk-coils" }]
+  "sequence": [{ "blockId": "balance-active-flexibility" }]
 }

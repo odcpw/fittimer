@@ -28,7 +28,7 @@
 - Warm-ups: ≥6 min on 30-min routines, ankle prep always included (pumps +
   heel-to-toe rocks — NOT calf raises, which would repeat later stations).
 
-## W1 — "Iron Roots" (30 × 40/20, hinge/push emphasis)
+## W1 — Hinge & Push Strength (30 × 40/20, hinge/push emphasis)
 
 1. March + arm circles — ramp RPE 2→4
 2. Bodyweight squat, deepening — heels down
@@ -61,7 +61,7 @@
 29. Backward walking — brisk, whole-foot
 30. Breathing + easy reach (use final rest as continued breathing)
 
-## W2 — "Silk Coils" (30 × 40/20, rotation/lateral/pull emphasis — redesigned)
+## W2 — Rotation, Lateral & Pull (30 × 40/20, rotation/lateral/pull emphasis — redesigned)
 
 1. March + shoulder rolls
 2. Cat-cow → child reach — no forced overhead
@@ -94,7 +94,7 @@
 29. Lateral step-to-balance + short-foot — flat-foot landings
 30. Supported side reach + breathing — switch at 20 s
 
-## W3 — "Dragon Longform" (45 × 40/20, full integration)
+## W3 — Full-Body Strength & Conditioning (45 × 40/20, full integration)
 
 Warm-up (1–6): 1 march ramp · 2 ankle pumps + heel-toe rocks · 3 deepening
 squats · 4 hinge + reach · 5 90/90 switches · 6 wall scapular reach.
@@ -116,7 +116,7 @@ isometric L (5–8 s presses) · 40 R · 41 supported standing side-leg raise L
 Cooldown (43–45): 43 hip-flexor stretch L (posterior tilt) · 44 R ·
 45 breathing + reach.
 
-## W4 — "Crane Longform" (45 × 40/20, balance/active-flex emphasis)
+## W4 — Balance & Active Flexibility (45 × 40/20, balance/active-flex emphasis)
 
 Warm-up (1–7): 1 march + arm circles · 2 cat-cow · 3 controlled leg
 pendulum L (small→bigger) · 4 same R · 5 lateral squat rock (controlled) ·

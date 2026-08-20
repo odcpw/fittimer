@@ -26,6 +26,8 @@ const settingControlIds = [
   'settings-voice-next',
   'settings-creator',
   'settings-reduced-motion',
+  'download-all-button',
+  'offline-progress',
 ];
 
 test('home settings panel exposes every versioned preference', () => {
@@ -35,6 +37,15 @@ test('home settings panel exposes every versioned preference', () => {
   assert.doesNotMatch(html, /id="settings-visual-pack"/);
   assert.match(html, /Video creator/);
   assert.match(html, /Automatic/);
+  assert.match(html, /Download all videos/);
+  assert.match(html, /All workouts and creator choices/);
+});
+
+test('offline download exposes progress and requests persistent phone storage', () => {
+  assert.match(application, /navigator\.storage\?\.persist/);
+  assert.match(application, /collectAllContentUrls/);
+  assert.match(application, /Downloading \$\{completed\} \/ \$\{total\} files/);
+  assert.match(styles, /\.offline-progress/);
 });
 
 test('installed landscape home owns a touch-scroll surface', () => {

@@ -9,6 +9,7 @@ import {
   APPROVED_CREATOR_IDS,
   chooseRoutineMediaPackId,
   chooseRoutineCreatorId,
+  collectAllContentUrls,
   collectContentUrls,
   creatorCoverageForRoutine,
   mergePrivateMediaPackIndex,
@@ -174,7 +175,7 @@ test('selected private packs never mix in reference or GIF fallback assets', () 
     intervals: [{ movements: [{ movementId: 'referenceFallback' }] }],
   }, packs), 'reference-v1');
   assert.equal(chooseRoutineMediaPackId({
-    id: 'iron-roots',
+    id: 'hinge-push-strength',
     intervals: [{ movements: [
       { movementId: 'w1w4Primary' },
       { movementId: 'referenceFallback' },
@@ -248,8 +249,8 @@ test('v3 creator runtime picks one approved automatic winner and caches only tha
     },
   };
   const routine = {
-    id: 'iron-roots',
-    file: 'data/routines/iron-roots.json',
+    id: 'hinge-push-strength',
+    file: 'data/routines/hinge-push-strength.json',
     sequence: [],
     intervals: [{ movements: [
       { movementId: 'alpha' },
@@ -288,4 +289,49 @@ test('v3 creator runtime picks one approved automatic winner and caches only tha
   assert.ok(urls.includes('private-packs/creator-library-v1/pack/clips/growing-beta.mp4'));
   assert.ok(!urls.some((url) => url.includes('madfit-alpha') || url.includes('heather-beta') || url.includes('rejected-alpha')));
   assert.ok(!urls.includes('private-packs/creator-library-v1/pack/clips/must-not-play.mp4'));
+});
+
+test('download-all caches every approved creator variant needed by installed workouts', () => {
+  const packs = new Map([
+    ['gif-v1', { id: 'gif-v1', kind: 'mediaPack', entries: {} }],
+    ['w1w4-v1', {
+      id: 'w1w4-v1',
+      kind: 'mediaPack',
+      __sourcePath: 'private-packs/phone-v1/w1w4-v1/media-pack.json',
+      entries: {
+        squat: { assets: [
+          { type: 'video', url: 'clips/anna.mp4', creatorId: 'growingannanas' },
+          { type: 'poster', url: 'posters/anna.png', creatorId: 'growingannanas' },
+          { type: 'video', url: 'clips/heather.mp4', creatorId: 'heather-robertson' },
+          { type: 'video', url: 'clips/rejected.mp4', creatorId: 'unknown-creator' },
+        ] },
+        textOnly: { assets: [{ type: 'video', url: 'clips/text.mp4', creatorId: 'madfit' }] },
+        unused: { assets: [{ type: 'video', url: 'clips/unused.mp4', creatorId: 'madfit' }] },
+      },
+    }],
+  ]);
+  const routine = {
+    id: 'hinge-push-strength',
+    file: 'data/routines/hinge-push-strength.json',
+    sequence: [{ blockId: 'hinge-push-strength' }],
+    intervals: [{ movements: [
+      { movementId: 'squat' },
+      { movementId: 'textOnly', textOnly: true },
+    ] }],
+  };
+  const urls = collectAllContentUrls({
+    privateMediaPackIndexPath: 'private-packs/index.json',
+    mediaPacks: {
+      'gif-v1': 'data/media/gif-v1.json',
+      'w1w4-v1': 'private-packs/phone-v1/w1w4-v1/media-pack.json',
+    },
+    blocks: { 'hinge-push-strength': 'data/blocks/hinge-push-strength.json' },
+  }, [routine], packs, null);
+  assert.ok(urls.includes('private-packs/index.json'));
+  assert.ok(urls.includes('private-packs/phone-v1/w1w4-v1/media-pack.json'));
+  assert.ok(urls.includes('private-packs/phone-v1/w1w4-v1/clips/anna.mp4'));
+  assert.ok(urls.includes('private-packs/phone-v1/w1w4-v1/posters/anna.png'));
+  assert.ok(urls.includes('private-packs/phone-v1/w1w4-v1/clips/heather.mp4'));
+  assert.ok(!urls.some((url) => /rejected|text\.mp4|unused/.test(url)));
+  assert.ok(!urls.includes('data/media/gif-v1.json'));
 });

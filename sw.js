@@ -329,7 +329,19 @@ self.addEventListener('message', (event) => {
       for (const url of urls) {
         if (!(await cache.match(url.href))) missing.push(url.href);
       }
-      if (missing.length > 0) await cache.addAll(missing);
+      let completed = urls.length - missing.length;
+      event.ports[0]?.postMessage({ type: 'progress', completed, total: urls.length });
+      const concurrency = 3;
+      for (let index = 0; index < missing.length; index += concurrency) {
+        const batch = missing.slice(index, index + concurrency);
+        await Promise.all(batch.map(async (url) => {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Could not download ${new URL(url).pathname}`);
+          await cache.put(url, response);
+          completed += 1;
+          event.ports[0]?.postMessage({ type: 'progress', completed, total: urls.length });
+        }));
+      }
       event.ports[0]?.postMessage({ ok: true, cached: urls.length, fetched: missing.length });
     } catch (error) {
       event.ports[0]?.postMessage({ ok: false, error: error.message });

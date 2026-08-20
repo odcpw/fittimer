@@ -6,8 +6,9 @@ figures are estimates until the metadata/clip mining bead produces evidence.
 
 ## Operator and body rules
 
-- The four identities and lengths stay fixed: Iron Roots 30 intervals, Silk
-  Coils 30, Dragon Longform 45, and Crane Longform 45. Every interval remains
+- The four identities and lengths stay fixed: Hinge & Push Strength 30 intervals,
+  Rotation, Lateral & Pull 30, Full-Body Strength & Conditioning 45, and Balance
+  & Active Flexibility 45. Every interval remains
   40 seconds work plus 20 seconds rest. Tempo and left/right choice are
   operator-controlled; a visual reminder never prescribes either.
 - This is balanced restoration, not avoidance. The sesamoid/hallux constraint

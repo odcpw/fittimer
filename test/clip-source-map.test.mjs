@@ -5,10 +5,10 @@ import { readFile } from 'node:fs/promises';
 import { movementInventory, validateClipSourceMap, validateClipSourceMapFile } from '../scripts/media/source-map.mjs';
 
 const TARGETS = [
-  'data/blocks/iron-roots.json',
-  'data/blocks/silk-coils.json',
-  'data/blocks/dragon-longform.json',
-  'data/blocks/crane-longform.json',
+  'data/blocks/hinge-push-strength.json',
+  'data/blocks/rotation-lateral-pull.json',
+  'data/blocks/full-body-strength-conditioning.json',
+  'data/blocks/balance-active-flexibility.json',
 ];
 
 function rect() {

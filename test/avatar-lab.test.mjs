@@ -9,12 +9,12 @@ const assets = [
   ['butt-kicks.glb', 'Butt kicks'],
 ];
 
-const ironRootAssets = [
-  'iron-roots-march-arm-circles.glb',
-  'iron-roots-deepening-squat.glb',
-  'iron-roots-hip-hinge-reach.glb',
-  'iron-roots-ankle-calf-rocks.glb',
-  'iron-roots-wall-scapular-reach.glb',
+const hingePushAssets = [
+  'hinge-push-march-arm-circles.glb',
+  'hinge-push-deepening-squat.glb',
+  'hinge-push-hip-hinge-reach.glb',
+  'hinge-push-ankle-calf-rocks.glb',
+  'hinge-push-wall-scapular-reach.glb',
 ];
 
 async function readGlbJson(file) {
@@ -82,8 +82,8 @@ test('FitTimer links to a Michelle lab with three creator-labelled assessment co
 });
 
 test('hinge-and-push lab ships five selectable 15-second Vitruvian motion loops', async () => {
-  const html = await readFile('avatar-lab/iron-roots-motion.html', 'utf8');
-  const source = await readFile('avatar-lab/iron-roots-motion.mjs', 'utf8');
+  const html = await readFile('avatar-lab/hinge-push-motion.html', 'utf8');
+  const source = await readFile('avatar-lab/hinge-push-motion.mjs', 'utf8');
 
   assert.equal(html.match(/data-motion=/g)?.length, 5);
   assert.match(html, /March \+ Arm Circles/);
@@ -94,7 +94,7 @@ test('hinge-and-push lab ships five selectable 15-second Vitruvian motion loops'
   assert.match(source, /new OrbitControls/);
   assert.match(source, /THREE\.LoopRepeat/);
 
-  for (const file of ironRootAssets) {
+  for (const file of hingePushAssets) {
     assert.match(source, new RegExp(file.replaceAll('.', '\\.')));
     const gltf = await readGlbJson(file);
     assert.equal(gltf.skins.length, 1);

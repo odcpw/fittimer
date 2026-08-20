@@ -657,8 +657,94 @@ button:focus-visible {
 }
 
 .home-actions {
+  display: grid;
+  gap: 10px;
   margin-top: auto;
   padding-top: 28px;
+}
+
+.offline-download {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 11px 16px;
+  color: var(--text);
+  text-align: left;
+  border: 1px solid #526071;
+  border-radius: 12px;
+  background: rgba(17, 26, 37, 0.9);
+  cursor: pointer;
+}
+
+.offline-download:hover:not(:disabled) {
+  border-color: var(--lime);
+  background: rgba(201, 255, 61, 0.08);
+}
+
+.offline-download:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.offline-download:disabled {
+  color: var(--muted);
+  cursor: wait;
+}
+
+.offline-download__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #071006;
+  font-size: 1.5rem;
+  font-weight: 900;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+.offline-download__copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.offline-download__copy strong {
+  font-size: 0.98rem;
+}
+
+.offline-download__copy small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.3;
+}
+
+.offline-progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: #26313e;
+  accent-color: var(--lime);
+}
+
+.offline-progress::-webkit-progress-bar {
+  border-radius: 999px;
+  background: #26313e;
+}
+
+.offline-progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: var(--lime);
+}
+
+.offline-progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: var(--lime);
 }
 
 .primary-action {
@@ -691,7 +777,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin: 20px 0 0;
+  margin: 2px 0 0;
   color: var(--muted);
   font-size: 0.95rem;
 }

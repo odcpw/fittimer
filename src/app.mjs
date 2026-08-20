@@ -53,6 +53,9 @@ const elements = hasDocument
       creator: document.querySelector('#settings-creator'),
       reducedMotion: document.querySelector('#settings-reduced-motion'),
       mediaStatus: document.querySelector('#settings-media-status'),
+      downloadAll: document.querySelector('#download-all-button'),
+      downloadAllLabel: document.querySelector('#download-all-label'),
+      offlineProgress: document.querySelector('#offline-progress'),
       offline: document.querySelector('#offline-status'),
       phase: document.querySelector('#phase-label'),
       timer: document.querySelector('#timer'),
@@ -1441,6 +1444,50 @@ export function collectContentUrls(
   return [...files];
 }
 
+/**
+ * Collect every phone-useful private visual for the installed workouts. This
+ * intentionally includes all approved creator variants while excluding the
+ * retired public GIF pack, unapproved source material, and movements that are
+ * explicitly text-only.
+ */
+export function collectAllContentUrls(
+  index,
+  installedRoutines = routines,
+  packs = mediaPacks,
+  installedVoicePack = voicePack,
+) {
+  const installed = Array.isArray(installedRoutines) ? installedRoutines : [];
+  const files = new Set(collectContentUrls(index, installed, null, installedVoicePack));
+  const movementIds = new Set(installed.flatMap((routine) =>
+    routineMovements(routine).map((movement) => movement.movementId)));
+
+  for (const [packId] of packs instanceof Map ? packs : []) {
+    if (packId === VISUAL_PACK_GIF_V1) continue;
+    const packFile = index.mediaPacks?.[packId];
+    const pack = selectMediaPack(packId, packs);
+    if (!packFile || !pack || !packHasVideo(pack)) continue;
+    files.add(packFile);
+    if (packFile.startsWith('private-packs/') && index.privateMediaPackIndexPath) {
+      files.add(index.privateMediaPackIndexPath);
+    }
+    for (const movementId of movementIds) {
+      for (const asset of pack.entries?.[movementId]?.assets ?? []) {
+        if (asset.enabled === false || !['video', 'poster'].includes(asset.type)) continue;
+        if (!isApprovedCreatorId(asset.creatorId)) continue;
+        const sourcePath = asset.__sourcePath;
+        if (typeof sourcePath !== 'string' || !sourcePath.startsWith('private-packs/')) continue;
+        try {
+          const resolved = new URL(asset.url, new URL(sourcePath, 'http://fittimer-content.local/'));
+          if (resolved.origin === 'http://fittimer-content.local') files.add(resolved.pathname.replace(/^\//, ''));
+        } catch {
+          // Malformed optional assets stay out of the offline download.
+        }
+      }
+    }
+  }
+  return [...files];
+}
+
 function resumePausedWorkout() {
   if (!engine || engine.getSnapshot().state !== 'paused') return false;
   if (!engine.resume()) return false;
@@ -1510,11 +1557,9 @@ function goHome() {
   document.documentElement.dataset.screen = 'home';
 }
 
-async function prepareOffline(index) {
-  const status = elements.offline.querySelector('span:last-child');
+async function cacheContentUrls(urls, onProgress = () => {}) {
   if (!('serviceWorker' in navigator)) {
-    status.textContent = 'Offline install unavailable';
-    return;
+    throw new Error('Offline install unavailable');
   }
 
   await navigator.serviceWorker.register('./sw.js');
@@ -1526,23 +1571,69 @@ async function prepareOffline(index) {
   const installedVoicePack = voicePack ?? await voicePackLoad ?? null;
   const acknowledgement = new Promise((resolve, reject) => {
     channel.port1.onmessage = ({ data }) => {
-      if (data?.ok) resolve();
+      if (data?.type === 'progress') {
+        onProgress(data);
+      } else if (data?.ok) resolve(data);
       else reject(new Error(data?.error ?? 'Could not cache workout content'));
     };
   });
   worker.postMessage({
     type: 'CACHE_CONTENT',
-    urls: collectContentUrls(index, routines, selectedMediaPack, installedVoicePack, {
-      creatorId: currentSettings.visuals.creatorId,
-    }),
+    urls,
   }, [channel.port2]);
   try {
-    await acknowledgement;
+    return await acknowledgement;
   } finally {
     channel.port1.close();
   }
+}
+
+async function prepareOffline(index) {
+  const status = elements.offline.querySelector('span:last-child');
+  if (!('serviceWorker' in navigator)) {
+    status.textContent = 'Offline install unavailable';
+    return;
+  }
+  const installedVoicePack = voicePack ?? await voicePackLoad ?? null;
+  await cacheContentUrls(collectContentUrls(index, routines, selectedMediaPack, installedVoicePack, {
+    creatorId: currentSettings.visuals.creatorId,
+  }));
   elements.offline.dataset.ready = 'true';
-  status.textContent = 'Available offline';
+  status.textContent = 'App ready offline · videos optional';
+}
+
+async function downloadAllForOffline() {
+  if (!contentIndex || elements.downloadAll.disabled) return;
+  const status = elements.offline.querySelector('span:last-child');
+  elements.downloadAll.disabled = true;
+  elements.downloadAllLabel.textContent = 'Downloading videos…';
+  elements.offlineProgress.hidden = false;
+  elements.offlineProgress.value = 0;
+  status.textContent = 'Preparing phone storage…';
+  let persistent = null;
+  try {
+    if (navigator.storage?.persist) persistent = await navigator.storage.persist();
+    const installedVoicePack = voicePack ?? await voicePackLoad ?? null;
+    const urls = collectAllContentUrls(contentIndex, routines, mediaPacks, installedVoicePack);
+    const result = await cacheContentUrls(urls, ({ completed, total }) => {
+      elements.offlineProgress.max = Math.max(total, 1);
+      elements.offlineProgress.value = completed;
+      status.textContent = `Downloading ${completed} / ${total} files…`;
+    });
+    elements.offlineProgress.max = Math.max(result.cached, 1);
+    elements.offlineProgress.value = result.cached;
+    elements.offline.dataset.ready = 'true';
+    elements.downloadAllLabel.textContent = 'All videos downloaded';
+    status.textContent = persistent === false
+      ? `All ${result.cached} files available offline · keep app storage enabled`
+      : `All ${result.cached} files available offline`;
+  } catch (error) {
+    elements.downloadAllLabel.textContent = 'Retry video download';
+    status.textContent = 'Download paused · tap to retry';
+    showError(error);
+  } finally {
+    elements.downloadAll.disabled = false;
+  }
 }
 
 if (hasDocument) {
@@ -1566,6 +1657,10 @@ if (hasDocument) {
     if (!row) return;
     const routine = routines[Number(row.dataset.routineIndex)] ?? null;
     startRoutineFromUserGesture(routine);
+  }, listenerOptions);
+
+  elements.downloadAll.addEventListener('click', () => {
+    void downloadAllForOffline();
   }, listenerOptions);
 
   elements.historyPreviousMonth.addEventListener('click', () => {

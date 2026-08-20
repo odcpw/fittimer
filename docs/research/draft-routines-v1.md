@@ -14,7 +14,7 @@
 > behind-the-neck or loaded end-range abd+ER; calf work slow (2–3 s up, 3 s
 > down); springy/loaded calf work never first; breathe through all isometrics.
 
-## W1 — "Iron Roots" (30 min, hinge/push emphasis)
+## W1 — Hinge & Push Strength (30 min, hinge/push emphasis)
 
 Warm-up: 1 march + arm circles · 2 bodyweight squat (deepening) · 3 hip
 hinge + reach · 4 double-leg calf raise (easy, slow) · 5 scapular push-up.
@@ -30,7 +30,7 @@ Finisher: 28 slow front kicks (alternating, wall support ok) · 29 standing
 knee raise above 90° with holds (alternating) · 30 breathing + easy reach
 cooldown.
 
-## W2 — "Silk Coils" (30 min, rotation/lateral/pull emphasis)
+## W2 — Rotation, Lateral & Pull (30 min, rotation/lateral/pull emphasis)
 
 Warm-up: 1 march + shoulder rolls · 2 cat-cow → child reach · 3 90/90 hip
 switches · 4 alternating side-bend reach · 5 wall slides.
@@ -45,7 +45,7 @@ lean) · 27 short-foot balance stand.
 Finisher: 28/29 slow roundhouse chamber L/R · 30 gate-pose flank stretch
 flow.
 
-## W3 — "Dragon Longform" (45 min, full integration, biggest physio cluster)
+## W3 — Full-Body Strength & Conditioning (45 min, full integration, biggest physio cluster)
 
 Warm-up (6): march ramp · ankle pumps + easy calf raises · deepening squats
 · hinge + reach · 90/90 switches · scapular push-ups.
@@ -62,7 +62,7 @@ Balance & active-flex (6): single-leg balance + short-foot L/R · slow front
 kick L/R · long-sitting straight-leg raise L/R.
 Cooldown (3): half-kneeling hip-flexor stretch L/R · breathing + reach.
 
-## W4 — "Crane Longform" (45 min, balance/active-flexibility emphasis)
+## W4 — Balance & Active Flexibility (45 min, balance/active-flexibility emphasis)
 
 Warm-up (6): march + arm circles · cat-cow flow · standing leg swings
 front-back L/R (wall) · lateral squat rock · wall slides · easy calf raises.

@@ -11,10 +11,10 @@ None of the four routines should ship as-is.
 
 | Routine              | Verdict             | Main reason                                                                                                                                                                                                    |
 | -------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| W1 — Iron Roots      | **Ship-with-edits** | Strong base, but cold-morning warm-up is marginal, several toe/shoulder-loading choices are poor defaults, and the final hip-flexion work is redundant.                                                        |
-| W2 — Silk Coils      | **Redesign**        | Too many plank/rotation stations, inadequate true pulling for a “pull emphasis” routine, questionable Copenhagen placement, and excessive floor transitions.                                                   |
-| W3 — Dragon Longform | **Ship-with-edits** | Best overall coverage, but the full conditioning wave is incorrectly placed before strength, technical active-flexibility work occurs too late, and some stations conflict with the toe/equipment constraints. |
-| W4 — Crane Longform  | **Ship-with-edits** | Its written interval list reaches 45, but the block labels are wrong; cardio is underrepresented, and several stations are redundant.                                                                          |
+| W1 — Hinge & Push Strength | **Ship-with-edits** | Strong base, but cold-morning warm-up is marginal, several toe/shoulder-loading choices are poor defaults, and the final hip-flexion work is redundant.                                                        |
+| W2 — Rotation, Lateral & Pull | **Redesign** | Too many plank/rotation stations, inadequate true pulling for a “pull emphasis” routine, questionable Copenhagen placement, and excessive floor transitions.                                                   |
+| W3 — Full-Body Strength & Conditioning | **Ship-with-edits** | Best overall coverage, but the full conditioning wave is incorrectly placed before strength, technical active-flexibility work occurs too late, and some stations conflict with the toe/equipment constraints. |
+| W4 — Balance & Active Flexibility | **Ship-with-edits** | Its written interval list reaches 45, but the block labels are wrong; cardio is underrepresented, and several stations are redundant.                                                                          |
 
 The highest-risk assumption is that broad rehab coverage equals adequate rehab dosage. W3’s ten-station physio block is broad, but most structures receive only one 40-second set per side. That is not automatically a complete rehabilitation dose.
 
@@ -189,7 +189,7 @@ The following constraints apply throughout:
 * Shoulder work stops for apprehension, instability sensation or persistent pain. Behind-the-neck and loaded end-range abduction/external rotation remain excluded. `(synthesis.md, lines 29–33)`
 * Side-lying compression and aggressive hip stretching are not default choices while the right lateral-hip pain is unresolved. `(synthesis.md, lines 39–42)`
 
-### W1 — Iron Roots
+### W1 — Hinge & Push Strength
 
 | Interval                            | Audit                                                                                                                                                                                                            |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -227,7 +227,7 @@ This preserves all six required components and removes the original standing kne
 
 ---
 
-### W2 — Silk Coils
+### W2 — Rotation, Lateral & Pull
 
 | Interval                        | Audit                                                                                                                                                                                           |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -265,7 +265,7 @@ The redesign has actual pull emphasis, three clear cardio stations, active flexi
 
 ---
 
-### W3 — Dragon Longform
+### W3 — Full-Body Strength & Conditioning
 
 | Interval                                   | Audit                                                                                                                                                                                                                                                                                                          |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -316,7 +316,7 @@ This starts strength at minute 10 rather than after an eight-minute conditioning
 
 ---
 
-### W4 — Crane Longform
+### W4 — Balance & Active Flexibility
 
 The audit below follows the **actual 45-interval interpretation**, with seven warm-up intervals and four cooldown intervals.
 
@@ -384,4 +384,3 @@ The athlete has only one guaranteed app session each week. Therefore the randoml
 * Habit calf loading is counted as progressive dose days rather than treated as incidental activity.
 
 This is more valuable than adding another clever exercise. It prevents broad-but-shallow physio blocks from being mistaken for adequate rehabilitation and preserves the identities and enjoyment of the four mixed routines. `(synthesis.md, lines 91–105)`
-

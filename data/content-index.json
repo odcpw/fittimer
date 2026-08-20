@@ -6,16 +6,16 @@
   },
   "routines": [
     "data/routines/madfit-30min-hiit.json",
-    "data/routines/iron-roots.json",
-    "data/routines/silk-coils.json",
-    "data/routines/dragon-longform.json",
-    "data/routines/crane-longform.json"
+    "data/routines/hinge-push-strength.json",
+    "data/routines/rotation-lateral-pull.json",
+    "data/routines/full-body-strength-conditioning.json",
+    "data/routines/balance-active-flexibility.json"
   ],
   "blocks": {
     "madfit-30min-hiit": "data/blocks/madfit-30min-hiit.json",
-    "iron-roots": "data/blocks/iron-roots.json",
-    "silk-coils": "data/blocks/silk-coils.json",
-    "dragon-longform": "data/blocks/dragon-longform.json",
-    "crane-longform": "data/blocks/crane-longform.json"
+    "hinge-push-strength": "data/blocks/hinge-push-strength.json",
+    "rotation-lateral-pull": "data/blocks/rotation-lateral-pull.json",
+    "full-body-strength-conditioning": "data/blocks/full-body-strength-conditioning.json",
+    "balance-active-flexibility": "data/blocks/balance-active-flexibility.json"
   }
 }

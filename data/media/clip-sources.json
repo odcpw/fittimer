@@ -5,10 +5,10 @@
   "localOnly": true,
   "sourceRevision": "0096b7fcb89f49965d59e3d2955aae90790b704d",
   "targetBlockFiles": [
-    "data/blocks/iron-roots.json",
-    "data/blocks/silk-coils.json",
-    "data/blocks/dragon-longform.json",
-    "data/blocks/crane-longform.json"
+    "data/blocks/hinge-push-strength.json",
+    "data/blocks/rotation-lateral-pull.json",
+    "data/blocks/full-body-strength-conditioning.json",
+    "data/blocks/balance-active-flexibility.json"
   ],
   "outputContract": {
     "aspectRatio": "16:9",
@@ -2100,7 +2100,7 @@
           },
           "form": {
             "quality": "high",
-            "notes": "Three controlled kneeling push-ups return from chest-near-mat depth to the same top phase; the Iron Roots block explicitly permits this regression."
+            "notes": "Three controlled kneeling push-ups return from chest-near-mat depth to the same top phase; the Hinge & Push Strength block explicitly permits this regression."
           },
           "verification": {
             "status": "verified-normal-speed",

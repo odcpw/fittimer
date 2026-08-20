@@ -40,7 +40,7 @@ test('voice inventory is mechanically complete for MadFit and W1-W4', () => {
   const inventory = derivePhraseInventory(ROOT);
   assert.deepEqual(
     inventory.routines.map((routine) => routine.id),
-    ['madfit-30min-hiit', 'iron-roots', 'silk-coils', 'dragon-longform', 'crane-longform'],
+    ['madfit-30min-hiit', 'hinge-push-strength', 'rotation-lateral-pull', 'full-body-strength-conditioning', 'balance-active-flexibility'],
   );
   assert.equal(inventory.intervals.length, 180);
   assert.equal(inventory.phrases.length, 202);
